@@ -1,2 +1,0 @@
-# ShanXi-SA
-
