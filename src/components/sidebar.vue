@@ -97,6 +97,29 @@ const items = [
             },
         ],
     },
+    {
+        icon: 'Warning',
+        index: '/securityAnalysis',
+        title: '网站安全监测',
+        permiss: '5',
+        subs: [
+        {
+                index: '/securityAnalysis',
+                title: '安全分析',
+                permiss: '6',
+            },
+            {
+                index: '/taskManagement',
+                title: '任务管理',
+                permiss: '7',
+            },
+            {
+                index: '/networkStat',
+                title: '数据展示',
+                permiss: '8',
+            },
+        ],
+    },
     // {
     //     icon: 'DocumentCopy',
     //     index: '/tabs',

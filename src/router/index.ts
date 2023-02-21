@@ -57,6 +57,33 @@ const routes: RouteRecordRaw[] = [
                 },
                 component: () => import('../views/APPsearch.vue'),
             },
+            {
+                path: '/securityAnalysis',
+                name: 'securityAnalysis',
+                meta: {
+                    title: '安全分析',
+                    permiss: '7',
+                },
+                component: () => import('../views/securityAnalysis.vue'),
+            },
+            {
+                path: '/taskManagement',
+                name: 'taskManagement',
+                meta: {
+                    title: '任务管理',
+                    permiss: '8',
+                },
+                component: () => import('../views/taskManagement.vue'),
+            },
+            {
+                path: '/networkStat',
+                name: 'networkStat',
+                meta: {
+                    title: '数据展示',
+                    permiss: '9',
+                },
+                component: () => import('../views/networkStat.vue'),
+            },
             // {
             //     path: '/charts',
             //     name: 'basecharts',
