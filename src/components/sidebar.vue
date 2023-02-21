@@ -59,31 +59,41 @@ const items = [
     {
         icon: 'Odometer',
         index: '/dashboard',
-        title: '事件监测',
+        title: '数据安全监测',
         permiss: '1',
         subs:[
             {
                 index: '/dashboard',
-                title: '事件统计',
-                permiss: '5',
+                title: '数据安全事件统计',
+                permiss: '2',
+            },
+            {
+                index: '/editor',
+                title: '数据安全事件预警',
+                permiss: '3',
+            },
+            {
+                index: '/table',
+                title: '数据安全事件汇总',
+                permiss: '4',
             },
         ]
     },
     {
         icon: 'Warning',
         index: '1',
-        title: '事件预警管理',
-        permiss: '2',
+        title: '重点APP监测',
+        permiss: '5',
         subs: [
             {
-                index: '/editor',
-                title: '事件预警',
-                permiss: '2',
+                index: '/APPstat',
+                title: 'APP事件统计',
+                permiss: '6',
             },
             {
-                index: '/table',
-                title: '事件汇总',
-                permiss: '2',
+                index: '/APPsearch',
+                title: 'APP事件查询',
+                permiss: '7',
             },
         ],
     },

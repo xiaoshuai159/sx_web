@@ -16,8 +16,8 @@ const routes: RouteRecordRaw[] = [
                 path: '/dashboard',
                 name: 'dashboard',
                 meta: {
-                    title: '事件统计',
-                    permiss: '1',
+                    title: '数据安全事件统计',
+                    permiss: '2',
                 },
                 component: () => import('../views/dashboard.vue'),
             },
@@ -25,8 +25,8 @@ const routes: RouteRecordRaw[] = [
                 path: '/editor',
                 name: 'editor',
                 meta: {
-                    title: '事件预警',
-                    permiss: '2',
+                    title: '数据安全事件预警',
+                    permiss: '3',
                 },
                 component: () => import('../views/editor.vue'),
             },
@@ -34,10 +34,28 @@ const routes: RouteRecordRaw[] = [
                 path: '/table',
                 name: 'basetable',
                 meta: {
-                    title: '事件汇总',
-                    permiss: '2',
+                    title: '数据安全事件汇总',
+                    permiss: '4',
                 },
                 component: () => import('../views/table.vue'),
+            },
+            {
+                path: '/APPstat',
+                name: 'APPstat',
+                meta: {
+                    title: 'APP事件统计',
+                    permiss: '5',
+                },
+                component: () => import('../views/APPstat.vue'),
+            },
+            {
+                path: '/APPsearch',
+                name: 'APPsearch',
+                meta: {
+                    title: 'APP事件查询',
+                    permiss: '6',
+                },
+                component: () => import('../views/APPsearch.vue'),
             },
             // {
             //     path: '/charts',

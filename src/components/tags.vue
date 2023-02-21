@@ -12,20 +12,14 @@
 			</li>
 		</ul>
 		<div class="tags-close-box">
-			<el-dropdown @command="handleTags">
-				<el-button size="small" type="primary">
-					标签选项
-					<el-icon class="el-icon--right">
-						<arrow-down />
-					</el-icon>
-				</el-button>
-				<template #dropdown>
-					<el-dropdown-menu size="small">
-						<el-dropdown-item command="other">关闭其他</el-dropdown-item>
-						<el-dropdown-item command="all">关闭所有</el-dropdown-item>
-					</el-dropdown-menu>
-				</template>
-			</el-dropdown>
+			<el-select v-model="value" class="m-2" placeholder="Select" size="small">
+				<el-option
+				v-for="item in options"
+				:key="item.value"
+				:label="item.label"
+				:value="item.value"
+				/>
+			</el-select>
 		</div>
 	</div>
 </template>
@@ -33,6 +27,27 @@
 <script setup lang="ts">
 import { useTagsStore } from '../store/tags';
 import { onBeforeRouteUpdate, useRoute, useRouter } from 'vue-router';
+import { ref } from 'vue'
+const value = ref('day')
+
+const options = [
+  {
+    value: 'day',
+    label: '近一天',
+  },
+  {
+    value: 'week',
+    label: '近一周',
+  },
+  {
+    value: 'month',
+    label: '近一个月',
+  },
+  {
+    value: 'year',
+    label: '近一年',
+  },
+]
 
 const route = useRoute();
 const router = useRouter();
