@@ -1,13 +1,13 @@
 <template>
     <div class="sidebar">
-        <el-menu
-            class="sidebar-el-menu"
-            :default-active="onRoutes"
-            :collapse="sidebar.collapse"
+        <el-menu 
+            class="sidebar-el-menu" 
+            :default-active="onRoutes" 
+            :collapse="sidebar.collapse" 
             background-color="#324157"
-            text-color="#bfcbd9"
-            active-text-color="#20a0ff"
-            unique-opened
+            text-color="#bfcbd9" 
+            active-text-color="#20a0ff" 
+            unique-opened 
             router
         >
             <template v-for="item in items">
@@ -95,6 +95,11 @@ const items = [
                 title: 'APP事件查询',
                 permiss: '7',
             },
+            {
+                index: '/noRecordApp',
+                title: '未备案APP处置',
+                permiss: '8',
+            },
         ],
     },
     {
@@ -103,7 +108,7 @@ const items = [
         title: '网站安全监测',
         permiss: '5',
         subs: [
-        {
+            {
                 index: '/securityAnalysis',
                 title: '安全分析',
                 permiss: '6',
@@ -204,9 +209,11 @@ const sidebar = useSidebarStore();
     bottom: 0;
     overflow-y: scroll;
 }
+
 .sidebar::-webkit-scrollbar {
     width: 0;
 }
+
 .sidebar-el-menu:not(.el-menu--collapse) {
     width: 210px;
 }

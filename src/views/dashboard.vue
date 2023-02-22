@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div style="margin-bottom:10px;padding: 5px;" >
+		<!-- <div style="margin-bottom:10px;padding: 5px;" >
 			<div style="display: flex; justify-content: space-between;">
 				<div>
 					时间：<el-date-picker
@@ -17,7 +17,7 @@
 					<el-button type="primary" >重置</el-button>
 				</div>
 			</div>
-		</div>	
+		</div>	 -->
 	<el-row :gutter="10">
 		<el-col :span="4">
 			<el-card shadow="hover" :body-style="{ padding: '0px' }">
