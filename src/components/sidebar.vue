@@ -67,11 +67,11 @@ const items = [
                 title: '数据安全事件统计',
                 permiss: '2',
             },
-            {
-                index: '/editor',
-                title: '数据安全事件预警',
-                permiss: '3',
-            },
+            // {
+            //     index: '/editor',
+            //     title: '数据安全事件预警',
+            //     permiss: '3',
+            // },
             {
                 index: '/table',
                 title: '数据安全事件汇总',
@@ -92,7 +92,7 @@ const items = [
             },
             {
                 index: '/APPsearch',
-                title: 'APP事件查询',
+                title: 'APP综合查询',
                 permiss: '7',
             },
             {

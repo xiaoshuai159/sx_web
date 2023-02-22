@@ -21,15 +21,15 @@ const routes: RouteRecordRaw[] = [
                 },
                 component: () => import('../views/dashboard.vue'),
             },
-            {
-                path: '/editor',
-                name: 'editor',
-                meta: {
-                    title: '事件预警',
-                    permiss: '3',
-                },
-                component: () => import('../views/editor.vue'),
-            },
+            // {
+            //     path: '/editor',
+            //     name: 'editor',
+            //     meta: {
+            //         title: '事件预警',
+            //         permiss: '3',
+            //     },
+            //     component: () => import('../views/editor.vue'),
+            // },
             {
                 path: '/table',
                 name: 'basetable',
@@ -52,20 +52,20 @@ const routes: RouteRecordRaw[] = [
                 path: '/APPsearch',
                 name: 'APPsearch',
                 meta: {
-                    title: 'APP事件查询',
+                    title: 'APP综合查询',
                     permiss: '6',
                 },
                 component: () => import('../views/APPsearch.vue'),
             },
-            {
-                path: '/securityAnalysis',
-                name: 'securityAnalysis',
-                meta: {
-                    title: '安全分析',
-                    permiss: '7',
-                },
-                component: () => import('../views/securityAnalysis.vue'),
-            },
+            // {
+            //     path: '/securityAnalysis',
+            //     name: 'securityAnalysis',
+            //     meta: {
+            //         title: '安全分析',
+            //         permiss: '7',
+            //     },
+            //     component: () => import('../views/securityAnalysis.vue'),
+            // },
             {
                 path: '/taskManagement',
                 name: 'taskManagement',
@@ -75,15 +75,15 @@ const routes: RouteRecordRaw[] = [
                 },
                 component: () => import('../views/taskManagement.vue'),
             },
-            {
-                path: '/networkStat',
-                name: 'networkStat',
-                meta: {
-                    title: '数据展示',
-                    permiss: '9',
-                },
-                component: () => import('../views/networkStat.vue'),
-            },
+            // {
+            //     path: '/networkStat',
+            //     name: 'networkStat',
+            //     meta: {
+            //         title: '数据展示',
+            //         permiss: '9',
+            //     },
+            //     component: () => import('../views/networkStat.vue'),
+            // },
             {
                 path: '/noRecordApp',
                 name: 'noRecordApp',

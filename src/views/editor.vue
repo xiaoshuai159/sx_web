@@ -99,8 +99,8 @@
 									</el-form>
 									<template #footer>
 									<span class="dialog-footer">
-										<el-button @click="dialogFormVisible = false">确定</el-button>
-										<el-button type="primary" @click="dialogFormVisible = false">
+										<el-button type="primary" @click="dialogFormVisible = false">确定</el-button>
+										<el-button @click="dialogFormVisible = false">
 										取消
 										</el-button>
 									</span>
@@ -132,7 +132,7 @@ const value1 = ref<[Date, Date]>([
 const todoList = reactive([
 	{
 		eventId:1523,
-		time:'2023-2-13',
+		time:'2023-02-22',
 		type:'数据库密码爆破',
 		content:'...',
 		status:'未处理',
