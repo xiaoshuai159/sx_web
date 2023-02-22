@@ -1,4 +1,3 @@
-
 <template>
 	<div>
 		<div class="container">
@@ -25,7 +24,10 @@
 				<span>目标IP：</span>
 				<el-input v-model="query.name" placeholder="攻击者IP" class="handle-input mr10"></el-input>
 				<el-button type="primary" :icon="Search" @click="handleSearch">搜索</el-button>
-				<el-button type="primary" :icon="Plus" @click="addTask(3, 4)" v-permiss="15">新增</el-button>
+				<!-- <template #default="scope"> -->
+				<el-button type="primary" :icon="Plus" @click="addTask(scope.$index, scope.row)"
+					v-permiss="15">新增</el-button>
+				<!-- </template> -->
 			</div>
 			<el-table :data="tableData" border class="table" ref="multipleTable" header-cell-class-name="table-header">
 				<el-table-column prop="id" label="任务id" width="80" align="center"></el-table-column>
@@ -66,7 +68,7 @@
 		</div>
 
 		<!-- 编辑弹出框 -->
-		<el-dialog title="修改" v-model="editVisible" width="30%">
+		<el-dialog :title="dialogTitle" v-model="editVisible" width="30%">
 			<el-form-item label="任务类型" prop="region">
 				<el-select v-model="form.region" placeholder="请选择">
 					<el-option key="可用性监测" label="可用性监测" value="可用性监测"></el-option>
@@ -118,6 +120,86 @@ import type { FormInstance, FormRules } from 'element-plus';
 import { UploadProps } from 'element-plus';
 import * as XLSX from 'xlsx';
 
+const props = defineProps({
+	dialogTitle: {
+		type: String,
+		default: "新增",
+	},
+	icons: {
+		type: String,
+		default: "",
+	},
+});
+// const emit = defineEmits(['click', 'delete']);
+// export default {
+// 	name: "DialogComponent",
+// 	props: {
+// 		dialogTitle: {
+// 			type: String,
+// 			default: "添加人员"
+// 		},
+// 		itemInfo: {
+// 			type: Object,
+// 			default: function () {
+// 				return {};
+// 			}
+// 		}
+// 	},
+// 	data() {
+// 		return {
+// 			rules: {
+// 				assetName: [
+// 					{ required: true, message: '请输入资产名称', trigger: 'change' }
+// 				],
+// 				assetClassifyId: [
+// 					{ required: true, message: '请选择资产分类', trigger: 'change' }
+// 				],
+// 				assetCount: [
+// 					{ required: true, message: '请输入资产数量', trigger: 'change' }
+// 				],
+// 			},
+// 			options: [],
+// 			showDialog: false,
+// 			formInfo: JSON.parse(JSON.stringify(this.itemInfo))
+// 		};
+// 	},
+// 	mounted() {
+// 		this.getOpt();
+// 	},
+// 	methods: {
+// 		//   获取下拉框
+// 		getOpt() {
+// 			// this.getRequest("/asset/getTypeList", {}).then(res => {
+// 			// 	this.options = res.obj
+// 			// });
+// 		},
+// 		// 保存操作
+// 		submitForm() {
+// 			// const that = this;
+// 			// //   const params = Object.assign(that.formInfo, {});
+// 			// that.$refs[formName].validate(valid => {
+// 			// 	if (valid) {
+// 			// 		that.postRequest("/asset/setAsset", that.formInfo).then(res => {
+// 			// 			that.$message({
+// 			// 				message: "操作成功！",
+// 			// 				type: "success"
+// 			// 			});
+// 			// 			that.closeDialog(1);
+// 			// 		});
+// 			// 		// 走保存请求
+// 			// 	} else {
+// 			// 		return false;
+// 			// 	}
+// 			// });
+// 		},
+// 		// 关闭弹框
+// 		closeDialog() {
+// 			// this.$refs["formInfo"].resetFields();
+// 			// this.showDialog = false;
+// 			// this.$emit("closeDialog", flag);
+// 		}
+// 	}
+// };
 
 const rules: FormRules = {
 	name: [{ required: true, message: '请输入表单名称', trigger: 'blur' }],
@@ -170,7 +252,8 @@ interface TableItem {
 	attackPort: number;
 	state: string;
 	excute: string;
-	databaseType: string
+	databaseType: string,
+	title: string
 }
 
 const query = reactive({
@@ -193,7 +276,8 @@ const tableData = ref<TableItem[]>([{
 	attackPort: 68,
 	state: '已启用',
 	excute: '成功 1 次  失败 1 次',
-	databaseType: '可用性检测'
+	databaseType: '可用性检测',
+	title: '新增'
 },]);
 const pageTotal = ref(0);
 // 获取表格数据
@@ -211,9 +295,11 @@ const handleSearch = () => {
 	getData();
 };
 // 新增操作
-const addTask = (index: number, row: any) => {
-	form.name = row.name;
-	form.address = row.address;
+
+const addTask = (index, row) => {
+	// form.name = row.name;
+	// form.address = row.address;
+	this.dialogTitle = "修改";
 	editVisible.value = true;
 };
 // 分页导航
