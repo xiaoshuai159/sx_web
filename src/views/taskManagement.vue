@@ -22,12 +22,14 @@
 				<span>任务id：</span>
 				<el-input v-model="query.name" placeholder="任务id" class="eventid-input mr10"></el-input><br /><br />
 				<span>目标IP：</span>
-				<el-input v-model="query.name" placeholder="攻击者IP" class="handle-input mr10"></el-input>
+				<el-input v-model="query.name" placeholder="目标IP" class="handle-input mr10"></el-input>
 				<el-button type="primary" :icon="Search" @click="handleSearch">搜索</el-button>
-				<!-- <template #default="scope"> -->
-				<el-button type="primary" :icon="Plus" @click="addTask(scope.$index, scope.row)"
-					v-permiss="15">新增</el-button>
-				<!-- </template> -->
+				<!-- <el-table-column>
+					<template #default="scope">
+						<span>{{ scope.row["state"] == 1 ? "未使用" : "已使用" }}</span>
+					</template>
+				</el-table-column> -->
+				<el-button type="primary" :icon="Plus" @click="addTask()" v-permiss="15">新增</el-button>
 			</div>
 			<el-table :data="tableData" border class="table" ref="multipleTable" header-cell-class-name="table-header">
 				<el-table-column prop="id" label="任务id" width="80" align="center"></el-table-column>
@@ -68,9 +70,9 @@
 		</div>
 
 		<!-- 编辑弹出框 -->
-		<el-dialog :title="dialogTitle" v-model="editVisible" width="30%">
-			<el-form-item label="任务类型" prop="region">
-				<el-select v-model="form.region" placeholder="请选择">
+		<el-dialog :title="state.addTitle" v-model="editVisible" width="30%">
+			<el-form-item label="任务类型" prop="taskType">
+				<el-select v-model="form.taskType" placeholder="请选择">
 					<el-option key="可用性监测" label="可用性监测" value="可用性监测"></el-option>
 					<el-option key="系统漏洞扫描" label="系统漏洞扫描" value="系统漏洞扫描"></el-option>
 					<el-option key="网页变更监测" label="网页变更监测" value="网页变更监测"></el-option>
@@ -104,7 +106,7 @@
 			<template #footer>
 				<span class="dialog-footer">
 					<el-button @click="editVisible = false">取 消</el-button>
-					<el-button type="primary" @click="saveEdit">确 定</el-button>
+					<el-button type="primary" @click="saveEdit()">确 定</el-button>
 				</span>
 			</template>
 		</el-dialog>
@@ -113,22 +115,23 @@
 
 <script setup lang="ts" name="basetable">
 import { ref, reactive } from 'vue';
-import { ElMessage, ElMessageBox } from 'element-plus';
+import { dialogEmits, ElMessage, ElMessageBox } from 'element-plus';
 import { Delete, Edit, Search, Plus } from '@element-plus/icons-vue';
 import { fetchData } from '../api/index';
 import type { FormInstance, FormRules } from 'element-plus';
 import { UploadProps } from 'element-plus';
 import * as XLSX from 'xlsx';
 
-const props = defineProps({
-	dialogTitle: {
-		type: String,
-		default: "新增",
-	},
-	icons: {
-		type: String,
-		default: "",
-	},
+const state = reactive({
+	addTitle: '新增'
+	// dialogTitle: {
+	// 	type: String,
+	// 	default: "新增",
+	// },
+	// icons: {
+	// 	type: String,
+	// 	default: "",
+	// },
 });
 // const emit = defineEmits(['click', 'delete']);
 // export default {
@@ -296,11 +299,12 @@ const handleSearch = () => {
 };
 // 新增操作
 
-const addTask = (index, row) => {
+const addTask = () => {
 	// form.name = row.name;
 	// form.address = row.address;
-	this.dialogTitle = "修改";
+	// debugger
 	editVisible.value = true;
+	state.addTitle = '新增';
 };
 // 分页导航
 const handlePageChange = (val: number) => {
@@ -325,7 +329,8 @@ const handleDelete = (index: number) => {
 const editVisible = ref(false);
 let form = reactive({
 	name: '',
-	address: ''
+	address: '',
+	taskType: ''
 });
 let idx: number = -1;
 const handleEdit = (index: number, row: any) => {
@@ -333,10 +338,24 @@ const handleEdit = (index: number, row: any) => {
 	form.name = row.name;
 	form.address = row.address;
 	editVisible.value = true;
+	state.addTitle = '编辑';
 };
 const saveEdit = () => {
 	editVisible.value = false;
 	ElMessage.success(`修改第 ${idx + 1} 行成功`);
+	tableData.value.push({
+		id: 2,
+		taskTime: '2023-03-01 18:00:00',
+		harmIP: '172.53.45.62',
+		harmPort: 22,
+		attackNum: 9,
+		attackIP: '192.168.55.4',
+		attackPort: 68,
+		state: '已关闭',
+		excute: '',
+		databaseType: form.taskType,
+		title: '新增'
+	})
 };
 </script>
 
