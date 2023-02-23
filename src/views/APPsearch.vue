@@ -82,7 +82,7 @@
 	</div>
 </template>
 
-<script setup lang="ts" name="APPsearch">
+<script setup lang="ts" name="APPsearch" >
 import { ref, reactive } from 'vue'
 import { ElTable } from 'element-plus'
 import { Delete, Plus, Search } from '@element-plus/icons-vue'

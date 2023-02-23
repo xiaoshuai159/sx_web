@@ -94,16 +94,43 @@ const routes: RouteRecordRaw[] = [
                 component: () => import('../views/noRecordApp.vue'),
 
             },
-            // {
-            //     path: '/charts',
-            //     name: 'basecharts',
-            //     meta: {
-            //         title: '图表',
-            //         permiss: '11',
-            //     },
-            //     component: () => import(/* webpackChunkName: "charts" */ '../views/charts.vue'),
-            // },
-
+            {
+                path: '/threatIntelligence',
+                name: 'threatIntelligence',
+                meta: {
+                    title: '威胁研判',
+                    permiss: '11',
+                },
+                component: () => import(/* webpackChunkName: "charts" */ '../views/threatIntelligence.vue'),
+            },
+            {
+                path: '/attackAndDefence',
+                name: 'attackAndDefence',
+                meta: {
+                    title: '组织与资产检索',
+                    permiss: '12',
+                },
+                component: () => import(/* webpackChunkName: "charts" */ '../views/attackAndDefence.vue'),
+            },
+            {
+                path: '/provincePage',
+                name: 'provincePage',
+                meta: {
+                    title: '虚拟货币挖矿监测',
+                    permiss: '13',
+                },
+                component: () => import(/* webpackChunkName: "charts" */ '../views/mining/provincePage.vue'),
+                
+            },
+            {
+                path: '/cityPage',
+                name: 'cityPage',
+                meta: {
+                    title: '虚拟货币挖矿监测',
+                    permiss: '14',
+                },
+                component: () => import(/* webpackChunkName: "charts" */ '../views/mining/cityPage.vue'),
+            },
             // {
             //     path: '/tabs',
             //     name: 'tabs',

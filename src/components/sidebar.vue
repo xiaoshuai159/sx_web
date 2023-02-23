@@ -80,7 +80,7 @@ const items = [
         ]
     },
     {
-        icon: 'Warning',
+        icon: 'Bell',
         index: '1',
         title: '重点APP监测',
         permiss: '5',
@@ -122,6 +122,37 @@ const items = [
                 index: '/networkStat',
                 title: '数据展示',
                 permiss: '8',
+            },
+        ],
+    },
+    {
+        icon: 'WarnTriangleFilled',
+        index: '/threatIntelligence',
+        title: '威胁情报分析',
+        permiss: '9',
+        subs: [
+            {
+                index: '/threatIntelligence',
+                title: '威胁研判',
+                permiss: '10',
+            },
+            {
+                index: '/attackAndDefence',
+                title: '组织与资产检索',
+                permiss: '11',
+            },
+        ],
+    },
+    {
+        icon: 'Wallet',
+        index: '/provincePage',
+        title: '虚拟货币挖矿监测',
+        permiss: '12',
+        subs: [
+            {
+                index: '/provincePage',
+                title: '挖矿行为监测',
+                permiss: '13',
             },
         ],
     },
