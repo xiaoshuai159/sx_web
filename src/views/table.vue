@@ -26,14 +26,26 @@
 				<el-button type="primary" :icon="Plus">新增</el-button>
 			</div>
 			<el-table :data="tableData" border class="table" ref="multipleTable" header-cell-class-name="table-header">
-				<el-table-column prop="id" label="事件id" width="80" align="center"></el-table-column>
-				<el-table-column prop="harmIP" label="受害数据库IP"></el-table-column>
-				<el-table-column prop="harmPort" label="端口"></el-table-column>
-				<el-table-column prop="databaseType" label="数据库类型" align="center"></el-table-column>
-				<el-table-column prop="attackNum" label="攻击次数"></el-table-column>
-				<el-table-column prop="attackIP" label="攻击者IP"></el-table-column>
-				<el-table-column prop="attackPort" label="攻击者端口"></el-table-column>
-				<el-table-column label="验证状态" align="center">
+				<el-table-column prop="id" label="事件id" min-width="60" align="center"></el-table-column>
+				<el-table-column prop="time" label="时间" min-width="105"></el-table-column>
+				<el-table-column prop="harmIP" label="受害数据库IP" min-width="105"></el-table-column>
+				<el-table-column prop="harmPort" label="端口" min-width="60"></el-table-column>
+				<el-table-column prop="databaseType" label="数据库类型" align="center" min-width="90"></el-table-column>
+				<el-table-column prop="warnType" label="预警类型" min-width="70"></el-table-column>
+				<el-table-column prop="warnContent" label="告警内容" min-width="100"></el-table-column>
+				<el-table-column prop="attackNum" label="攻击次数" min-width="70"></el-table-column>
+				<el-table-column prop="attackIP" label="攻击者IP" min-width="105"></el-table-column>
+				<el-table-column prop="attackPort" label="攻击者端口" min-width="75"></el-table-column>
+				<el-table-column prop="level" label="优先级" min-width="75">
+					<template #default="scope">
+						<el-tag
+							:type="scope.row.level === '低' ? '' : scope.row.level === '高' ? 'danger' : ''"
+						>
+							{{ scope.row.level }}
+						</el-tag>
+					</template>
+				</el-table-column>
+				<el-table-column label="验证状态" align="center" min-width="70">
 					<template #default="scope">
 						<el-tag
 							:type="scope.row.state === '已验证' ? 'success' : scope.row.state === '未验证' ? 'danger' : ''"
@@ -42,7 +54,7 @@
 						</el-tag>
 					</template>
 				</el-table-column>
-				<el-table-column label="操作" width="220" align="center">
+				<el-table-column label="操作" width="200" align="center" fixed="right">
 					<template #default="scope">
 						<el-button text :icon="Edit" @click="handleEdit(scope.$index, scope.row)" v-permiss="15">
 							编辑
@@ -67,15 +79,45 @@
 		</div>
 
 		<!-- 编辑弹出框 -->
-		<el-dialog title="编辑" v-model="editVisible" width="30%">
-			<el-form label-width="70px">
-				<el-form-item label="用户名">
-					<el-input v-model="form.name"></el-input>
-				</el-form-item>
-				<el-form-item label="地址">
-					<el-input v-model="form.address"></el-input>
-				</el-form-item>
-			</el-form>
+		<el-dialog title="数据安全事件详情" v-model="editVisible" width="30%" top="1%">
+				<el-form :model="form">
+							<el-form-item label="事件id" :label-width="formLabelWidth">
+								<el-input v-model="form.num" autocomplete="off" />
+							</el-form-item>
+							<el-form-item label="时间" :label-width="formLabelWidth">
+								<el-input v-model="form.time" autocomplete="off" />
+							</el-form-item>
+							<el-form-item label="受害数据IP" :label-width="formLabelWidth">
+								<el-input v-model="form.harmIP" autocomplete="off" />
+							</el-form-item>
+							<el-form-item label="受害端口" :label-width="formLabelWidth">
+								<el-input v-model="form.port" autocomplete="off" />
+							</el-form-item>
+							<el-form-item label="数据库类型" :label-width="formLabelWidth">
+								<el-input v-model="form.databaseType" autocomplete="off" />
+							</el-form-item>
+							<el-form-item label="预警类型" :label-width="formLabelWidth">
+								<el-input v-model="form.sosType" autocomplete="off" />
+							</el-form-item>
+							<el-form-item label="告警内容" :label-width="formLabelWidth">
+								<el-input v-model="form.sosContent" autocomplete="off" />
+							</el-form-item>
+							<el-form-item label="攻击次数" :label-width="formLabelWidth">
+								<el-input v-model="form.attackNum" autocomplete="off" />
+							</el-form-item>
+							<el-form-item label="攻击IP" :label-width="formLabelWidth">
+								<el-input v-model="form.attackIP" autocomplete="off" />
+							</el-form-item>
+							<el-form-item label="攻击端口" :label-width="formLabelWidth">
+								<el-input v-model="form.attackPort" autocomplete="off" />
+							</el-form-item>
+							<el-form-item label="优先级" :label-width="formLabelWidth">
+								<el-input v-model="form.level" autocomplete="off" />
+							</el-form-item>
+							<el-form-item label="验证状态" :label-width="formLabelWidth">
+								<el-input v-model="form.status" autocomplete="off" />
+							</el-form-item>
+						</el-form>
 			<template #footer>
 				<span class="dialog-footer">
 					<el-button @click="editVisible = false">取 消</el-button>
@@ -88,21 +130,27 @@
 
 <script setup lang="ts" name="basetable">
 import { ref, reactive } from 'vue';
-import { ElMessage, ElMessageBox } from 'element-plus';
+import { ElMessage, ElMessageBox, rowContextKey } from 'element-plus';
 import { Delete, Edit, Search, Plus } from '@element-plus/icons-vue';
 import { fetchData } from '../api/index';
+import { Row } from 'element-plus/es/components/table-v2/src/components';
 
 interface TableItem {
 	id: number;
+	time: string;
 	harmIP: string;
 	harmPort: number;
+	databaseType: string;
+	warnType: string;
+	warnContent: string;
 	attackNum: number;
 	attackIP: string;
 	attackPort: number;
 	state:string;
-	databaseType:string
+	level:string
 }
-
+const dialogTableVisible = ref(false)
+const formLabelWidth = '90px'
 const query = reactive({
 	address: '',
 	name: '',
@@ -110,18 +158,22 @@ const query = reactive({
 	pageSize: 10
 });
 const value1 = ref<[Date,Date]>([
-  new Date(2023, 1, 14, 10, 10),
-  new Date(2023, 1, 15, 10, 10),
+  new Date(2023, 1, 21, 10, 10),
+  new Date(2023, 1, 22, 10, 10),
 ])
 const tableData = ref<TableItem[]>([{
 	id: 1,
+	time:'2023-02-22 10:10:00',
 	harmIP: '172.53.45.62',
 	harmPort: 45,
+	databaseType:'mysql',
+	warnType:'数据库密码爆破',
+	warnContent:'...',
 	attackNum: 9,
 	attackIP: '192.168.55.4',
 	attackPort: 68,
 	state:'已验证',
-	databaseType:'mysql'
+	level:'高'
 },]);
 const pageTotal = ref(0);
 // 获取表格数据
@@ -160,14 +212,33 @@ const handleDelete = (index: number) => {
 // 表格编辑时弹窗和保存
 const editVisible = ref(false);
 let form = reactive({
-	name: '',
-	address: ''
+	num: '',
+	time: '',
+	harmIP:'',
+	port:'',
+	databaseType:'',
+	sosType:'',
+	sosContent:'',
+	attackNum:'',
+	attackIP:'',
+	attackPort:'',
+	level:'',
+	status:''
 });
 let idx: number = -1;
 const handleEdit = (index: number, row: any) => {
-	idx = index;
-	form.name = row.name;
-	form.address = row.address;
+	form.num = row.id;
+	form.time = row.time;
+	form.harmIP = row.harmIP;
+	form.port = row.harmPort;
+	form.databaseType = row.databaseType;
+	form.sosType = row.warnType;
+	form.sosContent = row.warnContent;
+	form.attackNum = row.attackNum;
+	form.attackIP = row.attackIP;
+	form.attackPort = row.attackPort;
+	form.level = row.level;
+	form.status = row.state;
 	editVisible.value = true;
 };
 const saveEdit = () => {
@@ -176,7 +247,7 @@ const saveEdit = () => {
 };
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .handle-box {
 	margin-bottom: 20px;
 }
@@ -207,5 +278,12 @@ const saveEdit = () => {
 	margin: auto;
 	width: 40px;
 	height: 40px;
+}
+:deep(.el-dialog__body) {
+    // padding: calc(var(--el-dialog-padding-primary) + 10px) var(--el-dialog-padding-primary);
+	padding: 15px 30px;
+    color: var(--el-text-color-regular);
+    font-size: var(--el-dialog-content-font-size);
+    word-break: break-all;
 }
 </style>

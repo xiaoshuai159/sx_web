@@ -21,6 +21,7 @@ declare module '@vue/runtime-core' {
     ElDropdown: typeof import('element-plus/es')['ElDropdown']
     ElDropdownItem: typeof import('element-plus/es')['ElDropdownItem']
     ElDropdownMenu: typeof import('element-plus/es')['ElDropdownMenu']
+    ElEmpty: typeof import('element-plus/es')['ElEmpty']
     ElForm: typeof import('element-plus/es')['ElForm']
     ElFormItem: typeof import('element-plus/es')['ElFormItem']
     ElIcon: typeof import('element-plus/es')['ElIcon']
@@ -52,5 +53,13 @@ declare module '@vue/runtime-core' {
     RouterView: typeof import('vue-router')['RouterView']
     Sidebar: typeof import('./src/components/sidebar.vue')['default']
     Tags: typeof import('./src/components/tags.vue')['default']
+    Xiangqing: typeof import('./src/components/mining/xiangqing.vue')['default']
+    Xiangqing1: typeof import('./src/components/mining/xiangqing1.vue')['default']
+    Xiangqing2: typeof import('./src/components/mining/xiangqing2.vue')['default']
+    Xiangqing3: typeof import('./src/components/mining/xiangqing3.vue')['default']
+    Xiangqing4: typeof import('./src/components/mining/xiangqing4.vue')['default']
+  }
+  export interface ComponentCustomProperties {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }

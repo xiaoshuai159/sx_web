@@ -61,11 +61,15 @@ const closeTags = (index: number) => {
 	const delItem = tags.list[index];
 	tags.delTagsItem(index);
 	const item = tags.list[index] ? tags.list[index] : tags.list[index - 1];
-	if (item) {
+	if(route.name==='cityPage'||route.name==='areaPage'){return}
+	else{
+		if (item) {
 		delItem.path === route.fullPath && router.push(item.path);
-	} else {
-		router.push('/');
+		} else {
+			router.push('/');
+		}
 	}
+	
 };
 
 // 设置标签
@@ -75,11 +79,16 @@ const setTags = (route: any) => {
 	});
 	if (!isExist) {
 		if (tags.list.length >= 8) tags.delTagsItem(0);
-		tags.setTagsItem({
-			name: route.name,
-			title: route.meta.title,
-			path: route.fullPath
-		});
+		console.log(route.name);
+		if(route.name==='cityPage'||route.name==='areaPage'){return}
+		else{
+			tags.setTagsItem({
+				name: route.name,
+				title: route.meta.title,
+				path: route.fullPath
+			});
+		}
+		
 	}
 };
 setTags(route);
