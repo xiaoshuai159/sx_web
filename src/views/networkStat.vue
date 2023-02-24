@@ -18,6 +18,7 @@
 				end-placeholder="End date" />&nbsp;&nbsp;
 			<span>任务类型：</span>
 			<el-select v-model="query.address" placeholder="任务类型" class="handle-select mr10">
+				<el-option key="数据采集" label="数据采集" value="数据采集"></el-option>
 				<el-option key="可用性监测" label="可用性监测" value="可用性监测"></el-option>
 				<el-option key="系统漏洞扫描" label="系统漏洞扫描" value="系统漏洞扫描"></el-option>
 				<el-option key="网页变更监测" label="网页变更监测" value="网页变更监测"></el-option>
@@ -228,25 +229,68 @@
 				<el-card class="card" shadow="hover" :body-style="{ padding: '0px', height: '280px' }">
 					<span class="warningTop">可用性监测</span>
 					<el-table ref="rateRef" :data="bugData" height="250">
-						<el-table-column prop="time" label="时间" />
+						<el-table-column prop="time" label="时间" width="160px" />
 						<el-table-column prop="ip" label="IP" />
 						<el-table-column prop="url" label="URL" />
+						<el-table-column prop="rate" label="频率(s)" />
+						<el-table-column prop="num" label="次数" width="75px" />
 						<el-table-column prop="result" label="结果" />
-						<el-table-column prop="rate" label="监测频率" />
-						<el-table-column prop="num" label="监测次数"> </el-table-column>
 					</el-table>
 				</el-card>
 			</el-col>
 			<el-col :span="12">
 				<el-card class="card" shadow="hover" :body-style="{ padding: '0px', height: '280px' }">
-					<span class="warningTop">可用性监测</span>
-					<el-table :data="bugData" height="250">
+					<span class="warningTop">网页敏感信息监测</span>
+					<el-table ref="rateRef2" :data="bugData" height="250">
 						<el-table-column prop="time" label="时间" />
 						<el-table-column prop="ip" label="IP" />
 						<el-table-column prop="url" label="URL" />
-						<el-table-column prop="result" label="结果" />
-						<el-table-column prop="rate" label="监测频率" />
-						<el-table-column prop="num" label="监测次数"> </el-table-column>
+						<el-table-column prop="change" label="结果" />
+						<el-table-column prop="change" label="详情">
+							<template #default="scope">
+								<el-button text @click="getDetail()" v-permiss="15" style="color:dodgerblue;">
+									详情
+								</el-button>
+							</template>
+						</el-table-column>
+					</el-table>
+				</el-card>
+			</el-col>
+		</el-row>
+		<el-row :gutter="10">
+			<el-col :span="12">
+				<el-card class="card" shadow="hover" :body-style="{ padding: '0px', height: '280px' }">
+					<span class="warningTop">网页恶意链接监测</span>
+					<el-table ref="rateRef3" :data="bugData" height="250">
+						<el-table-column prop="time" label="时间" />
+						<el-table-column prop="ip" label="IP" />
+						<el-table-column prop="url" label="URL" />
+						<el-table-column prop="malice_url" label="结果" />
+						<el-table-column prop="change" label="详情">
+							<template #default="scope">
+								<el-button text @click="getDetail()" v-permiss="15" style="color:dodgerblue;">
+									详情
+								</el-button>
+							</template>
+						</el-table-column>
+					</el-table>
+				</el-card>
+			</el-col>
+			<el-col :span="12">
+				<el-card class="card" shadow="hover" :body-style="{ padding: '0px', height: '280px' }">
+					<span class="warningTop">数据采集情况</span>
+					<el-table ref="rateRef4" :data="bugData" height="250">
+						<el-table-column prop="time" label="时间" />
+						<el-table-column prop="ip" label="IP" />
+						<el-table-column prop="url" label="URL" />
+						<el-table-column prop="crawl_result" label="结果" />
+						<el-table-column prop="change" label="详情">
+							<template #default="scope">
+								<el-button text @click="getDetail()" v-permiss="15" style="color:dodgerblue;">
+									详情
+								</el-button>
+							</template>
+						</el-table-column>
 					</el-table>
 				</el-card>
 			</el-col>
@@ -264,6 +308,21 @@
 				</el-card>
 			</el-col>
 		</el-row>
+		<!-- 编辑弹出框 -->
+		<el-dialog title="详情" :data="eventData" v-model="editVisible" width="30%">
+			<el-form-item label="URL" prop="taskType">
+				http://www.xxx.com
+			</el-form-item>
+			<el-form-item label="详情" prop="cyclical">
+				XXXXXXXXXXXXXXXXXX
+			</el-form-item>
+			<template #footer>
+				<span class="dialog-footer">
+					<el-button @click="editVisible = false">取 消</el-button>
+					<el-button type="primary" @click="editVisible = false">确 定</el-button>
+				</span>
+			</template>
+		</el-dialog>
 	</div>
 </template>
 
@@ -279,6 +338,9 @@ import { nextTick } from 'vue'
 const eventRef = ref();
 const bugRef = ref();
 const rateRef = ref();
+const rateRef2 = ref();
+const rateRef3 = ref();
+const rateRef4 = ref();
 
 const eventData = ref<any[]>([])
 const bugData = ref<any[]>([])
@@ -293,6 +355,9 @@ onMounted(() => {
 		scroll(eventRef.value.$refs.bodyWrapper); //设置滚动
 		scroll(bugRef.value.$refs.bodyWrapper); //设置滚动
 		scroll(rateRef.value.$refs.bodyWrapper) //设置滚动
+		scroll(rateRef2.value.$refs.bodyWrapper) //设置滚动
+		scroll(rateRef3.value.$refs.bodyWrapper) //设置滚动
+		scroll(rateRef4.value.$refs.bodyWrapper) //设置滚动
 	})
 })
 
@@ -321,7 +386,9 @@ const getEventData = (): any => {
 			d_port: '21',
 			type: '弱口令',
 			tag: '高',
-			content: ''
+			content: '',
+			malice_url: 'http://www.xxx.com',
+			crawl_result: '正常',
 		},
 		{
 			eventID: '1645',
@@ -332,7 +399,9 @@ const getEventData = (): any => {
 			d_port: '21',
 			type: '弱口令',
 			tag: '高',
-			content: ''
+			content: '',
+			malice_url: 'http://www.xxx.com',
+			crawl_result: '正常',
 		},
 		{
 			eventID: '1645',
@@ -343,7 +412,9 @@ const getEventData = (): any => {
 			d_port: '21',
 			type: '弱口令',
 			tag: '高',
-			content: ''
+			content: '',
+			malice_url: 'http://www.xxx.com',
+			crawl_result: '失败',
 		},
 		{
 			eventID: '1645',
@@ -354,7 +425,9 @@ const getEventData = (): any => {
 			d_port: '21',
 			type: '弱口令',
 			tag: '高',
-			content: ''
+			content: '',
+			malice_url: 'http://www.xxx.com',
+			crawl_result: '失败',
 		},
 		{
 			eventID: '1645',
@@ -365,7 +438,9 @@ const getEventData = (): any => {
 			d_port: '21',
 			type: '弱口令',
 			tag: '高',
-			content: ''
+			content: '',
+			malice_url: 'http://www.xxx.com',
+			crawl_result: '正常',
 		},
 		{
 			eventID: '1645',
@@ -376,7 +451,9 @@ const getEventData = (): any => {
 			d_port: '21',
 			type: '弱口令',
 			tag: '高',
-			content: ''
+			content: '',
+			malice_url: 'http://www.xxx.com',
+			crawl_result: '正常',
 		},
 		{
 			eventID: '1645',
@@ -387,7 +464,9 @@ const getEventData = (): any => {
 			d_port: '21',
 			type: '弱口令',
 			tag: '高',
-			content: ''
+			content: '',
+			malice_url: 'http://www.xxx.com',
+			crawl_result: '失败',
 		},
 		{
 			eventID: '1645',
@@ -398,7 +477,9 @@ const getEventData = (): any => {
 			d_port: '21',
 			type: '弱口令',
 			tag: '高',
-			content: ''
+			content: '',
+			malice_url: 'http://www.xxx.com',
+			crawl_result: '失败',
 		},
 		{
 			eventID: '1648',
@@ -409,7 +490,9 @@ const getEventData = (): any => {
 			d_port: '21',
 			type: '特洛伊木马',
 			tag: '中',
-			content: ''
+			content: '',
+			malice_url: 'http://www.xxx.com',
+			crawl_result: '正常',
 		},
 		{
 			eventID: '1648',
@@ -420,7 +503,9 @@ const getEventData = (): any => {
 			d_port: '21',
 			type: '代码执行',
 			tag: '中',
-			content: ''
+			content: '',
+			malice_url: 'http://www.xxx.com',
+			crawl_result: '正常',
 		},
 		{
 			eventID: '1645',
@@ -431,7 +516,9 @@ const getEventData = (): any => {
 			d_port: '21',
 			type: '弱口令',
 			tag: '高',
-			content: ''
+			content: '',
+			malice_url: 'http://www.xxx.com',
+			crawl_result: '正常',
 		},
 		{
 			eventID: '1645',
@@ -442,7 +529,9 @@ const getEventData = (): any => {
 			d_port: '21',
 			type: '弱口令',
 			tag: '高',
-			content: ''
+			content: '',
+			malice_url: 'http://www.xxx.com',
+			crawl_result: '正常',
 		},
 		{
 			eventID: '1645',
@@ -453,7 +542,9 @@ const getEventData = (): any => {
 			d_port: '21',
 			type: '弱口令',
 			tag: '高',
-			content: ''
+			content: '',
+			malice_url: 'http://www.xxx.com',
+			crawl_result: '失败',
 		}
 	]
 	return eventData
@@ -470,6 +561,10 @@ const getBugData = (): any => {
 			result: '正常',
 			rate: '10',
 			num: '10',
+			change: '违规',
+			detail: '详情',
+			malice_url: '含有恶意链接',
+			crawl_result: '失败',
 			tag: '高',
 		},
 		{
@@ -481,6 +576,10 @@ const getBugData = (): any => {
 			result: '正常',
 			rate: '10',
 			num: '10',
+			change: '违规',
+			detail: '详情',
+			malice_url: '含有恶意链接',
+			crawl_result: '成功',
 			tag: '中',
 		},
 		{
@@ -489,9 +588,13 @@ const getBugData = (): any => {
 			ip: '192.168.0.1',
 			type: 'CSRF漏洞',
 			url: '192.168.0.1',
-			result: '正常',
+			result: 'PING 异常',
 			rate: '10',
 			num: '10',
+			change: '违规',
+			detail: '详情',
+			malice_url: '含有恶意链接',
+			crawl_result: '失败',
 			tag: '中',
 		},
 		{
@@ -500,9 +603,13 @@ const getBugData = (): any => {
 			ip: '192.168.0.1',
 			type: 'SSRF漏洞',
 			url: '192.168.0.1',
-			result: '正常',
+			result: 'DNS 异常',
 			rate: '10',
 			num: '10',
+			change: '违规',
+			detail: '详情',
+			malice_url: '含有恶意链接',
+			crawl_result: '成功',
 			tag: '高',
 		},
 		{
@@ -511,9 +618,13 @@ const getBugData = (): any => {
 			ip: '192.168.0.1',
 			type: '未授权访问',
 			url: '192.168.0.1',
-			result: '正常',
+			result: 'HTTPS 异常',
 			rate: '10',
 			num: '10',
+			change: '违规',
+			detail: '详情',
+			malice_url: '含有恶意链接',
+			crawl_result: '失败',
 			tag: '中',
 		},
 		{
@@ -525,6 +636,40 @@ const getBugData = (): any => {
 			result: '正常',
 			rate: '10',
 			num: '10',
+			change: '违规',
+			detail: '详情',
+			malice_url: '含有恶意链接',
+			crawl_result: '成功',
+			tag: '中',
+		},
+		{
+			eventID: '1648',
+			time: '2023-02-22 12:10:00',
+			ip: '192.168.0.1',
+			type: '未授权访问',
+			url: '192.168.0.1',
+			result: 'PING 异常',
+			rate: '10',
+			num: '10',
+			change: '违规',
+			detail: '详情',
+			malice_url: '含有恶意链接',
+			crawl_result: '失败',
+			tag: '中',
+		},
+		{
+			eventID: '1648',
+			time: '2023-02-22 12:10:00',
+			ip: '192.168.0.1',
+			type: '未授权访问',
+			url: '192.168.0.1',
+			result: 'PING 异常',
+			rate: '10',
+			num: '10',
+			change: '违规',
+			detail: '详情',
+			malice_url: '含有恶意链接',
+			crawl_result: '成功',
 			tag: '中',
 		},
 		{
@@ -536,6 +681,10 @@ const getBugData = (): any => {
 			result: '正常',
 			rate: '10',
 			num: '10',
+			change: '违规',
+			detail: '详情',
+			malice_url: '含有恶意链接',
+			crawl_result: '失败',
 			tag: '中',
 		},
 		{
@@ -547,28 +696,25 @@ const getBugData = (): any => {
 			result: '正常',
 			rate: '10',
 			num: '10',
+			change: '违规',
+			detail: '详情',
+			malice_url: '含有恶意链接',
+			crawl_result: '失败',
 			tag: '中',
 		},
 		{
 			eventID: '1648',
 			time: '2023-02-22 12:10:00',
 			ip: '192.168.0.1',
-			type: '未授权访问',
+			type: 'CSRF漏洞',
 			url: '192.168.0.1',
-			result: '正常',
+			result: 'PING 异常',
 			rate: '10',
 			num: '10',
-			tag: '中',
-		},
-		{
-			eventID: '1648',
-			time: '2023-02-22 12:10:00',
-			ip: '192.168.0.1',
-			type: '未授权访问',
-			url: '192.168.0.1',
-			result: '正常',
-			rate: '10',
-			num: '10',
+			change: '违规',
+			detail: '详情',
+			malice_url: '含有恶意链接',
+			crawl_result: '成功',
 			tag: '中',
 		},
 		{
@@ -580,17 +726,10 @@ const getBugData = (): any => {
 			result: '正常',
 			rate: '10',
 			num: '10',
-			tag: '中',
-		},
-		{
-			eventID: '1648',
-			time: '2023-02-22 12:10:00',
-			ip: '192.168.0.1',
-			type: 'CSRF漏洞',
-			url: '192.168.0.1',
-			result: '正常',
-			rate: '10',
-			num: '10',
+			change: '违规',
+			detail: '详情',
+			malice_url: '含有恶意链接',
+			crawl_result: '失败',
 			tag: '中',
 		},
 		{
@@ -602,6 +741,10 @@ const getBugData = (): any => {
 			result: '正常',
 			rate: '10',
 			num: '10',
+			change: '违规',
+			detail: '详情',
+			malice_url: '含有恶意链接',
+			crawl_result: '失败',
 			tag: '高',
 		},
 		{
@@ -613,6 +756,10 @@ const getBugData = (): any => {
 			result: '正常',
 			rate: '10',
 			num: '10',
+			change: '违规',
+			detail: '详情',
+			malice_url: '含有恶意链接',
+			crawl_result: '失败',
 			tag: '高'
 		}
 	]
@@ -690,7 +837,7 @@ function initOption1() {
 	const myChart1 = echarts.init(document.getElementById('myChart'));
 	let option: EChartsOption = {
 		title: {
-			text: '被攻击数据库ip排行',
+			text: '事件排行',
 			x: '2%',
 			y: '2%',
 			textStyle: {
@@ -717,7 +864,7 @@ function initOption1() {
 		},
 		yAxis: {
 			type: 'category',
-			data: ['172.31.6.54', '172.8.66.13', '172.25.65.52', '172.68.5.96', '172.21.65.3', '172.9.64.2', '172.86.5.2', '172.57.55.1', '172.7.53.2', '172.8.12.3']
+			data: ['Boat', '蔓灵花', '海莲花', 'CobaltStrike', '“8220”组织木马', 'Ramnit”蠕虫病毒”', 'Miori', 'Mirai', 'Mozi', '僵尸网络']
 		},
 		series: [
 			{
@@ -751,7 +898,7 @@ function initOption2() {
 			}
 		},
 		legend: {
-			data: ['密码爆破', '勒索攻击', '挖矿攻击', '拖库攻击', '后门植入攻击'],
+			data: ['Boat', '蔓灵花', '海莲花', 'CobaltStrike', '“8220”组织木马'],
 			top: '13%'
 		},
 		toolbox: {
@@ -780,7 +927,7 @@ function initOption2() {
 		],
 		series: [
 			{
-				name: '密码爆破',
+				name: 'Boat',
 				type: 'line',
 				stack: 'Total',
 				areaStyle: {},
@@ -790,7 +937,7 @@ function initOption2() {
 				data: [120, 132, 101, 134, 90, 230, 210]
 			},
 			{
-				name: '勒索攻击',
+				name: '蔓灵花',
 				type: 'line',
 				stack: 'Total',
 				areaStyle: {},
@@ -800,7 +947,7 @@ function initOption2() {
 				data: [220, 182, 191, 234, 290, 330, 310]
 			},
 			{
-				name: '挖矿攻击',
+				name: '海莲花',
 				type: 'line',
 				stack: 'Total',
 				areaStyle: {},
@@ -810,7 +957,7 @@ function initOption2() {
 				data: [150, 232, 201, 154, 190, 330, 410]
 			},
 			{
-				name: '拖库攻击',
+				name: 'CobaltStrike',
 				type: 'line',
 				stack: 'Total',
 				areaStyle: {},
@@ -820,7 +967,7 @@ function initOption2() {
 				data: [320, 332, 301, 334, 390, 330, 320]
 			},
 			{
-				name: '后门植入攻击',
+				name: '“8220”组织木马',
 				type: 'line',
 				stack: 'Total',
 				label: {
@@ -844,6 +991,21 @@ onMounted(() => {
 // onUnmounted(() => {
 // 	myChart1.dispose;
 //     });
+// 表格编辑时弹窗和保存
+const editVisible = ref(false);
+let form = reactive({
+	cyclical: '',
+	taskType: '',
+	cyclicalNum: ''
+});
+const getDetail = () => {
+	// form.name = row.name;
+	// form.address = row.address;
+	// debugger
+	editVisible.value = true;
+	// state.addTitle = '新增';
+};
+
 </script>
 
 <style scoped>
