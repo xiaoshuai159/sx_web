@@ -6,7 +6,7 @@
 				<el-date-picker v-model="value1" type="datetimerange" range-separator="To" start-placeholder="Start date"
 					end-placeholder="End date" />&nbsp;&nbsp;
 				<span>任务类型：</span>
-				<el-select v-model="query.address" placeholder="任务类型" class="handle-select mr10">
+				<el-select v-model="query.taskType" placeholder="任务类型" class="handle-select mr10">
 					<el-option key="可用性监测" label="可用性监测" value="可用性监测"></el-option>
 					<el-option key="系统漏洞扫描" label="系统漏洞扫描" value="系统漏洞扫描"></el-option>
 					<el-option key="网页变更监测" label="网页变更监测" value="网页变更监测"></el-option>
@@ -86,8 +86,8 @@
 					<el-option key="webshell扫描检测" label="webshell扫描检测" value="webshell扫描检测"></el-option>
 				</el-select>
 			</el-form-item>
-			<el-form-item label="检测周期" prop="resource">
-				<el-radio-group v-model="form.resource">
+			<el-form-item label="检测周期" prop="cyclical">
+				<el-radio-group v-model="form.cyclical">
 					<el-radio label="天"></el-radio>
 					<el-radio label="小时"></el-radio>
 					<el-radio label="分"></el-radio>
@@ -95,7 +95,7 @@
 			</el-form-item>
 			<el-form label-width="70px">
 				<el-form-item label="周期设置">
-					<el-input v-model="form.name"></el-input>
+					<el-input v-model="form.cyclicalNum"></el-input>
 				</el-form-item>
 				<el-form-item label="目标配置">
 					<el-upload action="#" :limit="1" accept=".xlsx, .xls" :show-file-list="false"
@@ -122,6 +122,7 @@ import { fetchData } from '../api/index';
 import type { FormInstance, FormRules } from 'element-plus';
 import { UploadProps } from 'element-plus';
 import * as XLSX from 'xlsx';
+import { fromPairs } from 'lodash';
 
 const state = reactive({
 	addTitle: '新增'
@@ -262,7 +263,7 @@ interface TableItem {
 }
 
 const query = reactive({
-	address: '',
+	taskType: '',
 	name: '',
 	pageIndex: 1,
 	pageSize: 10
@@ -305,7 +306,6 @@ const handleSearch = () => {
 const addTask = () => {
 	// form.name = row.name;
 	// form.address = row.address;
-	// debugger
 	editVisible.value = true;
 	state.addTitle = '新增';
 };
@@ -331,15 +331,16 @@ const handleDelete = (index: number) => {
 // 表格编辑时弹窗和保存
 const editVisible = ref(false);
 let form = reactive({
-	name: '',
-	address: '',
-	taskType: ''
+	cyclical: '',
+	taskType: '',
+	cyclicalNum: ''
 });
 let idx: number = -1;
 const handleEdit = (index: number, row: any) => {
 	idx = index;
-	form.name = row.name;
-	form.address = row.address;
+	form.taskType = row.databaseType
+	form.cyclical = row.cyclical.substr(1,1)
+	form.cyclicalNum = row.cyclical.substr(2,1);
 	editVisible.value = true;
 	state.addTitle = '编辑';
 };
@@ -357,6 +358,7 @@ const saveEdit = () => {
 		state: '已关闭',
 		excute: '',
 		databaseType: form.taskType,
+		cyclical: "每" + form.cyclical + form.cyclicalNum + "次",
 		title: '新增'
 	})
 };
