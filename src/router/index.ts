@@ -140,6 +140,15 @@ const routes: RouteRecordRaw[] = [
                 },
                 component: () => import(/* webpackChunkName: "charts" */ '../views/mining/areaPage.vue'),
             },
+            {
+                path: '/domainMonitoring',
+                name: 'domainMonitoring',
+                meta: {
+                    title: '域名安全监测',
+                    permiss: '15',
+                },
+                component: () => import(/* webpackChunkName: "charts" */ '../views/domainMonitoring.vue'),
+            },
             // {
             //     path: '/tabs',
             //     name: 'tabs',

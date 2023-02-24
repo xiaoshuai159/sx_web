@@ -108,11 +108,11 @@ const items = [
         title: '网站安全监测',
         permiss: '5',
         subs: [
-            {
-                index: '/securityAnalysis',
-                title: '安全分析',
-                permiss: '6',
-            },
+            // {
+            //     index: '/securityAnalysis',
+            //     title: '安全分析',
+            //     permiss: '6',
+            // },
             {
                 index: '/taskManagement',
                 title: '任务管理',
@@ -153,6 +153,24 @@ const items = [
                 index: '/provincePage',
                 title: '挖矿行为监测',
                 permiss: '13',
+            },
+        ],
+    },
+    {
+        icon: 'Wallet',
+        index: '/domainMonitoring',
+        title: '域名安全监测',
+        permiss: '15',
+        subs: [
+            {
+                index: '/domainMonitoring',
+                title: '域名异常监测(待完善)',
+                permiss: '15',
+            },
+            {
+                index: '/domainSetting',
+                title: '配置管理(待完善)',
+                permiss: '15',
             },
         ],
     },
