@@ -1,11 +1,21 @@
 import { defineStore } from 'pinia';
 
-export const useSidebarStore = defineStore('mining', {
+export const useMiningStore = defineStore('mining', {
 	state: () => {
+		const city:string = ''
+		const area:string = ''
 		return {
+			city,
+			area
 		};
 	},
-	getters: {},
+	// getters: {},
 	actions: {
+		updatecity(val:string){
+			console.log(val);
+			
+			this.city = val
+		}
 	}
 });
+

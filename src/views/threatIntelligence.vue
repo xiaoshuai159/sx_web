@@ -53,7 +53,7 @@ import { ref } from 'vue'
 import { Search } from '@element-plus/icons-vue';
 import { UploadFilled } from '@element-plus/icons-vue'
 const input1 = ref('')
-const isHave = ref(false)
+let isHave = ref(false)
 </script>
 
 <style scoped>
