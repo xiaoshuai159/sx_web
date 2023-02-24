@@ -57,15 +57,15 @@ const routes: RouteRecordRaw[] = [
                 },
                 component: () => import('../views/APPsearch.vue'),
             },
-            {
-                path: '/securityAnalysis',
-                name: 'securityAnalysis',
-                meta: {
-                    title: '安全分析',
-                    permiss: '7',
-                },
-                component: () => import('../views/securityAnalysis.vue'),
-            },
+            // {
+            //     path: '/securityAnalysis',
+            //     name: 'securityAnalysis',
+            //     meta: {
+            //         title: '安全分析',
+            //         permiss: '7',
+            //     },
+            //     component: () => import('../views/securityAnalysis.vue'),
+            // },
             {
                 path: '/taskManagement',
                 name: 'taskManagement',
@@ -130,6 +130,15 @@ const routes: RouteRecordRaw[] = [
                     permiss: '14',
                 },
                 component: () => import(/* webpackChunkName: "charts" */ '../views/mining/cityPage.vue'),
+            },
+            {
+                path: '/areaPage',
+                name: 'areaPage',
+                meta: {
+                    title: '虚拟货币挖矿监测',
+                    permiss: '14',
+                },
+                component: () => import(/* webpackChunkName: "charts" */ '../views/mining/areaPage.vue'),
             },
             // {
             //     path: '/tabs',

@@ -23,19 +23,37 @@
                 <el-col :span="4">
                     <div style="text-align: left; line-height: 40px;width:200px;">
                         涉及城市数量：{{ area_num }}<br />
-                        涉及单位数量：{{ unit_num }}<br />
+                        涉及矿池数量：{{ unit_num }}<br />
                         涉及IP数量：{{ ip_num }}
                     </div>
                 </el-col>
             </el-row>
         </div>
+        <el-divider></el-divider>
+        <el-header style="
+           text-align: left;
+            font-size: 20px;
+            height: 30px;
+            margin-top: 15px;
+            margin-bottom: 7px;
+          ">山西挖矿IP概览</el-header>
+          <el-row>
+        <el-col :span="24">
+          <div>
+            <xiangqing2></xiangqing2>
+          </div>
+        </el-col>
+      </el-row>
     </div>
 </template>
 
 <script setup lang="ts" name="provincePage">
-import { onMounted, ref } from "vue"
+import { onMounted, ref, onBeforeUnmount,onBeforeMount } from "vue"
 import axios from "axios";
+import xiangqing2 from "../../components/mining/xiangqing2.vue";
 import * as echarts from 'echarts'
+import {useMiningStore} from '../../store'
+import router from "../../router";
 const query = ref("涉及IP数量")
 const area_num = ref(58)
 const unit_num = ref(38)
@@ -46,13 +64,14 @@ const options = [
         label: "涉及IP数量",
     },
     {
-        value: "涉及单位数量",
-        label: "涉及单位数量",
+        value: "涉及矿池数量",
+        label: "涉及矿池数量",
     },
 ]
+let mapChart:any = '' 
 async function initChart() {
     type EChartsOption = echarts.EChartsOption;
-    const mapChart = echarts.init(document.getElementById('map_ref'));
+    mapChart = echarts.init(document.getElementById('map_ref'));
     const ret = await axios.get(`../../map/省级/山西省.json`);
     echarts.registerMap("山西省", ret.data)
     const initOption = {
@@ -88,9 +107,28 @@ async function initChart() {
         },
     };
     mapChart.setOption(initOption, true)
+    mapChart.on("click",(arg)=>{
+        const store = useMiningStore()
+        store.$patch({
+            city:arg.name
+        })
+        console.log(store.city);
+        router.push({
+            name:'cityPage',
+            // params:{
+            //     arg: arg,
+            // }
+        })
+    })
 }
+onBeforeMount(()=>{
+    
+})
 onMounted(() => {
     initChart()
+})
+onBeforeUnmount(() => {
+    mapChart.dispose()
 })
 </script>
 
@@ -107,6 +145,13 @@ onMounted(() => {
 }
 </style>
 <style>
+.content {
+    width: auto;
+    height: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: white;
+}
 .map-header-text {
     display: inline-block;
     margin-left: 15px;
