@@ -108,11 +108,11 @@ const items = [
         title: '网站安全监测',
         permiss: '5',
         subs: [
-            {
-                index: '/securityAnalysis',
-                title: '安全分析',
-                permiss: '6',
-            },
+            // {
+            //     index: '/securityAnalysis',
+            //     title: '安全分析',
+            //     permiss: '6',
+            // },
             {
                 index: '/taskManagement',
                 title: '任务管理',
