@@ -33,10 +33,11 @@
 			</div>
 			<el-table :data="tableData" border class="table" ref="multipleTable" header-cell-class-name="table-header">
 				<el-table-column prop="id" label="任务id" width="80" align="center"></el-table-column>
-				<el-table-column prop="taskTime" label="时间"></el-table-column>
+				<el-table-column prop="taskTime" label="时间" width="180"></el-table-column>
 				<el-table-column prop="harmIP" label="目标IP"></el-table-column>
-				<el-table-column prop="harmPort" label="端口"></el-table-column>
+				<el-table-column prop="harmPort" label="端口" width="80"></el-table-column>
 				<el-table-column prop="databaseType" label="任务类型" align="center"></el-table-column>
+				<el-table-column prop="cyclical" label="检测周期"></el-table-column>
 				<el-table-column label="状态" align="center">
 					<template #default="scope">
 						<el-tag :type="scope.row.state === '已启用' ? 'success' : scope.row.state === '未启用' ? 'danger' : ''">
@@ -44,7 +45,7 @@
 						</el-tag>
 					</template>
 				</el-table-column>
-				<el-table-column prop="excute" label="执行结果"></el-table-column>
+				<el-table-column prop="excute" label="执行结果" width="200px"></el-table-column>
 				<el-table-column label="操作" width="220" align="center">
 					<template #default="scope">
 						<el-button text :icon="Edit" @click="handleEdit(scope.$index, scope.row)" v-permiss="15">
@@ -256,6 +257,7 @@ interface TableItem {
 	state: string;
 	excute: string;
 	databaseType: string,
+	cyclical: string,
 	title: string
 }
 
@@ -280,6 +282,7 @@ const tableData = ref<TableItem[]>([{
 	state: '已启用',
 	excute: '成功 1 次  失败 1 次',
 	databaseType: '可用性检测',
+	cyclical: '每天1次',
 	title: '新增'
 },]);
 const pageTotal = ref(0);
