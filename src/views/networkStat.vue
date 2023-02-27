@@ -14,10 +14,10 @@
 		</div> -->
 		<div class="handle-box">
 			<span>时间：</span>
-			<el-date-picker v-model="value1" type="datetimerange" range-separator="To" start-placeholder="Start date"
+			<el-date-picker v-model="value1" type="datetimerange" range-separator="To" style="width:37%" start-placeholder="Start date"
 				end-placeholder="End date" />&nbsp;&nbsp;
 			<span>任务类型：</span>
-			<el-select v-model="query.address" placeholder="任务类型" class="handle-select mr10">
+			<el-select v-model="query.address" placeholder="任务类型" style="width:15%">
 				<el-option key="数据采集" label="数据采集" value="数据采集"></el-option>
 				<el-option key="可用性监测" label="可用性监测" value="可用性监测"></el-option>
 				<el-option key="系统漏洞扫描" label="系统漏洞扫描" value="系统漏洞扫描"></el-option>
@@ -1018,7 +1018,7 @@ const getDetail = () => {
 }
 
 .handle-input {
-	width: 210px;
+	width: 15%;
 }
 
 

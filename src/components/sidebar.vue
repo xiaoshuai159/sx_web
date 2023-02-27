@@ -157,7 +157,7 @@ const items = [
         ],
     },
     {
-        icon: 'Wallet',
+        icon: 'MessageBox',
         index: '/domainMonitoring',
         title: '域名安全监测',
         permiss: '15',

@@ -149,6 +149,16 @@ const routes: RouteRecordRaw[] = [
                 },
                 component: () => import(/* webpackChunkName: "charts" */ '../views/domainMonitoring.vue'),
             },
+            
+            {
+                path: '/domainSetting',
+                name: 'domainSetting',
+                meta: {
+                    title: '域名安全监测',
+                    permiss: '15',
+                },
+                component: () => import(/* webpackChunkName: "charts" */ '../views/domainSetting.vue'),
+            },
             // {
             //     path: '/tabs',
             //     name: 'tabs',

@@ -1,16 +1,16 @@
 <template>
 	<div>
-        <el-tabs type="border-card">
+        <el-tabs type="border-card" @tab-change="changeTab">
             <el-tab-pane label="C&C维度检索">
                 <el-input placeholder="请输入C&C域名、C&C IP、C&C URL" v-model="input1" style="width:390px"></el-input>&nbsp;&nbsp;
-                <el-button type="primary" :icon="Search" @click="isHave = !isHave">查询</el-button><br/>
+                <el-button type="primary" :icon="Search" @click="isHave = true">查询</el-button><br/>
                 <div style="margin:10px 4px 0 4px">
                     <span class="left-text">查询示例</span><span class="right-text">hot.tenchier.com &nbsp;  121.37.189.177 &nbsp;  https://www.hot.tenchier.com</span>
                 </div>
             </el-tab-pane>
             <el-tab-pane label="攻击维度检索">
                 <el-input placeholder="请输入攻击域名、攻击IP、攻击URL" v-model="input1" style="width:390px"></el-input>&nbsp;&nbsp;
-                <el-button type="primary" :icon="Search" @click="isHave = !isHave">查询</el-button><br/>
+                <el-button type="primary" :icon="Search" @click="isHave = true">查询</el-button><br/>
                 <div style="margin:10px 4px 0 4px">
                     <span class="left-text">查询示例</span><span class="right-text">hot.tenchier.com &nbsp;  121.37.189.177 &nbsp;  https://www.hot.tenchier.com</span>
                 </div>
@@ -99,6 +99,9 @@ const items = ref<Array<Item>>([
 ])
 const input1 = ref('')
 let isHave = ref(false)
+const changeTab = (a:number) => {
+    isHave.value = false
+}
 </script>
 
 <style scoped>

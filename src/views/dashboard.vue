@@ -201,7 +201,7 @@ const options = {
 	legend: {
 		position: 'left'
 	},
-	bgColor: '#fbfbfb',
+	// bgColor: '#fbfbfb',
 	labels: ['政府', '公检法', '高校', '医院', '其他'],
 	datasets: [
 		{

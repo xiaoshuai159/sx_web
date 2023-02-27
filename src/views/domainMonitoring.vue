@@ -3,15 +3,15 @@
 		<div class="handle-box">
 			<span>时间：</span>
 			<el-date-picker v-model="value1" type="datetimerange" range-separator="To" start-placeholder="Start date"
-				end-placeholder="End date" />&nbsp;&nbsp;
+				end-placeholder="End date" style="width:37%"/>&nbsp;&nbsp;
 			<span>异常类型：</span>
-			<el-select v-model="query.address" placeholder="异常类型" class="handle-select mr10">
+			<el-select v-model="query.address" placeholder="异常类型" style="width:17%">
 				<el-option key="域名仿冒" label="域名仿冒" value="域名仿冒"></el-option>
 				<el-option key="域名劫持" label="域名劫持" value="域名劫持"></el-option>
 			</el-select>
 			<span style="margin-left: 15px;">IP：</span>
 			<el-input v-model="query.name" placeholder="IP" class="handle-input mr10"></el-input>
-			<div style="margin-left:0px">
+			<div style="margin:10px 0">
 				<span style="margin-left: 0px;">异常域名：</span>
 				<el-input v-model="query.name" placeholder="异常域名" class="handle-input mr10"></el-input>
 				<el-button type="primary" :icon="Search" @click="handleSearch" style="margin-left: 10px;">搜索</el-button>
@@ -51,10 +51,13 @@
 				</el-card>
 			</el-col>
 			<el-col :span="12">
-				<el-card shadow="hover" :body-style="{ padding: '0px', height: '280px' }">
+				<el-card shadow="hover" :body-style="{ padding: '0px', height: '285px' }">
 					<schart ref="bar" class="schart" canvasId="bar" :options="options"></schart>
 				</el-card>
 			</el-col>
+			
+		</el-row>
+		<el-row :gutter="10">
 			<el-col :span="12">
 				<el-card shadow="hover" :body-style="{ padding: '0px', height: '285px' }">
 					<div id="myChart2" :style="{ width: '98%', height: '277px' }"></div>
@@ -603,7 +606,7 @@ const options = {
 	legend: {
 		position: 'left'
 	},
-	bgColor: '#fbfbfb',
+	// bgColor: '#fbfbfb',
 	labels: ['未注册', '域名假冒劫持', '黑名单', '白名单', '其他'],
 	datasets: [
 		{
@@ -797,7 +800,7 @@ const getDetail = () => {
 }
 
 .handle-input {
-	width: 210px;
+	width: 18%;
 }
 
 
