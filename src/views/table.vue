@@ -81,47 +81,47 @@
 		<!-- 编辑弹出框 -->
 		<el-dialog title="数据安全事件详情" v-model="editVisible" width="30%" top="1%">
 				<el-form :model="form">
-							<el-form-item label="事件id" :label-width="formLabelWidth">
-								<el-input v-model="form.num" autocomplete="off" />
-							</el-form-item>
-							<el-form-item label="时间" :label-width="formLabelWidth">
-								<el-input v-model="form.time" autocomplete="off" />
-							</el-form-item>
-							<el-form-item label="受害数据IP" :label-width="formLabelWidth">
-								<el-input v-model="form.harmIP" autocomplete="off" />
-							</el-form-item>
-							<el-form-item label="受害端口" :label-width="formLabelWidth">
-								<el-input v-model="form.port" autocomplete="off" />
-							</el-form-item>
-							<el-form-item label="数据库类型" :label-width="formLabelWidth">
-								<el-input v-model="form.databaseType" autocomplete="off" />
-							</el-form-item>
-							<el-form-item label="预警类型" :label-width="formLabelWidth">
-								<el-input v-model="form.sosType" autocomplete="off" />
-							</el-form-item>
-							<el-form-item label="告警内容" :label-width="formLabelWidth">
-								<el-input v-model="form.sosContent" autocomplete="off" />
-							</el-form-item>
-							<el-form-item label="攻击次数" :label-width="formLabelWidth">
-								<el-input v-model="form.attackNum" autocomplete="off" />
-							</el-form-item>
-							<el-form-item label="攻击IP" :label-width="formLabelWidth">
-								<el-input v-model="form.attackIP" autocomplete="off" />
-							</el-form-item>
-							<el-form-item label="攻击端口" :label-width="formLabelWidth">
-								<el-input v-model="form.attackPort" autocomplete="off" />
-							</el-form-item>
-							<el-form-item label="优先级" :label-width="formLabelWidth">
-								<el-input v-model="form.level" autocomplete="off" />
-							</el-form-item>
-							<el-form-item label="验证状态" :label-width="formLabelWidth">
-								<el-input v-model="form.status" autocomplete="off" />
-							</el-form-item>
-						</el-form>
+					<el-form-item label="事件id" :label-width="formLabelWidth">
+						<el-input v-model="form.id" autocomplete="off" />
+					</el-form-item>
+					<el-form-item label="时间" :label-width="formLabelWidth">
+						<el-input v-model="form.time" autocomplete="off" />
+					</el-form-item>
+					<el-form-item label="受害数据IP" :label-width="formLabelWidth">
+						<el-input v-model="form.harmIP" autocomplete="off" />
+					</el-form-item>
+					<el-form-item label="受害端口" :label-width="formLabelWidth">
+						<el-input v-model="form.harmPort" autocomplete="off" />
+					</el-form-item>
+					<el-form-item label="数据库类型" :label-width="formLabelWidth">
+						<el-input v-model="form.databaseType" autocomplete="off" />
+					</el-form-item>
+					<el-form-item label="预警类型" :label-width="formLabelWidth">
+						<el-input v-model="form.warnType" autocomplete="off" />
+					</el-form-item>
+					<el-form-item label="告警内容" :label-width="formLabelWidth">
+						<el-input v-model="form.warnContent" autocomplete="off" />
+					</el-form-item>
+					<el-form-item label="攻击次数" :label-width="formLabelWidth">
+						<el-input v-model="form.attackNum" autocomplete="off" />
+					</el-form-item>
+					<el-form-item label="攻击IP" :label-width="formLabelWidth">
+						<el-input v-model="form.attackIP" autocomplete="off" />
+					</el-form-item>
+					<el-form-item label="攻击端口" :label-width="formLabelWidth">
+						<el-input v-model="form.attackPort" autocomplete="off" />
+					</el-form-item>
+					<el-form-item label="优先级" :label-width="formLabelWidth">
+						<el-input v-model="form.level" autocomplete="off" />
+					</el-form-item>
+					<el-form-item label="验证状态" :label-width="formLabelWidth">
+						<el-input v-model="form.state" autocomplete="off" />
+					</el-form-item>
+				</el-form>
 			<template #footer>
 				<span class="dialog-footer">
 					<el-button @click="editVisible = false">取 消</el-button>
-					<el-button type="primary" @click="saveEdit">确 定</el-button>
+					<el-button type="primary" @click="saveEdit()">确 定</el-button>
 				</span>
 			</template>
 		</el-dialog>
@@ -134,21 +134,6 @@ import { ElMessage, ElMessageBox, rowContextKey } from 'element-plus';
 import { Delete, Edit, Search, Plus } from '@element-plus/icons-vue';
 import { fetchData } from '../api/index';
 import { Row } from 'element-plus/es/components/table-v2/src/components';
-
-interface TableItem {
-	id: number;
-	time: string;
-	harmIP: string;
-	harmPort: number;
-	databaseType: string;
-	warnType: string;
-	warnContent: string;
-	attackNum: number;
-	attackIP: string;
-	attackPort: number;
-	state:string;
-	level:string
-}
 const dialogTableVisible = ref(false)
 const formLabelWidth = '90px'
 const query = reactive({
@@ -161,7 +146,7 @@ const value1 = ref<[Date,Date]>([
   new Date(2023, 1, 21, 10, 10),
   new Date(2023, 1, 22, 10, 10),
 ])
-const tableData = ref<TableItem[]>([{
+const tableData = ref([{
 	id: 1,
 	time:'2023-02-22 10:10:00',
 	harmIP: '172.53.45.62',
@@ -174,7 +159,7 @@ const tableData = ref<TableItem[]>([{
 	attackPort: 68,
 	state:'已验证',
 	level:'高'
-},]);
+}]);
 const pageTotal = ref(0);
 // 获取表格数据
 const getData = () => {
@@ -211,37 +196,33 @@ const handleDelete = (index: number) => {
 
 // 表格编辑时弹窗和保存
 const editVisible = ref(false);
-let form = reactive({
-	num: '',
+let form = ref({
+	id: 0,
 	time: '',
 	harmIP:'',
-	port:'',
+	harmPort:0,
 	databaseType:'',
-	sosType:'',
-	sosContent:'',
-	attackNum:'',
+	warnType:'',
+	warnContent:'',
+	attackNum:0,
 	attackIP:'',
-	attackPort:'',
+	attackPort:0,
 	level:'',
-	status:''
+	state:''
 });
+let currentRow:number;
 let idx: number = -1;
 const handleEdit = (index: number, row: any) => {
-	form.num = row.id;
-	form.time = row.time;
-	form.harmIP = row.harmIP;
-	form.port = row.harmPort;
-	form.databaseType = row.databaseType;
-	form.sosType = row.warnType;
-	form.sosContent = row.warnContent;
-	form.attackNum = row.attackNum;
-	form.attackIP = row.attackIP;
-	form.attackPort = row.attackPort;
-	form.level = row.level;
-	form.status = row.state;
+	currentRow = index
+	// const proxyForm = JSON.parse(JSON.stringify(tableData.value[currentRow]))
+	// form = proxyForm
+	form.value = tableData.value[currentRow]	
 	editVisible.value = true;
 };
-const saveEdit = () => {
+function saveEdit() {
+	// console.log(tableData.value[currentRow]);
+	
+	tableData.value[currentRow] = form.value
 	editVisible.value = false;
 	ElMessage.success(`修改第 ${idx + 1} 行成功`);
 };

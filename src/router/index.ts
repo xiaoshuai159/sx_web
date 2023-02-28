@@ -116,7 +116,7 @@ const routes: RouteRecordRaw[] = [
                 path: '/provincePage',
                 name: 'provincePage',
                 meta: {
-                    title: '虚拟货币挖矿监测',
+                    title: '挖矿行为监测',
                     permiss: '13',
                 },
                 component: () => import(/* webpackChunkName: "charts" */ '../views/mining/provincePage.vue'),
@@ -126,7 +126,7 @@ const routes: RouteRecordRaw[] = [
                 path: '/cityPage',
                 name: 'cityPage',
                 meta: {
-                    title: '虚拟货币挖矿监测',
+                    title: '挖矿行为监测',
                     permiss: '14',
                 },
                 component: () => import(/* webpackChunkName: "charts" */ '../views/mining/cityPage.vue'),
@@ -135,7 +135,7 @@ const routes: RouteRecordRaw[] = [
                 path: '/areaPage',
                 name: 'areaPage',
                 meta: {
-                    title: '虚拟货币挖矿监测',
+                    title: '挖矿行为监测',
                     permiss: '14',
                 },
                 component: () => import(/* webpackChunkName: "charts" */ '../views/mining/areaPage.vue'),
@@ -144,7 +144,7 @@ const routes: RouteRecordRaw[] = [
                 path: '/domainMonitoring',
                 name: 'domainMonitoring',
                 meta: {
-                    title: '域名安全监测',
+                    title: '域名异常监测',
                     permiss: '15',
                 },
                 component: () => import(/* webpackChunkName: "charts" */ '../views/domainMonitoring.vue'),
@@ -154,7 +154,7 @@ const routes: RouteRecordRaw[] = [
                 path: '/domainSetting',
                 name: 'domainSetting',
                 meta: {
-                    title: '域名安全监测',
+                    title: '配置管理',
                     permiss: '15',
                 },
                 component: () => import(/* webpackChunkName: "charts" */ '../views/domainSetting.vue'),

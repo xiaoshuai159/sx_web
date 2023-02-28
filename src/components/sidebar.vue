@@ -164,12 +164,12 @@ const items = [
         subs: [
             {
                 index: '/domainMonitoring',
-                title: '域名异常监测(待完善)',
+                title: '域名异常监测',
                 permiss: '15',
             },
             {
                 index: '/domainSetting',
-                title: '配置管理(待完善)',
+                title: '配置管理',
                 permiss: '15',
             },
         ],
