@@ -272,7 +272,7 @@ const value1 = ref<[Date, Date]>([
 	new Date(2023, 1, 14, 10, 10),
 	new Date(2023, 1, 15, 10, 10),
 ])
-const tableData = ref<TableItem[]>([{
+let tableData = ref<TableItem[]>([{
 	id: 1,
 	taskTime: '2023-03-01 18:00:00',
 	harmIP: '172.53.45.62',
@@ -289,10 +289,33 @@ const tableData = ref<TableItem[]>([{
 const pageTotal = ref(0);
 // 获取表格数据
 const getData = () => {
-	fetchData().then(res => {
-		tableData.value = res.data.list;
-		pageTotal.value = res.data.pageTotal || 50;
-	});
+	tableData.value = [{
+		id: 1,
+		taskTime: '2023-03-01 18:00:00',
+		harmIP: '172.53.45.62',
+		harmPort: 22,
+		attackNum: 9,
+		attackIP: '192.168.55.4',
+		attackPort: 68,
+		state: '已启用',
+		excute: '成功 1 次  失败 1 次',
+		databaseType: '可用性检测',
+		cyclical: '每天1次',
+		title: '新增'
+	},{
+		id: 2,
+		taskTime: '2023-03-01 18:00:00',
+		harmIP: '172.53.4.62',
+		harmPort: 29,
+		attackNum: 10,
+		attackIP: '192.168.5.4',
+		attackPort: 6,
+		state: '已启用',
+		excute: '成功 1 次  失败 1 次',
+		databaseType: '可用性检测',
+		cyclical: '每天1次',
+		title: '新增'
+	},]
 };
 // getData();
 

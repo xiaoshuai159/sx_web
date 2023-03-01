@@ -11,8 +11,8 @@
 			<el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
 		</el-select>
 		<el-row class="mb-4" style="margin: 15px 0;">
-			<el-button type="primary" :icon="Search">查询</el-button>
-			<el-button type="success" :icon="Plus">新增</el-button>
+			<el-button type="primary" :icon="Search" @click="handleSearch">查询</el-button>
+			<el-button type="success" :icon="Plus" @click="handleAdd">新增</el-button>
 			<el-button type="danger" :icon="Delete">删除</el-button>
 		</el-row>
 		<el-table ref="multipleTableRef" :data="tableData" style="width: 100%" @selection-change="handleSelectionChange">
@@ -29,66 +29,68 @@
 			<el-table-column prop="recordTel" label="备案号码" min-width="100" />
 			<el-table-column prop="premissInfo" label="应用权限信息" min-width="100" />
 			<el-table-column prop="operate" label="操作" fixed="right" min-width="90">
-				<template #default>
-					<el-button link type="primary" size="small" @click="dialogTableVisible = true">编辑</el-button>
-					<el-dialog v-model="dialogTableVisible" title="APP信息填写" :append-to-body='true' width="38%" top="1%" >
-						<el-form :model="appForm">
-							<el-form-item label="序号" :label-width="formLabelWidth">
-								<el-input v-model="appForm.num" autocomplete="off" />
-							</el-form-item>
-							<el-form-item label="应用名" :label-width="formLabelWidth">
-								<el-input v-model="appForm.name" autocomplete="off" />
-							</el-form-item>
-							<el-form-item label="包名" :label-width="formLabelWidth">
-								<el-input v-model="appForm.pcapName" autocomplete="off" />
-							</el-form-item>
-							<el-form-item label="运营商" :label-width="formLabelWidth">
-								<el-input v-model="appForm.operator" autocomplete="off" />
-							</el-form-item>
-							<el-form-item label="开发者" :label-width="formLabelWidth">
-								<el-input v-model="appForm.developer" autocomplete="off" />
-							</el-form-item>
-							<el-form-item label="版本" :label-width="formLabelWidth">
-								<el-input v-model="appForm.version" autocomplete="off" />
-							</el-form-item>
-							<el-form-item label="简介" :label-width="formLabelWidth">
-								<el-input v-model="appForm.info" autocomplete="off" />
-							</el-form-item>
-							<el-form-item label="在架状态" :label-width="formLabelWidth">
-								<el-input v-model="appForm.condition" autocomplete="off" />
-							</el-form-item>
-							<el-form-item label="是否备案" :label-width="formLabelWidth">
-								<el-input v-model="appForm.isRecord" autocomplete="off" />
-							</el-form-item>
-							<el-form-item label="备案号码" :label-width="formLabelWidth">
-								<el-input v-model="appForm.recordTel" autocomplete="off" />
-							</el-form-item>
-							<el-form-item label="权限信息" :label-width="formLabelWidth">
-								<el-input v-model="appForm.premissInfo" autocomplete="off" :rows="2" type="textarea" />
-							</el-form-item>
-						</el-form>
-						<template #footer>
-							<span class="dialog-footer">
-								<el-button type="primary" @click="dialogTableVisible = false">确定</el-button>
-								<el-button @click="dialogTableVisible = false">
-									取消
-								</el-button>
-							</span>
-						</template>
-					</el-dialog>
+				<template #default="scope">
+					<el-button link type="primary" size="small" @click="handleEdit(scope.$index, scope.row)" v-permiss="15">编辑</el-button>
+					
 				</template>
 			</el-table-column>
 		</el-table>
+		<el-dialog v-model="dialogTableVisible" title="APP信息填写" :append-to-body='true' width="38%" top="1%">
+			<el-form :model="form">
+				<el-form-item label="序号" :label-width="formLabelWidth">
+					<el-input v-model="form.num" autocomplete="off" />
+				</el-form-item>
+				<el-form-item label="应用名" :label-width="formLabelWidth">
+					<el-input v-model="form.name" autocomplete="off" />
+				</el-form-item>
+				<el-form-item label="包名" :label-width="formLabelWidth">
+					<el-input v-model="form.pcapName" autocomplete="off" />
+				</el-form-item>
+				<el-form-item label="运营商" :label-width="formLabelWidth">
+					<el-input v-model="form.operator" autocomplete="off" />
+				</el-form-item>
+				<el-form-item label="开发者" :label-width="formLabelWidth">
+					<el-input v-model="form.developer" autocomplete="off" />
+				</el-form-item>
+				<el-form-item label="版本" :label-width="formLabelWidth">
+					<el-input v-model="form.version" autocomplete="off" />
+				</el-form-item>
+				<el-form-item label="简介" :label-width="formLabelWidth">
+					<el-input v-model="form.info" autocomplete="off" />
+				</el-form-item>
+				<el-form-item label="在架状态" :label-width="formLabelWidth">
+					<el-input v-model="form.condition" autocomplete="off" />
+				</el-form-item>
+				<el-form-item label="是否备案" :label-width="formLabelWidth">
+					<el-input v-model="form.isRecord" autocomplete="off" />
+				</el-form-item>
+				<el-form-item label="备案号码" :label-width="formLabelWidth">
+					<el-input v-model="form.recordTel" autocomplete="off" />
+				</el-form-item>
+				<el-form-item label="权限信息" :label-width="formLabelWidth">
+					<el-input v-model="form.premissInfo" autocomplete="off" :rows="2" type="textarea" />
+				</el-form-item>
+			</el-form>
+			<template #footer>
+				<span class="dialog-footer">
+					<el-button type="primary" @click="dialogTableVisible = false">确定</el-button>
+					<el-button @click="dialogTableVisible = false">
+						取消
+					</el-button>
+				</span>
+			</template>
+		</el-dialog>
 	</div>
 </template>
 
 <script setup lang="ts" name="APPsearch" >
 import { ref, reactive } from 'vue'
 import { ElTable } from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus';
 import { Delete, Plus, Search } from '@element-plus/icons-vue'
 const value = ref('yes')
 interface appTableData {
-	num: number
+	num: number|undefined
 	name: string
 	pcapName: string
 	operator: string
@@ -106,10 +108,12 @@ const multipleTableRef = ref<InstanceType<typeof ElTable>>()
 const multipleSelection = ref<appTableData[]>([])
 const handleSelectionChange = (val: appTableData[]) => {
 	multipleSelection.value = val
+	console.log(val);
+	
 }
 const dialogTableVisible = ref(false)
 const formLabelWidth = '80px'
-const appForm:appTableData = reactive({
+const form = ref<appTableData>({
 	num: 12,
 	name: 'name1',
 	pcapName: 'pcapName1',
@@ -122,7 +126,7 @@ const appForm:appTableData = reactive({
 	recordTel: '9759632',
 	premissInfo: 'permissInfo',
 })
-const tableData: appTableData[] = [
+const tableData = ref<appTableData[]>([
 	{
 		num: 12,
 		name: 'name1',
@@ -137,7 +141,7 @@ const tableData: appTableData[] = [
 		premissInfo: 'permissInfo',
 
 	},
-]
+])
 const options = [
 	{
 		value: 'yes',
@@ -147,8 +151,76 @@ const options = [
 		value: 'no',
 		label: '未下架',
 	},]
-const handleClick = () => {
-	console.log('click')
+const getData = () => {
+	tableData.value = [
+		{
+			num: 12,
+			name: 'name1',
+			pcapName: 'pcapName1',
+			operator: 'operator1',
+			developer: 'dev1',
+			version: '12.3.1',
+			info: 'info',
+			condition: '未下架',
+			isRecord: '未备案',
+			recordTel: '9759632',
+			premissInfo: 'permissInfo',
+
+		},
+		{
+			num: 13,
+			name: 'name2',
+			pcapName: 'pcapName2',
+			operator: 'operator2',
+			developer: 'dev2',
+			version: '12.3.2',
+			info: 'info2',
+			condition: '未下架',
+			isRecord: '未备案',
+			recordTel: '9759632',
+			premissInfo: 'permissInfo',
+
+		},
+		{
+			num: 14,
+			name: 'name3',
+			pcapName: 'pcapName3',
+			operator: 'operator3',
+			developer: 'dev3',
+			version: '12.3.3',
+			info: 'info3',
+			condition: '未下架',
+			isRecord: '未备案',
+			recordTel: '9759632',
+			premissInfo: 'permissInfo',
+
+		}
+	]
+}
+const handleSearch = () => {
+	getData()
+}
+const handleEdit = (a:number,b:any) => {
+	console.log(a);
+	form.value = tableData.value[a]
+	dialogTableVisible.value = true
+	ElMessage.success(`修改成功`);
+}
+const handleAdd = () => {
+	form.value = {
+		num: undefined,
+		name: '',
+		pcapName: '',
+		operator: '',
+		developer: '',
+		version: '',
+		info: '',
+		condition: '',
+		isRecord: '',
+		recordTel: '',
+		premissInfo: ''
+	};
+	dialogTableVisible.value = true;
 }
 </script>
 

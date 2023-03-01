@@ -23,7 +23,7 @@
 				<span>攻击者IP：</span>
 				<el-input v-model="query.name" placeholder="攻击者IP" class="handle-input mr10"></el-input>
 				<el-button type="primary" :icon="Search" @click="handleSearch">搜索</el-button>
-				<el-button type="primary" :icon="Plus">新增</el-button>
+				<el-button type="primary" :icon="Plus" @click="handleAdd">新增</el-button>
 			</div>
 			<el-table :data="tableData" border class="table" ref="multipleTable" header-cell-class-name="table-header">
 				<el-table-column prop="id" label="事件id" min-width="60" align="center"></el-table-column>
@@ -120,8 +120,9 @@
 				</el-form>
 			<template #footer>
 				<span class="dialog-footer">
-					<el-button @click="editVisible = false">取 消</el-button>
 					<el-button type="primary" @click="saveEdit()">确 定</el-button>
+					<el-button @click="editVisible = false">取 消</el-button>
+					
 				</span>
 			</template>
 		</el-dialog>
@@ -132,10 +133,23 @@
 import { ref, reactive } from 'vue';
 import { ElMessage, ElMessageBox, rowContextKey } from 'element-plus';
 import { Delete, Edit, Search, Plus } from '@element-plus/icons-vue';
-import { fetchData } from '../api/index';
-import { Row } from 'element-plus/es/components/table-v2/src/components';
+// import { fetchData } from '../api/index';
 const dialogTableVisible = ref(false)
 const formLabelWidth = '90px'
+interface FormAndTable {
+	id: number|undefined
+	time: string
+	harmIP: string
+	harmPort: number|undefined
+	databaseType: string
+	warnType: string
+	warnContent: string
+	attackNum: number|undefined
+	attackIP: string
+	attackPort: number|undefined
+	level: string
+	state: string
+}
 const query = reactive({
 	address: '',
 	name: '',
@@ -146,7 +160,7 @@ const value1 = ref<[Date,Date]>([
   new Date(2023, 1, 21, 10, 10),
   new Date(2023, 1, 22, 10, 10),
 ])
-const tableData = ref([{
+const tableData = ref<FormAndTable[]>([{
 	id: 1,
 	time:'2023-02-22 10:10:00',
 	harmIP: '172.53.45.62',
@@ -162,14 +176,57 @@ const tableData = ref([{
 }]);
 const pageTotal = ref(0);
 // 获取表格数据
-const getData = () => {
-	fetchData().then(res => {
-		tableData.value = res.data.list;
-		pageTotal.value = res.data.pageTotal || 50;
-	});
-};
+// const getData = () => {
+// 	fetchData().then(res => {
+// 		tableData.value = res.data.list;
+// 		pageTotal.value = res.data.pageTotal || 50;
+// 	});
+// };
 // getData();
-
+const getData = () =>{
+	tableData.value = [{
+	id: 1,
+	time:'2023-02-22 10:10:00',
+	harmIP: '172.5.45.62',
+	harmPort: 45,
+	databaseType:'mysql',
+	warnType:'数据库密码爆破',
+	warnContent:'...',
+	attackNum: 9,
+	attackIP: '192.168.55.4',
+	attackPort: 68,
+	state:'已验证',
+	level:'高'
+},
+{
+	id: 2,
+	time:'2023-02-22 10:10:00',
+	harmIP: '172.53.45.6',
+	harmPort: 75,
+	databaseType:'mysql',
+	warnType:'数据库密码爆破',
+	warnContent:'...',
+	attackNum: 9,
+	attackIP: '192.168.55.4',
+	attackPort: 68,
+	state:'已验证',
+	level:'高'
+},
+{
+	id: 3,
+	time:'2023-02-22 10:10:00',
+	harmIP: '172.53.5.62',
+	harmPort: 40,
+	databaseType:'mysql',
+	warnType:'数据库密码爆破',
+	warnContent:'...',
+	attackNum: 9,
+	attackIP: '192.168.55.4',
+	attackPort: 68,
+	state:'已验证',
+	level:'高'
+}]
+}
 // 查询操作
 const handleSearch = () => {
 	query.pageIndex = 1;
@@ -196,17 +253,17 @@ const handleDelete = (index: number) => {
 
 // 表格编辑时弹窗和保存
 const editVisible = ref(false);
-let form = ref({
-	id: 0,
+let form = ref<FormAndTable>({
+	id: undefined,
 	time: '',
 	harmIP:'',
-	harmPort:0,
+	harmPort:undefined,
 	databaseType:'',
 	warnType:'',
 	warnContent:'',
-	attackNum:0,
+	attackNum:undefined,
 	attackIP:'',
-	attackPort:0,
+	attackPort:undefined,
 	level:'',
 	state:''
 });
@@ -219,12 +276,29 @@ const handleEdit = (index: number, row: any) => {
 	form.value = tableData.value[currentRow]	
 	editVisible.value = true;
 };
+const handleAdd = () => {
+	form.value = {
+		id: undefined,
+		time: '',
+		harmIP:'',
+		harmPort:undefined,
+		databaseType:'',
+		warnType:'',
+		warnContent:'',
+		attackNum:undefined,
+		attackIP:'',
+		attackPort:undefined,
+		level:'',
+		state:''
+	}
+	editVisible.value = true;
+}
 function saveEdit() {
 	// console.log(tableData.value[currentRow]);
 	
 	tableData.value[currentRow] = form.value
 	editVisible.value = false;
-	ElMessage.success(`修改第 ${idx + 1} 行成功`);
+	ElMessage.success(`修改成功`);
 };
 </script>
 
