@@ -13,7 +13,7 @@
 		<el-row class="mb-4" style="margin: 15px 0;">
 			<el-button type="primary" :icon="Search" @click="handleSearch">查询</el-button>
 			<el-button type="success" :icon="Plus" @click="handleAdd">新增</el-button>
-			<el-button type="danger" :icon="Delete">删除</el-button>
+			<el-button type="danger" :icon="Delete" @click="handleDel">删除</el-button>
 		</el-row>
 		<el-table ref="multipleTableRef" :data="tableData" style="width: 100%" @selection-change="handleSelectionChange">
 			<el-table-column type="selection" min-width="55" />
@@ -35,7 +35,7 @@
 				</template>
 			</el-table-column>
 		</el-table>
-		<el-dialog v-model="dialogTableVisible" title="APP信息填写" :append-to-body='true' width="38%" top="1%">
+		<el-dialog v-model="dialogTableVisible" title="APP信息填写" :append-to-body='true' width="30%" top="1%">
 			<el-form :model="form">
 				<el-form-item label="序号" :label-width="formLabelWidth">
 					<el-input v-model="form.num" autocomplete="off" />
@@ -73,7 +73,7 @@
 			</el-form>
 			<template #footer>
 				<span class="dialog-footer">
-					<el-button type="primary" @click="dialogTableVisible = false">确定</el-button>
+					<el-button type="primary" @click="saveEdit">确定</el-button>
 					<el-button @click="dialogTableVisible = false">
 						取消
 					</el-button>
@@ -89,6 +89,7 @@ import { ElTable } from 'element-plus'
 import { ElMessage, ElMessageBox } from 'element-plus';
 import { Delete, Plus, Search } from '@element-plus/icons-vue'
 const value = ref('yes')
+let idx: number = -1;
 interface appTableData {
 	num: number|undefined
 	name: string
@@ -103,7 +104,6 @@ interface appTableData {
 	premissInfo: string
 
 }
-
 const multipleTableRef = ref<InstanceType<typeof ElTable>>()
 const multipleSelection = ref<appTableData[]>([])
 const handleSelectionChange = (val: appTableData[]) => {
@@ -113,7 +113,7 @@ const handleSelectionChange = (val: appTableData[]) => {
 }
 const dialogTableVisible = ref(false)
 const formLabelWidth = '80px'
-const form = ref<appTableData>({
+let form = reactive<appTableData>({
 	num: 12,
 	name: 'name1',
 	pcapName: 'pcapName1',
@@ -200,27 +200,78 @@ const getData = () => {
 const handleSearch = () => {
 	getData()
 }
+let editOrAdd:string
 const handleEdit = (a:number,b:any) => {
-	console.log(a);
-	form.value = tableData.value[a]
+	idx = a
+	editOrAdd = 'edit'
+	form.num = tableData.value[idx].num
+	form.name = tableData.value[idx].name
+	form.pcapName = tableData.value[idx].pcapName
+	form.operator = tableData.value[idx].operator
+	form.developer = tableData.value[idx].developer
+	form.version = tableData.value[idx].version
+	form.info = tableData.value[idx].info
+	form.condition = tableData.value[idx].condition
+	form.isRecord = tableData.value[idx].isRecord
+	form.recordTel = tableData.value[idx].recordTel
+	form.premissInfo = tableData.value[idx].premissInfo
 	dialogTableVisible.value = true
-	ElMessage.success(`修改成功`);
+}
+
+const saveEdit = () => {
+	if(editOrAdd == 'edit'){
+		dialogTableVisible.value = false;
+		tableData.value[idx].num = form.num
+		tableData.value[idx].name = form.name
+		tableData.value[idx].pcapName = form.pcapName
+		tableData.value[idx].operator = form.operator
+		tableData.value[idx].developer = form.developer
+		tableData.value[idx].version = form.version
+		tableData.value[idx].info = form.info
+		tableData.value[idx].condition = form.condition
+		tableData.value[idx].isRecord = form.isRecord
+		tableData.value[idx].recordTel = form.recordTel
+		tableData.value[idx].premissInfo = form.premissInfo
+		ElMessage.success(`修改成功`);
+	}else{
+		dialogTableVisible.value = false;
+		tableData.value.push({
+			num: form.num,
+			name: form.name,
+			pcapName: form.pcapName,
+			operator: form.operator,
+			developer: form.developer,
+			version: form.version,
+			info: form.info,
+			condition: form.condition,
+			isRecord: form.isRecord,
+			recordTel: form.recordTel,
+			premissInfo: form.premissInfo,	
+		})
+		ElMessage.success(`添加成功`);
+	}
+	
 }
 const handleAdd = () => {
-	form.value = {
-		num: undefined,
-		name: '',
-		pcapName: '',
-		operator: '',
-		developer: '',
-		version: '',
-		info: '',
-		condition: '',
-		isRecord: '',
-		recordTel: '',
-		premissInfo: ''
-	};
+	editOrAdd = 'add'
+	form.num= undefined
+	form.name= ''
+	form.pcapName= ''
+	form.operator= ''
+	form.developer= ''
+	form.version= ''
+	form.info= ''
+	form.condition= ''
+	form.isRecord= ''
+	form.recordTel= ''
+	form.premissInfo= ''
 	dialogTableVisible.value = true;
+}
+const handleDel = () => {
+	tableData.value = tableData.value.filter((item, index)=>{		
+		let arrlist = multipleSelection.value;
+        return !arrlist.includes(item);
+	})
 }
 </script>
 

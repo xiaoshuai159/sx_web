@@ -134,8 +134,8 @@ import { ref, reactive } from 'vue';
 import { ElMessage, ElMessageBox, rowContextKey } from 'element-plus';
 import { Delete, Edit, Search, Plus } from '@element-plus/icons-vue';
 // import { fetchData } from '../api/index';
-const dialogTableVisible = ref(false)
 const formLabelWidth = '90px'
+
 interface FormAndTable {
 	id: number|undefined
 	time: string
@@ -253,7 +253,7 @@ const handleDelete = (index: number) => {
 
 // 表格编辑时弹窗和保存
 const editVisible = ref(false);
-let form = ref<FormAndTable>({
+let form = reactive<FormAndTable>({
 	id: undefined,
 	time: '',
 	harmIP:'',
@@ -267,38 +267,78 @@ let form = ref<FormAndTable>({
 	level:'',
 	state:''
 });
-let currentRow:number;
 let idx: number = -1;
+let editOrAdd:any
 const handleEdit = (index: number, row: any) => {
-	currentRow = index
+	idx = index
 	// const proxyForm = JSON.parse(JSON.stringify(tableData.value[currentRow]))
 	// form = proxyForm
-	form.value = tableData.value[currentRow]	
+	form.id = tableData.value[idx].id
+	form.time = tableData.value[idx].time
+	form.harmIP = tableData.value[idx].harmIP
+	form.harmPort = tableData.value[idx].harmPort
+	form.databaseType = tableData.value[idx].databaseType
+	form.warnType = tableData.value[idx].warnType
+	form.warnContent = tableData.value[idx].warnContent
+	form.attackNum = tableData.value[idx].attackNum
+	form.attackIP = tableData.value[idx].attackIP
+	form.attackPort = tableData.value[idx].attackPort
+	form.level = tableData.value[idx].level
+	form.state = tableData.value[idx].state
+	editOrAdd = 'edit'
 	editVisible.value = true;
 };
 const handleAdd = () => {
-	form.value = {
-		id: undefined,
-		time: '',
-		harmIP:'',
-		harmPort:undefined,
-		databaseType:'',
-		warnType:'',
-		warnContent:'',
-		attackNum:undefined,
-		attackIP:'',
-		attackPort:undefined,
-		level:'',
-		state:''
-	}
+	form.id = undefined,
+	form.time = '',
+	form.harmIP = '',
+	form.harmPort = undefined,
+	form.databaseType = '',
+	form.warnType = '',
+	form.warnContent = '',
+	form.attackNum = undefined,
+	form.attackIP = '',
+	form.attackPort = undefined,
+	form.level = '',
+	form.state = '',
+	editOrAdd = 'add'
 	editVisible.value = true;
 }
 function saveEdit() {
-	// console.log(tableData.value[currentRow]);
-	
-	tableData.value[currentRow] = form.value
+	// console.log(tableData.value[currentRow]);	
 	editVisible.value = false;
-	ElMessage.success(`修改成功`);
+	if(editOrAdd=='edit'){
+		tableData.value[idx].id = form.id
+		tableData.value[idx].time = form.time
+		tableData.value[idx].harmIP = form.harmIP
+		tableData.value[idx].harmPort = form.harmPort
+		tableData.value[idx].databaseType = form.databaseType
+		tableData.value[idx].warnType = form.warnType
+		tableData.value[idx].warnContent = form.warnContent
+		tableData.value[idx].attackNum = form.attackNum
+		tableData.value[idx].attackIP = form.attackIP
+		tableData.value[idx].attackPort = form.attackPort
+		tableData.value[idx].level = form.level
+		tableData.value[idx].state = form.state
+		ElMessage.success(`修改成功`);		
+	}else{
+		tableData.value.push({
+			id:form.id,
+			time:form.time,
+			harmIP: form.harmIP,
+			harmPort:form.harmPort,
+			databaseType:form.databaseType,
+			warnType:form.warnType,
+			warnContent:form.warnContent,
+			attackNum: form.attackNum,
+			attackIP: form.attackIP,
+			attackPort:form.attackPort,
+			state:form.state,
+			level:form.level
+		});
+		ElMessage.success(`添加成功`);	
+	}
+	
 };
 </script>
 

@@ -57,7 +57,7 @@
                 </el-form>
                 <template #footer>
                     <span class="dialog-footer">
-                        <el-button type="primary" @click="dialogTableVisible2 = false">确定</el-button>
+                        <el-button type="primary" @click="saveEdit2">确定</el-button>
                         <el-button @click="dialogTableVisible2 = false">
                             取消
                         </el-button>
@@ -155,7 +155,7 @@
                 </el-form>
                 <template #footer>
                     <span class="dialog-footer">
-                        <el-button type="primary" @click="dialogTableVisible = false">确定</el-button>
+                        <el-button type="primary" @click="saveEdit">确定</el-button>
                         <el-button @click="dialogTableVisible = false">
                             取消
                         </el-button>
@@ -171,6 +171,7 @@ import { reactive,ref } from 'vue'
 import { Search } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
 let showCard = ref(true)
+let editOrAdd:string
 const formLabelWidth = '100px'
 const liDatas:object = reactive({
     状态:'Yellow',
@@ -196,8 +197,10 @@ const tableData = ref<any[]>([{
     JVM: '29%',
     disk:'32.4GB'
 }])
-let form:any = ref({})
-let form2:any = ref({})
+let idx: number = -1;
+let idx2: number = -1;
+let form:any = reactive({})
+let form2:any = reactive({})
 const tableData2 = ref<any[]>([{
     name:'Configuration1',
     type:'资产管理',
@@ -215,19 +218,76 @@ const tabChange = (a:any) => {
     }
 }
 const handleEdit = (a:any,b:any) => {
-    
-    form.value = tableData.value[a]
+    idx = a
+	form.name = tableData.value[idx].name
+	form.ip = tableData.value[idx].ip
+	form.alarm = tableData.value[idx].alarm
+	form.status = tableData.value[idx].status
+	form.burst = tableData.value[idx].burst
+	form.CPU = tableData.value[idx].CPU
+    form.load = tableData.value[idx].load
+	form.JVM = tableData.value[idx].JVM
+	form.disk = tableData.value[idx].disk
 	dialogTableVisible.value = true
-	ElMessage.success(`修改成功`);
+	
 }
 const handleEdit2 = (a:any,b:any) => {
-    
-    form2.value = tableData2.value[a]
+    idx2 = a
+    editOrAdd = "edit"
+	form2.name = tableData2.value[idx2].name
+	form2.type = tableData2.value[idx2].type
+	form2.range = tableData2.value[idx2].range
+	form2.time = tableData2.value[idx2].time
+	form2.master = tableData2.value[idx2].master
+	form2.status = tableData2.value[idx2].status
 	dialogTableVisible2.value = true
-	ElMessage.success(`修改成功`);
+}
+const saveEdit = () => {
+    dialogTableVisible.value = false;
+    tableData.value[idx].name = form.name
+	tableData.value[idx].ip = form.ip
+	tableData.value[idx].alarm = form.alarm
+	tableData.value[idx].status = form.status
+	tableData.value[idx].burst = form.burst
+	tableData.value[idx].CPU = form.CPU
+	tableData.value[idx].load = form.load
+	tableData.value[idx].JVM = form.JVM
+	tableData.value[idx].disk = form.disk
+    ElMessage.success(`修改成功`);
+}
+const saveEdit2 = () => {
+    if(editOrAdd == "edit"){
+        
+        tableData2.value[idx2].name = form2.name
+        tableData2.value[idx2].type = form2.type
+        tableData2.value[idx2].range = form2.range
+        tableData2.value[idx2].time = form2.time
+        tableData2.value[idx2].master = form2.master
+        tableData2.value[idx2].status = form2.status
+        dialogTableVisible2.value = false;
+        ElMessage.success(`修改成功`);
+    }else{
+        tableData2.value.push({
+            name: form2.name,
+            type: form2.type,
+            range: form2.range,
+            time: form2.time,
+            master: form2.master,
+            status: form2.status
+        })
+        dialogTableVisible2.value = false;
+        ElMessage.success(`添加成功`);
+    }
+    
 }
 const handleAdd = ()=>{
-    form2.value = {}
+    editOrAdd = "add"
+    form2.name = ''
+	form2.type = ''
+	form2.range = ''
+	form2.time = ''
+	form2.master = ''
+	form2.status = ''
 	dialogTableVisible2.value = true
 }
 const handleDelete = (index: number) => {
