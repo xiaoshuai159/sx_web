@@ -18,16 +18,16 @@
 		<el-table ref="multipleTableRef" :data="tableData" style="width: 100%" @selection-change="handleSelectionChange">
 			<el-table-column type="selection" min-width="55" />
 			<el-table-column prop="num" label="序号" min-width="80" />
-			<el-table-column prop="name" label="APP应用名" min-width="120" />
-			<el-table-column prop="pcapName" label="包名" min-width="120" />
-			<el-table-column prop="operator" label="APP运营商" min-width="120" />
-			<el-table-column prop="developer" label="开发者" min-width="90" />
-			<el-table-column prop="version" label="版本" min-width="80" />
-			<el-table-column prop="info" label="APP简介" min-width="120" />
-			<el-table-column prop="condition" label="在架状态/下架时间(不在架)" min-width="120" />
-			<el-table-column prop="isRecord" label="是否备案" min-width="80" />
-			<el-table-column prop="recordTel" label="备案号码" min-width="100" />
-			<el-table-column prop="premissInfo" label="应用权限信息" min-width="100" />
+			<el-table-column prop="name" label="APP应用名" min-width="120" show-overflow-tooltip/>
+			<el-table-column prop="pcapName" label="包名" min-width="120" show-overflow-tooltip/>
+			<el-table-column prop="operator" label="APP运营商" min-width="120" show-overflow-tooltip/>
+			<el-table-column prop="developer" label="开发者" min-width="90" show-overflow-tooltip/>
+			<el-table-column prop="version" label="版本" min-width="80" show-overflow-tooltip/>
+			<el-table-column prop="info" label="APP简介" min-width="120" show-overflow-tooltip/>
+			<el-table-column prop="condition" label="在架状态/下架时间(不在架)" min-width="120" show-overflow-tooltip/>
+			<el-table-column prop="isRecord" label="是否备案" min-width="80" show-overflow-tooltip/>
+			<el-table-column prop="recordTel" label="备案号码" min-width="100" show-overflow-tooltip/>
+			<el-table-column prop="premissInfo" label="应用权限信息" min-width="100" show-overflow-tooltip/>
 			<el-table-column prop="operate" label="操作" fixed="right" min-width="90">
 				<template #default="scope">
 					<el-button link type="primary" size="small" @click="handleEdit(scope.$index, scope.row)" v-permiss="15">编辑</el-button>

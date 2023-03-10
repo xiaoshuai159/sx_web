@@ -33,7 +33,7 @@
 			</el-select>
 			<span style="margin-left: 15px;">IP：</span>
 			<el-input v-model="query.name" placeholder="攻击者IP" class="handle-input mr10"></el-input>
-			<el-button type="primary" :icon="Search" @click="handleSearch" style="margin-left: 10px;">搜索</el-button>
+			<el-button type="primary" :icon="Search"  style="margin-left: 10px;">搜索</el-button>
 			<!-- <template #default="scope"> -->
 			<!-- </template> -->
 		</div>
@@ -186,18 +186,19 @@
 				</el-card>
 			</el-col>
 		</el-row> -->
-		<el-row :gutter="10">
-			<el-col :span="24">
+		<el-row :gutter="10" v-show="query.address === '全部'">
+			<el-col :span="24" >
 				<el-card class="card" shadow="hover" :body-style="{ padding: '0px', height: '280px' }">
-					<span class="warningTop">安全事件</span>
+					<el-divider border-style="dotted"><span class="warningTop">安全事件</span></el-divider>
+					
 					<el-table ref="eventRef" :data="eventData" height="250">
-						<el-table-column prop="time" label="时间" />
-						<el-table-column prop="s_ip" label="源IP" />
-						<el-table-column prop="s_port" label="源端口" />
-						<el-table-column prop="d_ip" label="目的IP" />
-						<el-table-column prop="d_port" label="目的端口" />
-						<el-table-column prop="type" label="事件类型" />
-						<el-table-column prop="tag" label="危险等级">
+						<el-table-column prop="time" label="时间" min-width="125" show-overflow-tooltip/>
+						<el-table-column prop="s_ip" label="源IP" min-width="105" show-overflow-tooltip/>
+						<el-table-column prop="s_port" label="源端口" min-width="65" show-overflow-tooltip/>
+						<el-table-column prop="d_ip" label="目的IP" min-width="105" show-overflow-tooltip/>
+						<el-table-column prop="d_port" label="目的端口" min-width="65" show-overflow-tooltip/>
+						<el-table-column prop="type" label="事件类型" min-width="95" show-overflow-tooltip/>
+						<el-table-column prop="tag" label="危险等级" min-width="95" show-overflow-tooltip>
 							<template #default="scope">
 								<el-tag :type="scope.row.tag === '中' ? '' : 'danger'">{{ scope.row.tag }}</el-tag>
 							</template>
@@ -206,16 +207,17 @@
 				</el-card>
 			</el-col>
 		</el-row>
-		<el-row :gutter="10">
+		<el-row :gutter="10" v-show="query.address === '全部'">
 			<el-col :span="24">
 				<el-card class="card" shadow="hover" :body-style="{ padding: '0px', height: '280px' }">
-					<span class="warningTop">漏洞详情</span>
+					<el-divider border-style="dotted"><span class="warningTop">漏洞详情</span></el-divider>
+					
 					<el-table ref="bugRef" :data="bugData" height="250">
-						<el-table-column prop="time" label="时间" />
-						<el-table-column prop="ip" label="IP" />
-						<el-table-column prop="type" label="漏洞类型" />
-						<el-table-column prop="url" label="URL" />
-						<el-table-column prop="tag" label="漏洞等级">
+						<el-table-column prop="time" label="时间" min-width="125" show-overflow-tooltip/>
+						<el-table-column prop="ip" label="IP" min-width="115" show-overflow-tooltip/>
+						<el-table-column prop="type" label="漏洞类型" min-width="125" show-overflow-tooltip/>
+						<el-table-column prop="url" label="URL" min-width="145" show-overflow-tooltip/>
+						<el-table-column prop="tag" label="漏洞等级" min-width="105" show-overflow-tooltip>
 							<template #default="scope">
 								<el-tag :type="scope.row.tag === '中' ? '' : 'danger'">{{ scope.row.tag }}</el-tag>
 							</template>
@@ -224,29 +226,31 @@
 				</el-card>
 			</el-col>
 		</el-row>
-		<el-row :gutter="10">
+		<el-row :gutter="10" v-show="query.address==='全部'" >
 			<el-col :span="12">
 				<el-card class="card" shadow="hover" :body-style="{ padding: '0px', height: '280px' }">
-					<span class="warningTop">可用性监测</span>
+					<el-divider border-style="dotted"><span class="warningTop">可用性监测</span></el-divider>
+					
 					<el-table ref="rateRef" :data="bugData" height="250">
-						<el-table-column prop="time" label="时间" width="160px" />
-						<el-table-column prop="ip" label="IP" />
-						<el-table-column prop="url" label="URL" />
-						<el-table-column prop="rate" label="频率(s)" />
-						<el-table-column prop="num" label="次数" width="75px" />
-						<el-table-column prop="result" label="结果" />
+						<el-table-column prop="time" label="时间" min-width="115" show-overflow-tooltip/>
+						<el-table-column prop="ip" label="IP" min-width="105" show-overflow-tooltip/>
+						<el-table-column prop="url" label="URL" min-width="105" show-overflow-tooltip/>
+						<el-table-column prop="rate" label="频率(s)" min-width="55" show-overflow-tooltip/>
+						<el-table-column prop="num" label="次数" min-width="55" show-overflow-tooltip />
+						<el-table-column prop="result" label="结果" min-width="105" show-overflow-tooltip/>
 					</el-table>
 				</el-card>
 			</el-col>
 			<el-col :span="12">
 				<el-card class="card" shadow="hover" :body-style="{ padding: '0px', height: '280px' }">
-					<span class="warningTop">网页敏感信息监测</span>
+					<el-divider border-style="dotted"><span class="warningTop">网页敏感信息监测</span></el-divider>
+					
 					<el-table ref="rateRef2" :data="bugData" height="250">
-						<el-table-column prop="time" label="时间" />
-						<el-table-column prop="ip" label="IP" />
-						<el-table-column prop="url" label="URL" />
-						<el-table-column prop="change" label="结果" />
-						<el-table-column prop="change" label="详情">
+						<el-table-column prop="time" label="时间" min-width="115" show-overflow-tooltip/>
+						<el-table-column prop="ip" label="IP" min-width="105" show-overflow-tooltip/>
+						<el-table-column prop="url" label="URL" min-width="105" show-overflow-tooltip/>
+						<el-table-column prop="change" label="结果" min-width="85" show-overflow-tooltip/>
+						<el-table-column prop="change" label="详情" min-width="65" show-overflow-tooltip>
 							<template #default="scope">
 								<el-button text @click="getDetail()" v-permiss="15" style="color:dodgerblue;">
 									详情
@@ -257,16 +261,17 @@
 				</el-card>
 			</el-col>
 		</el-row>
-		<el-row :gutter="10">
-			<el-col :span="12">
+		<el-row :gutter="10" v-show="query.address==='全部'">
+			<el-col :span="12" >
 				<el-card class="card" shadow="hover" :body-style="{ padding: '0px', height: '280px' }">
-					<span class="warningTop">网页恶意链接监测</span>
+					<el-divider border-style="dotted"><span class="warningTop">网页恶意链接监测</span></el-divider>
+					
 					<el-table ref="rateRef3" :data="bugData" height="250">
-						<el-table-column prop="time" label="时间" />
-						<el-table-column prop="ip" label="IP" />
-						<el-table-column prop="url" label="URL" />
-						<el-table-column prop="malice_url" label="结果" />
-						<el-table-column prop="change" label="详情">
+						<el-table-column prop="time" label="时间" min-width="115" show-overflow-tooltip/>
+						<el-table-column prop="ip" label="IP" min-width="105" show-overflow-tooltip/>
+						<el-table-column prop="url" label="URL" min-width="105" show-overflow-tooltip/>
+						<el-table-column prop="malice_url" label="结果" min-width="85" show-overflow-tooltip/>
+						<el-table-column prop="change" label="详情" min-width="65" show-overflow-tooltip>
 							<template #default="scope">
 								<el-button text @click="getDetail()" v-permiss="15" style="color:dodgerblue;">
 									详情
@@ -278,13 +283,14 @@
 			</el-col>
 			<el-col :span="12">
 				<el-card class="card" shadow="hover" :body-style="{ padding: '0px', height: '280px' }">
-					<span class="warningTop">数据采集情况</span>
+					<el-divider border-style="dotted"><span class="warningTop">数据采集情况</span></el-divider>
+					
 					<el-table ref="rateRef4" :data="bugData" height="250">
-						<el-table-column prop="time" label="时间" />
-						<el-table-column prop="ip" label="IP" />
-						<el-table-column prop="url" label="URL" />
-						<el-table-column prop="crawl_result" label="结果" />
-						<el-table-column prop="change" label="详情">
+						<el-table-column prop="time" label="时间" min-width="115" show-overflow-tooltip/>
+						<el-table-column prop="ip" label="IP" min-width="105" show-overflow-tooltip/>
+						<el-table-column prop="url" label="URL" min-width="105" show-overflow-tooltip/>
+						<el-table-column prop="crawl_result" label="结果" min-width="85" show-overflow-tooltip/>
+						<el-table-column prop="change" label="详情" min-width="65" show-overflow-tooltip>
 							<template #default="scope">
 								<el-button text @click="getDetail()" v-permiss="15" style="color:dodgerblue;">
 									详情
@@ -295,7 +301,211 @@
 				</el-card>
 			</el-col>
 		</el-row>
-		<el-row :gutter="10">
+		<el-row v-show="query.address === '网页木马监测'">
+			<el-card class="box-card">
+				<template #header>
+					<div class="card-header">
+						<span>安全事件详情</span>
+						<!-- <el-button class="button" text>Operation button</el-button> -->
+					</div>
+				</template>
+				<el-table :data="eventData" border style="width: 100%">
+					<el-table-column type="index" width="50" />
+					<el-table-column prop="time" label="时间" min-width="125" show-overflow-tooltip/>
+					<el-table-column prop="s_ip" label="源IP" min-width="105" show-overflow-tooltip/>
+					<el-table-column prop="s_port" label="源端口" min-width="65" show-overflow-tooltip/>
+					<el-table-column prop="d_ip" label="目的IP" min-width="105" show-overflow-tooltip/>
+					<el-table-column prop="d_port" label="目的端口" min-width="65" show-overflow-tooltip/>
+					<el-table-column prop="type" label="事件类型" min-width="95" show-overflow-tooltip/>
+					<el-table-column prop="tag" label="危险等级" min-width="95" show-overflow-tooltip>
+						<template #default="scope">
+							<el-tag :type="scope.row.tag === '中' ? '' : 'danger'">{{ scope.row.tag }}</el-tag>
+						</template>
+					</el-table-column>
+				</el-table>
+				<div class="demo-pagination-block">
+					<el-pagination
+						v-model:current-page="currentPage4"
+						v-model:page-size="pageSize4"
+						:page-sizes="[10, 30, 50, 100]"
+						layout="total, sizes, prev, pager, next, jumper"
+						:total="eventData.length"
+						@size-change="handleSizeChange"
+						@current-change="handleCurrentChange"
+					/>
+				</div>
+			</el-card>
+		</el-row>
+		<el-row v-show="query.address === '系统漏洞扫描'||query.address === '弱口令检查'||query.address === 'web漏洞扫描监测'||query.address === 'webshell扫描检测'">
+			<el-card class="box-card">
+				<template #header>
+					<div class="card-header">
+						<span>漏洞详情</span>
+						<!-- <el-button class="button" text>Operation button</el-button> -->
+					</div>
+				</template>
+				<el-table :data="bugData" border style="width: 100%">
+						<el-table-column type="index" width="50" />
+						<el-table-column prop="time" label="时间" min-width="125" show-overflow-tooltip/>
+						<el-table-column prop="ip" label="IP" min-width="115" show-overflow-tooltip/>
+						<el-table-column prop="type" label="漏洞类型" min-width="125" show-overflow-tooltip/>
+						<el-table-column prop="url" label="URL" min-width="145" show-overflow-tooltip/>
+						<el-table-column prop="tag" label="漏洞等级" min-width="105" show-overflow-tooltip>
+							<template #default="scope">
+								<el-tag :type="scope.row.tag === '中' ? '' : 'danger'">{{ scope.row.tag }}</el-tag>
+							</template>
+						</el-table-column>
+					</el-table>
+				<div class="demo-pagination-block">
+					<el-pagination
+						v-model:current-page="currentPage4"
+						v-model:page-size="pageSize4"
+						:page-sizes="[10, 30, 50, 100]"
+						layout="total, sizes, prev, pager, next, jumper"
+						:total="eventData.length"
+						@size-change="handleSizeChange"
+						@current-change="handleCurrentChange"
+					/>
+				</div>
+			</el-card>
+		</el-row>
+		<el-row v-show="query.address === '网页敏感信息监测'||query.address==='网页变更监测'">
+			<el-card class="box-card">
+				<template #header>
+					<div class="card-header">
+						<span>网页敏感信息监测</span>
+						<!-- <el-button class="button" text>Operation button</el-button> -->
+					</div>
+				</template>
+				<el-table :data="bugData" border style="width: 100%">
+					<el-table-column type="index" width="50" />
+						<el-table-column prop="time" label="时间" min-width="115" show-overflow-tooltip/>
+						<el-table-column prop="ip" label="IP" min-width="105" show-overflow-tooltip/>
+						<el-table-column prop="url" label="URL" min-width="105" show-overflow-tooltip/>
+						<el-table-column prop="change" label="结果" min-width="85" show-overflow-tooltip/>
+						<el-table-column prop="change" label="详情" min-width="65" show-overflow-tooltip>
+							<template #default="scope">
+								<el-button text @click="getDetail()" v-permiss="15" style="color:dodgerblue;">
+									详情
+								</el-button>
+							</template>
+						</el-table-column>
+					</el-table>
+				<div class="demo-pagination-block">
+					<el-pagination
+						v-model:current-page="currentPage4"
+						v-model:page-size="pageSize4"
+						:page-sizes="[10, 30, 50, 100]"
+						layout="total, sizes, prev, pager, next, jumper"
+						:total="eventData.length"
+						@size-change="handleSizeChange"
+						@current-change="handleCurrentChange"
+					/>
+				</div>
+			</el-card>
+		</el-row>
+		<el-row v-show="query.address === '数据采集'">
+			<el-card class="box-card">
+				<template #header>
+					<div class="card-header">
+						<span>数据采集情况</span>
+						<!-- <el-button class="button" text>Operation button</el-button> -->
+					</div>
+				</template>
+				<el-table :data="bugData" border style="width: 100%">
+						<el-table-column type="index" width="50" />
+						<el-table-column prop="time" label="时间" min-width="115" show-overflow-tooltip/>
+						<el-table-column prop="ip" label="IP" min-width="105" show-overflow-tooltip/>
+						<el-table-column prop="url" label="URL" min-width="105" show-overflow-tooltip/>
+						<el-table-column prop="crawl_result" label="结果" min-width="85" show-overflow-tooltip/>
+						<el-table-column prop="change" label="详情" min-width="65" show-overflow-tooltip>
+							<template #default="scope">
+								<el-button text @click="getDetail()" v-permiss="15" style="color:dodgerblue;">
+									详情
+								</el-button>
+							</template>
+						</el-table-column>
+					</el-table>
+				<div class="demo-pagination-block">
+					<el-pagination
+						v-model:current-page="currentPage4"
+						v-model:page-size="pageSize4"
+						:page-sizes="[10, 30, 50, 100]"
+						layout="total, sizes, prev, pager, next, jumper"
+						:total="eventData.length"
+						@size-change="handleSizeChange"
+						@current-change="handleCurrentChange"
+					/>
+				</div>
+			</el-card>
+		</el-row>
+		<el-row v-show="query.address === '网页恶意链接监测'||query.address==='网页钓鱼监测'">
+			<el-card class="box-card">
+				<template #header>
+					<div class="card-header">
+						<span>网页恶意链接监测详情</span>
+						<!-- <el-button class="button" text>Operation button</el-button> -->
+					</div>
+				</template>
+				<el-table :data="bugData" border style="width: 100%">
+						<el-table-column type="index" width="50" />
+						<el-table-column prop="time" label="时间" min-width="115" show-overflow-tooltip/>
+						<el-table-column prop="ip" label="IP" min-width="105" show-overflow-tooltip/>
+						<el-table-column prop="url" label="URL" min-width="105" show-overflow-tooltip/>
+						<el-table-column prop="malice_url" label="结果" min-width="85" show-overflow-tooltip/>
+						<el-table-column prop="change" label="详情" min-width="65" show-overflow-tooltip>
+							<template #default="scope">
+								<el-button text @click="getDetail()" v-permiss="15" style="color:dodgerblue;">
+									详情
+								</el-button>
+							</template>
+						</el-table-column>
+					</el-table>
+				<div class="demo-pagination-block">
+					<el-pagination
+						v-model:current-page="currentPage4"
+						v-model:page-size="pageSize4"
+						:page-sizes="[10, 30, 50, 100]"
+						layout="total, sizes, prev, pager, next, jumper"
+						:total="eventData.length"
+						@size-change="handleSizeChange"
+						@current-change="handleCurrentChange"
+					/>
+				</div>
+			</el-card>
+		</el-row>
+		<!-- 6 -->
+		<el-row v-show="query.address === '可用性监测'">
+			<el-card class="box-card">
+				<template #header>
+					<div class="card-header">
+						<span>可用性监测详情</span>
+						<!-- <el-button class="button" text>Operation button</el-button> -->
+					</div>
+				</template>
+				<el-table :data="bugData" border style="width: 100%">
+						<el-table-column type="index" width="50" />
+						<el-table-column prop="time" label="时间" min-width="115" show-overflow-tooltip/>
+						<el-table-column prop="ip" label="IP" min-width="105" show-overflow-tooltip/>
+						<el-table-column prop="url" label="URL" min-width="105" show-overflow-tooltip/>
+						<el-table-column prop="rate" label="频率(s)" min-width="55" show-overflow-tooltip/>
+						<el-table-column prop="num" label="次数" min-width="55" show-overflow-tooltip />
+						<el-table-column prop="result" label="结果" min-width="105" show-overflow-tooltip/>
+					</el-table>
+				<div class="demo-pagination-block">
+					<el-pagination
+						v-model:current-page="currentPage4"
+						v-model:page-size="pageSize4"
+						:page-sizes="[10, 30, 50, 100]"
+						layout="total, sizes, prev, pager, next, jumper"
+						:total="eventData.length"
+						@size-change="handleSizeChange"
+						@current-change="handleCurrentChange"
+					/>
+				</div>
+			</el-card>
+		</el-row>
+		<el-row :gutter="10" v-show="query.address === '全部'">
 			<el-col :span="12">
 				<el-card shadow="hover" :body-style="{ padding: '0px', height: '285px' }">
 					<!-- <span class="normalText">被攻击数据库ip排行</span> -->
@@ -327,13 +537,20 @@
 </template>
 
 <script setup lang="ts" name="dashboard">
-import Schart from 'vue-schart';
-import { onMounted, reactive, ref, Ref } from 'vue';
-import imgurl from '../assets/img/img.jpg';
-import { sample } from 'lodash';
+import { onMounted, reactive, ref, onBeforeUnmount } from 'vue';
 import * as echarts from 'echarts'
 import { nextTick } from 'vue'
+import { Search } from '@element-plus/icons-vue';
 
+let currentPage4 = ref<number>(1)
+let pageSize4 = ref<number>(30)
+
+const handleSizeChange = (val: number) => {
+	pageSize4.value = val;
+}
+const handleCurrentChange = (val: number) => {
+	currentPage4.value = val
+}
 // const tableRef: Ref<HTMLElement | any> = ref(null)
 const eventRef = ref();
 const bugRef = ref();
@@ -345,7 +562,7 @@ const rateRef4 = ref();
 const eventData = ref<any[]>([])
 const bugData = ref<any[]>([])
 const rateData = ref<any[]>([])
-
+let timer:any = null
 onMounted(() => {
 	eventData.value = getEventData() //表格数据赋值
 	bugData.value = getBugData() //表格数据赋值
@@ -361,6 +578,10 @@ onMounted(() => {
 	})
 })
 
+onBeforeUnmount(()=>{
+	clearInterval(timer)
+	timer = null;
+})
 const name = localStorage.getItem('ms_username');
 const role: string = name === 'admin' ? '超级管理员' : '普通用户';
 const value1 = ref<[Date, Date]>([
@@ -369,7 +590,7 @@ const value1 = ref<[Date, Date]>([
 ])
 
 const query = reactive({
-	address: '',
+	address: '全部',
 	name: '',
 	pageIndex: 1,
 	pageSize: 10
@@ -384,7 +605,7 @@ const getEventData = (): any => {
 			s_port: '22',
 			d_ip: '192.168.0.2',
 			d_port: '21',
-			type: '弱口令',
+			type: 'APT',
 			tag: '高',
 			content: '',
 			malice_url: 'http://www.xxx.com',
@@ -397,7 +618,7 @@ const getEventData = (): any => {
 			s_port: '22',
 			d_ip: '192.168.0.2',
 			d_port: '21',
-			type: '弱口令',
+			type: 'APT',
 			tag: '高',
 			content: '',
 			malice_url: 'http://www.xxx.com',
@@ -410,7 +631,7 @@ const getEventData = (): any => {
 			s_port: '22',
 			d_ip: '192.168.0.2',
 			d_port: '21',
-			type: '弱口令',
+			type: 'APT',
 			tag: '高',
 			content: '',
 			malice_url: 'http://www.xxx.com',
@@ -423,7 +644,7 @@ const getEventData = (): any => {
 			s_port: '22',
 			d_ip: '192.168.0.2',
 			d_port: '21',
-			type: '弱口令',
+			type: 'APT',
 			tag: '高',
 			content: '',
 			malice_url: 'http://www.xxx.com',
@@ -436,7 +657,7 @@ const getEventData = (): any => {
 			s_port: '22',
 			d_ip: '192.168.0.2',
 			d_port: '21',
-			type: '弱口令',
+			type: 'APT',
 			tag: '高',
 			content: '',
 			malice_url: 'http://www.xxx.com',
@@ -449,7 +670,7 @@ const getEventData = (): any => {
 			s_port: '22',
 			d_ip: '192.168.0.2',
 			d_port: '21',
-			type: '弱口令',
+			type: 'APT',
 			tag: '高',
 			content: '',
 			malice_url: 'http://www.xxx.com',
@@ -462,7 +683,7 @@ const getEventData = (): any => {
 			s_port: '22',
 			d_ip: '192.168.0.2',
 			d_port: '21',
-			type: '弱口令',
+			type: 'APT',
 			tag: '高',
 			content: '',
 			malice_url: 'http://www.xxx.com',
@@ -475,7 +696,7 @@ const getEventData = (): any => {
 			s_port: '22',
 			d_ip: '192.168.0.2',
 			d_port: '21',
-			type: '弱口令',
+			type: 'APT',
 			tag: '高',
 			content: '',
 			malice_url: 'http://www.xxx.com',
@@ -514,7 +735,7 @@ const getEventData = (): any => {
 			s_port: '22',
 			d_ip: '192.168.0.2',
 			d_port: '21',
-			type: '弱口令',
+			type: 'APT',
 			tag: '高',
 			content: '',
 			malice_url: 'http://www.xxx.com',
@@ -527,7 +748,7 @@ const getEventData = (): any => {
 			s_port: '22',
 			d_ip: '192.168.0.2',
 			d_port: '21',
-			type: '弱口令',
+			type: 'APT',
 			tag: '高',
 			content: '',
 			malice_url: 'http://www.xxx.com',
@@ -540,7 +761,7 @@ const getEventData = (): any => {
 			s_port: '22',
 			d_ip: '192.168.0.2',
 			d_port: '21',
-			type: '弱口令',
+			type: 'APT',
 			tag: '高',
 			content: '',
 			malice_url: 'http://www.xxx.com',
@@ -777,7 +998,7 @@ const scroll = (tableBody: any) => {
 		isScroll = true
 	})
 
-	setInterval(() => {
+	timer = setInterval(() => {
 		if (isScroll) {
 			tableDom.scrollTop += 3 //设置滚动速度
 			if (tableDom.clientHeight + tableDom.scrollTop == tableDom.scrollHeight) {
@@ -836,6 +1057,7 @@ function initOption1() {
 	type EChartsOption = echarts.EChartsOption;
 	const myChart1 = echarts.init(document.getElementById('myChart'));
 	let option: EChartsOption = {
+		color: ['#c23531'],
 		title: {
 			text: '事件排行',
 			x: '2%',
@@ -888,26 +1110,26 @@ function initOption2() {
 				color: '#666666'
 			}
 		},
+		color: ['#80FFA5', '#00DDFF', '#37A2FF', '#FF0087', '#FFBF00'],
 		tooltip: {
 			trigger: 'axis',
 			axisPointer: {
-				type: 'cross',
-				label: {
-					backgroundColor: '#6a7985'
-				}
+			type: 'cross',
+			label: {
+				backgroundColor: '#6a7985'
+			}
 			}
 		},
 		legend: {
-			data: ['Boat', '蔓灵花', '海莲花', 'CobaltStrike', '“8220”组织木马'],
-			top: '13%'
+			top:'10%',
+			data: ['Boat', '蔓灵花', '海莲花', 'CobaltStrike', '“8220组织木马”']
 		},
 		toolbox: {
 			feature: {
-				saveAsImage: {}
+			saveAsImage: {}
 			}
 		},
 		grid: {
-			top: '30%',
 			left: '3%',
 			right: '4%',
 			bottom: '3%',
@@ -915,70 +1137,155 @@ function initOption2() {
 		},
 		xAxis: [
 			{
-				type: 'category',
-				boundaryGap: false,
-				data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+			type: 'category',
+			boundaryGap: false,
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 			}
 		],
 		yAxis: [
 			{
-				type: 'value'
+			type: 'value'
 			}
 		],
 		series: [
 			{
-				name: 'Boat',
-				type: 'line',
-				stack: 'Total',
-				areaStyle: {},
-				emphasis: {
-					focus: 'series'
+			name: 'Boat',
+			type: 'line',
+			stack: 'Total',
+			smooth: true,
+			lineStyle: {
+				width: 0
+			},
+			showSymbol: false,
+			areaStyle: {
+				opacity: 0.8,
+				color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+				{
+					offset: 0,
+					color: 'rgb(128, 255, 165)'
 				},
-				data: [120, 132, 101, 134, 90, 230, 210]
+				{
+					offset: 1,
+					color: 'rgb(1, 191, 236)'
+				}
+				])
+			},
+			emphasis: {
+				focus: 'series'
+			},
+			data: [140, 232, 101, 264, 90, 340, 250]
 			},
 			{
-				name: '蔓灵花',
-				type: 'line',
-				stack: 'Total',
-				areaStyle: {},
-				emphasis: {
-					focus: 'series'
+			name: '蔓灵花',
+			type: 'line',
+			stack: 'Total',
+			smooth: true,
+			lineStyle: {
+				width: 0
+			},
+			showSymbol: false,
+			areaStyle: {
+				opacity: 0.8,
+				color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+				{
+					offset: 0,
+					color: 'rgb(0, 221, 255)'
 				},
-				data: [220, 182, 191, 234, 290, 330, 310]
+				{
+					offset: 1,
+					color: 'rgb(77, 119, 255)'
+				}
+				])
+			},
+			emphasis: {
+				focus: 'series'
+			},
+			data: [120, 282, 111, 234, 220, 340, 310]
 			},
 			{
-				name: '海莲花',
-				type: 'line',
-				stack: 'Total',
-				areaStyle: {},
-				emphasis: {
-					focus: 'series'
+			name: '海莲花',
+			type: 'line',
+			stack: 'Total',
+			smooth: true,
+			lineStyle: {
+				width: 0
+			},
+			showSymbol: false,
+			areaStyle: {
+				opacity: 0.8,
+				color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+				{
+					offset: 0,
+					color: 'rgb(55, 162, 255)'
 				},
-				data: [150, 232, 201, 154, 190, 330, 410]
+				{
+					offset: 1,
+					color: 'rgb(116, 21, 219)'
+				}
+				])
+			},
+			emphasis: {
+				focus: 'series'
+			},
+			data: [320, 132, 201, 334, 190, 130, 220]
 			},
 			{
-				name: 'CobaltStrike',
-				type: 'line',
-				stack: 'Total',
-				areaStyle: {},
-				emphasis: {
-					focus: 'series'
+			name: 'CobaltStrike',
+			type: 'line',
+			stack: 'Total',
+			smooth: true,
+			lineStyle: {
+				width: 0
+			},
+			showSymbol: false,
+			areaStyle: {
+				opacity: 0.8,
+				color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+				{
+					offset: 0,
+					color: 'rgb(255, 0, 135)'
 				},
-				data: [320, 332, 301, 334, 390, 330, 320]
+				{
+					offset: 1,
+					color: 'rgb(135, 0, 157)'
+				}
+				])
+			},
+			emphasis: {
+				focus: 'series'
+			},
+			data: [220, 402, 231, 134, 190, 230, 120]
 			},
 			{
-				name: '“8220”组织木马',
-				type: 'line',
-				stack: 'Total',
-				label: {
-					show: true,
-					position: 'top'
+			name: '“8220组织木马”',
+			type: 'line',
+			stack: 'Total',
+			smooth: true,
+			lineStyle: {
+				width: 0
+			},
+			showSymbol: false,
+			label: {
+				show: true,
+				position: 'top'
+			},
+			areaStyle: {
+				opacity: 0.8,
+				color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+				{
+					offset: 0,
+					color: 'rgb(255, 191, 0)'
 				},
-				areaStyle: {},
-				emphasis: {
-					focus: 'series'
-				},
-				data: [820, 932, 901, 934, 1290, 1330, 1320]
+				{
+					offset: 1,
+					color: 'rgb(224, 62, 76)'
+				}
+				])
+			},
+			emphasis: {
+				focus: 'series'
+			},
+			data: [220, 302, 181, 234, 210, 290, 150]
 			}
 		]
 	}
@@ -1152,9 +1459,10 @@ const getDetail = () => {
 .warningTop {
 	display: inline-block;
 	color: red;
-	font-size: 22px;
+	font-size: 20px;
 	width: 100%;
-	margin: 8px 15px;
+	/* margin: 8px 15px; */
+	margin-top: -3px;
 	text-align: center;
 }
 
@@ -1170,4 +1478,30 @@ const getDetail = () => {
 	margin-top: 3px;
 	margin-left: 15px;
 }
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.text {
+  font-size: 14px;
+}
+
+.item {
+  margin-bottom: 18px;
+}
+
+.box-card {
+  width: 100%;
+}
+.demo-pagination-block + .demo-pagination-block {
+  margin-top: 10px;
+}
+.demo-pagination-block .demonstration {
+  margin-bottom: 16px;
+}
+.el-pagination {
+    justify-content: center;
+  }
 </style>

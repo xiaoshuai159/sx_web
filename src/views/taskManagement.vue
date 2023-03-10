@@ -32,13 +32,13 @@
 				<el-button type="primary" :icon="Plus" @click="addTask()" v-permiss="15">新增</el-button>
 			</div>
 			<el-table :data="tableData" border class="table" ref="multipleTable" header-cell-class-name="table-header">
-				<el-table-column prop="id" label="任务id" width="80" align="center"></el-table-column>
-				<el-table-column prop="taskTime" label="时间" width="160"></el-table-column>
-				<el-table-column prop="harmIP" label="目标IP"></el-table-column>
-				<el-table-column prop="harmPort" label="端口" width="55"></el-table-column>
-				<el-table-column prop="databaseType" label="任务类型" align="center"></el-table-column>
-				<el-table-column prop="cyclical" label="检测周期"></el-table-column>
-				<el-table-column label="状态" align="center" >
+				<el-table-column prop="id" label="任务id" min-width="80" align="center"></el-table-column>
+				<el-table-column prop="taskTime" label="时间" min-width="160"></el-table-column>
+				<el-table-column prop="harmIP" label="目标IP" min-width="110" show-overflow-tooltip></el-table-column>
+				<el-table-column prop="harmPort" label="端口" min-width="55"></el-table-column>
+				<el-table-column prop="databaseType" label="任务类型" align="center" min-width="100"></el-table-column>
+				<el-table-column prop="cyclical" label="检测周期" min-width="90"></el-table-column>
+				<el-table-column label="状态" align="center" min-width="90">
 					<template #default="scope">
 						<el-tag :type="scope.row.state === '已启用' ? 'success' : scope.row.state === '未启用' ? 'danger' : ''">
 							{{ scope.row.state }}

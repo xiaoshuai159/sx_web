@@ -22,16 +22,16 @@
 				<el-card class="card" shadow="hover" :body-style="{ padding: '0px', height: '280px' }">
 					<span class="warningTop">异常域名情况</span>
 					<el-table ref="eventRef" :data="eventData" height="250">
-						<el-table-column prop="time" label="时间" />
-						<el-table-column prop="s_ip" label="IP" />
-						<el-table-column prop="domain" label="域名" />
-						<el-table-column prop="type" label="异常类型" />
-						<el-table-column prop="tag" label="危险等级">
+						<el-table-column prop="time" label="时间" min-width="105" show-overflow-tooltip/>
+						<el-table-column prop="s_ip" label="IP" min-width="85" show-overflow-tooltip/>
+						<el-table-column prop="domain" label="域名" min-width="85" show-overflow-tooltip/>
+						<el-table-column prop="type" label="异常类型" min-width="85" show-overflow-tooltip/>
+						<el-table-column prop="tag" label="危险等级" min-width="85" show-overflow-tooltip>
 							<template #default="scope">
 								<el-tag :type="scope.row.tag === '中' ? '' : 'danger'">{{ scope.row.tag }}</el-tag>
 							</template>
 						</el-table-column>
-						<el-table-column prop="change" label="详情">
+						<el-table-column prop="change" label="详情" min-width="85" show-overflow-tooltip>
 							<template #default="scope">
 								<el-button text @click="getDetail()" v-permiss="15" style="color:dodgerblue;">
 									详情
@@ -52,13 +52,13 @@
 			</el-col>
 			<el-col :span="12">
 				<el-card shadow="hover" :body-style="{ padding: '0px', height: '285px' }">
-					<schart ref="bar" class="schart" canvasId="bar" :options="options"></schart>
+					<div id="myChart3" :style="{ width: '92%', height: '277px' }"></div>
 				</el-card>
 			</el-col>
 			
 		</el-row>
 		<el-row :gutter="10">
-			<el-col :span="12">
+			<el-col :span="24">
 				<el-card shadow="hover" :body-style="{ padding: '0px', height: '285px' }">
 					<div id="myChart2" :style="{ width: '98%', height: '277px' }"></div>
 				</el-card>
@@ -83,7 +83,7 @@
 </template>
 
 <script setup lang="ts" name="dashboard">
-import Schart from 'vue-schart';
+
 import { onMounted, reactive, ref, Ref } from 'vue';
 import imgurl from '../assets/img/img.jpg';
 import { sample } from 'lodash';
@@ -627,10 +627,10 @@ function initOption1() {
 			}
 		},
 		tooltip: {
-			trigger: 'axis',
-			axisPointer: {
-				type: 'shadow'
-			}
+			// trigger: 'axis',
+			// axisPointer: {
+			// 	type: 'shadow'
+			// }
 		},
 		legend: {},
 		grid: {
@@ -642,17 +642,38 @@ function initOption1() {
 		},
 		xAxis: {
 			type: 'value',
-			boundaryGap: [0, 0.01]
+			max: 250,
+			splitLine: {
+				show: false
+			}
 		},
 		yAxis: {
 			type: 'category',
+			axisLabel: {
+				interval: 0,
+				rotate: 30
+			},
 			data: ['host.com', 'host.com', 'host.com', 'host.com', 'host.com', 'host.com', 'host.com', 'host.com', 'host.com', 'host.com']
 		},
 		series: [
 			{
 				type: 'bar',
+				stack: 'chart',
+				label: {
+					position: 'right',
+					show: true
+				},
 				data: [242, 156, 128, 96, 85, 65, 50, 44, 32, 10].reverse()
-			}
+			},
+			{
+				type: 'bar',
+				stack: 'chart',
+				silent: true,
+				itemStyle: {
+					color: '#eee'
+				},
+				data: [28,114,142,174,185,205,220,226,238,260].reverse()
+			},
 		]
 	}
 	option && myChart1.setOption(option);
@@ -680,13 +701,8 @@ function initOption2() {
 			}
 		},
 		legend: {
-			data: ['恶意未注册', '域名仿冒', '域名篡改', '白名单', '黑名单'],
+			data: ['恶意未注册', '域名仿冒', '“8220”组织木马', '白名单', '黑名单'],
 			top: '13%'
-		},
-		toolbox: {
-			feature: {
-				saveAsImage: {}
-			}
 		},
 		grid: {
 			top: '30%',
@@ -712,63 +728,90 @@ function initOption2() {
 				name: '恶意未注册',
 				type: 'line',
 				stack: 'Total',
-				areaStyle: {},
-				emphasis: {
-					focus: 'series'
-				},
+
 				data: [120, 132, 101, 134, 90, 230, 210]
 			},
 			{
 				name: '域名仿冒',
 				type: 'line',
 				stack: 'Total',
-				areaStyle: {},
-				emphasis: {
-					focus: 'series'
-				},
+
 				data: [220, 182, 191, 234, 290, 330, 310]
 			},
 			{
 				name: '白名单',
 				type: 'line',
 				stack: 'Total',
-				areaStyle: {},
-				emphasis: {
-					focus: 'series'
-				},
+	
 				data: [150, 232, 201, 154, 190, 330, 410]
 			},
 			{
 				name: '黑名单',
 				type: 'line',
 				stack: 'Total',
-				areaStyle: {},
-				emphasis: {
-					focus: 'series'
-				},
+
 				data: [320, 332, 301, 334, 390, 330, 320]
 			},
 			{
 				name: '“8220”组织木马',
 				type: 'line',
 				stack: 'Total',
-				label: {
-					show: true,
-					position: 'top'
-				},
-				areaStyle: {},
-				emphasis: {
-					focus: 'series'
-				},
-				data: [820, 932, 901, 934, 1290, 1330, 1320]
+				data: [220, 132, 201, 134, 190, 330, 320]
 			}
 		]
 	}
 	option && myChart2.setOption(option);
 }
+function initOption3() {
+	type EChartsOption = echarts.EChartsOption;
+	const myChart3 = echarts.init(document.getElementById('myChart3'));
+	let option: EChartsOption = {
+		title:{
+			text: '域名异常分类',
+			x: '2%',
+			y: '2%',
+			textStyle: {
+				color: '#666666'
+			}
+		},
+		legend: {
+			top: 'bottom'
+		},
+		toolbox: {
+			show: true,
+			feature: {
+			mark: { show: true },
+			dataView: { show: true, readOnly: false },
+			restore: { show: true },
+			saveAsImage: { show: true }
+			}
+		},
+		series: [
+			{
+			name: 'Nightingale Chart',
+			type: 'pie',
+			radius: [20, 100],
+			center: ['50%', '50%'],
+			roseType: 'area',
+			itemStyle: {
+				borderRadius: 8
+			},
+			data: [
+				{ value: 334, name: '未注册' },
+				{ value: 278, name: '域名假冒劫持' },
+				{ value: 238, name: '白名单' },
+				{ value: 190, name: '黑名单' },				
+				{ value: 90, name: '其他' },
+			]
+			}
+		]
+	}
+	option && myChart3.setOption(option);
+}
 onMounted(() => {
 	initOption1()
 	initOption2()
+	initOption3()
 })
 // onUnmounted(() => {
 // 	myChart1.dispose;
@@ -924,11 +967,6 @@ const getDetail = () => {
 .todo-item-del {
 	text-decoration: line-through;
 	color: #999;
-}
-
-.schart {
-	width: 100%;
-	height: 300px;
 }
 
 .warningTop {

@@ -249,7 +249,7 @@ const onRoutes = computed(() => {
 const sidebar = useSidebarStore();
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .sidebar {
     display: block;
     position: absolute;
@@ -268,5 +268,8 @@ const sidebar = useSidebarStore();
 }
 .sidebar > ul {
     height: 100%;
+}
+:deep(.el-sub-menu__title){
+    height: 50px;
 }
 </style>

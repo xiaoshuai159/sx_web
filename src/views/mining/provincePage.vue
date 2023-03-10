@@ -55,7 +55,7 @@ import * as echarts from 'echarts'
 import {useMiningStore} from '../../store'
 import router from "../../router";
 const query = ref("涉及IP数量")
-const area_num = ref(58)
+const area_num = ref(12)
 const unit_num = ref(38)
 const ip_num = ref(128)
 const options = [
@@ -76,16 +76,55 @@ async function initChart() {
     echarts.registerMap("山西省", ret.data)
     const initOption = {
         geo: [
+            // {
+            //     type: "map",
+            //     map: "山西省",
+            //     roam: false,
+            //     zoom: 1.2,
+            // },
             {
-                type: "map",
-                map: "山西省",
-                roam: false,
+                map: '山西省',
+                zlevel:5,
                 zoom: 1.2,
+                label: {
+                    show: true,
+                    color: '#6a6a70'
+                },
+                itemStyle: {
+                    color: '#dde5ff', // 背景
+                    borderWidth: '1', // 边框宽度
+                    borderColor: '#b6caf6', // 边框颜色
+                }
+            },
+            {
+                map: '山西省',
+                top:'11%',
+                zlevel:4,
+                zoom: 1.2,
+                itemStyle: {
+                    color: '#879bc7', // 背景
+                    borderWidth: '1', // 边框宽度
+                    borderColor: '#879bc7', // 边框颜色
+                }
+            },
+            {
+                map: '山西省',
+                top:'12%',
+                zlevel:3,
+                zoom: 1.2,
+                itemStyle: {
+                    color: '#879bc7', // 背景
+                    borderWidth: '1', // 边框宽度
+                    borderColor: '#879bc7', // 边框颜色
+                }
             },
         ],
 
         series: {
-            data: [],
+            data: [
+                // {name: '大同市',value: 25},
+                // {name:'太原市',value: 75},
+            ],
             geoIndex: 0, //将数据与第0个geo配置关联在一起
             type: "map",
         },

@@ -81,11 +81,47 @@ async function initChart() {
     echarts.registerMap(`${useMiningStore().city}`, ret.data)
     const initOption = {
         geo: [
+            // {
+            //     type: "map",
+            //     map: `${useMiningStore().city}`,
+            //     roam: false,
+            //     zoom: 1.2,
+            // },
             {
-                type: "map",
                 map: `${useMiningStore().city}`,
-                roam: false,
+                zlevel:5,
                 zoom: 1.2,
+                label: {
+                    show: true,
+                    color: '#6a6a70'
+                },
+                itemStyle: {
+                    color: '#dde5ff', // 背景
+                    borderWidth: '1', // 边框宽度
+                    borderColor: '#b6caf6', // 边框颜色
+                }
+            },
+            {
+                map: `${useMiningStore().city}`,
+                top:'11%',
+                zlevel:4,
+                zoom: 1.2,
+                itemStyle: {
+                    color: '#879bc7', // 背景
+                    borderWidth: '1', // 边框宽度
+                    borderColor: '#879bc7', // 边框颜色
+                }
+            },
+            {
+                map: `${useMiningStore().city}`,
+                top:'12%',
+                zlevel:3,
+                zoom: 1.2,
+                itemStyle: {
+                    color: '#879bc7', // 背景
+                    borderWidth: '1', // 边框宽度
+                    borderColor: '#879bc7', // 边框颜色
+                }
             },
         ],
 

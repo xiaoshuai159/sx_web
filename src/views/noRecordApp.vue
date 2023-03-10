@@ -52,15 +52,16 @@
         <el-button size="small" :icon="Search" type="primary">查询</el-button>
         <div style="margin:15px 0">
           <el-table :data="tableData" border style="width: 100%">
-            <el-table-column prop="date" label="时间" min-width="120" />
-            <el-table-column prop="sourceIP" label="源IP" min-width="120" />
-            <el-table-column prop="sourcePort" label="源端口" min-width="80" />
-            <el-table-column prop="destIP" label="目的IP" min-width="120" />
-            <el-table-column prop="destPort" label="目的端口" min-width="80" />
-            <el-table-column prop="appName" label="APP名称" min-width="100" />
-            <el-table-column prop="appLink" label="APP下载链接" min-width="110" />
-            <el-table-column prop="appPcapName" label="APP包名" min-width="100" />
-            <el-table-column prop="appType" label="APP类型" min-width="100" />
+            <el-table-column prop="date" label="时间" min-width="120" show-overflow-tooltip/>
+            <el-table-column prop="sourceIP" label="源IP" min-width="105" show-overflow-tooltip/>
+            <el-table-column prop="sourcePort" label="源端口" min-width="60" show-overflow-tooltip/>
+            <el-table-column prop="destIP" label="目的IP" min-width="105" show-overflow-tooltip/>
+            <el-table-column prop="destPort" label="目的端口" min-width="80" show-overflow-tooltip/>
+            <el-table-column prop="appName" label="APP名称" min-width="100" show-overflow-tooltip/>
+            <el-table-column prop="appLink" label="APP下载链接" min-width="140" show-overflow-tooltip/>
+            <el-table-column prop="downloadNum" label="下载量" min-width="70" show-overflow-tooltip/>
+            <el-table-column prop="appPcapName" label="APP包名" min-width="100" show-overflow-tooltip/>
+            <el-table-column prop="appType" label="APP类型" min-width="100" show-overflow-tooltip/>
           </el-table>
         </div>
       </el-tab-pane>
@@ -76,15 +77,15 @@
         <el-button size="small" :icon="Search" type="primary">查询</el-button>
         <div style="margin:15px 0">
           <el-table :data="tableData2" border style="width: 100%">
-            <el-table-column prop="date" label="时间" min-width="120" />
-            <el-table-column prop="sourceIP" label="源IP" min-width="120" />
-            <el-table-column prop="sourcePort" label="源端口" min-width="80" />
-            <el-table-column prop="destIP" label="目的IP" min-width="120" />
-            <el-table-column prop="destPort" label="目的端口" min-width="80" />
-            <el-table-column prop="appName" label="APP名称" min-width="100" />
-            <el-table-column prop="appLink" label="APP下载链接" min-width="110" />
-            <el-table-column prop="appPcapName" label="APP包名" min-width="100" />
-            <el-table-column prop="appType" label="APP类型" min-width="100" />
+            <el-table-column prop="date" label="时间" min-width="120" show-overflow-tooltip/>
+            <el-table-column prop="sourceIP" label="源IP" min-width="105" show-overflow-tooltip/>
+            <el-table-column prop="sourcePort" label="源端口" min-width="60" show-overflow-tooltip/>
+            <el-table-column prop="destIP" label="目的IP" min-width="105" show-overflow-tooltip/>
+            <el-table-column prop="destPort" label="目的端口" min-width="80" show-overflow-tooltip/>
+            <el-table-column prop="appName" label="APP名称" min-width="100" show-overflow-tooltip/>
+            <el-table-column prop="appLink" label="APP下载链接" min-width="140" show-overflow-tooltip/>
+            <el-table-column prop="appPcapName" label="APP包名" min-width="100" show-overflow-tooltip/>
+            <el-table-column prop="appType" label="APP类型" min-width="100" show-overflow-tooltip/>
           </el-table>
         </div>
       </el-tab-pane>
@@ -131,7 +132,7 @@ interface appInfo {
   appType: string
 }
 
-const tableData: appInfo[] = [
+const tableData = [
   {
     date: '2023-01-03',
     sourceIP: '176.56.2.128',
@@ -140,6 +141,7 @@ const tableData: appInfo[] = [
     destPort: '235',
     appName: 'name1',
     appLink:'www.twtigapp.com',
+    downloadNum:99,
     appPcapName:'twiterpcap',
     appType:'社交'
   }
@@ -149,7 +151,7 @@ const tableData2: appInfo[] = [
     date: '2023-02-03',
     sourceIP: '126.5.23.28',
     sourcePort: '633',
-    destIP: '161.132.46.11',
+    destIP: '161.132.6.1',
     destPort: '23',
     appName: 'name1',
     appLink:'www.twtigapp.com',
@@ -183,6 +185,11 @@ const inputInfo = () => {
   position: relative;
 }
 
+:deep(.tableClass .cell) {
+  // padding-bottom: 12px;
+  height: 20px;
+  line-height: 20px !important;
+}
 .spanText {
   font-size: 14px
 }</style>

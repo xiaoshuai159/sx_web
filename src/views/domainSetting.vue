@@ -19,13 +19,13 @@
                 style="width: 200px;margin-right: 10px;"
                 /><el-button type="primary" @click="handleAdd()">添加配置</el-button>
                 <el-table :data="tableData2" style="width: 100%;margin-top: 15px;">
-                    <el-table-column prop="name" label="配置名称" min-width="100" />
-                    <el-table-column prop="type" label="配置类型" min-width="100" />
-                    <el-table-column prop="range" label="配置范围" min-width="100"/>
-                    <el-table-column prop="time" label="下发时间" min-width="110" />
-                    <el-table-column prop="master" label="发起人" min-width="100"/>
-                    <el-table-column prop="status" label="当前状态" min-width="100" />
-                    <el-table-column prop="管理" label="操作" min-width="100" align="center">
+                    <el-table-column prop="name" label="配置名称" min-width="100" show-overflow-tooltip/>
+                    <el-table-column prop="type" label="配置类型" min-width="100" show-overflow-tooltip/>
+                    <el-table-column prop="range" label="配置范围" min-width="100" show-overflow-tooltip/>
+                    <el-table-column prop="time" label="下发时间" min-width="110" show-overflow-tooltip/>
+                    <el-table-column prop="master" label="发起人" min-width="100" show-overflow-tooltip/>
+                    <el-table-column prop="status" label="当前状态" min-width="100" show-overflow-tooltip/>
+                    <el-table-column prop="管理" label="操作" min-width="100" align="center" show-overflow-tooltip>
                         <template #default="scope">
                             <el-button link type="primary" size="small" @click="handleEdit2(scope.$index, scope.row)">编辑</el-button>
                             <el-button link type="danger" size="small" @click="handleDelete(scope.$index)">删除</el-button>
@@ -72,7 +72,7 @@
                 :prefix-icon="Search"
             />
             <el-table :data="tableData" style="width: 100%;margin-top: 15px;">
-                <el-table-column prop="name" label="名称" min-width="100">
+                <el-table-column prop="name" label="名称" min-width="100" show-overflow-tooltip>
                     <template #default="scope">
                         <div>
                             <el-icon style="display:inline-block; margin-right: 5px;"><Star /></el-icon>
@@ -81,10 +81,10 @@
                         </div>
                     </template>
                 </el-table-column>
-                <el-table-column prop="alarm" label="告警" min-width="100" />
-                <el-table-column prop="status" label="状态" min-width="100"/>
-                <el-table-column prop="burst" label="分片" min-width="100" />
-                <el-table-column label="CPU使用率" min-width="100" >
+                <el-table-column prop="alarm" label="告警" min-width="100" show-overflow-tooltip/>
+                <el-table-column prop="status" label="状态" min-width="100" show-overflow-tooltip/>
+                <el-table-column prop="burst" label="分片" min-width="100" show-overflow-tooltip/>
+                <el-table-column label="CPU使用率" min-width="100" show-overflow-tooltip>
                     <template #default="scope">
                         <div style="display: flex; align-items: center">
                             <el-icon><Top /></el-icon>
@@ -92,7 +92,7 @@
                         </div>
                     </template>
                 </el-table-column>
-                <el-table-column label="负载平均值" min-width="100">
+                <el-table-column label="负载平均值" min-width="100" show-overflow-tooltip>
                     <template #default="scope">
                         <div style="display: flex; align-items: center">
                             <el-icon><Top /></el-icon>
@@ -101,7 +101,7 @@
                     </template>
                 </el-table-column>
                 
-                <el-table-column prop="JVM" label="JVM堆" min-width="100">
+                <el-table-column prop="JVM" label="JVM堆" min-width="100" show-overflow-tooltip>
                     <template #default="scope">
                         <div style="display: flex; align-items: center">
                             <el-icon><Bottom /></el-icon>
@@ -109,7 +109,7 @@
                         </div>
                     </template>
                 </el-table-column>
-                <el-table-column label="磁盘可用空间" min-width="100">
+                <el-table-column label="磁盘可用空间" min-width="100" show-overflow-tooltip>
                     <template #default="scope">
                         <div style="display: flex; align-items: center">
                             <el-icon><Bottom /></el-icon>
@@ -117,7 +117,7 @@
                         </div>
                     </template>
                 </el-table-column>
-                <el-table-column prop="管理" label="管理" min-width="100">
+                <el-table-column prop="管理" label="管理" min-width="100" show-overflow-tooltip>
                     <template #default="scope">
                         <el-button link type="primary" size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
                     </template>

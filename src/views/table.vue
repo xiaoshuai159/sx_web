@@ -27,16 +27,16 @@
 			</div>
 			<el-table :data="tableData" border class="table" ref="multipleTable" header-cell-class-name="table-header">
 				<el-table-column prop="id" label="事件id" min-width="60" align="center"></el-table-column>
-				<el-table-column prop="time" label="时间" min-width="105"></el-table-column>
-				<el-table-column prop="harmIP" label="受害数据库IP" min-width="105"></el-table-column>
-				<el-table-column prop="harmPort" label="端口" min-width="60"></el-table-column>
-				<el-table-column prop="databaseType" label="数据库类型" align="center" min-width="90"></el-table-column>
-				<el-table-column prop="warnType" label="预警类型" min-width="70"></el-table-column>
-				<el-table-column prop="warnContent" label="告警内容" min-width="100"></el-table-column>
-				<el-table-column prop="attackNum" label="攻击次数" min-width="70"></el-table-column>
-				<el-table-column prop="attackIP" label="攻击者IP" min-width="105"></el-table-column>
+				<el-table-column prop="time" label="时间" min-width="158" show-overflow-tooltip></el-table-column>
+				<el-table-column prop="harmIP" label="受害数据库IP" min-width="115" show-overflow-tooltip></el-table-column>
+				<el-table-column prop="harmPort" label="端口" min-width="55" show-overflow-tooltip></el-table-column>
+				<el-table-column prop="databaseType" label="数据库类型" show-overflow-tooltip min-width="90"></el-table-column>
+				<el-table-column prop="warnType" label="预警类型" min-width="140"  show-overflow-tooltip ></el-table-column>
+				<el-table-column prop="warnContent" label="告警内容" min-width="100" show-overflow-tooltip></el-table-column>
+				<el-table-column prop="attackNum" label="攻击次数" min-width="70" show-overflow-tooltip></el-table-column>
+				<el-table-column prop="attackIP" label="攻击者IP" min-width="115" show-overflow-tooltip></el-table-column>
 				<el-table-column prop="attackPort" label="攻击者端口" min-width="75"></el-table-column>
-				<el-table-column prop="level" label="优先级" min-width="75">
+				<el-table-column prop="level" label="优先级" min-width="75" align="center">
 					<template #default="scope">
 						<el-tag
 							:type="scope.row.level === '低' ? '' : scope.row.level === '高' ? 'danger' : ''"
@@ -45,7 +45,7 @@
 						</el-tag>
 					</template>
 				</el-table-column>
-				<el-table-column label="验证状态" align="center" min-width="70">
+				<el-table-column label="验证状态" align="center" min-width="90">
 					<template #default="scope">
 						<el-tag
 							:type="scope.row.state === '已验证' ? 'success' : scope.row.state === '未验证' ? 'danger' : ''"
@@ -209,8 +209,8 @@ const getData = () =>{
 	attackNum: 9,
 	attackIP: '192.168.55.4',
 	attackPort: 68,
-	state:'已验证',
-	level:'高'
+	state:'未验证',
+	level:'中'
 },
 {
 	id: 3,
@@ -343,6 +343,11 @@ function saveEdit() {
 </script>
 
 <style scoped lang="less">
+:deep(.tableClass .cell) {
+  // padding-bottom: 12px;
+  height: 20px;
+  line-height: 20px !important;
+}
 .handle-box {
 	margin-bottom: 20px;
 }
