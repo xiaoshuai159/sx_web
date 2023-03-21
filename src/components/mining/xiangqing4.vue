@@ -1,20 +1,11 @@
 <template>
     <div class="content" ref="xiangqing_ref">
     <el-card shadow="never">
-      <el-main style="background-color: white">
-        <el-row :gutter="20" style="margin-bottom: 25px; margin-top: -12px">
-          <el-col :span="4"
-            ><div
-              class="grid-content bg-purple"
-              style="font-size: 16px;"
-            >
-              矿池详情
-            </div></el-col
-          >
-          <el-col :span="20"
-            ><div class="grid-content bg-purple">
+      <el-main style="background-color: white;padding: 5px;">
+        <el-row>
+          <div class="grid-content bg-purple">
               <div align="left">
-                矿池IP <span v-html="'\u00a0'"></span><el-input
+                矿池IP <span v-html="'\u00a0\u00a0'"></span><el-input
                   v-model="searchValue.input1"
                   placeholder="单行输入"
                   style="width: 20%"
@@ -34,14 +25,14 @@
                   >
                   </el-option> </el-select
                 ><span v-html="'\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0'"></span> 活跃次数
-                <span v-html="'\u00a0\u00a0\u00a0'"></span><el-input
+                <span v-html="'\u00a0\u00a0'"></span><el-input
                   v-model="searchValue.input2"
                   placeholder="单行输入"
                   style="width: 20%"
                 ></el-input>
               </div>
               <!-- <br/> -->
-              <div align="left">
+              <div align="left"  style="height: 58px;">
                 <el-button>查询</el-button
                 ><el-button 
                   >导出</el-button
@@ -51,7 +42,6 @@
                 >
               </div>
             </div>
-          </el-col>
         </el-row>
         <el-row>
           <el-col :span="24">
@@ -169,7 +159,7 @@ function handleCurrentChange(val:number) {
   cursor: pointer;
   overflow: initial;
   position: relative;
-  margin: -6px auto;
+  margin: 6px auto;
 }
 </style>
 <style>

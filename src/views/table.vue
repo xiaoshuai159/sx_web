@@ -11,12 +11,12 @@
 					end-placeholder="End date"
 					/>&nbsp;&nbsp;
 				<span>攻击类型：</span>
-				<el-select v-model="query.address" placeholder="攻击类型" class="handle-select mr10">
+				<el-select v-model="query.address" placeholder="攻击类型" class="handle-select mr10" style="width:16%">
 					<el-option key="1" label="数据库密码爆破" value="数据库密码爆破"></el-option>
 					<el-option key="2" label="数据库勒索攻击" value="数据库勒索攻击"></el-option>
 				</el-select>
 				<span>事件id：</span>
-				<el-input v-model="query.name" placeholder="事件id" class="eventid-input mr10"></el-input><br/><br/>
+				<el-input v-model="query.name" placeholder="事件id" class="eventid-input mr10" style="width:16%"></el-input><br/><br/>
 				<span>受害数据库IP：</span>
 				<el-input v-model="query.name" placeholder="受害数据库IP" class="handle-input mr10"></el-input>
 				
@@ -26,14 +26,14 @@
 				<el-button type="primary" :icon="Plus" @click="handleAdd">新增</el-button>
 			</div>
 			<el-table :data="tableData" border class="table" ref="multipleTable" header-cell-class-name="table-header">
-				<el-table-column prop="id" label="事件id" min-width="60" align="center"></el-table-column>
+				<el-table-column prop="id" label="事件id" min-width="70" align="center"></el-table-column>
 				<el-table-column prop="time" label="时间" min-width="158" show-overflow-tooltip></el-table-column>
 				<el-table-column prop="harmIP" label="受害数据库IP" min-width="115" show-overflow-tooltip></el-table-column>
 				<el-table-column prop="harmPort" label="端口" min-width="55" show-overflow-tooltip></el-table-column>
-				<el-table-column prop="databaseType" label="数据库类型" show-overflow-tooltip min-width="90"></el-table-column>
+				<el-table-column prop="databaseType" label="数据库类型" show-overflow-tooltip min-width="95"></el-table-column>
 				<el-table-column prop="warnType" label="预警类型" min-width="140"  show-overflow-tooltip ></el-table-column>
 				<el-table-column prop="warnContent" label="告警内容" min-width="100" show-overflow-tooltip></el-table-column>
-				<el-table-column prop="attackNum" label="攻击次数" min-width="70" show-overflow-tooltip></el-table-column>
+				<el-table-column prop="attackNum" label="攻击次数" min-width="83" show-overflow-tooltip></el-table-column>
 				<el-table-column prop="attackIP" label="攻击者IP" min-width="115" show-overflow-tooltip></el-table-column>
 				<el-table-column prop="attackPort" label="攻击者端口" min-width="75"></el-table-column>
 				<el-table-column prop="level" label="优先级" min-width="75" align="center">

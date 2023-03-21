@@ -1,13 +1,13 @@
 <template>
 	<div class="container">
-		<span class="spanText">APP应用名：</span><el-input placeholder="请输入内容" size="small"
+		<span class="spanText">APP应用名：</span><el-input placeholder="请输入内容"
 			style="width:13%;margin-right: 20px;"></el-input>
-		<span class="spanText">APP包名：</span><el-input placeholder="请输入内容" size="small"
+		<span class="spanText">APP包名：</span><el-input placeholder="请输入内容" 
 			style="width:13%;margin-right: 20px;"></el-input>
-		<span class="spanText">APP运营商：</span><el-input placeholder="请输入内容" size="small"
+		<span class="spanText">APP运营商：</span><el-input placeholder="请输入内容" 
 			style="width:13%;margin-right: 20px;"></el-input>
 		<span class="spanText">APP在架状态：</span>
-		<el-select v-model="value" class="m-2" placeholder="Select" size="small" style="width:13%;">
+		<el-select v-model="value" class="m-2" placeholder="Select" style="width:13%;">
 			<el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
 		</el-select>
 		<el-row class="mb-4" style="margin: 15px 0;">
@@ -27,7 +27,7 @@
 			<el-table-column prop="condition" label="在架状态/下架时间(不在架)" min-width="120" show-overflow-tooltip/>
 			<el-table-column prop="isRecord" label="是否备案" min-width="80" show-overflow-tooltip/>
 			<el-table-column prop="recordTel" label="备案号码" min-width="100" show-overflow-tooltip/>
-			<el-table-column prop="premissInfo" label="应用权限信息" min-width="100" show-overflow-tooltip/>
+			<el-table-column prop="premissInfo" label="应用权限信息" min-width="110" show-overflow-tooltip/>
 			<el-table-column prop="operate" label="操作" fixed="right" min-width="90">
 				<template #default="scope">
 					<el-button link type="primary" size="small" @click="handleEdit(scope.$index, scope.row)" v-permiss="15">编辑</el-button>
@@ -277,6 +277,6 @@ const handleDel = () => {
 
 <style scoped>
 .spanText {
-	font-size: 14px
+	font-size: 16px
 }
 </style>

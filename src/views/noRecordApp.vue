@@ -54,9 +54,9 @@
           <el-table :data="tableData" border style="width: 100%">
             <el-table-column prop="date" label="时间" min-width="120" show-overflow-tooltip/>
             <el-table-column prop="sourceIP" label="源IP" min-width="105" show-overflow-tooltip/>
-            <el-table-column prop="sourcePort" label="源端口" min-width="60" show-overflow-tooltip/>
+            <el-table-column prop="sourcePort" label="源端口" min-width="70" show-overflow-tooltip/>
             <el-table-column prop="destIP" label="目的IP" min-width="105" show-overflow-tooltip/>
-            <el-table-column prop="destPort" label="目的端口" min-width="80" show-overflow-tooltip/>
+            <el-table-column prop="destPort" label="目的端口" min-width="85" show-overflow-tooltip/>
             <el-table-column prop="appName" label="APP名称" min-width="100" show-overflow-tooltip/>
             <el-table-column prop="appLink" label="APP下载链接" min-width="140" show-overflow-tooltip/>
             <el-table-column prop="downloadNum" label="下载量" min-width="70" show-overflow-tooltip/>
@@ -79,9 +79,9 @@
           <el-table :data="tableData2" border style="width: 100%">
             <el-table-column prop="date" label="时间" min-width="120" show-overflow-tooltip/>
             <el-table-column prop="sourceIP" label="源IP" min-width="105" show-overflow-tooltip/>
-            <el-table-column prop="sourcePort" label="源端口" min-width="60" show-overflow-tooltip/>
+            <el-table-column prop="sourcePort" label="源端口" min-width="70" show-overflow-tooltip/>
             <el-table-column prop="destIP" label="目的IP" min-width="105" show-overflow-tooltip/>
-            <el-table-column prop="destPort" label="目的端口" min-width="80" show-overflow-tooltip/>
+            <el-table-column prop="destPort" label="目的端口" min-width="85" show-overflow-tooltip/>
             <el-table-column prop="appName" label="APP名称" min-width="100" show-overflow-tooltip/>
             <el-table-column prop="appLink" label="APP下载链接" min-width="140" show-overflow-tooltip/>
             <el-table-column prop="appPcapName" label="APP包名" min-width="100" show-overflow-tooltip/>

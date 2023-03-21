@@ -12,7 +12,7 @@
 			</li>
 		</ul>
 		<div class="tags-close-box">
-			<el-select v-model="value" class="m-2" placeholder="Select" size="small">
+			<el-select v-model="value" class="m-2" placeholder="Select" size="small" style="height: 28px;">
 				<el-option
 				v-for="item in options"
 				:key="item.value"
@@ -119,6 +119,12 @@ const handleTags = (command: string) => {
 // });
 </script>
 
+<style scoped lang="less">
+
+:deep(.el-input__wrapper){
+	height: 26px!important
+}
+</style>
 <style>
 .tags {
 	position: relative;

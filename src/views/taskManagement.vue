@@ -6,7 +6,7 @@
 				<el-date-picker v-model="value1" type="datetimerange" range-separator="To" start-placeholder="Start date"
 					end-placeholder="End date" />&nbsp;&nbsp;
 				<span>任务类型：</span>
-				<el-select v-model="query.taskType" placeholder="任务类型" class="handle-select mr10">
+				<el-select v-model="query.taskType" placeholder="任务类型" class="handle-select mr10" style="width:17%">
 					<el-option key="可用性监测" label="可用性监测" value="可用性监测"></el-option>
 					<el-option key="系统漏洞扫描" label="系统漏洞扫描" value="系统漏洞扫描"></el-option>
 					<el-option key="网页变更监测" label="网页变更监测" value="网页变更监测"></el-option>
@@ -20,7 +20,7 @@
 					<el-option key="全部" label="全部" value="全部"></el-option>
 				</el-select>
 				<span>任务id：</span>
-				<el-input v-model="query.name" placeholder="任务id" class="eventid-input mr10"></el-input><br /><br />
+				<el-input v-model="query.name" placeholder="任务id" class="eventid-input mr10" style="width:16%"></el-input><br /><br />
 				<span>目标IP：</span>
 				<el-input v-model="query.name" placeholder="目标IP" class="handle-input mr10"></el-input>
 				<el-button type="primary" :icon="Search" @click="handleSearch">搜索</el-button>

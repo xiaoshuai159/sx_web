@@ -302,13 +302,7 @@
 			</el-col>
 		</el-row>
 		<el-row v-show="query.address === '网页木马监测'">
-			<el-card class="box-card">
-				<template #header>
-					<div class="card-header">
-						<span>安全事件详情</span>
-						<!-- <el-button class="button" text>Operation button</el-button> -->
-					</div>
-				</template>
+			<div style="width:100%">
 				<el-table :data="eventData" border style="width: 100%">
 					<el-table-column type="index" width="50" />
 					<el-table-column prop="time" label="时间" min-width="125" show-overflow-tooltip/>
@@ -334,16 +328,11 @@
 						@current-change="handleCurrentChange"
 					/>
 				</div>
-			</el-card>
+			</div>
+				
 		</el-row>
 		<el-row v-show="query.address === '系统漏洞扫描'||query.address === '弱口令检查'||query.address === 'web漏洞扫描监测'||query.address === 'webshell扫描检测'">
-			<el-card class="box-card">
-				<template #header>
-					<div class="card-header">
-						<span>漏洞详情</span>
-						<!-- <el-button class="button" text>Operation button</el-button> -->
-					</div>
-				</template>
+			<div style="width: 100%;">
 				<el-table :data="bugData" border style="width: 100%">
 						<el-table-column type="index" width="50" />
 						<el-table-column prop="time" label="时间" min-width="125" show-overflow-tooltip/>
@@ -367,16 +356,11 @@
 						@current-change="handleCurrentChange"
 					/>
 				</div>
-			</el-card>
+			</div>
+				
 		</el-row>
 		<el-row v-show="query.address === '网页敏感信息监测'||query.address==='网页变更监测'">
-			<el-card class="box-card">
-				<template #header>
-					<div class="card-header">
-						<span>网页敏感信息监测</span>
-						<!-- <el-button class="button" text>Operation button</el-button> -->
-					</div>
-				</template>
+			<div style="width:100%">
 				<el-table :data="bugData" border style="width: 100%">
 					<el-table-column type="index" width="50" />
 						<el-table-column prop="time" label="时间" min-width="115" show-overflow-tooltip/>
@@ -402,16 +386,11 @@
 						@current-change="handleCurrentChange"
 					/>
 				</div>
-			</el-card>
+			</div>
+				
 		</el-row>
 		<el-row v-show="query.address === '数据采集'">
-			<el-card class="box-card">
-				<template #header>
-					<div class="card-header">
-						<span>数据采集情况</span>
-						<!-- <el-button class="button" text>Operation button</el-button> -->
-					</div>
-				</template>
+			<div style="width:100%">
 				<el-table :data="bugData" border style="width: 100%">
 						<el-table-column type="index" width="50" />
 						<el-table-column prop="time" label="时间" min-width="115" show-overflow-tooltip/>
@@ -437,16 +416,11 @@
 						@current-change="handleCurrentChange"
 					/>
 				</div>
-			</el-card>
+			</div>
+				
 		</el-row>
 		<el-row v-show="query.address === '网页恶意链接监测'||query.address==='网页钓鱼监测'">
-			<el-card class="box-card">
-				<template #header>
-					<div class="card-header">
-						<span>网页恶意链接监测详情</span>
-						<!-- <el-button class="button" text>Operation button</el-button> -->
-					</div>
-				</template>
+			<div style="width:100%">
 				<el-table :data="bugData" border style="width: 100%">
 						<el-table-column type="index" width="50" />
 						<el-table-column prop="time" label="时间" min-width="115" show-overflow-tooltip/>
@@ -472,17 +446,18 @@
 						@current-change="handleCurrentChange"
 					/>
 				</div>
-			</el-card>
+			</div>
+				<!-- <template #header>
+					<div class="card-header">
+						<span>网页恶意链接监测详情</span>
+					</div>
+				</template> -->
+				
+
 		</el-row>
 		<!-- 6 -->
 		<el-row v-show="query.address === '可用性监测'">
-			<el-card class="box-card">
-				<template #header>
-					<div class="card-header">
-						<span>可用性监测详情</span>
-						<!-- <el-button class="button" text>Operation button</el-button> -->
-					</div>
-				</template>
+			<div style="width:100%">
 				<el-table :data="bugData" border style="width: 100%">
 						<el-table-column type="index" width="50" />
 						<el-table-column prop="time" label="时间" min-width="115" show-overflow-tooltip/>
@@ -503,7 +478,7 @@
 						@current-change="handleCurrentChange"
 					/>
 				</div>
-			</el-card>
+			</div>
 		</el-row>
 		<el-row :gutter="10" v-show="query.address === '全部'">
 			<el-col :span="12">
