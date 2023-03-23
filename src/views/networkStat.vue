@@ -1029,9 +1029,9 @@ const options = {
 	]
 };
 function initOption1() {
-	type EChartsOption = echarts.EChartsOption;
-	const myChart1 = echarts.init(document.getElementById('myChart'));
-	let option: EChartsOption = {
+	// type EChartsOption = echarts.EChartsOption;
+	const myChart1 = echarts.init(document.getElementById('myChart')!);
+	let option = {
 		color: ['#c23531'],
 		title: {
 			text: '事件排行',
@@ -1074,9 +1074,8 @@ function initOption1() {
 	myChart1.resize();
 }
 function initOption2() {
-	type EChartsOption = echarts.EChartsOption;
-	const myChart2 = echarts.init(document.getElementById('myChart2'));
-	let option: EChartsOption = {
+	const myChart2 = echarts.init(document.getElementById('myChart2')!);
+	let option = {
 		title: {
 			text: '事件趋势分析',
 			x: '2%',

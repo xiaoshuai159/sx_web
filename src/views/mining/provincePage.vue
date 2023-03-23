@@ -70,8 +70,7 @@ const options = [
 ]
 let mapChart:any = '' 
 async function initChart() {
-    type EChartsOption = echarts.EChartsOption;
-    mapChart = echarts.init(document.getElementById('map_ref'));
+    mapChart = echarts.init(document.getElementById('map_ref')!);
     const ret = await axios.get(`../../map/省级/山西省.json`);
     echarts.registerMap("山西省", ret.data)
     const initOption = {
@@ -146,7 +145,7 @@ async function initChart() {
         },
     };
     mapChart.setOption(initOption, true)
-    mapChart.on("click",(arg)=>{
+    mapChart.on("click",(arg:any)=>{
         const store = useMiningStore()
         store.$patch({
             city:arg.name

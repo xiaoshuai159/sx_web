@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="map-header-text">
-            <span @click="textlink1()" style="cursor:pointer;">山西省</span><span v-html="'\u00a0'"></span>
+            <span style="cursor:pointer;">山西省</span><span v-html="'\u00a0'"></span>
           >
           <span v-html="'\u00a0'"></span><span style="cursor:pointer;">{{useMiningStore().city}}</span><span v-html="'\u00a0'"></span>
           >
@@ -76,8 +76,7 @@ const options = [
 ]
 let mapChart:any = '' 
 async function initChart() {
-    type EChartsOption = echarts.EChartsOption;
-    mapChart = echarts.init(document.getElementById('map_ref'));
+    mapChart = echarts.init(document.getElementById('map_ref')!);
     const ret = await axios.get(`../../map/省级/市级/县级/${useMiningStore().area}.json`);
     echarts.registerMap(`${useMiningStore().area}`, ret.data)
     const initOption = {
@@ -149,7 +148,7 @@ async function initChart() {
         },
     };
     mapChart.setOption(initOption, true)
-    mapChart.on("click",(arg)=>{
+    mapChart.on("click",(arg:any)=>{
         const store = useMiningStore()
         store.$patch({
             city:arg.name

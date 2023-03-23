@@ -14,7 +14,7 @@
 			<div style="margin:10px 0">
 				<span style="margin-left: 0px;">异常域名：</span>
 				<el-input v-model="query.name" placeholder="异常域名" class="handle-input mr10"></el-input>
-				<el-button type="primary" :icon="Search" @click="handleSearch" style="margin-left: 10px;">搜索</el-button>
+				<el-button type="primary" style="margin-left: 10px;">搜索</el-button>
 			</div>
 		</div>
 		<el-row :gutter="10">
@@ -615,9 +615,8 @@ const options = {
 	]
 };
 function initOption1() {
-	type EChartsOption = echarts.EChartsOption;
-	const myChart1 = echarts.init(document.getElementById('myChart'));
-	let option: EChartsOption = {
+	const myChart1 = echarts.init(document.getElementById('myChart')!); 
+	let option= {
 		title: {
 			text: '域名异常排行',
 			x: '2%',
@@ -680,9 +679,9 @@ function initOption1() {
 	myChart1.resize();
 }
 function initOption2() {
-	type EChartsOption = echarts.EChartsOption;
-	const myChart2 = echarts.init(document.getElementById('myChart2'));
-	let option: EChartsOption = {
+	// type EChartsOption = echarts.EChartsOption;
+	const myChart2 = echarts.init(document.getElementById('myChart2')!);
+	let option= {
 		title: {
 			text: '事件趋势分析',
 			x: '2%',
@@ -763,9 +762,9 @@ function initOption2() {
 	option && myChart2.setOption(option);
 }
 function initOption3() {
-	type EChartsOption = echarts.EChartsOption;
-	const myChart3 = echarts.init(document.getElementById('myChart3'));
-	let option: EChartsOption = {
+	// type EChartsOption = echarts.EChartsOption;
+	const myChart3 = echarts.init(document.getElementById('myChart3')!);
+	let option = {
 		title:{
 			text: '域名异常分类',
 			x: '2%',

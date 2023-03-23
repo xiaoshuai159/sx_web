@@ -56,9 +56,8 @@
 import * as echarts from 'echarts'
 import { onMounted, reactive, ref } from 'vue';
 function initOption1() {
-    type EChartsOption = echarts.EChartsOption;
-    const myLineChart = echarts.init(document.getElementById('lineChart'));
-    let option: EChartsOption = {
+    const myLineChart = echarts.init(document.getElementById('lineChart')!);
+    let option = {
         tooltip: {
             trigger: 'axis',
             axisPointer: {
@@ -157,9 +156,8 @@ function initOption1() {
 }
 
 function initOption2() {
-    type EChartsOption = echarts.EChartsOption;
-    const myPieChart = echarts.init(document.getElementById('pieChart'));
-    let option: EChartsOption = {
+    const myPieChart = echarts.init(document.getElementById('pieChart')!);
+    let option = {
         title: {
             text: '应用商店分布'
         },
@@ -213,9 +211,9 @@ function initOption2() {
     myPieChart.resize()
 }
 function initOption3() {
-    type EChartsOption = echarts.EChartsOption;
-    const myBarChart = echarts.init(document.getElementById('barChart'));
-    let option: EChartsOption = {
+    // type EChartsOption = echarts.EChartsOption;
+    const myBarChart = echarts.init(document.getElementById('barChart')!);
+    let option = {
         title: {
             text: '下载量分布',
             x: '2%',
@@ -257,9 +255,8 @@ function initOption3() {
     myBarChart.resize();
 }
 function initOption4() {
-    type EChartsOption = echarts.EChartsOption;
-    const myBarChart = echarts.init(document.getElementById('pieChart2'));
-    let option: EChartsOption = {
+    const myBarChart = echarts.init(document.getElementById('pieChart2')!);
+    let option = {
         title: {
             text: '应用类型分布',
         },
