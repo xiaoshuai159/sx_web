@@ -16,7 +16,7 @@ const routes: RouteRecordRaw[] = [
                 path: '/dashboard',
                 name: 'dashboard',
                 meta: {
-                    title: '事件统计',
+                    title: '数据库安全',
                     permiss: '2',
                 },
                 component: () => import('../views/dashboard.vue'),
@@ -43,7 +43,7 @@ const routes: RouteRecordRaw[] = [
                 path: '/APPstat',
                 name: 'APPstat',
                 meta: {
-                    title: 'APP事件统计',
+                    title: 'APP监测',
                     permiss: '5',
                 },
                 component: () => import('../views/APPstat.vue'),
@@ -98,7 +98,7 @@ const routes: RouteRecordRaw[] = [
                 path: '/threatIntelligence',
                 name: 'threatIntelligence',
                 meta: {
-                    title: '威胁研判',
+                    title: '情报查询',
                     permiss: '11',
                 },
                 component: () => import(/* webpackChunkName: "charts" */ '../views/threatIntelligence.vue'),
@@ -107,7 +107,7 @@ const routes: RouteRecordRaw[] = [
                 path: '/attackAndDefence',
                 name: 'attackAndDefence',
                 meta: {
-                    title: '组织与资产检索',
+                    title: '追踪溯源',
                     permiss: '12',
                 },
                 component: () => import(/* webpackChunkName: "charts" */ '../views/attackAndDefence.vue'),
@@ -177,15 +177,15 @@ const routes: RouteRecordRaw[] = [
             //     },
             //     component: () => import(/* webpackChunkName: "donate" */ '../views/donate.vue'),
             // },
-            // {
-            //     path: '/permission',
-            //     name: 'permission',
-            //     meta: {
-            //         title: '权限管理',
-            //         permiss: '13',
-            //     },
-            //     component: () => import(/* webpackChunkName: "permission" */ '../views/permission.vue'),
-            // },
+            {
+                path: '/permission',
+                name: 'permission',
+                meta: {
+                    title: '权限管理',
+                    permiss: '13',
+                },
+                component: () => import(/* webpackChunkName: "permission" */ '../views/permission.vue'),
+            },
             // {
             //     path: '/upload',
             //     name: 'upload',

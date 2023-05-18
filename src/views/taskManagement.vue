@@ -23,13 +23,13 @@
 				<el-input v-model="query.name" placeholder="任务id" class="eventid-input mr10" style="width:16%"></el-input><br /><br />
 				<span>目标IP：</span>
 				<el-input v-model="query.name" placeholder="目标IP" class="handle-input mr10"></el-input>
-				<el-button type="primary" :icon="Search" @click="handleSearch">搜索</el-button>
+				<el-button type="primary" @click="handleSearch">搜索</el-button>
 				<!-- <el-table-column>
 					<template #default="scope">
 						<span>{{ scope.row["state"] == 1 ? "未使用" : "已使用" }}</span>
 					</template>
 				</el-table-column> -->
-				<el-button type="primary" :icon="Plus" @click="addTask()" v-permiss="15">新增</el-button>
+				<el-button type="primary" @click="addTask()" v-permiss="15">新增</el-button>
 			</div>
 			<el-table :data="tableData" border class="table" ref="multipleTable" header-cell-class-name="table-header">
 				<el-table-column prop="id" label="任务id" min-width="80" align="center"></el-table-column>

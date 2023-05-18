@@ -1,6 +1,6 @@
 <template>
-	<div class="container">
-		<div class="plugins-tips">通过 v-permiss 自定义指令实现权限管理，使用非 admin 账号登录，可查看效果。</div>
+	<div class="container handle-box">
+		<!-- <div class="plugins-tips">通过 v-permiss 自定义指令实现权限管理，使用非 admin 账号登录，可查看效果。</div> -->
 		<div class="mgb20">
 			<span class="label">角色：</span>
 			<el-select v-model="role" @change="handleChange">
@@ -45,64 +45,92 @@ const data: Tree[] = [
 		label: '基础表格',
 		children: [
 			{
-				id: '15',
+				id: '3',
 				label: '编辑'
 			},
 			{
-				id: '16',
+				id: '4',
 				label: '删除'
 			}
 		]
 	},
+	// {
+	// 	id: '3',
+	// 	label: 'tab选项卡'
+	// },
 	{
-		id: '3',
-		label: 'tab选项卡'
-	},
-	{
-		id: '4',
-		label: '表单相关',
+		id: '5',
+		label: '模块相关',
 		children: [
 			{
-				id: '5',
-				label: '基本表单'
-			},
-			{
 				id: '6',
-				label: '文件上传'
-			},
-			{
-				id: '7',
-				label: '三级菜单',
+				label: '数据安全',
 				children: [
 					{
-						id: '8',
-						label: '富文本编辑器'
+						id: '7',
+						label: '数据库安全事件'
 					},
 					{
-						id: '9',
-						label: 'markdown编辑器'
+						id: '8',
+						label: 'APP监测事件'
+					}
+				]
+			},
+			{
+				id: '9',
+				label: '网站安全',
+				children: [
+					{
+						id: '10',
+						label: '挖矿行为监测'
+					},
+					{
+						id: '11',
+						label: '漏洞'
+					},
+					{
+						id: '12',
+						label: '僵木蠕'
+					}
+				]
+			},
+			{
+				id: '13',
+				label: '分析研判',
+				children: [
+					{
+						id: '14',
+						label: '域名异常监测'
+					},
+					{
+						id: '15',
+						label: '情报查询'
+					},
+					{
+						id: '16',
+						label: '追踪溯源'
 					}
 				]
 			}
 		]
 	},
+	// {
+	// 	id: '10',
+	// 	label: '自定义图标'
+	// },
 	{
-		id: '10',
-		label: '自定义图标'
-	},
-	{
-		id: '11',
-		label: 'schart图表'
+		id: '17',
+		label: 'echart图表'
 	},
 
 	{
-		id: '13',
+		id: '18',
 		label: '权限管理'
 	},
-	{
-		id: '14',
-		label: '支持作者'
-	}
+	// {
+	// 	id: '14',
+	// 	label: '支持作者'
+	// }
 ];
 
 const permiss = usePermissStore();
@@ -127,7 +155,40 @@ const handleChange = (val: string[]) => {
 };
 </script>
 
-<style scoped>
+<style scoped lang="less">
+.handle-box :deep(.el-input__wrapper){
+	border: solid #b3b3b3 1px;
+	padding:1px 12px;
+	border-radius: 0px;
+	box-shadow:0 0 0 0 !important;
+}
+.handle-box :deep(.el-input__wrapper:hover){
+	border: solid #6f9ffd 1px;
+	padding:1px 12px;
+	border-radius: 0px;
+	box-shadow:0 0 0 0 !important;
+}
+:deep(.el-input__inner::placeholder) {
+
+	color:#808080!important
+}
+:deep(.el-input__inner:focus::-webkit-input-placeholder){
+	opacity: 0;
+
+}
+.handle-box .el-button{
+	height: 34px;
+	padding: 0 24px;
+	letter-spacing: 2px;
+	color: #cdeaf9;
+	background: linear-gradient(to right, #177ad9, #00a3e5);
+	border: transparent;
+	border-radius: 3px;
+}
+.handle-box .el-button:hover{
+	color: white;
+	background: #3ba3e4;
+}
 .tree-wrapper {
 	max-width: 500px;
 }

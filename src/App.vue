@@ -12,4 +12,5 @@ import zhCn from 'element-plus/es/locale/lang/zh-cn';
 <style>
 @import './assets/css/main.css';
 @import './assets/css/color-dark.css';
+@import "./assets/css/public.css";
 </style>

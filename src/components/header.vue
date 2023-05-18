@@ -9,7 +9,7 @@
 		<div class="header-right">
 			<div class="header-user-con">
 				<!-- 消息中心 -->
-				<div class="btn-bell">
+				<!-- <div class="btn-bell">
 					<el-tooltip
 						effect="dark"
 						:content="message ? `有${message}条未读消息` : `消息中心`"
@@ -18,7 +18,7 @@
 						<i class="el-icon-lx-notice"></i>
 					</el-tooltip>
 					<span class="btn-bell-badge" v-if="message"></span>
-				</div>
+				</div> -->
 				<!-- 用户头像 -->
 				<el-avatar class="user-avator" :size="30" :src="imgurl" />
 				<!-- 用户名下拉菜单 -->
@@ -80,7 +80,8 @@ const handleCommand = (command: string) => {
 	position: relative;
 	box-sizing: border-box;
 	width: 100%;
-	height: 48px;
+	/* height: 48px; */
+	height: 76px;
 	font-size: 19px;
 	color: #fff;
 }
@@ -95,8 +96,13 @@ const handleCommand = (command: string) => {
 }
 .header .logo {
 	float: left;
-	width: 210px;
-	line-height: 48px;
+	/* width: 210px;
+	line-height: 48px; */
+	width: 520px;
+	font-weight: 600;
+	letter-spacing: 2px;
+	font-size: 33px;
+	line-height: 76px;
 }
 .header-right {
 	float: right;
@@ -104,7 +110,8 @@ const handleCommand = (command: string) => {
 }
 .header-user-con {
 	display: flex;
-	height: 48px;
+	/* height: 48px; */
+	height: 76px;
 	align-items: center;
 }
 .btn-fullscreen {

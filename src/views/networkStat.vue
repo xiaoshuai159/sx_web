@@ -33,7 +33,7 @@
 			</el-select>
 			<span style="margin-left: 15px;">IP：</span>
 			<el-input v-model="query.name" placeholder="攻击者IP" class="handle-input mr10"></el-input>
-			<el-button type="primary" :icon="Search"  style="margin-left: 10px;">搜索</el-button>
+			<el-button type="primary" style="margin-left: 10px;">搜索</el-button>
 			<!-- <template #default="scope"> -->
 			<!-- </template> -->
 		</div>

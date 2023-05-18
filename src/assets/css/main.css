@@ -25,7 +25,8 @@ a {
     position: absolute;
     left: 210px;
     right: 0;
-    top: 48px;
+    /* top: 48px; */
+    top: 76px;
     bottom: 0;
     padding-bottom: 30px;
     -webkit-transition: left .3s ease-in-out;
@@ -46,12 +47,24 @@ a {
 }
 
 .container {
-    padding: 30px;
+    padding: 20px;
     background: #fff;
     border: 1px solid #ddd;
     border-radius: 5px;
 }
-
+.handle-box .el-button{
+	height: 34px;
+	padding: 0 24px;
+	letter-spacing: 2px;
+	color: #cdeaf9;
+	background: linear-gradient(to right, #177ad9, #00a3e5);
+	border: transparent;
+	border-radius: 3px;
+}
+.handle-box .el-button:hover{
+	color: white;
+	background: #3ba3e4;
+}
 .crumbs {
     margin: 10px 0;
 }

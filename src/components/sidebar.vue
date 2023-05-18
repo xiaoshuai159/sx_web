@@ -1,10 +1,12 @@
 <template>
     <div class="sidebar">
+        <!-- background-color="#324157" -->
         <el-menu 
             class="sidebar-el-menu" 
             :default-active="onRoutes" 
             :collapse="sidebar.collapse" 
-            background-color="#324157"
+            
+            background-color="#0e528f"
             text-color="#bfcbd9" 
             active-text-color="#20a0ff" 
             unique-opened 
@@ -20,7 +22,7 @@
                             <span>{{ item.title }}</span>
                         </template>
                         <template v-for="subItem in item.subs">
-                            <!-- <el-sub-menu
+                            <el-sub-menu
                                 v-if="subItem.subs"
                                 :index="subItem.index"
                                 :key="subItem.index"
@@ -30,8 +32,8 @@
                                 <el-menu-item v-for="(threeItem, i) in subItem.subs" :key="i" :index="threeItem.index">
                                     {{ threeItem.title }}
                                 </el-menu-item>
-                            </el-sub-menu> -->
-                            <el-menu-item :index="subItem.index" v-permiss="item.permiss">
+                            </el-sub-menu>
+                            <el-menu-item v-else :index="subItem.index" v-permiss="item.permiss">
                                 {{ subItem.title }}
                             </el-menu-item>
                         </template>
@@ -59,121 +61,163 @@ const items = [
     {
         icon: 'Odometer',
         index: '/dashboard',
-        title: '数据安全监测',
+        title: '数据安全',
         permiss: '1',
         subs:[
             {
                 index: '/dashboard',
-                title: '数据安全事件统计',
+                title: '数据库安全事件',
                 permiss: '2',
+            },
+            {
+                index: '/APPstat',
+                title: 'APP监测事件',
+                permiss: '3',
             },
             // {
             //     index: '/editor',
             //     title: '数据安全事件预警',
             //     permiss: '3',
             // },
-            {
-                index: '/table',
-                title: '数据安全事件汇总',
-                permiss: '4',
-            },
+            // {
+            //     index: '/table',
+            //     title: '数据安全事件汇总',
+            //     permiss: '4',
+            // },
         ]
     },
-    {
-        icon: 'Bell',
-        index: '1',
-        title: '重点APP监测',
-        permiss: '5',
-        subs: [
-            {
-                index: '/APPstat',
-                title: 'APP事件统计',
-                permiss: '6',
-            },
-            {
-                index: '/APPsearch',
-                title: 'APP综合查询',
-                permiss: '7',
-            },
-            {
-                index: '/noRecordApp',
-                title: '未备案APP处置',
-                permiss: '8',
-            },
-        ],
-    },
+    // {
+    //     icon: 'Bell',
+    //     index: '1',
+    //     title: '重点APP监测',
+    //     permiss: '5',
+    //     subs: [
+    //         // {
+    //         //     index: '/APPstat',
+    //         //     title: 'APP事件统计',
+    //         //     permiss: '6',
+    //         // },
+    //         {
+    //             index: '/APPsearch',
+    //             title: 'APP综合查询',
+    //             permiss: '7',
+    //         },
+    //         {
+    //             index: '/noRecordApp',
+    //             title: '未备案APP处置',
+    //             permiss: '8',
+    //         },
+    //     ],
+    // },
     {
         icon: 'Warning',
         index: '/securityAnalysis',
-        title: '网站安全监测',
+        title: '网站安全',
         permiss: '5',
         subs: [
+        {
+                index: '/provincePage',
+                title: '挖矿行为监测',
+                permiss: '13',
+            },
             // {
             //     index: '/securityAnalysis',
             //     title: '安全分析',
             //     permiss: '6',
             // },
-            {
-                index: '/taskManagement',
-                title: '任务管理',
-                permiss: '7',
-            },
-            {
-                index: '/networkStat',
-                title: '数据展示',
-                permiss: '8',
-            },
+            // {
+            //     index: '/taskManagement',
+            //     title: '任务管理',
+            //     permiss: '7',
+            // },
+            // {
+            //     index: '/networkStat',
+            //     title: '数据展示',
+            //     permiss: '8',
+            // },
         ],
     },
     {
         icon: 'WarnTriangleFilled',
         index: '/threatIntelligence',
-        title: '威胁情报分析',
+        title: '分析研判',
         permiss: '9',
         subs: [
-            {
-                index: '/threatIntelligence',
-                title: '威胁研判',
+             {
+                index: '/domainMonitoring',
+                title: '域名异常监测',
                 permiss: '10',
             },
             {
-                index: '/attackAndDefence',
-                title: '组织与资产检索',
+                index: '/threatIntelligence',
+                title: '情报查询',
+                // title: '威胁研判',
                 permiss: '11',
             },
-        ],
-    },
-    {
-        icon: 'Wallet',
-        index: '/provincePage',
-        title: '虚拟货币挖矿监测',
-        permiss: '12',
-        subs: [
             {
-                index: '/provincePage',
-                title: '挖矿行为监测',
-                permiss: '13',
+                index: '/attackAndDefence',
+                // title: '组织与资产检索',
+                title: '追踪溯源',
+                permiss: '12',
             },
         ],
     },
     {
         icon: 'MessageBox',
-        index: '/domainMonitoring',
-        title: '域名安全监测',
-        permiss: '15',
+        index: '/permission',
+        title: '系统管理',
+        permiss: '13',
         subs: [
-            {
-                index: '/domainMonitoring',
-                title: '域名异常监测',
-                permiss: '15',
-            },
-            {
-                index: '/domainSetting',
-                title: '配置管理',
-                permiss: '15',
+             {
+                index: '/permission',
+                title: '用户管理',
+                permiss: '13',
             },
         ],
     },
+    // {
+    //     icon: 'Wallet',
+    //     index: '/provincePage',
+    //     title: '虚拟货币挖矿监测',
+    //     permiss: '12',
+    //     subs: [
+    //         {
+    //             index: '/provincePage',
+    //             title: '挖矿行为监测',
+    //             permiss: '13',
+    //         },
+    //     ],
+    // },
+    // {
+    //     icon: 'MessageBox',
+    //     index: '/domainMonitoring',
+    //     title: '域名安全监测',
+    //     permiss: '15',
+    //     subs: [
+    //         {
+    //             index: '/domainMonitoring',
+    //             title: '域名异常监测',
+    //             permiss: '15',
+    //         },
+    //         {
+    //             index: '4',
+    //             title: '配置管理',
+    //             permiss: '15',
+    //             subs:[
+    //                 {
+    //                     index: '/domainSetting',
+    //                     title: '三级菜单1',
+    //                     permiss: '16',
+    //                 },
+    //                 {
+    //                     index: '/threatIntelligence',
+    //                     title: '三级菜单2',
+    //                     permiss: '17',
+    //                 },
+    //             ]
+    //         },
+    //     ],
+    // },
     // {
     //     icon: 'DocumentCopy',
     //     index: '/tabs',
@@ -254,7 +298,8 @@ const sidebar = useSidebarStore();
     display: block;
     position: absolute;
     left: 0;
-    top: 48px;
+    // top: 48px;
+    top: 76px;
     bottom: 0;
     overflow-y: scroll;
 }

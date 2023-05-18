@@ -1,8 +1,10 @@
 .header{
-    background-color: #242f42;
+    /* background-color: #242f42; */
+    background: linear-gradient(to bottom, #0a6c9a, #0f4e8a);
 }
 .login-wrap{
-    background: #324157;
+    /* background: #324157; */
+    background: #0e528f;
 }
 .plugins-tips{
     background: #eef1f6;
@@ -19,5 +21,5 @@
     color: #20a0ff;
 }
 .collapse-btn:hover{
-    background: rgb(40,52,70);
+    background: rgb(11, 66, 114);
 }

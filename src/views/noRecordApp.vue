@@ -49,7 +49,7 @@
           style="width:13%;margin-right: 20px;"></el-input>
         <span class="spanText">APP类型：</span><el-input placeholder="请输入内容" size="small"
           style="width:13%;margin-right: 20px;"></el-input>
-        <el-button size="small" :icon="Search" type="primary">查询</el-button>
+        <el-button size="small" type="primary">查询</el-button>
         <div style="margin:15px 0">
           <el-table :data="tableData" border style="width: 100%">
             <el-table-column prop="date" label="时间" min-width="120" show-overflow-tooltip/>

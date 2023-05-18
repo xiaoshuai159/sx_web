@@ -22,10 +22,10 @@
 				
 				<span>攻击者IP：</span>
 				<el-input v-model="query.name" placeholder="攻击者IP" class="handle-input mr10"></el-input>
-				<el-button type="primary" :icon="Search" @click="handleSearch">搜索</el-button>
-				<el-button type="primary" :icon="Plus" @click="handleAdd">新增</el-button>
+				<el-button type="primary" @click="handleSearch">搜索</el-button>
+				<el-button type="primary" @click="handleAdd">新增</el-button>
 			</div>
-			<el-table :data="tableData" border class="table" ref="multipleTable" header-cell-class-name="table-header">
+			<el-table :data="tableData" class="tableStyle" ref="multipleTable" header-cell-class-name="table-header" stripe>
 				<el-table-column prop="id" label="事件id" min-width="70" align="center"></el-table-column>
 				<el-table-column prop="time" label="时间" min-width="158" show-overflow-tooltip></el-table-column>
 				<el-table-column prop="harmIP" label="受害数据库IP" min-width="115" show-overflow-tooltip></el-table-column>
@@ -56,10 +56,10 @@
 				</el-table-column>
 				<el-table-column label="操作" width="200" align="center" fixed="right">
 					<template #default="scope">
-						<el-button text :icon="Edit" @click="handleEdit(scope.$index, scope.row)" v-permiss="15">
+						<el-button text @click="handleEdit(scope.$index, scope.row)" v-permiss="15">
 							编辑
 						</el-button>
-						<el-button text :icon="Delete" class="red" @click="handleDelete(scope.$index)" v-permiss="16">
+						<el-button text class="red" @click="handleDelete(scope.$index)" v-permiss="16">
 							删除
 						</el-button>
 					</template>
@@ -343,6 +343,50 @@ function saveEdit() {
 </script>
 
 <style scoped lang="less">
+// .handle-box .el-input{
+// 	border: solid #b3b3b3;
+// }
+// :deep(.tableStyle th){
+// 	background-color: #3379FF!important;
+// 	opacity:0.2;
+// 	color: #333333!important;
+// }
+:deep(.el-popper__arrow){
+	display: none!important;
+}
+.handle-box :deep(.el-input__wrapper){
+	border: solid #b3b3b3 1px;
+	padding:1px 12px;
+	border-radius: 0px;
+	box-shadow:0 0 0 0 !important;
+}
+.handle-box :deep(.el-input__wrapper:hover){
+	border: solid #6f9ffd 1px;
+	padding:1px 12px;
+	border-radius: 0px;
+	box-shadow:0 0 0 0 !important;
+}
+:deep(.el-input__inner::placeholder) {
+	// color: #6f9ffd !important;
+	color:#808080!important
+}
+:deep(.el-input__inner:focus::-webkit-input-placeholder){
+	opacity: 0;
+	// color:transparent!important
+}
+.handle-box .el-button{
+	height: 34px;
+	padding: 0 24px;
+	letter-spacing: 2px;
+	color: #cdeaf9;
+	background: linear-gradient(to right, #177ad9, #00a3e5);
+	border: transparent;
+	border-radius: 3px;
+}
+.handle-box .el-button:hover{
+	color: white;
+	background: #3ba3e4;
+}
 :deep(.tableClass .cell) {
   // padding-bottom: 12px;
   height: 20px;

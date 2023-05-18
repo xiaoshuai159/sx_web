@@ -21,7 +21,7 @@
 			<el-col :span="24">
 				<el-card class="card" shadow="hover" :body-style="{ padding: '0px', height: '280px' }">
 					<span class="warningTop">异常域名情况</span>
-					<el-table ref="eventRef" :data="eventData" height="250">
+					<el-table ref="eventRef" :data="eventData" height="250" stripe>
 						<el-table-column prop="time" label="时间" min-width="105" show-overflow-tooltip/>
 						<el-table-column prop="s_ip" label="IP" min-width="85" show-overflow-tooltip/>
 						<el-table-column prop="domain" label="域名" min-width="85" show-overflow-tooltip/>
@@ -832,7 +832,55 @@ const getDetail = () => {
 
 </script>
 
-<style scoped>
+<style scoped lang="less">
+
+:deep(.el-table__header th){
+	background-color: rgba(51, 121, 255,0.2)!important;
+  	color: #333333;
+	font-weight: 400;
+	font-size: 15px;
+	border: transparent solid 0px
+}
+:deep(.el-table__row--striped td){
+	background-color: rgba(51, 121, 255,0.05) !important;
+	color:#4D4D4D;
+}
+:deep(.el-table__row td){
+	border: transparent solid 0px
+}
+.handle-box :deep(.el-input__wrapper){
+	border: solid #b3b3b3 1px;
+	padding:1px 12px;
+	border-radius: 0px;
+	box-shadow:0 0 0 0 !important;
+}
+.handle-box :deep(.el-input__wrapper:hover){
+	border: solid #6f9ffd 1px;
+	padding:1px 12px;
+	border-radius: 0px;
+	box-shadow:0 0 0 0 !important;
+}
+:deep(.el-input__inner::placeholder) {
+
+	color:#808080!important
+}
+:deep(.el-input__inner:focus::-webkit-input-placeholder){
+	opacity: 0;
+
+}
+.handle-box .el-button{
+	height: 34px;
+	padding: 0 24px;
+	letter-spacing: 2px;
+	color: #cdeaf9;
+	background: linear-gradient(to right, #177ad9, #00a3e5);
+	border: transparent;
+	border-radius: 3px;
+}
+.handle-box .el-button:hover{
+	color: white;
+	background: #3ba3e4;
+}
 .el-row {
 	margin-bottom: 10px;
 }

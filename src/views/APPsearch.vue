@@ -11,9 +11,9 @@
 			<el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
 		</el-select>
 		<el-row class="mb-4" style="margin: 15px 0;">
-			<el-button type="primary" :icon="Search" @click="handleSearch">查询</el-button>
-			<el-button type="success" :icon="Plus" @click="handleAdd">新增</el-button>
-			<el-button type="danger" :icon="Delete" @click="handleDel">删除</el-button>
+			<el-button type="primary" @click="handleSearch">查询</el-button>
+			<el-button type="success" @click="handleAdd">新增</el-button>
+			<el-button type="danger" @click="handleDel">删除</el-button>
 		</el-row>
 		<el-table ref="multipleTableRef" :data="tableData" style="width: 100%" @selection-change="handleSelectionChange">
 			<el-table-column type="selection" min-width="55" />

@@ -1,0 +1,170 @@
+.el-table{
+    color: #fff !important;
+  }
+    //表格样式
+    .tableStyle {
+       opacity: .9;
+      // border: 1px solid #1c7aa8;
+      th {
+        background-color: #08263d;
+      //  color: #e5fafe;
+        font-size: 16px;
+        font-weight: 400;
+  
+        .cell{
+          background-image: linear-gradient(180deg, #e7fafb 0%, #0abafe 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          font-family: "heiti";
+        }
+      
+      }
+  
+      th.is-leaf {
+        border-bottom: 0;
+      }
+  
+      tr {
+        background-color: #01162d;
+        // border-color: #fff;
+        // color: #ffffff;
+        height: 50px;
+        font-family: "siyuanheiti";
+  
+      }
+    
+      td {
+        border-bottom: 1px solid #07293f;
+  
+        .cell {
+          //overflow: hidden;
+          //white-space: nowrap;
+          //text-overflow: ellipsis;
+  
+          .el-tag {
+            background-color: transparent;
+            border-color: #2b3440;
+            margin-right: 2px;
+          }
+        
+        }
+      
+        //数据过长，鼠标滑过展示全部  去掉，使用element默认方式
+        //.cell:hover{
+        //  white-space:normal;
+        //  overflow:auto;
+        //}
+      }
+  
+      // 以下四条为修改table head标题错行
+      th.gutter {
+        display: table-cell !important;
+      }
+  
+      colgroup.gutter {
+        display: table-cell !important;
+      }
+  
+    /* 上面两个背景色透明才能让table的背景透明少一个都不行 */
+  
+  
+      .warning-row {
+        background: #0b304e;
+        // background: rgba(241, 245, 248, 0.1);
+      }
+  
+      .success-row {
+        background:  #08263d;
+      
+      }
+  
+      .el-table__body {
+        width: 100% !important;
+      }
+    
+     
+      //给列表加滚动条
+      .el-table__body-wrapper {
+        overflow-y: scroll;
+      }
+  
+      .el-table__body-wrapper::-webkit-scrollbar {
+        /*width: 0;宽度为0隐藏*/
+        width: 5px;
+      }
+  
+      .el-table__body-wrapper::-webkit-scrollbar-thumb {
+        height: 30px;
+        background: #0c44699d;
+      }
+  
+      .el-table__body-wrapper::-webkit-scrollbar-track {
+        background: #07293f;
+      }
+  
+      // 以下两行滚动条样式、颜色
+      ::-webkit-scrollbar {
+        width: 7px;
+      }
+  
+      ::-webkit-scrollbar-thumb {
+        background-color: #07293fbd; //滚动条颜色
+        border-radius: 5px;
+      }
+  
+      // 表头字体居中
+      td,
+      th.is-leaf {
+        border: 0;
+        text-align: center;
+        border-bottom: 1px solid rgba(68, 68, 68, 0.158);
+      }
+  th{
+    padding-left: 10px ;
+  }
+      // 多选、全选框 样式颜色
+      .el-checkbox__inner {
+        border: 1px solid #0d8cd8;
+        background-color: rgba(238, 238, 238, 0);
+      }
+  
+      // // hover 样式
+      // .el-table--enable-row-hover .el-table__body tr:hover>td {
+      //   background-color: transparent !important;
+      // }
+  
+      // ">" 模块样式
+      .demo-table-expand {
+        font-size: 0;
+      }
+  
+      .demo-table-expand label {
+        width: 140px;
+        color: #99a9bf;
+      }
+  
+      .demo-table-expand .el-form-item {
+        margin-right: 0;
+        margin-bottom: 0;
+        width: 50%;
+      }
+  
+  
+      //底部空白条
+      .el-table--border::after,
+      .el-table--group::after,
+      ::before {
+        background-color: #192d45 !important;
+      }
+  
+      .el-table__fixed-right::before,
+      .el-table__fixed::before {
+        background-color: #192d45 !important;
+      }
+  
+      //无数据时
+      .el-table__empty-block {
+        background-color: #01162d;
+      }
+    }
+      /*# sourceMappingURL=./public.css.map */
