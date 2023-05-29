@@ -432,38 +432,38 @@ const changeTab = (a:number) => {
 // })
 const tableData2 = [
     {
-        time: '2023-02-14 10:12:15',
-        name: 'APP1',
+        time: '2023-05-29 10:12:15',
+        name: '天天汇率',
         type: '金融',
         because: '涉嫌诈骗'
     },
     {
-        time: '2023-02-14 10:12:15',
-        name: 'APP2',
-        type: '医疗',
+        time: '2023-05-29 10:12:15',
+        name: '口袋战舰',
+        type: '游戏',
         because: '信息泄露'
     },
     {
-        time: '2023-02-14 10:12:15',
-        name: 'APP3',
+        time: '2023-05-29 10:12:15',
+        name: '灵剑奇缘',
         type: '游戏',
         because: '大量投诉'
     },
     {
-        time: '2023-02-14 10:12:15',
-        name: 'APP4',
+        time: '2023-05-29 10:12:15',
+        name: '小红蚁',
         type: '社交',
         because: '评分过低'
     },
     {
-        time: '2023-02-14 10:12:15',
-        name: 'APP5',
+        time: '2023-05-29 10:12:15',
+        name: '云村宝',
         type: '金融',
         because: '大量举报'
     },
     {
-        time: '2023-02-14 10:12:15',
-        name: 'APP6',
+        time: '2023-05-29 10:12:15',
+        name: '小圈子',
         type: '社交',
         because: '评分过低'
     },
@@ -496,30 +496,30 @@ const dialogTableVisible = ref(false)
 const formLabelWidth = '80px'
 let form = reactive<appTableData>({
 	num: 12,
-	name: 'name1',
-	pcapName: 'pcapName1',
-	operator: 'operator1',
-	developer: 'dev1',
+	name: 'TikTok',
+	pcapName: 'com.ss.android.ugc.trill',
+	operator: 'ByteDance',
+	developer: 'ByteDance',
 	version: '12.3.1',
-	info: 'info',
-	condition: '未下架',
-	isRecord: '未备案',
-	recordTel: '9759632',
-	premissInfo: 'permissInfo',
+    info: 'TikTok 是一款全球流行的短视频社交应用，用户可以通过拍摄、剪辑和分享短视频来展示自己的才华和创意。',
+    condition: '未下架',
+    isRecord: '未备案',
+    recordTel: '9759632',
+    premissInfo: '读取设备状态和身份：用于获取设备信息和身份验证。',
 })
 const tableData = ref<appTableData[]>([
 	{
 		num: 12,
-		name: 'name1',
-		pcapName: 'pcapName1',
-		operator: 'operator1',
-		developer: 'dev1',
+		name: 'TikTok',
+        pcapName: 'com.ss.android.ugc.trill',
+        operator: 'ByteDance',
+        developer: 'ByteDance',
 		version: '12.3.1',
-		info: 'info',
+		info: 'TikTok 是一款全球流行的短视频社交应用，用户可以通过拍摄、剪辑和分享短视频来展示自己的才华和创意。',
 		condition: '未下架',
 		isRecord: '未备案',
 		recordTel: '9759632',
-		premissInfo: 'permissInfo',
+		premissInfo: '读取设备状态和身份：用于获取设备信息和身份验证。',
 
 	},
 ])
@@ -536,44 +536,44 @@ const getData = () => {
 	tableData.value = [
 		{
 			num: 12,
-			name: 'name1',
-			pcapName: 'pcapName1',
-			operator: 'operator1',
-			developer: 'dev1',
+            name: 'TikTok',
+            pcapName: 'com.ss.android.ugc.trill',
+            operator: 'ByteDance',
+            developer: 'ByteDance',
 			version: '12.3.1',
-			info: 'info',
-			condition: '未下架',
-			isRecord: '未备案',
-			recordTel: '9759632',
-			premissInfo: 'permissInfo',
+			info: 'TikTok 是一款全球流行的短视频社交应用，用户可以通过拍摄、剪辑和分享短视频来展示自己的才华和创意。',
+            condition: '未下架',
+            isRecord: '未备案',
+            recordTel: '9759632',
+            premissInfo: '读取设备状态和身份：用于获取设备信息和身份验证。',
 
 		},
 		{
 			num: 13,
-			name: 'name2',
-			pcapName: 'pcapName2',
-			operator: 'operator2',
-			developer: 'dev2',
+			name: '微信',
+			pcapName: 'com.tencent.mm',
+			operator: 'Tencent',
+			developer: 'Tencent',
 			version: '12.3.2',
-			info: 'info2',
+			info: '微信是一款全球流行的社交应用，用户可以通过文字、语音、图片、视频等方式与朋友和家人保持联系，并使用微信支付进行线上支付。',
 			condition: '未下架',
 			isRecord: '未备案',
 			recordTel: '9759632',
-			premissInfo: 'permissInfo',
+			premissInfo: '读取设备状态和身份：用于获取设备信息和身份验证。',
 
 		},
 		{
 			num: 14,
-			name: 'name3',
-			pcapName: 'pcapName3',
-			operator: 'operator3',
-			developer: 'dev3',
+			name: '抖音短视频',
+			pcapName: 'com.ss.android.ugc.aweme',
+			operator: 'ByteDance',
+			developer: 'ByteDance',
 			version: '12.3.3',
-			info: 'info3',
+			info: '抖音是一款全球流行的短视频社交应用，用户可以通过拍摄、剪辑和分享短视频来展示自己的才华和创意。',
 			condition: '未下架',
 			isRecord: '未备案',
 			recordTel: '9759632',
-			premissInfo: 'permissInfo',
+			premissInfo: '读取设备状态和身份：用于获取设备信息和身份验证。',
 
 		}
 	]
@@ -583,20 +583,21 @@ const handleSearch = () => {
 }
 let editOrAdd:string
 const handleEdit = (a:number,b:any) => {
-	idx = a
-	editOrAdd = 'edit'
-	form.num = tableData.value[idx].num
-	form.name = tableData.value[idx].name
-	form.pcapName = tableData.value[idx].pcapName
-	form.operator = tableData.value[idx].operator
-	form.developer = tableData.value[idx].developer
-	form.version = tableData.value[idx].version
-	form.info = tableData.value[idx].info
-	form.condition = tableData.value[idx].condition
-	form.isRecord = tableData.value[idx].isRecord
-	form.recordTel = tableData.value[idx].recordTel
-	form.premissInfo = tableData.value[idx].premissInfo
-	dialogTableVisible.value = true
+    ElMessage('正在开发中...')
+	// idx = a
+	// editOrAdd = 'edit'
+	// form.num = tableData.value[idx].num
+	// form.name = tableData.value[idx].name
+	// form.pcapName = tableData.value[idx].pcapName
+	// form.operator = tableData.value[idx].operator
+	// form.developer = tableData.value[idx].developer
+	// form.version = tableData.value[idx].version
+	// form.info = tableData.value[idx].info
+	// form.condition = tableData.value[idx].condition
+	// form.isRecord = tableData.value[idx].isRecord
+	// form.recordTel = tableData.value[idx].recordTel
+	// form.premissInfo = tableData.value[idx].premissInfo
+	// dialogTableVisible.value = true
 }
 
 const saveEdit = () => {

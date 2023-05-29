@@ -87,7 +87,7 @@
 </template>
 
 <script setup lang="ts" name="dashboard">
-
+import { ElMessage } from 'element-plus';
 import { onMounted, reactive, ref, Ref,onUnmounted,nextTick } from 'vue';
 import imgurl from '../assets/img/img.jpg';
 import { sample } from 'lodash';
@@ -126,8 +126,8 @@ onMounted(() => {
 const name = localStorage.getItem('ms_username');
 const role: string = name === 'admin' ? '超级管理员' : '普通用户';
 const value1 = ref<[Date, Date]>([
-	new Date(2023, 1, 14, 10, 10),
-	new Date(2023, 1, 15, 10, 10),
+	new Date(2023, 4, 29, 10, 10),
+  	new Date(2023, 4, 30, 10, 10),
 ])
 
 const query = reactive({
@@ -141,12 +141,12 @@ const getEventData = (): any => {
 	let eventData = [
 		{
 			eventID: '1645',
-			time: '2023-02-22 12:10:00',
-			s_ip: '192.168.0.1',
+			time: '2023-05-29 12:10:00',
+			s_ip: '5.135.199.25',
 			s_port: '22',
 			d_ip: '192.168.0.2',
 			d_port: '21',
-			domain: 'host.com',
+			domain: 'dailysync.zapto.org',
 			type: '域名仿冒',
 			tag: '高',
 			detail: '详情',
@@ -156,12 +156,12 @@ const getEventData = (): any => {
 		},
 		{
 			eventID: '1645',
-			time: '2023-02-22 12:10:00',
-			s_ip: '192.168.0.1',
+			time: '2023-05-29 12:10:00',
+			s_ip: '31.7.62.48',
 			s_port: '22',
 			d_ip: '192.168.0.2',
 			d_port: '21',
-			domain: 'host.com',
+			domain: 'abtprinting.com',
 			type: '域名劫持',
 			tag: '高',
 			detail: '详情',
@@ -171,12 +171,12 @@ const getEventData = (): any => {
 		},
 		{
 			eventID: '1645',
-			time: '2023-02-22 12:10:00',
-			s_ip: '192.168.0.1',
+			time: '2023-05-29 12:10:00',
+			s_ip: '88.150.221.107',
 			s_port: '22',
 			d_ip: '192.168.0.2',
 			d_port: '21',
-			domain: 'host.com',
+			domain: 'adworks.webhop.me',
 			type: '域名仿冒',
 			tag: '高',
 			detail: '详情',
@@ -186,12 +186,12 @@ const getEventData = (): any => {
 		},
 		{
 			eventID: '1645',
-			time: '2023-02-22 12:10:00',
-			s_ip: '192.168.0.1',
+			time: '2023-05-29 12:10:00',
+			s_ip: '109.169.89.103',
 			s_port: '22',
 			d_ip: '192.168.0.2',
 			d_port: '21',
-			domain: 'host.com',
+			domain: 'ichoose.zapto.org',
 			type: '域名劫持',
 			tag: '高',
 			detail: '详情',
@@ -201,12 +201,12 @@ const getEventData = (): any => {
 		},
 		{
 			eventID: '1645',
-			time: '2023-02-22 12:10:00',
-			s_ip: '192.168.0.1',
+			time: '2023-05-29 12:10:00',
+			s_ip: '109.200.24.114',
 			s_port: '22',
 			d_ip: '192.168.0.2',
 			d_port: '21',
-			domain: 'host.com',
+			domain: 'timpisstoo.hol.es',
 			type: '域名仿冒',
 			tag: '高',
 			detail: '详情',
@@ -216,12 +216,12 @@ const getEventData = (): any => {
 		},
 		{
 			eventID: '1645',
-			time: '2023-02-22 12:10:00',
-			s_ip: '192.168.0.1',
+			time: '2023-05-29 12:10:00',
+			s_ip: '137.74.157.84',
 			s_port: '22',
 			d_ip: '192.168.0.2',
 			d_port: '21',
-			domain: 'host.com',
+			domain: 'burningforests.com',
 			type: '域名劫持',
 			tag: '高',
 			detail: '详情',
@@ -231,12 +231,12 @@ const getEventData = (): any => {
 		},
 		{
 			eventID: '1645',
-			time: '2023-02-22 12:10:00',
-			s_ip: '192.168.0.1',
+			time: '2023-05-29 12:10:00',
+			s_ip: '193.70.71.112',
 			s_port: '22',
 			d_ip: '192.168.0.2',
 			d_port: '21',
-			domain: 'host.com',
+			domain: 'account-support.site',
 			type: '域名仿冒',
 			tag: '高',
 			detail: '详情',
@@ -246,12 +246,12 @@ const getEventData = (): any => {
 		},
 		{
 			eventID: '1645',
-			time: '2023-02-22 12:10:00',
-			s_ip: '192.168.0.1',
+			time: '2023-05-29 12:10:00',
+			s_ip: '216.244.93.137',
 			s_port: '22',
 			d_ip: '192.168.0.2',
 			d_port: '21',
-			domain: 'host.com',
+			domain: 'useraccount.co',
 			type: '域名劫持',
 			tag: '高',
 			detail: '详情',
@@ -261,12 +261,12 @@ const getEventData = (): any => {
 		},
 		{
 			eventID: '1648',
-			time: '2023-02-22 12:10:00',
-			s_ip: '192.168.0.1',
+			time: '2023-05-29 12:10:00',
+			s_ip: '213.32.113.159',
 			s_port: '22',
 			d_ip: '192.168.0.2',
 			d_port: '21',
-			domain: 'host.com',
+			domain: 'nakamini.ddns.net',
 			type: '域名仿冒',
 			tag: '中',
 			detail: '详情',
@@ -276,12 +276,12 @@ const getEventData = (): any => {
 		},
 		{
 			eventID: '1648',
-			time: '2023-02-22 12:10:00',
-			s_ip: '192.168.0.1',
+			time: '2023-05-29 12:10:00',
+			s_ip: '195.154.41.72',
 			s_port: '22',
 			d_ip: '192.168.0.2',
 			d_port: '21',
-			domain: 'host.com',
+			domain: 'adrev22.ddns.net',
 			type: '域名劫持',
 			tag: '中',
 			detail: '详情',
@@ -291,12 +291,12 @@ const getEventData = (): any => {
 		},
 		{
 			eventID: '1645',
-			time: '2023-02-22 12:10:00',
-			s_ip: '192.168.0.1',
+			time: '2023-05-29 12:10:00',
+			s_ip: '188.165.119.138',
 			s_port: '22',
 			d_ip: '192.168.0.2',
 			d_port: '21',
-			domain: 'host.com',
+			domain: 'waterlily.ddns.net',
 			type: '域名仿冒',
 			tag: '高',
 			detail: '详情',
@@ -306,12 +306,12 @@ const getEventData = (): any => {
 		},
 		{
 			eventID: '1645',
-			time: '2023-02-22 12:10:00',
-			s_ip: '192.168.0.1',
+			time: '2023-05-29 12:10:00',
+			s_ip: '185.175.138.173',
 			s_port: '22',
 			d_ip: '192.168.0.2',
 			d_port: '21',
-			domain: 'host.com',
+			domain: 'pressnorth.net',
 			type: '域名劫持',
 			tag: '高',
 			detail: '详情',
@@ -321,12 +321,12 @@ const getEventData = (): any => {
 		},
 		{
 			eventID: '1645',
-			time: '2023-02-22 12:10:00',
-			s_ip: '192.168.0.1',
+			time: '2023-05-29 12:10:00',
+			s_ip: '185.125.204.57',
 			s_port: '22',
 			d_ip: '192.168.0.2',
 			d_port: '21',
-			domain: 'host.com',
+			domain: 'officeopenxml.co',
 			type: '域名仿冒',
 			tag: '高',
 			detail: '详情',
@@ -342,7 +342,7 @@ const getBugData = (): any => {
 	let bugData = [
 		{
 			eventID: '1645',
-			time: '2023-02-22 12:10:00',
+			time: '2023-05-29 12:10:00',
 			ip: '192.168.0.1',
 			type: 'XSS漏洞',
 			url: '192.168.0.1',
@@ -357,7 +357,7 @@ const getBugData = (): any => {
 		},
 		{
 			eventID: '1648',
-			time: '2023-02-22 12:10:00',
+			time: '2023-05-29 12:10:00',
 			ip: '192.168.0.1',
 			type: '未授权访问',
 			url: '192.168.0.1',
@@ -372,7 +372,7 @@ const getBugData = (): any => {
 		},
 		{
 			eventID: '1648',
-			time: '2023-02-22 12:10:00',
+			time: '2023-05-29 12:10:00',
 			ip: '192.168.0.1',
 			type: 'CSRF漏洞',
 			url: '192.168.0.1',
@@ -387,7 +387,7 @@ const getBugData = (): any => {
 		},
 		{
 			eventID: '1645',
-			time: '2023-02-22 12:10:00',
+			time: '2023-05-29 12:10:00',
 			ip: '192.168.0.1',
 			type: 'SSRF漏洞',
 			url: '192.168.0.1',
@@ -402,7 +402,7 @@ const getBugData = (): any => {
 		},
 		{
 			eventID: '1648',
-			time: '2023-02-22 12:10:00',
+			time: '2023-05-29 12:10:00',
 			ip: '192.168.0.1',
 			type: '未授权访问',
 			url: '192.168.0.1',
@@ -417,7 +417,7 @@ const getBugData = (): any => {
 		},
 		{
 			eventID: '1648',
-			time: '2023-02-22 12:10:00',
+			time: '2023-05-29 12:10:00',
 			ip: '192.168.0.1',
 			type: 'CSRF漏洞',
 			url: '192.168.0.1',
@@ -432,7 +432,7 @@ const getBugData = (): any => {
 		},
 		{
 			eventID: '1648',
-			time: '2023-02-22 12:10:00',
+			time: '2023-05-29 12:10:00',
 			ip: '192.168.0.1',
 			type: '未授权访问',
 			url: '192.168.0.1',
@@ -447,7 +447,7 @@ const getBugData = (): any => {
 		},
 		{
 			eventID: '1648',
-			time: '2023-02-22 12:10:00',
+			time: '2023-05-29 12:10:00',
 			ip: '192.168.0.1',
 			type: '未授权访问',
 			url: '192.168.0.1',
@@ -462,7 +462,7 @@ const getBugData = (): any => {
 		},
 		{
 			eventID: '1648',
-			time: '2023-02-22 12:10:00',
+			time: '2023-05-29 12:10:00',
 			ip: '192.168.0.1',
 			type: '未授权访问',
 			url: '192.168.0.1',
@@ -477,7 +477,7 @@ const getBugData = (): any => {
 		},
 		{
 			eventID: '1648',
-			time: '2023-02-22 12:10:00',
+			time: '2023-05-29 12:10:00',
 			ip: '192.168.0.1',
 			type: '未授权访问',
 			url: '192.168.0.1',
@@ -492,7 +492,7 @@ const getBugData = (): any => {
 		},
 		{
 			eventID: '1648',
-			time: '2023-02-22 12:10:00',
+			time: '2023-05-29 12:10:00',
 			ip: '192.168.0.1',
 			type: 'CSRF漏洞',
 			url: '192.168.0.1',
@@ -507,7 +507,7 @@ const getBugData = (): any => {
 		},
 		{
 			eventID: '1648',
-			time: '2023-02-22 12:10:00',
+			time: '2023-05-29 12:10:00',
 			ip: '192.168.0.1',
 			type: 'CSRF漏洞',
 			url: '192.168.0.1',
@@ -522,7 +522,7 @@ const getBugData = (): any => {
 		},
 		{
 			eventID: '1645',
-			time: '2023-02-22 12:10:00',
+			time: '2023-05-29 12:10:00',
 			ip: '192.168.0.1',
 			type: '文件上传漏洞',
 			url: '192.168.0.1',
@@ -537,7 +537,7 @@ const getBugData = (): any => {
 		},
 		{
 			eventID: '1645',
-			time: '2023-02-22 12:10:00',
+			time: '2023-05-29 12:10:00',
 			ip: '192.168.0.1',
 			type: '暴力破解',
 			url: '192.168.0.1',
@@ -659,7 +659,7 @@ function initOption1() {
 				interval: 0,
 				rotate: 30
 			},
-			data: ['host.com', 'host.com', 'host.com', 'host.com', 'host.com', 'host.com', 'host.com', 'host.com', 'host.com', 'host.com']
+			data: ['openl.co', 'pressnorth.net', 'waterlily.ddns.net', 'adrev22.ddns.net', 'nakamini.ddns.net', 'abtprinting.com', 'useraccount.co', 'account-support.site', 'burningforests.com', 'abtprinting.com']
 		},
 		series: [
 			{
@@ -854,10 +854,11 @@ let form = reactive({
 	cyclicalNum: ''
 });
 const getDetail = () => {
+	ElMessage('正在开发中...')
 	// form.name = row.name;
 	// form.address = row.address;
 	// debugger
-	editVisible.value = true;
+	// editVisible.value = true;
 	// state.addTitle = '新增';
 };
 
