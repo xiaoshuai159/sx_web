@@ -70,38 +70,29 @@
                 tooltip-effect="dark"
                 style="width: 100%"
               >
-                <el-table-column type="selection" width="50" fixed>
+              <el-table-column type="selection" width="50" fixed>
                 </el-table-column>
-                <el-table-column label="IP" prop="_id" min-width="130" sortable>
+                <el-table-column label="受害者IP" prop="_id" min-width="130">
                 </el-table-column>
-                <el-table-column label="日期" width="110" sortable>
+                <el-table-column label="矿池IP" prop="_ip" min-width="130">
                 </el-table-column>
-                <!-- <el-table-column
-                        prop="time"
-                        label="时间"
-                        width="90"
-                        >
-                        </el-table-column> -->
+                <el-table-column label="目的端口" prop="_port" min-width="80">
+                </el-table-column>
+                <el-table-column label="时间" width="110" sortable>
+                </el-table-column>
                 <el-table-column
                   prop="district"
-                  label="涉及地区"
+                  label="涉及地址"
                   min-width="100"
                   show-overflow-tooltip
                 >
                 </el-table-column>
-                <el-table-column
-                  prop="unit_type"
-                  label="活跃次数"
-                  min-width="105"
-                  show-overflow-tooltip
-                >
-                </el-table-column>
-                <el-table-column
-                  prop="unit_name"
-                  label="矿池名称"
-                  min-width="200"
-                  show-overflow-tooltip
-                >
+                <el-table-column label="操作" width="90" align="center" >
+                  <template #default="scope">
+                    <el-button text v-permiss="15">
+                      详情
+                    </el-button>
+                  </template>
                 </el-table-column>
               </el-table>
               <el-pagination

@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="map-header-text">
-            <span style="cursor:pointer;">山西省</span><span v-html="'\u00a0'"></span>
+            <span style="cursor:pointer;" @click="changePage">山西省</span><span v-html="'\u00a0'"></span>
           >
           <span v-html="'\u00a0'"></span><span style="cursor:pointer;">{{useMiningStore().city}}</span><span v-html="'\u00a0'"></span></div>
           <el-divider></el-divider>
@@ -74,10 +74,11 @@ const options = [
     },
 ]
 let mapChart:any = '' 
+const store = useMiningStore()
 async function initChart() {
     mapChart = echarts.init(document.getElementById('map_ref')!);
-    const ret = await axios.get(`../../map/省级/市级/${useMiningStore().city}.json`);
-    echarts.registerMap(`${useMiningStore().city}`, ret.data)
+    const ret = await axios.get(`../../map/省级/市级/${store.city}.json`);
+    echarts.registerMap(`${store.city}`, ret.data)
     const initOption = {
         geo: [
             // {
@@ -87,7 +88,7 @@ async function initChart() {
             //     zoom: 1.2,
             // },
             {
-                map: `${useMiningStore().city}`,
+                map: `${store.city}`,
                 zlevel:5,
                 zoom: 1.2,
                 label: {
@@ -101,7 +102,7 @@ async function initChart() {
                 }
             },
             {
-                map: `${useMiningStore().city}`,
+                map: `${store.city}`,
                 top:'11%',
                 zlevel:4,
                 zoom: 1.2,
@@ -112,7 +113,7 @@ async function initChart() {
                 }
             },
             {
-                map: `${useMiningStore().city}`,
+                map: `${store.city}`,
                 top:'12%',
                 zlevel:3,
                 zoom: 1.2,
@@ -147,12 +148,10 @@ async function initChart() {
         },
     };
     mapChart.setOption(initOption, true)
-    mapChart.on("click",(arg:any)=>{
-        const store = useMiningStore()
+    mapChart.on("click",(arg:any)=>{        
         store.$patch({
             area:arg.name
         })
-        console.log(store.area);
         router.push({
             name:'areaPage',
             // params:{
@@ -160,6 +159,15 @@ async function initChart() {
             // }
         })
     })
+}
+const changePage = () =>{
+    router.push({
+        name:'provincePage'
+    })
+    store.$patch({
+        city:"",
+        area:""
+    })        
 }
 onMounted(() => {
     initChart()

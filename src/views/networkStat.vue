@@ -1270,7 +1270,7 @@ onMounted(() => {
 	initOption2()
 })
 // onUnmounted(() => {
-// 	myChart1.dispose;
+// 	myChart1.dispose();
 //     });
 // 表格编辑时弹窗和保存
 const editVisible = ref(false);

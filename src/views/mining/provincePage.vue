@@ -150,7 +150,7 @@ async function initChart() {
         store.$patch({
             city:arg.name
         })
-        console.log(store.city);
+        // console.log(store.city);
         router.push({
             name:'cityPage',
             // params:{
@@ -159,9 +159,6 @@ async function initChart() {
         })
     })
 }
-onBeforeMount(()=>{
-    
-})
 onMounted(() => {
     initChart()
 })
@@ -198,7 +195,10 @@ onBeforeUnmount(() => {
     text-align: left;
     cursor: pointer;
 }
-
+/* .map-header-text:hover {
+    cursor: pointer;
+    color:blue
+} */
 .map-header-time {
     display: inline-block;
     width: 40%;

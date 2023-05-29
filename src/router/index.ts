@@ -98,7 +98,7 @@ const routes: RouteRecordRaw[] = [
                 path: '/threatIntelligence',
                 name: 'threatIntelligence',
                 meta: {
-                    title: '情报查询',
+                    title: '威胁情报库',
                     permiss: '11',
                 },
                 component: () => import(/* webpackChunkName: "charts" */ '../views/threatIntelligence.vue'),
@@ -159,24 +159,26 @@ const routes: RouteRecordRaw[] = [
                 },
                 component: () => import(/* webpackChunkName: "charts" */ '../views/domainSetting.vue'),
             },
-            // {
-            //     path: '/tabs',
-            //     name: 'tabs',
-            //     meta: {
-            //         title: 'tab标签',
-            //         permiss: '3',
-            //     },
-            //     component: () => import(/* webpackChunkName: "tabs" */ '../views/tabs.vue'),
-            // },
-            // {
-            //     path: '/donate',
-            //     name: 'donate',
-            //     meta: {
-            //         title: '鼓励作者',
-            //         permiss: '14',
-            //     },
-            //     component: () => import(/* webpackChunkName: "donate" */ '../views/donate.vue'),
-            // },
+            {
+                path:'/bugPage',
+                name:'bugPage',
+                meta:{
+                    title:'漏洞',
+                    permiss:'16',
+                },
+                component: () => import('../views/bugPage.vue')
+
+            },
+            {
+                path:'/jiangPage',
+                name:'jiangPage',
+                meta:{
+                    title:'僵木蠕',
+                    permiss:'16',
+                },
+                component: () => import('../views/jiangPage.vue')
+
+            },
             {
                 path: '/permission',
                 name: 'permission',

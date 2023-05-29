@@ -1,9 +1,9 @@
 <template>
     <div>
         <div class="map-header-text">
-            <span style="cursor:pointer;">山西省</span><span v-html="'\u00a0'"></span>
+            <span style="cursor:pointer;" @click="toProvincePage()">山西省</span><span v-html="'\u00a0'"></span>
           >
-          <span v-html="'\u00a0'"></span><span style="cursor:pointer;">{{useMiningStore().city}}</span><span v-html="'\u00a0'"></span>
+          <span v-html="'\u00a0'"></span><span style="cursor:pointer;" @click="toCityPage()">{{useMiningStore().city}}</span><span v-html="'\u00a0'"></span>
           >
           <span v-html="'\u00a0'"></span><span style="cursor:pointer;">{{useMiningStore().area}}</span><span v-html="'\u00a0'"></span></div>
           <el-divider></el-divider>
@@ -54,7 +54,7 @@
 </template>
 
 <script setup lang="ts" name="areaPage">
-import { onMounted, ref, onBeforeUnmount } from "vue"
+import { onMounted, ref, onBeforeUnmount, nextTick } from "vue"
 import axios from "axios";
 import xiangqing4 from "../../components/mining/xiangqing4.vue";
 import * as echarts from 'echarts'
@@ -75,10 +75,11 @@ const options = [
     },
 ]
 let mapChart:any = '' 
+const store = useMiningStore()
 async function initChart() {
     mapChart = echarts.init(document.getElementById('map_ref')!);
-    const ret = await axios.get(`../../map/省级/市级/县级/${useMiningStore().area}.json`);
-    echarts.registerMap(`${useMiningStore().area}`, ret.data)
+    const ret = await axios.get(`../../map/省级/市级/县级/${store.area}.json`);
+    echarts.registerMap(`${store.area}`, ret.data)
     const initOption = {
         geo: [
             // {
@@ -88,7 +89,7 @@ async function initChart() {
             //     zoom: 1.2,
             // },
             {
-                map: `${useMiningStore().area}`,
+                map: `${store.area}`,
                 zlevel:5,
                 zoom: 1.2,
                 label: {
@@ -102,7 +103,7 @@ async function initChart() {
                 }
             },
             {
-                map: `${useMiningStore().area}`,
+                map: `${store.area}`,
                 top:'11%',
                 zlevel:4,
                 zoom: 1.2,
@@ -113,7 +114,7 @@ async function initChart() {
                 }
             },
             {
-                map: `${useMiningStore().area}`,
+                map: `${store.area}`,
                 top:'12%',
                 zlevel:3,
                 zoom: 1.2,
@@ -149,11 +150,11 @@ async function initChart() {
     };
     mapChart.setOption(initOption, true)
     mapChart.on("click",(arg:any)=>{
-        const store = useMiningStore()
+        
         store.$patch({
-            city:arg.name
+            area:arg.name
         })
-        console.log(store.city);
+        // console.log(store.city);
         router.push({
             name:'areaPage',
             // params:{
@@ -162,12 +163,56 @@ async function initChart() {
         })
     })
 }
+const toProvincePage=()=>{
+    router.push({
+        name:'provincePage'
+    })
+    store.$patch({
+        city:"",
+        area:""
+    })
+}
+const toCityPage=()=>{
+    router.push({
+        name:'cityPage'
+    })
+    store.$patch({
+        area:""
+    })
+}
+
+    // if (sessionStorage.getItem("store")) {
+    //   store.replaceState(
+    //     Object.assign(
+    //       {},
+    //       this.$store.state,
+    //       JSON.parse(sessionStorage.getItem("store"))
+    //     )
+    //   );
+    //   sessionStorage.removeItem("store");
+    // }
+    
+    
+    // 在页面刷新时将vuex里的信息保存到sessionStorage里
+    // beforeunload事件在页面刷新时先触发
+    window.addEventListener("beforeunload", () => {
+      sessionStorage.setItem("store", JSON.stringify(store.$state));
+    });
+    const savedState = localStorage.getItem('store');
+    if (savedState) {
+        store.$state = JSON.parse(savedState);
+        }
+
 onMounted(() => {
-    initChart()
+    // nextTick(()=>{
+        initChart()
+    // })
+    
 })
 onBeforeUnmount(() => {
     mapChart.dispose()
 })
+
 </script>
 
 <style lang="less" scoped>

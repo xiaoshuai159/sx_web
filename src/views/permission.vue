@@ -72,7 +72,7 @@ const data: Tree[] = [
 					},
 					{
 						id: '8',
-						label: 'APP监测事件'
+						label: 'APP检测分析'
 					}
 				]
 			},
@@ -104,7 +104,7 @@ const data: Tree[] = [
 					},
 					{
 						id: '15',
-						label: '情报查询'
+						label: '威胁情报库'
 					},
 					{
 						id: '16',

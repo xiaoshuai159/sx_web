@@ -20,6 +20,10 @@
 		<el-row :gutter="10">
 			<el-col :span="24">
 				<el-card class="card" shadow="hover" :body-style="{ padding: '0px', height: '280px' }">
+					<!-- <el-divider>
+						<template #left>左侧内容</template>
+      					<template #right>右侧内容</template>
+					</el-divider> -->
 					<span class="warningTop">异常域名情况</span>
 					<el-table ref="eventRef" :data="eventData" height="250" stripe>
 						<el-table-column prop="time" label="时间" min-width="105" show-overflow-tooltip/>
@@ -84,11 +88,10 @@
 
 <script setup lang="ts" name="dashboard">
 
-import { onMounted, reactive, ref, Ref } from 'vue';
+import { onMounted, reactive, ref, Ref,onUnmounted,nextTick } from 'vue';
 import imgurl from '../assets/img/img.jpg';
 import { sample } from 'lodash';
 import * as echarts from 'echarts'
-import { nextTick } from 'vue'
 
 // const tableRef: Ref<HTMLElement | any> = ref(null)
 const eventRef = ref();
@@ -108,6 +111,9 @@ onMounted(() => {
 	rateData.value = getBugData()
 	// eventData.value = getEventData()
 	nextTick(() => {
+		initOption1()
+		initOption2()
+		initOption3()
 		scroll(eventRef.value.$refs.bodyWrapper); //设置滚动
 		scroll(bugRef.value.$refs.bodyWrapper); //设置滚动
 		scroll(rateRef.value.$refs.bodyWrapper) //设置滚动
@@ -614,8 +620,9 @@ const options = {
 		}
 	]
 };
+let myChart1:any = null
 function initOption1() {
-	const myChart1 = echarts.init(document.getElementById('myChart')!); 
+	myChart1 = echarts.init(document.getElementById('myChart')!); 
 	let option= {
 		title: {
 			text: '域名异常排行',
@@ -676,11 +683,12 @@ function initOption1() {
 		]
 	}
 	option && myChart1.setOption(option);
-	myChart1.resize();
+	window.addEventListener('resize',myChart1Resize)
 }
+let myChart2:any = null
 function initOption2() {
 	// type EChartsOption = echarts.EChartsOption;
-	const myChart2 = echarts.init(document.getElementById('myChart2')!);
+	myChart2 = echarts.init(document.getElementById('myChart2')!);
 	let option= {
 		title: {
 			text: '事件趋势分析',
@@ -760,10 +768,12 @@ function initOption2() {
 		]
 	}
 	option && myChart2.setOption(option);
+	window.addEventListener('resize',myChart2Resize)
 }
+let myChart3:any = null
 function initOption3() {
 	// type EChartsOption = echarts.EChartsOption;
-	const myChart3 = echarts.init(document.getElementById('myChart3')!);
+	myChart3 = echarts.init(document.getElementById('myChart3')!);
 	let option = {
 		title:{
 			text: '域名异常分类',
@@ -776,15 +786,15 @@ function initOption3() {
 		legend: {
 			top: 'bottom'
 		},
-		toolbox: {
-			show: true,
-			feature: {
-			mark: { show: true },
-			dataView: { show: true, readOnly: false },
-			restore: { show: true },
-			saveAsImage: { show: true }
-			}
-		},
+		// toolbox: {
+		// 	show: true,
+		// 	feature: {
+		// 	mark: { show: true },
+		// 	dataView: { show: true, readOnly: false },
+		// 	restore: { show: true },
+		// 	saveAsImage: { show: true }
+		// 	}
+		// },
 		series: [
 			{
 			name: 'Nightingale Chart',
@@ -806,14 +816,35 @@ function initOption3() {
 		]
 	}
 	option && myChart3.setOption(option);
+	window.addEventListener('resize',myChart3Resize)
 }
-onMounted(() => {
-	initOption1()
-	initOption2()
-	initOption3()
-})
+// 
+function myChart1Resize(){
+	if (myChart1) {
+		myChart1.resize();
+	}
+}
+function myChart2Resize(){
+	if (myChart2) {
+		myChart2.resize();
+	}
+}
+function myChart3Resize(){
+	if (myChart3) {
+		myChart3.resize();
+	}
+}
+
+onUnmounted(() => {
+	myChart1.dispose();
+	myChart2.dispose();
+	myChart3.dispose();
+	window.removeEventListener('resize',myChart1Resize)
+	window.removeEventListener('resize',myChart2Resize)
+	window.removeEventListener('resize',myChart3Resize)
+    });
 // onUnmounted(() => {
-// 	myChart1.dispose;
+// 	myChart1.dispose();
 //     });
 // 表格编辑时弹窗和保存
 const editVisible = ref(false);

@@ -22,7 +22,7 @@
                             <span>{{ item.title }}</span>
                         </template>
                         <template v-for="subItem in item.subs">
-                            <el-sub-menu
+                            <!-- <el-sub-menu
                                 v-if="subItem.subs"
                                 :index="subItem.index"
                                 :key="subItem.index"
@@ -34,6 +34,9 @@
                                 </el-menu-item>
                             </el-sub-menu>
                             <el-menu-item v-else :index="subItem.index" v-permiss="item.permiss">
+                                {{ subItem.title }}
+                            </el-menu-item> -->
+                            <el-menu-item :index="subItem.index" v-permiss="item.permiss">
                                 {{ subItem.title }}
                             </el-menu-item>
                         </template>
@@ -71,7 +74,7 @@ const items = [
             },
             {
                 index: '/APPstat',
-                title: 'APP监测事件',
+                title: 'APP检测分析',
                 permiss: '3',
             },
             // {
@@ -115,26 +118,21 @@ const items = [
         title: '网站安全',
         permiss: '5',
         subs: [
-        {
+            {
                 index: '/provincePage',
                 title: '挖矿行为监测',
                 permiss: '13',
             },
-            // {
-            //     index: '/securityAnalysis',
-            //     title: '安全分析',
-            //     permiss: '6',
-            // },
-            // {
-            //     index: '/taskManagement',
-            //     title: '任务管理',
-            //     permiss: '7',
-            // },
-            // {
-            //     index: '/networkStat',
-            //     title: '数据展示',
-            //     permiss: '8',
-            // },
+            {
+                index: '/bugPage',
+                title: '漏洞',
+                permiss: '14',
+            },
+            {
+                index: '/jiangPage',
+                title: '僵木蠕',
+                permiss: '15',
+            }
         ],
     },
     {
@@ -150,7 +148,7 @@ const items = [
             },
             {
                 index: '/threatIntelligence',
-                title: '情报查询',
+                title: '威胁情报库',
                 // title: '威胁研判',
                 permiss: '11',
             },
@@ -159,7 +157,7 @@ const items = [
                 // title: '组织与资产检索',
                 title: '追踪溯源',
                 permiss: '12',
-            },
+            }
         ],
     },
     {

@@ -10,12 +10,12 @@ export const useMiningStore = defineStore('mining', {
 		};
 	},
 	// getters: {},
-	actions: {
-		updatecity(val:string){
-			console.log(val);
+	// actions: {
+	// 	updatecity(val:string){
+	// 		console.log(val);
 			
-			this.city = val
-		}
-	}
+	// 		this.city = val
+	// 	}
+	// }
 });
 

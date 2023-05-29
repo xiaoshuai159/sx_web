@@ -59,8 +59,8 @@ const isHave = ref(false)
 
 }
 .handle-box .el-button{
-	height: 34px;
-	padding: 0 24px;
+	height: 28px;
+	padding: 0 16px;
 	letter-spacing: 2px;
 	color: #cdeaf9;
 	background: linear-gradient(to right, #177ad9, #00a3e5);

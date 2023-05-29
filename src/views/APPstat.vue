@@ -16,13 +16,13 @@
                             <span class="top-text">APP下载量 : 987102</span><br />
                             <span class="bottom-text">同比上周 +3.5%</span><br />
                         </div>
-                        <div id="lineChart" :style="{  width: '420px', height: '323px' }"></div>
+                        <div id="lineChart" :style="{  width: '92%', height: '323px' }"></div>
                     </div>
                 </el-card>
             </el-col>
             <el-col :span="8">
                 <el-card style="height:395px;">
-                    <div id="pieChart" :style="{ width: '280px', height: '345px' }"></div>
+                    <div id="pieChart" :style="{ width: '92%', height: '345px' }"></div>
                 </el-card>
             </el-col>
         </el-row>
@@ -41,12 +41,12 @@
             </el-col>
             <el-col :span="8">
                 <el-card>
-                    <div id="pieChart2" :style="{  width: '280px', height: '323px' }"></div>
+                    <div id="pieChart2" :style="{  width: '92%', height: '323px' }"></div>
                 </el-card>
             </el-col>
             <el-col :span="8">
                 <el-card>
-                    <div id="barChart" :style="{ width: '280px', height: '323px' }"></div>
+                    <div id="barChart" :style="{ width: '92%', height: '323px' }"></div>
                 </el-card>
             </el-col>
             
@@ -66,9 +66,10 @@
                             <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
                         </el-select>
                         <el-row class="mb-4" style="margin: 15px 0;">
-                            <el-button type="primary" @click="handleSearch">查询</el-button>
-                            <el-button type="success" @click="handleAdd">新增</el-button>
-                            <el-button type="danger" @click="handleDel">删除</el-button>
+                            <el-button @click="handleSearch">查询</el-button>
+                            <el-button>导出</el-button>
+                            <!-- <el-button type="success" @click="handleAdd">新增</el-button>
+                            <el-button type="danger" @click="handleDel">删除</el-button> -->
                         </el-row>
                     </div>
 		
@@ -146,13 +147,13 @@
 
 <script setup lang="ts" name="APPstat">
 import * as echarts from 'echarts'
-import { onMounted, reactive, ref } from 'vue';
+import { onMounted, reactive, ref,onUnmounted, nextTick } from 'vue';
 import { ElTable } from 'element-plus'
 import { ElMessage, ElMessageBox } from 'element-plus';
-import { Delete, Plus, Search } from '@element-plus/icons-vue'
 let isHave = ref(false)
+let myLineChart:any = null
 function initOption1() {
-    const myLineChart = echarts.init(document.getElementById('lineChart')!);
+    myLineChart = echarts.init(document.getElementById('lineChart')!);
     let option = {
         tooltip: {
             trigger: 'axis',
@@ -248,11 +249,12 @@ function initOption1() {
         ]
     }
     option && myLineChart.setOption(option);
-    myLineChart.resize();
+    // myLineChart.resize();
+    window.addEventListener('resize',myChart1Resize)
 }
-
+let myPieChart:any = null
 function initOption2() {
-    const myPieChart = echarts.init(document.getElementById('pieChart')!);
+    myPieChart = echarts.init(document.getElementById('pieChart')!);
     let option = {
         title: {
             text: '应用商店分布'
@@ -304,11 +306,13 @@ function initOption2() {
         ]
     }
     option && myPieChart.setOption(option);
-    myPieChart.resize()
+    // myPieChart.resize()
+    window.addEventListener('resize',myChart4Resize)
 }
+let myBarChart:any = null
 function initOption3() {
     // type EChartsOption = echarts.EChartsOption;
-    const myBarChart = echarts.init(document.getElementById('barChart')!);
+    myBarChart = echarts.init(document.getElementById('barChart')!);
     let option = {
         title: {
             text: '下载量分布',
@@ -348,10 +352,12 @@ function initOption3() {
         ]
     }
     option && myBarChart.setOption(option);
-    myBarChart.resize();
+    // myBarChart.resize();
+    window.addEventListener('resize',myChart2Resize)
 }
+let myBarChart2:any = null
 function initOption4() {
-    const myBarChart = echarts.init(document.getElementById('pieChart2')!);
+    myBarChart2 = echarts.init(document.getElementById('pieChart2')!);
     let option = {
         title: {
             text: '应用类型分布',
@@ -409,18 +415,21 @@ function initOption4() {
             }
         ]
     };
-    option && myBarChart.setOption(option);
-    myBarChart.resize();
+    option && myBarChart2.setOption(option);
+    window.addEventListener('resize',myChart3Resize)
 }
 const changeTab = (a:number) => {
     isHave.value = false
 }
-onMounted(() => {
-    initOption1()
-    initOption2()
-    initOption3()
-    initOption4()
-})
+// onMounted(() => {
+//     nextTick(()=>{
+//         initOption1()
+//         initOption2()
+//         initOption3()
+//         initOption4()
+//     })
+    
+// })
 const tableData2 = [
     {
         time: '2023-02-14 10:12:15',
@@ -645,6 +654,46 @@ const handleDel = () => {
         return !arrlist.includes(item);
 	})
 }
+function myChart1Resize(){
+	if (myLineChart) {
+		myLineChart.resize();
+	}
+}
+function myChart2Resize(){
+	if (myBarChart) {
+		myBarChart.resize();
+	}
+}
+function myChart3Resize(){
+	if (myBarChart2) {
+		myBarChart2.resize();
+	}
+}
+function myChart4Resize(){
+	if (myPieChart) {
+		myPieChart.resize();
+	}
+}
+onMounted(()=>{
+	nextTick(()=>{
+		initOption1()
+		initOption2()
+		initOption3()
+        initOption4()
+	})	
+})
+
+
+onUnmounted(() => {
+	myLineChart.dispose();
+	myBarChart.dispose();
+	myBarChart2.dispose();
+    myPieChart.dispose()
+	window.removeEventListener('resize',myChart1Resize)
+	window.removeEventListener('resize',myChart2Resize)
+	window.removeEventListener('resize',myChart3Resize)
+    window.removeEventListener('resize',myChart4Resize)
+    });
 </script>
 
 <style scoped lang="less">
