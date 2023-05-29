@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="map-header-text"> 山西省 </div>
+        <div class="map-header-text"> 辽宁省 </div>
         <el-divider></el-divider>
         <div>
             <el-row style="height: 30px; text-align: left;">
@@ -36,7 +36,7 @@
             height: 30px;
             margin-top: 15px;
             margin-bottom: 7px;
-          ">山西挖矿IP概览</el-header>
+          ">辽宁省挖矿IP概览</el-header>
           <el-row>
         <el-col :span="24">
           <div>
@@ -71,18 +71,18 @@ const options = [
 let mapChart:any = '' 
 async function initChart() {
     mapChart = echarts.init(document.getElementById('map_ref')!);
-    const ret = await axios.get(`../../map/省级/山西省.json`);
-    echarts.registerMap("山西省", ret.data)
+    const ret = await axios.get(`../../map/省级/辽宁省.json`);
+    echarts.registerMap("辽宁省", ret.data)
     const initOption = {
         geo: [
             // {
             //     type: "map",
-            //     map: "山西省",
+            //     map: "辽宁省",
             //     roam: false,
             //     zoom: 1.2,
             // },
             {
-                map: '山西省',
+                map: '辽宁省',
                 zlevel:5,
                 zoom: 1.2,
                 label: {
@@ -96,7 +96,7 @@ async function initChart() {
                 }
             },
             {
-                map: '山西省',
+                map: '辽宁省',
                 top:'11%',
                 zlevel:4,
                 zoom: 1.2,
@@ -107,7 +107,7 @@ async function initChart() {
                 }
             },
             {
-                map: '山西省',
+                map: '辽宁省',
                 top:'12%',
                 zlevel:3,
                 zoom: 1.2,

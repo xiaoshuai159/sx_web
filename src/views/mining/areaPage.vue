@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="map-header-text">
-            <span style="cursor:pointer;" @click="toProvincePage()">山西省</span><span v-html="'\u00a0'"></span>
+            <span style="cursor:pointer;" @click="toProvincePage()">辽宁省</span><span v-html="'\u00a0'"></span>
           >
           <span v-html="'\u00a0'"></span><span style="cursor:pointer;" @click="toCityPage()">{{useMiningStore().city}}</span><span v-html="'\u00a0'"></span>
           >
