@@ -11,7 +11,7 @@
 				<el-icon @click="closeTags(index)"><Close /></el-icon>
 			</li>
 		</ul>
-		<div class="tags-close-box">
+		<!-- <div class="tags-close-box">
 			<el-select v-model="value" class="m-2" placeholder="Select" size="small" style="height: 28px;">
 				<el-option
 				v-for="item in options"
@@ -20,7 +20,7 @@
 				:value="item.value"
 				/>
 			</el-select>
-		</div>
+		</div> -->
 	</div>
 </template>
 

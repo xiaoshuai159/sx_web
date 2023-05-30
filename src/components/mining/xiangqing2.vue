@@ -47,7 +47,7 @@
                 ></el-input>
               </div>
               <div align="left" style="height: 58px;">
-                <el-button>查询</el-button
+                <el-button @click="handleSearch">查询</el-button
                 ><el-button 
                   >导出</el-button
                 ><el-button
@@ -62,9 +62,9 @@
           <el-col :span="24">
             <div class="block">
               <el-table
+                :data="tableData"
                 class="tableClass"
                 stripe
-                border
                 ref="multipleTable"
                 tooltip-effect="dark"
                 style="width: 100%"
@@ -77,20 +77,14 @@
                 </el-table-column>
                 <el-table-column label="目的端口" prop="_port" min-width="80">
                 </el-table-column>
-                <el-table-column label="时间" width="110" sortable>
+                <el-table-column label="时间" prop="_time" width="110" sortable>
                 </el-table-column>
-                <el-table-column
-                  prop="district"
-                  label="涉及地址"
-                  min-width="100"
-                  show-overflow-tooltip
-                >
+                <el-table-column prop="district" label="涉及地址" min-width="100" show-overflow-tooltip>
                 </el-table-column>
-                <el-table-column label="操作" width="90" align="center" >
+                <el-table-column label="操作" width="100" align="center">
                   <template #default="scope">
-                    <el-button text v-permiss="15">
-                      详情
-                    </el-button>
+                    <el-button text type="primary" size="small" @click="handleEdit(scope.$index, scope.row)" style="margin: 0; letter-spacing: 0px;" v-permiss="15">详情</el-button>
+                    
                   </template>
                 </el-table-column>
                 <!-- <el-table-column
@@ -113,9 +107,10 @@
                 @current-change="handleCurrentChange"
                 :current-page="currentPage"
                 :page-size="pagesize"
-                layout="total, sizes, prev, pager, next, jumper"
+                layout="total, sizes"
                 :total="tableData.length"
               >
+              <!-- , prev, pager, next, jumper -->
               </el-pagination>
             </div>
           </el-col>
@@ -126,6 +121,7 @@
 </template>
 
 <script setup lang="ts" name="xiangqing2">
+import {reactive, ref} from 'vue';
 const searchValue = {
     value: "",
     value2: "",
@@ -133,12 +129,59 @@ const searchValue = {
     input1: "",
     input2: "",
 }
+interface appTableData {
+  _id: string
+  _ip: string
+  _port: string
+  _time:string
+  district: string
+
+}
 const options:any = []
 const options2:any = []
 const options3:any = []
-const tableData:any = []
+const tableData = ref<appTableData[]>([
+    {
+        _id: '182.16.14.234',
+        _ip: '216.118.242.12',
+        _port: '37',
+        _time:'2023-05-29',
+        district: '普兰店'
+    }
+])
+const handleSearch = () => {
+	getData()
+}
+const getData = () => {
+	tableData.value = [
+      {
+        _id: '182.16.14.234',
+        _ip: '216.118.242.12',
+        _port: '37',
+        _time:'2023-05-29',
+        district: '普兰店'
+    },{
+        _id: '172.16.14.234',
+        _ip: '16.118.42.122',
+        _port: '11',
+        _time:'2023-05-29',
+        district: '普兰店'
+    },{
+        _id: '12.168.114.23',
+        _ip: '21.18.24.12',
+        _port: '96',
+        _time:'2023-05-29',
+        district: '普兰店'
+    }
+	]
+  
+}
 let pagesize:number = 10
 let currentPage:number = 1
+const handleEdit = (index:any,row:any) =>{
+  console.log(index,row);
+  
+}
 function handleSizeChange(val:number) {
     pagesize = val;
 }

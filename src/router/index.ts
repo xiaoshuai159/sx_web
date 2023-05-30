@@ -180,6 +180,16 @@ const routes: RouteRecordRaw[] = [
 
             },
             {
+                path:'/harmEvent',
+                name:'harmEvent',
+                meta:{
+                    title:'公共危害事件',
+                    permiss:'16',
+                },
+                component: () => import('../views/harmEvent.vue')
+
+            },
+            {
                 path: '/permission',
                 name: 'permission',
                 meta: {
@@ -276,7 +286,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    document.title = `${to.meta.title} | vue-manage-system`;
+    document.title = `${to.meta.title} `;
     const role = localStorage.getItem('ms_username');
     const permiss = usePermissStore();
     if (!role && to.path !== '/login') {

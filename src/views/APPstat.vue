@@ -88,7 +88,7 @@
 			<el-table-column prop="premissInfo" label="应用权限信息" min-width="110" show-overflow-tooltip/>
 			<el-table-column prop="operate" label="操作" min-width="90">
 				<template #default="scope">
-					<el-button text type="primary" size="small" @click="handleEdit(scope.$index, scope.row)" v-permiss="15">编辑</el-button>
+					<el-button text type="primary" size="small" @click="handleEdit(scope.$index, scope.row)" v-permiss="15">详情</el-button>
 					
 				</template>
 			</el-table-column>
@@ -577,6 +577,8 @@ const getData = () => {
 
 		}
 	]
+    console.log(tableData);
+    
 }
 const handleSearch = () => {
 	getData()

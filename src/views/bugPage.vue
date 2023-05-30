@@ -13,8 +13,13 @@
                 />&nbsp;&nbsp;
             <span>类型：</span>
             <el-select v-model="query.address" placeholder="类型" class="handle-select mr10" style="width:16%">
-                <el-option key="1" label="类型1" value="类型1"></el-option>
-                <el-option key="2" label="类型2" value="类型2"></el-option>
+                <el-option key="1" label="SQL注入漏洞" value="SQL注入漏洞"></el-option>
+                <el-option key="2" label="XSS漏洞" value="XSS漏洞"></el-option>
+				<el-option key="3" label="CSRF漏洞" value="CSRF漏洞"></el-option>
+                <el-option key="4" label="SSRF漏洞" value="SSRF漏洞"></el-option>
+				<el-option key="5" label="命令执行漏洞" value="命令执行漏洞"></el-option>
+                <el-option key="6" label="文件上传漏洞" value="文件上传漏洞"></el-option>
+				<el-option key="6" label="暴力破解" value="暴力破解"></el-option>
             </el-select>
             <span>事件id：</span>
             <el-input v-model="query.name" placeholder="事件id" class="eventid-input mr10" style="width:16%"></el-input><br/><br/>
@@ -34,8 +39,8 @@
             <el-table-column prop="attackIP" label="攻击者IP" min-width="115" show-overflow-tooltip></el-table-column>
             
             <!-- <el-table-column prop="databaseType" label="数据库类型" show-overflow-tooltip min-width="95"></el-table-column> -->
-            <!-- <el-table-column prop="warnType" label="类型" min-width="140"  show-overflow-tooltip ></el-table-column>
-            <el-table-column prop="warnContent" label="事件名称" min-width="100" show-overflow-tooltip></el-table-column> -->
+            <el-table-column prop="warnType" label="类型" min-width="140"  show-overflow-tooltip ></el-table-column>
+            <!-- <el-table-column prop="warnContent" label="事件名称" min-width="100" show-overflow-tooltip></el-table-column> -->
             <el-table-column prop="harmPort" label="目的端口" min-width="100" show-overflow-tooltip></el-table-column>
             <!-- <el-table-column prop="attackNum" label="攻击次数" min-width="83" show-overflow-tooltip></el-table-column> -->
             
@@ -172,7 +177,7 @@ const getData = () =>{
 	harmIP: '172.5.45.62',
 	harmPort: 45,
 	databaseType:'mysql',
-	warnType:'类型1',
+	warnType:'SQL注入漏洞',
 	warnContent:'...',
 	attackNum: 9,
 	attackIP: '192.168.55.4',
@@ -186,7 +191,7 @@ const getData = () =>{
 	harmIP: '172.53.45.6',
 	harmPort: 75,
 	databaseType:'mysql',
-	warnType:'类型1',
+	warnType:'SQL注入漏洞',
 	warnContent:'...',
 	attackNum: 9,
 	attackIP: '192.168.55.4',
@@ -200,7 +205,7 @@ const getData = () =>{
 	harmIP: '172.53.5.62',
 	harmPort: 40,
 	databaseType:'mysql',
-	warnType:'类型1',
+	warnType:'XSS漏洞',
 	warnContent:'...',
 	attackNum: 9,
 	attackIP: '192.168.55.4',
@@ -219,7 +224,7 @@ const tableData2 = ref<FormAndTable[]>([{
 	harmIP: '172.53.45.62',
 	harmPort: 45,
 	databaseType:'mysql',
-	warnType:'类型1',
+	warnType:'SQL注入漏洞',
 	warnContent:'...',
 	attackNum: 9,
 	attackIP: '192.168.55.4',

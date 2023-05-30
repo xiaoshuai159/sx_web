@@ -3,25 +3,20 @@
         <el-tabs type="border-card" @tab-change="changeTab">
             <el-tab-pane label="IOC检索">
                 <el-input placeholder="请输入域名、IP、URL" v-model="input1" style="width:390px"></el-input>&nbsp;&nbsp;
-                <el-button type="primary"  @click="isHave = true">查询</el-button><br/>
+                <el-button type="primary"  @click="getIOCinfo">查询</el-button><br/>
                 <div style="margin:10px 4px 0 4px">
                     <span class="left-text">查询示例</span><span class="right-text">hot.tenchier.com &nbsp;  121.37.189.177 &nbsp;  https://www.hot.tenchier.com</span>
                 </div>
             </el-tab-pane>
-            <!-- <el-tab-pane label="攻击维度检索">
-                <el-input placeholder="请输入攻击域名、攻击IP、攻击URL" v-model="input1" style="width:390px"></el-input>&nbsp;&nbsp;
-                <el-button type="primary" @click="isHave = true">查询</el-button><br/>
-                <div style="margin:10px 4px 0 4px">
-                    <span class="left-text">查询示例</span><span class="right-text">hot.tenchier.com &nbsp;  121.37.189.177 &nbsp;  https://www.hot.tenchier.com</span>
-                </div>
-            </el-tab-pane> -->
             <el-tab-pane label="样本检索">
                 <el-upload
                     class="upload-demo"
                     drag
                     action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
                     multiple
+                    :on-success="successFn"
                 >
+                
                     <el-icon class="el-icon--upload"><upload-filled /></el-icon>
                     <div class="el-upload__text">
                     拖曳上传或 <em>点击文件上传</em>
@@ -36,9 +31,9 @@
             </el-tab-pane>
         </el-tabs>
         <div>
-        <el-card v-if="!isHave" shadow="never" style="margin-top:10px;border-radius: 0" ><el-empty :image-size="200"></el-empty></el-card>
+        <el-card v-if="isHave==1" shadow="never" style="margin-top:10px;border-radius: 0" ><el-empty :image-size="200"></el-empty></el-card>
         
-        <el-card shadow="never" style="margin-top:10px; border-radius: 0" v-else>
+        <el-card shadow="never" style="margin-top:10px; border-radius: 0" v-else-if="isHave==2">
             <!-- <div v-for="(item,value) in repeatData" :key="value" style="margin:15px 5px">
             {{item}}
             </div> -->
@@ -111,13 +106,70 @@
                 </el-table>
             </div> 
         </el-card>
+        <el-card shadow="never" style="margin-top:10px; border-radius: 0" v-else-if="isHave==3">
+            <div>
+                <div style="float: left; margin:10px 30px;"><svg t="1685357027154" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10341" width="200" height="200"><path d="M461.35296 114.4832c6.61504-11.20256 18.6368-18.06336 31.6416-18.08384l45.54752 0.14336c13.1072 0.04096 25.21088 7.0656 31.72352 18.432l86.99904 152.14592 83.61984-47.69792L626.13504 18.80064a36.61824 36.61824 0 0 0-31.6416-18.432L436.98176 0c-13.04576 0-25.10848 6.8608-31.72352 18.06336L282.8288 226.67264l83.84512 48.9472 94.67904-161.15712zM1024 362.55744l-102.23616-64.73728-5.40672-121.11872L674.38592 439.7056 1024 362.57792zM108.31872 175.104l-5.34528 121.99936L0 362.20928l351.9488 78.336L108.3392 175.104zM415.88736 1024l96.01024-50.03264L608.41984 1024l-96.52224-305.74592L415.88736 1024zM808.7552 537.3952l93.0816 161.9968c6.47168 11.264 6.47168 25.14944 0 36.43392l-22.71232 39.424c-6.5536 11.34592-18.65728 18.35008-31.78496 18.35008h-175.45216v96.17408H903.168c13.1072 0 25.1904-7.00416 31.70304-18.35008l78.52032-136.3968a36.39296 36.39296 0 0 0 0-36.4544l-120.48384-209.69472-84.13184 48.49664zM143.60576 775.8848l-33.1776-58.30656 103.54688-178.60608L129.8432 490.496 9.29792 699.392a36.53632 36.53632 0 0 0 0 36.49536l78.4384 136.33536c6.5536 11.3664 18.65728 18.37056 31.78496 18.37056h234.496v-96.19456H175.37024a36.47488 36.47488 0 0 1-31.78496-18.49344z" fill="#D9001B" p-id="10342"></path><path d="M417.71008 397.1072c0 33.28 17.77664 64.02048 46.61248 80.65024a93.32736 93.32736 0 0 0 93.22496 0 93.0816 93.0816 0 0 0-46.61248-173.75232 93.184 93.184 0 0 0-93.22496 93.10208z m-91.5456 296.42752h373.71904c-3.01056-100.72064-85.25824-181.61664-186.81856-181.61664-101.5808 0-183.808 80.896-186.90048 181.61664z" fill="#EC808D" p-id="10343"></path></svg></div>
+                <div style="margin:0 30px;">
+                    <div style="font-size: 26px; font-weight: 600;margin-top: 10px;margin-bottom: 40px;">26c46fdf058abdf2d4cad1d8bcca0d68</div>
+                    <div style="margin-bottom: 25px;"><span class="right-text">首次提交：</span><span class="left-text">2019/08/26</span><span class="right-text">末次提交：</span><span class="left-text">2023/03/14</span><span class="right-text">末次分析：</span><span class="left-text">2023/03/14 10:15:56</span></div>
+                    <div><span class="right-text">文件类型：</span><span class="left-text">PE32 executable </span><span class="right-text">文件大小：</span><span class="left-text">596.52 KB</span><span class="right-text">威胁类型：</span><span class="left-text"><el-tag type='danger'>木马</el-tag></span></div>
+                </div>
+                
+                <div class="IOCdiv">
+                    <span class="IOClogo"></span>
+                    <span class="IOCtitle">情报IOC</span>
+                    <!-- <span style="color:#7a7a7a;font-size: 10px;">2 条情报，1 条 CDN服务器 相关。</span> -->
+                </div>
+                <div>
+                    <el-table :data="tableData3" class="tableStyle" ref="multipleTable" header-cell-class-name="table-header" stripe style="width:80%">
+                        <el-table-column prop="ioc" label="情报IOC" min-width="260"></el-table-column>  
+                        <el-table-column prop="iocType" label="IOC类型" min-width="158" show-overflow-tooltip></el-table-column>
+                        <el-table-column prop="pandingType" label="判定类型" min-width="158" show-overflow-tooltip>
+                            <template #default="scope">
+                                <span v-if="scope.row.pandingType=='恶意'" style="color:rgb(255, 0, 0)">
+                                    {{ scope.row.pandingType }}
+                                </span>
+                                <span v-else-if="scope.row.pandingType=='良性'" style="color:#00ff08">
+                                    {{ scope.row.pandingType }}
+                                </span>
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="content" label="情报内容" min-width="158" show-overflow-tooltip>
+                            <template #default="scope">
+                                <el-tag
+                                    :type="scope.row.content === '远控' ? 'danger' : scope.row.content === '木马' ? 'warning' : ''"
+                                >
+                                    {{ scope.row.content }}
+                                </el-tag>
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="huanjing" label="发现IOC环境" min-width="100" align="center">
+                            
+                        </el-table-column>                        
+                    </el-table>
+                </div>
+                <div class="IOCdiv">
+                    <span class="IOClogo"></span>
+                    <span class="IOCtitle">行为检测</span>
+                    <!-- <span style="color:#7a7a7a;font-size: 10px;">2 条情报，1 条 CDN服务器 相关。</span> -->
+                </div>
+                <div style="margin-left: 20px;">
+                   <span class="left-text">MITRE ATT&CK矩阵（技术）检测到<strong> 11 </strong>条技术指标。</span> 
+                   <div style="background-color: #fceded; height: 40px;line-height: 40px; width:79%; color:red;font-weight: 600;padding: 0 15px;margin: 10px 0;">高危行为（2）</div>
+                   <div><span class="redSpan">反检测技术</span> <span class="left-text">启动了一个具有隐藏界面的进程</span></div>
+                   <el-divider></el-divider>
+                   <div><span class="redSpan">静态文件特征</span> <span class="left-text">缓冲区中发现一个PE文件</span>
+                   </div>
+                </div>
+            </div>   
+        </el-card>
         </div>
     </div>
 </template>
 
 <script setup lang="ts" name="threatIntelligence">
 import { ref } from 'vue'
-import { Search } from '@element-plus/icons-vue';
+import { ElMessage } from 'element-plus';
 import { UploadFilled } from '@element-plus/icons-vue'
 import type { TagProps } from 'element-plus'
 type Item = { type: TagProps['type']; label: string }
@@ -130,9 +182,9 @@ const items = ref<Array<Item>>([
   { type: 'warning', label: '挖矿病毒' },
 ])
 const input1 = ref('')
-let isHave = ref(false)
+let isHave = ref(1)
 const changeTab = (a:number) => {
-    isHave.value = false
+    isHave.value = 1
 }
 const tableData2:any = [
 {
@@ -148,9 +200,50 @@ const tableData2:any = [
     type:'IDC服务器',
     status:'过期'
 }];
+const tableData3:any = [
+{
+	ioc: 'boyonnem.ddns.net',
+    iocType:'Domain',
+    pandingType:'恶意',
+    content:'远控',
+    huanjing:'2 个分析环境'
+},
+{
+	ioc: '26c46fdf058abdf2d4cad1d8bcca0d68',
+    iocType:'Hash',
+    pandingType:'恶意',
+    content:'木马',
+    huanjing:'2 个分析环境'
+}
+]
+const successFn = () => {
+    isHave.value = 3
+}
+const getIOCinfo = () =>{
+    if(input1.value == 'hot.tenchier.com'||input1.value == '121.37.189.177'||input1.value == 'https://www.hot.tenchier.com'){
+        isHave.value = 2
+    }else{
+        isHave.value = 1
+        ElMessage.error('未查询到相关IOC')
+    }
+}
 </script>
 
 <style scoped lang="less">
+:deep(.el-divider--horizontal){
+    margin: 5px 0;
+    width: 81%;
+}
+.redSpan{
+    display: inline-block;
+    background-color: #db1414;
+    color:aliceblue;
+    width: 120px;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    margin: 5px 15px;
+}
 .IOCdiv{
     // background-color: #f2f4f7;
     position: relative;

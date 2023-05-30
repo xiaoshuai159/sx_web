@@ -115,7 +115,7 @@ const items = [
     {
         icon: 'Warning',
         index: '/securityAnalysis',
-        title: '网站安全',
+        title: '网络安全',
         permiss: '5',
         subs: [
             {
@@ -156,6 +156,12 @@ const items = [
                 index: '/attackAndDefence',
                 // title: '组织与资产检索',
                 title: '追踪溯源',
+                permiss: '12',
+            },
+            {
+                index: '/harmEvent',
+                // title: '组织与资产检索',
+                title: '公共危害事件',
                 permiss: '12',
             }
         ],

@@ -78,7 +78,7 @@ const data: Tree[] = [
 			},
 			{
 				id: '9',
-				label: '网站安全',
+				label: '网络安全',
 				children: [
 					{
 						id: '10',
