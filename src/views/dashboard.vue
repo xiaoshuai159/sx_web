@@ -228,7 +228,7 @@
 						</div>
 						<div class="dialog-body-content">
 							<div><span class="dialog-body-left">事件id：</span><span class="dialog-body-right">01</span></div>
-							<div><span class="dialog-body-left">时间：</span><span class="dialog-body-right">2023-05-29</span></div>
+							<div><span class="dialog-body-left">时间：</span><span class="dialog-body-right">2023-05-29</span></div>	
 							<div><span class="dialog-body-left">源IP：</span><span class="dialog-body-right">63.56.123.55</span></div>
 							<div><span class="dialog-body-left">源端口：</span><span class="dialog-body-right">124</span></div>
 							<div><span class="dialog-body-left">地域：</span><span class="dialog-body-right">日本东京</span></div>
@@ -861,6 +861,11 @@ function saveEdit() {
     height: 5px;
     margin: 0 auto;
 	background: url(../assets/img/data_image_base2.png) no-repeat 50%;
+}
+.dialog-body-content{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
 }
 :deep(.el-table__header th){
 	background-color: rgba(51, 121, 255,0.2)!important;
