@@ -13,11 +13,11 @@
                 />&nbsp;&nbsp;
             <span>类型：</span>
             <el-select v-model="query.address" placeholder="类型" class="handle-select mr10" style="width:16%">
-                <el-option key="1" label="黄" value="黄"></el-option>
-                <el-option key="2" label="赌" value="赌"></el-option>
-                <el-option key="3" label="毒" value="毒"></el-option>
-                <el-option key="4" label="枪" value="枪"></el-option>
-                <el-option key="5" label="诈" value="诈"></el-option>
+                <el-option key="1" label="涉黄事件" value="涉黄事件"></el-option>
+                <el-option key="2" label="涉赌事件" value="涉赌事件"></el-option>
+                <el-option key="3" label="涉毒事件" value="涉毒事件"></el-option>
+                <el-option key="4" label="涉枪事件" value="涉枪事件"></el-option>
+                <el-option key="5" label="涉诈事件" value="涉诈事件"></el-option>
             </el-select>
             <span>域名：</span>
             <el-input v-model="query.name" placeholder="域名" class="eventid-input mr10" style="width:16%"></el-input><br/><br/>
@@ -152,7 +152,7 @@ const getData = () =>{
 	time:'2023-05-29 10:10:00',
 	IP: '172.53.45.62',
     domain:'dailysync.zapto.org',
-	warnType:'黄',
+	warnType:'涉黄事件',
     inOrOut:'境内',
 	visitNum:22
 },
@@ -161,7 +161,7 @@ const getData = () =>{
 	time:'2023-05-29 18:40:00',
 	IP: '188.241.68.127',
     domain:'plansecure.org',
-	warnType:'黄',
+	warnType:'涉黄事件',
     inOrOut:'境内',
 	visitNum:13
 },
@@ -170,7 +170,7 @@ const getData = () =>{
 	time:'2023-05-29 19:20:00',
 	IP: '91.211.88.71',
     domain:'davidjone.net',
-	warnType:'毒',
+	warnType:'涉黄事件',
     inOrOut:'境内',
 	visitNum:5
 }]
@@ -184,7 +184,7 @@ const tableData2 = ref<FormAndTable[]>([{
 	time:'2023-05-29 10:10:00',
 	IP: '172.53.45.62',
     domain:'dailysync.zapto.org',
-	warnType:'黄',
+	warnType:'涉黄事件',
     inOrOut:'境内',
 	visitNum:22
 }]);

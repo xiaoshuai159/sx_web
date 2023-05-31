@@ -40,20 +40,21 @@
           <el-row>
         <el-col :span="24">
           <div>
-            <xiangqing2></xiangqing2>
+            <xiangqing></xiangqing>
           </div>
         </el-col>
       </el-row>
     </div>
 </template>
 
-<script setup lang="ts" name="provincePage">
+<script setup lang="ts" name="countryPage">
 import { onMounted, ref, onBeforeUnmount,onBeforeMount } from "vue"
 import axios from "axios";
-import xiangqing2 from "../../components/mining/xiangqing2.vue";
+import xiangqing from "../../components/mining/xiangqing.vue";
 import * as echarts from 'echarts'
 import {useMiningStore} from '../../store'
 import router from "../../router";
+import chinaGeoJSON from '../../../public/map/china.json'
 const query = ref("涉及IP数量")
 const area_num = ref(12)
 const unit_num = ref(38)
@@ -69,20 +70,24 @@ const options = [
     },
 ]
 let mapChart:any = '' 
+const store = useMiningStore()
 async function initChart() {
+    const excludedRegions = ['南沙群岛', '西沙群岛', '中沙群岛', '三沙市'];
+const filteredGeoJSON = chinaGeoJSON;
+filteredGeoJSON.features = filteredGeoJSON.features.filter((feature) => !excludedRegions.includes(feature.properties.name));
     mapChart = echarts.init(document.getElementById('map_ref')!);
-    const ret = await axios.get(`../../map/省级/辽宁省.json`);
-    echarts.registerMap("辽宁省", ret.data)
+    const ret = await axios.get(`../../map/china.json`);
+    echarts.registerMap("china", ret.data)
     const initOption = {
         geo: [
             // {
             //     type: "map",
-            //     map: "辽宁省",
+            //     map: "china",
             //     roam: false,
             //     zoom: 1.2,
             // },
             {
-                map: '辽宁省',
+                map: 'china',
                 zlevel:5,
                 zoom: 1.2,
                 label: {
@@ -96,7 +101,7 @@ async function initChart() {
                 }
             },
             {
-                map: '辽宁省',
+                map: 'china',
                 top:'11%',
                 zlevel:4,
                 zoom: 1.2,
@@ -107,7 +112,7 @@ async function initChart() {
                 }
             },
             {
-                map: '辽宁省',
+                map: 'china',
                 top:'12%',
                 zlevel:3,
                 zoom: 1.2,
@@ -126,6 +131,7 @@ async function initChart() {
             ],
             geoIndex: 0, //将数据与第0个geo配置关联在一起
             type: "map",
+            geoJson:filteredGeoJSON
         },
 
         tooltip: {
@@ -146,13 +152,11 @@ async function initChart() {
     };
     mapChart.setOption(initOption, true)
     mapChart.on("click",(arg:any)=>{
-        const store = useMiningStore()
-        store.$patch({
-            city:arg.name
-        })
+        
+        store.updateprovince(arg.name)
         // console.log(store.city);
         router.push({
-            name:'cityPage',
+            name:'provincePage',
             // params:{
             //     arg: arg,
             // }

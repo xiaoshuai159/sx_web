@@ -1,7 +1,9 @@
 <template>
     <div>
         <div class="map-header-text">
-            <span style="cursor:pointer;" @click="changePage">辽宁省</span><span v-html="'\u00a0'"></span>
+          <span style="cursor:pointer;" @click="toCountryPage">全国</span><span v-html="'\u00a0'"></span>
+          >
+          <span v-html="'\u00a0'"></span><span style="cursor:pointer;" @click="toProvincePage">{{useMiningStore().province}}</span><span v-html="'\u00a0'"></span>
           >
           <span v-html="'\u00a0'"></span><span style="cursor:pointer;">{{useMiningStore().city}}</span><span v-html="'\u00a0'"></span></div>
           <el-divider></el-divider>
@@ -79,6 +81,7 @@ async function initChart() {
     mapChart = echarts.init(document.getElementById('map_ref')!);
     const ret = await axios.get(`../../map/省级/市级/${store.city}.json`);
     echarts.registerMap(`${store.city}`, ret.data)
+    console.log('执行了initChart',store.city);
     const initOption = {
         geo: [
             // {
@@ -149,9 +152,7 @@ async function initChart() {
     };
     mapChart.setOption(initOption, true)
     mapChart.on("click",(arg:any)=>{        
-        store.$patch({
-            area:arg.name
-        })
+        store.updatearea(arg.name)
         router.push({
             name:'areaPage',
             // params:{
@@ -160,14 +161,15 @@ async function initChart() {
         })
     })
 }
-const changePage = () =>{
+const toProvincePage = () =>{
     router.push({
         name:'provincePage'
-    })
-    store.$patch({
-        city:"",
-        area:""
-    })        
+    }) 
+}
+const toCountryPage =()=>{
+    router.push({
+        name:'countryPage'
+    }) 
 }
 onMounted(() => {
     initChart()

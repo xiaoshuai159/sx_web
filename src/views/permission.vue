@@ -86,11 +86,11 @@ const data: Tree[] = [
 					},
 					{
 						id: '11',
-						label: '漏洞'
+						label: '漏洞监测'
 					},
 					{
 						id: '12',
-						label: '僵木蠕'
+						label: '僵木蠕事件监测'
 					}
 				]
 			},
@@ -108,7 +108,7 @@ const data: Tree[] = [
 					},
 					{
 						id: '16',
-						label: '追踪溯源'
+						label: '追踪溯源分析'
 					}
 				]
 			}

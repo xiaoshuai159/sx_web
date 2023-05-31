@@ -1,6 +1,10 @@
 <template>
     <div>
-        <div class="map-header-text"> 辽宁省 </div>
+        <div class="map-header-text">
+            <span style="cursor:pointer;" @click="toCountryPage">全国</span><span v-html="'\u00a0'"></span>
+            >
+            <span v-html="'\u00a0'"></span><span> {{ useMiningStore().province }} </span>
+        </div>        
         <el-divider></el-divider>
         <div>
             <el-row style="height: 30px; text-align: left;">
@@ -36,7 +40,7 @@
             height: 30px;
             margin-top: 15px;
             margin-bottom: 7px;
-          ">辽宁省挖矿IP概览</el-header>
+          ">{{ useMiningStore().province }}挖矿IP概览</el-header>
           <el-row>
         <el-col :span="24">
           <div>
@@ -48,7 +52,8 @@
 </template>
 
 <script setup lang="ts" name="provincePage">
-import { onMounted, ref, onBeforeUnmount,onBeforeMount } from "vue"
+import { onBeforeRouteLeave } from 'vue-router'
+import { onMounted, ref, onBeforeUnmount } from "vue"
 import axios from "axios";
 import xiangqing2 from "../../components/mining/xiangqing2.vue";
 import * as echarts from 'echarts'
@@ -69,10 +74,13 @@ const options = [
     },
 ]
 let mapChart:any = '' 
+const store = useMiningStore()
 async function initChart() {
     mapChart = echarts.init(document.getElementById('map_ref')!);
-    const ret = await axios.get(`../../map/省级/辽宁省.json`);
-    echarts.registerMap("辽宁省", ret.data)
+    const ret = await axios.get(`../../map/省级/${store.province}.json`);
+    echarts.registerMap(`${store.province}`, ret.data)
+    console.log('执行了initChart',store.province);
+    
     const initOption = {
         geo: [
             // {
@@ -82,7 +90,7 @@ async function initChart() {
             //     zoom: 1.2,
             // },
             {
-                map: '辽宁省',
+                map: `${store.province}`,
                 zlevel:5,
                 zoom: 1.2,
                 label: {
@@ -96,7 +104,7 @@ async function initChart() {
                 }
             },
             {
-                map: '辽宁省',
+                map: `${store.province}`,
                 top:'11%',
                 zlevel:4,
                 zoom: 1.2,
@@ -107,7 +115,7 @@ async function initChart() {
                 }
             },
             {
-                map: '辽宁省',
+                map:`${store.province}`,
                 top:'12%',
                 zlevel:3,
                 zoom: 1.2,
@@ -145,19 +153,29 @@ async function initChart() {
         },
     };
     mapChart.setOption(initOption, true)
-    mapChart.on("click",(arg:any)=>{
-        const store = useMiningStore()
-        store.$patch({
-            city:arg.name
-        })
+    mapChart.on("click",(arg:any)=>{        
+        store.updatecity(arg.name)
+        // store.$patch({
+        //     city:arg.name
+        // })
         // console.log(store.city);
+        // console.log(store);
         router.push({
             name:'cityPage',
-            // params:{
-            //     arg: arg,
-            // }
         })
     })
+}
+// const beforeLeave = () => {
+//       // 手动卸载当前页面
+//       // ...
+//       console.log('离开了');
+//       mapChart.dispose()
+// }
+// onBeforeRouteLeave(beforeLeave)
+const toCountryPage = () =>{
+    router.push({
+        name:'countryPage'
+    }) 
 }
 onMounted(() => {
     initChart()

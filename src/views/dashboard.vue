@@ -198,12 +198,9 @@
 								<el-button text class="blue" @click="handleEdit(scope.$index, scope.row)" v-permiss="15">
 									详情
 								</el-button>
-								 <!-- <el-button text @click="handleEdit(scope.$index, scope.row)" v-permiss="15">
-									编辑
-								</el-button>
-								<el-button text class="red" @click="handleDelete(scope.$index)" v-permiss="16">
+								<!-- <el-button text class="red" @click="handleDelete(scope.$index)" v-permiss="16">
 									删除
-								</el-button>  -->
+								</el-button> -->
 							</template>
 						</el-table-column>
 						
@@ -221,8 +218,26 @@
 				</div>
 
 				<!-- 编辑弹出框 -->
-				<el-dialog title="数据安全事件详情" v-model="editVisible" width="30%" top="1%">
-						<el-form :model="form">
+				<el-dialog title="数据安全事件详情" v-model="editVisible" min-width="800px" min-height="520px">
+					<div class="dialog-body">
+						<div class="dialog-body-title">
+							<span class="start-png"></span>
+							基础信息
+							<p class="dashed-bottom"></p>
+							<p class="end-png"></p>
+						</div>
+						<div class="dialog-body-content">
+							<div><span class="dialog-body-left">事件id：</span><span class="dialog-body-right">01</span></div>
+							<div><span class="dialog-body-left">时间：</span><span class="dialog-body-right">2023-05-29</span></div>
+							<div><span class="dialog-body-left">源IP：</span><span class="dialog-body-right">63.56.123.55</span></div>
+							<div><span class="dialog-body-left">源端口：</span><span class="dialog-body-right">124</span></div>
+							<div><span class="dialog-body-left">地域：</span><span class="dialog-body-right">日本东京</span></div>
+							<div><span class="dialog-body-left">目的IP：</span><span class="dialog-body-right">13.5.12.55</span></div>
+							<div><span class="dialog-body-left">目的端口：</span><span class="dialog-body-right">24</span></div>
+							<div><span class="dialog-body-left">地域：</span><span class="dialog-body-right">北京昌平</span></div>
+						</div>
+					</div>
+						<!-- <el-form :model="form">
 							<el-form-item label="事件id" :label-width="formLabelWidth">
 								<el-input v-model="form.id" autocomplete="off" />
 							</el-form-item>
@@ -259,7 +274,7 @@
 							<el-form-item label="验证状态" :label-width="formLabelWidth">
 								<el-input v-model="form.state" autocomplete="off" />
 							</el-form-item>
-						</el-form>
+						</el-form> -->
 					<template #footer>
 						<span class="dialog-footer">
 							<el-button type="primary" @click="saveEdit()">确 定</el-button>
@@ -713,7 +728,7 @@ let form = reactive<FormAndTable>({
 let idx: number = -1;
 let editOrAdd:any
 const handleEdit = (index: number, row: any) => {
-	ElMessage('正在开发中...')
+	// ElMessage('正在开发中...')
 	// idx = index
 	// form.id = tableData2.value[idx].id
 	// form.time = tableData2.value[idx].time
@@ -728,7 +743,7 @@ const handleEdit = (index: number, row: any) => {
 	// form.level = tableData2.value[idx].level
 	// form.state = tableData2.value[idx].state
 	// editOrAdd = 'edit'
-	// editVisible.value = true;
+	editVisible.value = true;
 };
 const handleAdd = () => {
 	form.id = undefined,
@@ -785,6 +800,68 @@ function saveEdit() {
 </script>
 
 <style scoped lang="less">
+// dialog样式
+:deep(.el-dialog__header){
+	height: 46px;
+	line-height: 46px;
+	padding:0 16px;
+	border-bottom: 1px solid #e6e6e6;
+	margin-right:0px
+}
+:deep(.el-dialog__title) {
+    line-height: 16px;
+    font-size: 16px;
+    color: #303133;
+}
+:deep(.el-dialog__headerbtn) {
+	top:0;
+	height: 50px;
+	width: 50px;
+}
+:deep(.el-dialog__body){
+	padding:15px 20px!important
+}
+.dialog-body{
+	// width: 100%;
+    font-size: 14px;
+    border: 1px solid #d6d6d6;
+    padding: 20px;
+    overflow: auto;
+}
+.dialog-body-title{
+	padding: 5px 0;
+    font-size: 17px;
+    color: #333;
+    font-weight: 700;
+    display: flex;
+    // -webkit-box-align: center;
+    // -ms-flex-align: center;
+    align-items: center;
+}
+.dialog-body .start-png{
+	width: 20px;
+    height: 20px;
+    margin-right: 0;
+	background: url(../assets/img/data_image_base1.png) no-repeat 50%;
+	// background-size: contain;
+}
+// p{
+// 	line-height: 32px;
+// }
+.dashed-bottom{
+	flex: 1;  // flex剩余空间都分给dashed-bottom  flex-grow：1 伸
+	// flex:auto;
+	// position: relative;
+	margin: 0;
+	margin-left:11px;
+	border-bottom:1px dashed rgb(144, 202, 229)
+}
+.end-png{
+	width: 60px;
+    height: 5px;
+    margin: 0 auto;
+	background: url(../assets/img/data_image_base2.png) no-repeat 50%;
+}
 :deep(.el-table__header th){
 	background-color: rgba(51, 121, 255,0.2)!important;
   	color: #333333;

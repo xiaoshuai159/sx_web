@@ -55,37 +55,44 @@
             <el-tab-pane label="APP综合查询">
                 <div class="container ">
                     <div class="handle-box"> 
-                        <span class="spanText">APP应用名：</span><el-input placeholder="请输入内容"
+                        <span class="spanText">APP名称：</span><el-input placeholder="请输入内容"
                             style="width:13%;margin-right: 20px;"></el-input>
-                        <span class="spanText">APP包名：</span><el-input placeholder="请输入内容" 
-                            style="width:13%;margin-right: 20px;"></el-input>
-                        <span class="spanText">APP运营商：</span><el-input placeholder="请输入内容" 
-                            style="width:13%;margin-right: 20px;"></el-input>
-                        <span class="spanText">APP在架状态：</span>
-                        <el-select v-model="value" class="m-2" placeholder="Select" style="width:13%;">
+                        <span class="spanText">应用商店：</span>
+                        <el-select v-model="value" class="m-2" placeholder="Select" style="width:13%; margin-right: 20px;">
                             <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
                         </el-select>
-                        <el-row class="mb-4" style="margin: 15px 0;">
-                            <el-button @click="handleSearch">查询</el-button>
-                            <el-button>导出</el-button>
+                        <span class="spanText">开发者：</span><el-input placeholder="请输入内容" 
+                            style="width:13%;margin-right: 20px;"></el-input>
+                        <span class="spanText">简介关键字：</span><el-input placeholder="请输入内容" 
+                            style="width:13%;margin-right: 20px;"></el-input> <br><br>
+                        <span class="spanText">下载量：</span><el-input placeholder="请输入" 
+                            style="width:8%;margin-right: 10px;"></el-input>至：<el-input placeholder="请输入" 
+                            style="width:8%;margin-right: 20px;"></el-input>
+                        <span class="spanText">包名：</span><el-input placeholder="请输入内容" 
+                            style="width:13%;margin-right: 20px;"></el-input>
+                        <el-button @click="handleSearch">查询</el-button>
+                        <el-button>导出</el-button>
                             <!-- <el-button type="success" @click="handleAdd">新增</el-button>
                             <el-button type="danger" @click="handleDel">删除</el-button> -->
-                        </el-row>
                     </div>
 		
 		<el-table ref="multipleTableRef" :data="tableData" class="tableStyle" style="width: 100%" @selection-change="handleSelectionChange" stripe>
 			<el-table-column type="selection" min-width="55" />
 			<el-table-column prop="num" label="序号" min-width="80" />
-			<el-table-column prop="name" label="APP应用名" min-width="120" show-overflow-tooltip/>
+			<el-table-column prop="name" label="APP名称" min-width="120" show-overflow-tooltip/>
+            <el-table-column prop="developer" label="开发者" min-width="90" show-overflow-tooltip/>
+            <el-table-column prop="sha1" label="sha1" min-width="90" show-overflow-tooltip/>
+            <el-table-column prop="shopName" label="商店名称" min-width="90" show-overflow-tooltip/>
 			<el-table-column prop="pcapName" label="包名" min-width="120" show-overflow-tooltip/>
-			<el-table-column prop="operator" label="APP运营商" min-width="120" show-overflow-tooltip/>
-			<el-table-column prop="developer" label="开发者" min-width="90" show-overflow-tooltip/>
+			<!-- <el-table-column prop="operator" label="APP运营商" min-width="120" show-overflow-tooltip/> -->
+			
 			<el-table-column prop="version" label="版本" min-width="80" show-overflow-tooltip/>
-			<el-table-column prop="info" label="APP简介" min-width="120" show-overflow-tooltip/>
+            <el-table-column prop="downloadNum" label="下载量" min-width="80" show-overflow-tooltip/>
+			<!-- <el-table-column prop="info" label="APP简介" min-width="120" show-overflow-tooltip/>
 			<el-table-column prop="condition" label="在架状态/下架时间(不在架)" min-width="120" show-overflow-tooltip/>
 			<el-table-column prop="isRecord" label="是否备案" min-width="80" show-overflow-tooltip/>
 			<el-table-column prop="recordTel" label="备案号码" min-width="100" show-overflow-tooltip/>
-			<el-table-column prop="premissInfo" label="应用权限信息" min-width="110" show-overflow-tooltip/>
+			<el-table-column prop="premissInfo" label="应用权限信息" min-width="110" show-overflow-tooltip/> -->
 			<el-table-column prop="operate" label="操作" min-width="90">
 				<template #default="scope">
 					<el-button text type="primary" size="small" @click="handleEdit(scope.$index, scope.row)" v-permiss="15">详情</el-button>
@@ -479,6 +486,9 @@ interface appTableData {
 	developer: string
 	version: string
 	info: string
+    sha1: string
+    shopName: string
+    downloadNum: number
 	condition: string
 	isRecord: string
 	recordTel: string
@@ -501,6 +511,9 @@ let form = reactive<appTableData>({
 	operator: 'ByteDance',
 	developer: 'ByteDance',
 	version: '12.3.1',
+    sha1:'ce03a420dce72d092f7a048774608e478c6d5d97',
+    shopName:'小米应用商店',
+    downloadNum:12333,
     info: 'TikTok 是一款全球流行的短视频社交应用，用户可以通过拍摄、剪辑和分享短视频来展示自己的才华和创意。',
     condition: '未下架',
     isRecord: '未备案',
@@ -515,6 +528,9 @@ const tableData = ref<appTableData[]>([
         operator: 'ByteDance',
         developer: 'ByteDance',
 		version: '12.3.1',
+        sha1:'ce03a420dce72d092f7a048774608e478c6d5d97',
+        shopName:'小米应用商店',
+        downloadNum:12333,
 		info: 'TikTok 是一款全球流行的短视频社交应用，用户可以通过拍摄、剪辑和分享短视频来展示自己的才华和创意。',
 		condition: '未下架',
 		isRecord: '未备案',
@@ -541,6 +557,9 @@ const getData = () => {
             operator: 'ByteDance',
             developer: 'ByteDance',
 			version: '12.3.1',
+            sha1:'ce03a420dce72d092f7a048774608e478c6d5d97',
+            shopName:'小米应用商店',
+            downloadNum:12333,
 			info: 'TikTok 是一款全球流行的短视频社交应用，用户可以通过拍摄、剪辑和分享短视频来展示自己的才华和创意。',
             condition: '未下架',
             isRecord: '未备案',
@@ -555,6 +574,9 @@ const getData = () => {
 			operator: 'Tencent',
 			developer: 'Tencent',
 			version: '12.3.2',
+            sha1:'ce72d092f7a0487748c6d5d976ce03a420d08e47',
+            shopName:'苹果应用商店',
+            downloadNum:2333,
 			info: '微信是一款全球流行的社交应用，用户可以通过文字、语音、图片、视频等方式与朋友和家人保持联系，并使用微信支付进行线上支付。',
 			condition: '未下架',
 			isRecord: '未备案',
@@ -569,6 +591,9 @@ const getData = () => {
 			operator: 'ByteDance',
 			developer: 'ByteDance',
 			version: '12.3.3',
+            sha1:'8774608e478c6d5d97ce03a420dce72d092f7a04',
+            shopName:'苹果应用商店',
+            downloadNum:123,
 			info: '抖音是一款全球流行的短视频社交应用，用户可以通过拍摄、剪辑和分享短视频来展示自己的才华和创意。',
 			condition: '未下架',
 			isRecord: '未备案',
@@ -626,6 +651,9 @@ const saveEdit = () => {
 			operator: form.operator,
 			developer: form.developer,
 			version: form.version,
+            sha1:form.sha1,
+            shopName:form.shopName,
+            downloadNum:form.downloadNum,
 			info: form.info,
 			condition: form.condition,
 			isRecord: form.isRecord,

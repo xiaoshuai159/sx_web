@@ -107,10 +107,20 @@ const routes: RouteRecordRaw[] = [
                 path: '/attackAndDefence',
                 name: 'attackAndDefence',
                 meta: {
-                    title: '追踪溯源',
+                    title: '追踪溯源分析',
                     permiss: '12',
                 },
                 component: () => import(/* webpackChunkName: "charts" */ '../views/attackAndDefence.vue'),
+            },
+            {
+                path: '/countryPage',
+                name: 'countryPage',
+                meta: {
+                    title: '挖矿行为监测',
+                    permiss: '13',
+                },
+                component: () => import(/* webpackChunkName: "charts" */ '../views/mining/countryPage.vue'),
+
             },
             {
                 path: '/provincePage',
@@ -163,7 +173,7 @@ const routes: RouteRecordRaw[] = [
                 path:'/bugPage',
                 name:'bugPage',
                 meta:{
-                    title:'漏洞',
+                    title:'漏洞监测',
                     permiss:'16',
                 },
                 component: () => import('../views/bugPage.vue')
@@ -173,7 +183,7 @@ const routes: RouteRecordRaw[] = [
                 path:'/jiangPage',
                 name:'jiangPage',
                 meta:{
-                    title:'僵木蠕',
+                    title:'僵木蠕事件监测',
                     permiss:'16',
                 },
                 component: () => import('../views/jiangPage.vue')
@@ -284,19 +294,19 @@ const router = createRouter({
     history: createWebHashHistory(),
     routes,
 });
-
-router.beforeEach((to, from, next) => {
-    document.title = `${to.meta.title} `;
-    const role = localStorage.getItem('ms_username');
-    const permiss = usePermissStore();
-    if (!role && to.path !== '/login') {
-        next('/login');
-    } else if (to.meta.permiss && !permiss.key.includes(to.meta.permiss)) {
-        // 如果没有权限，则进入403
-        next('/403');
-    } else {
-        next();
-    }
-});
+// 路由守卫
+// router.beforeEach((to, from, next) => {
+//     document.title = `${to.meta.title} `;
+//     const role = localStorage.getItem('ms_username');
+//     const permiss = usePermissStore();
+//     if (!role && to.path !== '/login') {
+//         next('/login');
+//     } else if (to.meta.permiss && !permiss.key.includes(to.meta.permiss)) {
+//         // 如果没有权限，则进入403
+//         next('/403');
+//     } else {
+//         next();
+//     }
+// });
 
 export default router;

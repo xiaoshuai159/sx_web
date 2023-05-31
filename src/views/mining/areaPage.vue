@@ -1,7 +1,9 @@
 <template>
     <div>
         <div class="map-header-text">
-            <span style="cursor:pointer;" @click="toProvincePage()">辽宁省</span><span v-html="'\u00a0'"></span>
+            <span style="cursor:pointer;" @click="toCountryPage()">全国</span><span v-html="'\u00a0'"></span>
+            >
+          <span v-html="'\u00a0'"></span><span style="cursor:pointer;" @click="toProvincePage()">{{useMiningStore().province}}</span><span v-html="'\u00a0'"></span>
           >
           <span v-html="'\u00a0'"></span><span style="cursor:pointer;" @click="toCityPage()">{{useMiningStore().city}}</span><span v-html="'\u00a0'"></span>
           >
@@ -163,22 +165,27 @@ async function initChart() {
         })
     })
 }
+const toCountryPage = ()=>{
+    router.push({
+        name:'countryPage'
+    })
+}
 const toProvincePage=()=>{
     router.push({
         name:'provincePage'
     })
-    store.$patch({
-        city:"",
-        area:""
-    })
+    // store.updatecity("")
+    // store.updatearea("")
+    // store.$patch({
+    //     city:"",
+    //     area:""
+    // })
 }
 const toCityPage=()=>{
     router.push({
         name:'cityPage'
     })
-    store.$patch({
-        area:""
-    })
+    // store.updatearea("")
 }
 
     // if (sessionStorage.getItem("store")) {
@@ -195,9 +202,9 @@ const toCityPage=()=>{
     
     // 在页面刷新时将vuex里的信息保存到sessionStorage里
     // beforeunload事件在页面刷新时先触发
-    window.addEventListener("beforeunload", () => {
-      sessionStorage.setItem("store", JSON.stringify(store.$state));
-    });
+    // window.addEventListener("beforeunload", () => {
+    //   sessionStorage.setItem("store", JSON.stringify(store.$state));
+    // });
     const savedState = localStorage.getItem('store');
     if (savedState) {
         store.$state = JSON.parse(savedState);

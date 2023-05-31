@@ -119,18 +119,18 @@ const items = [
         permiss: '5',
         subs: [
             {
-                index: '/provincePage',
+                index: '/countryPage',
                 title: '挖矿行为监测',
                 permiss: '13',
             },
             {
                 index: '/bugPage',
-                title: '漏洞',
+                title: '漏洞监测',
                 permiss: '14',
             },
             {
                 index: '/jiangPage',
-                title: '僵木蠕',
+                title: '僵木蠕事件监测',
                 permiss: '15',
             }
         ],
@@ -155,7 +155,7 @@ const items = [
             {
                 index: '/attackAndDefence',
                 // title: '组织与资产检索',
-                title: '追踪溯源',
+                title: '追踪溯源分析',
                 permiss: '12',
             },
             {
@@ -179,19 +179,6 @@ const items = [
             },
         ],
     },
-    // {
-    //     icon: 'Wallet',
-    //     index: '/provincePage',
-    //     title: '虚拟货币挖矿监测',
-    //     permiss: '12',
-    //     subs: [
-    //         {
-    //             index: '/provincePage',
-    //             title: '挖矿行为监测',
-    //             permiss: '13',
-    //         },
-    //     ],
-    // },
     // {
     //     icon: 'MessageBox',
     //     index: '/domainMonitoring',
