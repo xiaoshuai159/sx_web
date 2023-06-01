@@ -6,12 +6,13 @@
             :default-active="onRoutes" 
             :collapse="sidebar.collapse" 
             
-            background-color="#0e528f"
+            background-color="#0e538f" 
             text-color="#bfcbd9" 
             active-text-color="#20a0ff" 
             unique-opened 
             router
         >
+        <!-- background-color="#0e538f" -->
             <template v-for="item in items">
                 <template v-if="item.subs">
                     <el-sub-menu :index="item.index" :key="item.index" v-permiss="item.permiss">
@@ -195,17 +196,21 @@ const sidebar = useSidebarStore();
     position: absolute;
     left: 0;
     // top: 48px;
-    top: 76px;
+    top: 56px;
     bottom: 0;
     overflow-y: scroll;
+    transition: all 0.3s;
 }
-
+.sidebar .sidebar-el-menu {
+    background: url(../assets/img/menuLeftpush.png) no-repeat;
+    background-size:cover;
+}
 .sidebar::-webkit-scrollbar {
     width: 0;
 }
 
 .sidebar-el-menu:not(.el-menu--collapse) {
-    width: 210px;
+    width: 220px;
 }
 .sidebar > ul {
     height: 100%;

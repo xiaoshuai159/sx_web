@@ -83,15 +83,20 @@ const handleCommand = (command: string) => {
 .header {
 	position: relative;
 	box-sizing: border-box;
+	/* display:flex; */
+	/* align-items: center; */
 	width: 100%;
 	/* height: 48px; */
-	height: 76px;
+	height: 56px;
 	font-size: 19px;
+	background: url(../assets/img/headerbg.png) 100% 100% no-repeat;
+	background-size: cover;
+	background-color: #0f4e8a;
 	color: #fff;
 }
 .collapse-btn {
 	display: flex;
-	justify-content: center;
+	/* justify-content: center; */
 	align-items: center;
 	height: 100%;
 	float: left;
@@ -100,13 +105,16 @@ const handleCommand = (command: string) => {
 }
 .header .logo {
 	float: left;
-	/* width: 210px;
+	/* width: 220px;
 	line-height: 48px; */
+	font-family: 'YouShe';
 	width: 520px;
 	font-weight: 600;
-	letter-spacing: 2px;
-	font-size: 33px;
-	line-height: 76px;
+	letter-spacing: 1.5px;
+	font-size: 28px;
+	line-height: 56px;
+	/* 文字倾斜 */
+	transform: skew(-7deg); 
 }
 .header-right {
 	float: right;
@@ -116,7 +124,7 @@ const handleCommand = (command: string) => {
 	display: flex;
 	/* height: 48px; */
 	cursor: pointer;
-	height: 76px;
+	height: 56px;
 	align-items: center;
 }
 .btn-fullscreen {

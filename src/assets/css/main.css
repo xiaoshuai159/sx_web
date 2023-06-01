@@ -23,10 +23,10 @@ a {
 
 .content-box {
     position: absolute;
-    left: 210px;
+    left: 220px;
     right: 0;
     /* top: 48px; */
-    top: 76px;
+    top: 56px;
     bottom: 0;
     padding-bottom: 30px;
     -webkit-transition: left .3s ease-in-out;

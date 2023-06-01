@@ -340,7 +340,7 @@ const handleEdit = (index: number, row: any) => {
 }
 
 .handle-input {
-	width: 210px;
+	width: 220px;
 }
 .eventid-input {
 	width: 16%;

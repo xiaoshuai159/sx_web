@@ -397,7 +397,7 @@ const saveEdit = () => {
 }
 
 .handle-input {
-	width: 210px;
+	width: 220px;
 }
 
 .eventid-input {

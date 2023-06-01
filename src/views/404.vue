@@ -33,7 +33,7 @@ const goBack = () => {
 }
 .error-code {
 	line-height: 1;
-	font-size: 210px;
+	font-size: 220px;
 	font-weight: bolder;
 	color: #2d8cf0;
 }
@@ -46,7 +46,7 @@ const goBack = () => {
 }
 .error-handle {
 	margin-top: 30px;
-	padding-bottom: 210px;
+	padding-bottom: 220px;
 }
 .error-btn {
 	margin-left: 100px;
