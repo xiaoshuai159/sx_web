@@ -1,9 +1,12 @@
 <template>
     <div>
         <div class="map-header-text">
-            <span style="cursor:pointer;" @click="toCountryPage">全国</span><span v-html="'\u00a0'"></span>
+            <!-- 国级 -->
+            <!-- <span style="cursor:pointer;" @click="toCountryPage">全国</span><span v-html="'\u00a0'"></span>
             >
-            <span v-html="'\u00a0'"></span><span> {{ useMiningStore().province }} </span>
+            <span v-html="'\u00a0'"></span><span> {{ useMiningStore().province }} </span> -->
+            <!-- 省级 -->
+            <span> 辽宁省 </span>
         </div>        
         <el-divider></el-divider>
         <div>
@@ -40,7 +43,7 @@
             height: 30px;
             margin-top: 15px;
             margin-bottom: 7px;
-          ">{{ useMiningStore().province }}挖矿IP概览</el-header>
+          ">辽宁省挖矿IP概览</el-header>
           <el-row>
         <el-col :span="24">
           <div>
@@ -77,8 +80,8 @@ let mapChart:any = ''
 const store = useMiningStore()
 async function initChart() {
     mapChart = echarts.init(document.getElementById('map_ref')!);
-    const ret = await axios.get(`../../map/省级/${store.province}.json`);
-    echarts.registerMap(`${store.province}`, ret.data)
+    const ret = await axios.get(`../../map/省级/辽宁省.json`);
+    echarts.registerMap(`辽宁省`, ret.data)
     console.log('执行了initChart',store.province);
     
     const initOption = {
@@ -90,7 +93,7 @@ async function initChart() {
             //     zoom: 1.2,
             // },
             {
-                map: `${store.province}`,
+                map: `辽宁省`,
                 zlevel:5,
                 zoom: 1.2,
                 label: {
@@ -104,7 +107,7 @@ async function initChart() {
                 }
             },
             {
-                map: `${store.province}`,
+                map: `辽宁省`,
                 top:'11%',
                 zlevel:4,
                 zoom: 1.2,
@@ -115,7 +118,7 @@ async function initChart() {
                 }
             },
             {
-                map:`${store.province}`,
+                map:`辽宁省`,
                 top:'12%',
                 zlevel:3,
                 zoom: 1.2,

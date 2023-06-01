@@ -728,7 +728,7 @@ let form = reactive<FormAndTable>({
 let idx: number = -1;
 let editOrAdd:any
 const handleEdit = (index: number, row: any) => {
-	// ElMessage('正在开发中...')
+	ElMessage('正在开发中...')
 	// idx = index
 	// form.id = tableData2.value[idx].id
 	// form.time = tableData2.value[idx].time
@@ -743,7 +743,7 @@ const handleEdit = (index: number, row: any) => {
 	// form.level = tableData2.value[idx].level
 	// form.state = tableData2.value[idx].state
 	// editOrAdd = 'edit'
-	editVisible.value = true;
+	// editVisible.value = true;
 };
 const handleAdd = () => {
 	form.id = undefined,

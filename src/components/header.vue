@@ -5,9 +5,11 @@
 			<el-icon v-if="sidebar.collapse"><Expand /></el-icon>
 			<el-icon v-else><Fold /></el-icon>
 		</div>
-		<div class="logo">风险感知分析研判系统</div>
+		<div class="logo">网络安全协调指挥平台</div>
 		<div class="header-right">
-			<div class="header-user-con">
+			<div class="header-user-con" @click="toMenuIndex">
+				<span style="line-height: 14px; align-self: center;margin-right: 7px;"><svg t="1685582666850" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3347" width="20" height="20"><path d="M468.1 320.3V158.7c0.9-8.1-1.3-16.4-7.5-22.7-10.9-10.8-28.4-10.8-39.3 0L147.6 436.1c-5.8 5.7-8.3 13.4-7.9 20.9-0.4 7.5 2.1 15.1 7.9 20.9l272.2 298.4c10.2 8.7 28.8 13.6 40.8 1.6 6.2-6.2 8.9-11.4 8-19.5V594c180.8 0 344.4 130.2 376.8 301.6 21.9-50.2 34.1-105.6 34.1-163.9 0.1-227.2-184.1-411.4-411.4-411.4z" fill="#ffffff" p-id="3348"></path></svg></span>
+				<span style="font-size: 14px;">返回</span>
 				<!-- 消息中心 -->
 				<!-- <div class="btn-bell">
 					<el-tooltip
@@ -63,7 +65,9 @@ onMounted(() => {
 		collapseChage();
 	}
 });
-
+const toMenuIndex = ()=>{
+	window.location.href = "http://172.17.18.1:9998/#/menuIndex"
+}
 // 用户名下拉菜单选择事件
 const router = useRouter();
 const handleCommand = (command: string) => {
@@ -111,6 +115,7 @@ const handleCommand = (command: string) => {
 .header-user-con {
 	display: flex;
 	/* height: 48px; */
+	cursor: pointer;
 	height: 76px;
 	align-items: center;
 }

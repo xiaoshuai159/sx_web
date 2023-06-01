@@ -77,41 +77,8 @@ const items = [
                 title: 'APP检测分析',
                 permiss: '3',
             },
-            // {
-            //     index: '/editor',
-            //     title: '数据安全事件预警',
-            //     permiss: '3',
-            // },
-            // {
-            //     index: '/table',
-            //     title: '数据安全事件汇总',
-            //     permiss: '4',
-            // },
         ]
     },
-    // {
-    //     icon: 'Bell',
-    //     index: '1',
-    //     title: '重点APP监测',
-    //     permiss: '5',
-    //     subs: [
-    //         // {
-    //         //     index: '/APPstat',
-    //         //     title: 'APP事件统计',
-    //         //     permiss: '6',
-    //         // },
-    //         {
-    //             index: '/APPsearch',
-    //             title: 'APP综合查询',
-    //             permiss: '7',
-    //         },
-    //         {
-    //             index: '/noRecordApp',
-    //             title: '未备案APP处置',
-    //             permiss: '8',
-    //         },
-    //     ],
-    // },
     {
         icon: 'Warning',
         index: '/securityAnalysis',
@@ -119,7 +86,7 @@ const items = [
         permiss: '5',
         subs: [
             {
-                index: '/countryPage',
+                index: '/provincePage',
                 title: '挖矿行为监测',
                 permiss: '13',
             },
@@ -209,79 +176,17 @@ const items = [
     //         },
     //     ],
     // },
-    // {
-    //     icon: 'DocumentCopy',
-    //     index: '/tabs',
-    //     title: 'tab选项卡',
-    //     permiss: '3',
-    // },
-    // {
-    //     icon: 'Edit',
-    //     index: '3',
-    //     title: '表单相关',
-    //     permiss: '4',
-    //     subs: [
-    //         {
-    //             index: '/form',
-    //             title: '基本表单',
-    //             permiss: '5',
-    //         },
-    //         {
-    //             index: '/upload',
-    //             title: '文件上传',
-    //             permiss: '6',
-    //         },
-    //         {
-    //             index: '4',
-    //             title: '三级菜单',
-    //             permiss: '7',
-    //             subs: [
-    //                 {
-    //                     index: '/editor',
-    //                     title: '富文本编辑器',
-    //                     permiss: '8',
-    //                 },
-    //                 {
-    //                     index: '/markdown',
-    //                     title: 'markdown编辑器',
-    //                     permiss: '9',
-    //                 },
-    //             ],
-    //         },
-    //     ],
-    // },
-    // {
-    //     icon: 'Setting',
-    //     index: '/icon',
-    //     title: '自定义图标',
-    //     permiss: '10',
-    // },
-    // {
-    //     icon: 'PieChart',
-    //     index: '/charts',
-    //     title: 'schart图表',
-    //     permiss: '11',
-    // },
-    // {
-    //     icon: 'Warning',
-    //     index: '/permission',
-    //     title: '权限管理',
-    //     permiss: '13',
-    // },
-    // {
-    //     icon: 'CoffeeCup',
-    //     index: '/donate',
-    //     title: '支持作者',
-    //     permiss: '14',
-    // },
 ];
 
 const route = useRoute();
 const onRoutes = computed(() => {
+    // “不走登录” 设置 ms_keys 权限，侧边栏内容显示
+    localStorage.setItem('ms_keys', '["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18"]');
     return route.path;
 });
 
 const sidebar = useSidebarStore();
+
 </script>
 
 <style scoped lang="less">
