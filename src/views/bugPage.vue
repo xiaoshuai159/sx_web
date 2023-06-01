@@ -91,45 +91,64 @@
     </div>
 
             <!-- 编辑弹出框 -->
-    <el-dialog title="数据安全事件详情" v-model="editVisible" width="30%" top="1%">
-            <el-form :model="form">
-                <el-form-item label="事件id" :label-width="formLabelWidth">
-                    <el-input v-model="form.id" autocomplete="off" />
-                </el-form-item>
-                <el-form-item label="时间" :label-width="formLabelWidth">
-                    <el-input v-model="form.time" autocomplete="off" />
-                </el-form-item>
-                <el-form-item label="受害数据IP" :label-width="formLabelWidth">
-                    <el-input v-model="form.harmIP" autocomplete="off" />
-                </el-form-item>
-                <el-form-item label="受害端口" :label-width="formLabelWidth">
-                    <el-input v-model="form.harmPort" autocomplete="off" />
-                </el-form-item>
-                <el-form-item label="数据库类型" :label-width="formLabelWidth">
-                    <el-input v-model="form.databaseType" autocomplete="off" />
-                </el-form-item>
-                <el-form-item label="预警类型" :label-width="formLabelWidth">
-                    <el-input v-model="form.warnType" autocomplete="off" />
-                </el-form-item>
-                <el-form-item label="告警内容" :label-width="formLabelWidth">
-                    <el-input v-model="form.warnContent" autocomplete="off" />
-                </el-form-item>
-                <el-form-item label="攻击次数" :label-width="formLabelWidth">
-                    <el-input v-model="form.attackNum" autocomplete="off" />
-                </el-form-item>
-                <el-form-item label="攻击IP" :label-width="formLabelWidth">
-                    <el-input v-model="form.attackIP" autocomplete="off" />
-                </el-form-item>
-                <el-form-item label="攻击端口" :label-width="formLabelWidth">
-                    <el-input v-model="form.attackPort" autocomplete="off" />
-                </el-form-item>
-                <el-form-item label="优先级" :label-width="formLabelWidth">
-                    <el-input v-model="form.level" autocomplete="off" />
-                </el-form-item>
-                <el-form-item label="验证状态" :label-width="formLabelWidth">
-                    <el-input v-model="form.state" autocomplete="off" />
-                </el-form-item>
-            </el-form>
+    <el-dialog title="漏洞事件详情" v-model="editVisible" >
+		<div class="dialog-body">
+						<div class="dialog-body-title">
+							<span class="start-png"></span>
+							基础信息
+							<p class="dashed-bottom"></p>
+							<p class="end-png"></p>
+						</div>
+						<div class="dialog-body-content">
+							<div><span class="dialog-body-left">事件id：</span><span class="dialog-body-right">01</span></div>
+							<div><span class="dialog-body-left">时间：</span><span class="dialog-body-right">2023-05-29</span></div>
+							<div><span class="dialog-body-left">事件名称：</span><span class="dialog-body-right">密码爆破</span></div>	
+							<div><span class="dialog-body-left">源IP：</span><span class="dialog-body-right">63.56.123.55</span></div>
+							<div><span class="dialog-body-left">源端口：</span><span class="dialog-body-right">124</span></div>
+							<div><span class="dialog-body-left">地域：</span><span class="dialog-body-right">日本东京</span></div> 
+							<div><span class="dialog-body-left">目的IP：</span><span class="dialog-body-right">13.5.12.55</span></div>
+							<div><span class="dialog-body-left">目的端口：</span><span class="dialog-body-right">24</span></div>
+							<div><span class="dialog-body-left">地域：</span><span class="dialog-body-right">北京昌平</span></div>
+						</div>
+						<br>
+						<div class="dialog-body-title">
+							<span class="start-png"></span>
+							告警信息
+							<p class="dashed-bottom"></p>
+							<p class="end-png"></p>
+						</div>
+						<div class="dialog-body-content">
+							<div><span class="dialog-body-left">告警类型：</span><span class="dialog-body-right">数据库密码爆破</span></div>
+							<div><span class="dialog-body-left">告警等级：</span><span class="dialog-body-right">高级</span></div>
+							<div><span class="dialog-body-left">告警载荷：</span><span class="dialog-body-right">/x0qrvdngfe</span></div>	
+						</div>
+						<br>
+						<div class="dialog-body-title">
+							<span class="start-png"></span>
+							威胁情报
+							<p class="dashed-bottom"></p>
+							<p class="end-png"></p>
+						</div>
+						<div style="margin-top: 6px;margin-left: 5px; font-size: 18px;font-weight: 600;">pool.use-138.com</div>
+						<div class="dialog-body-content">							
+							<div><span class="dialog-body-left">情报标签</span> <span class="dialog-body-right">暂无</span></div>
+							<div><span class="dialog-body-left">运营商</span> <span class="dialog-body-right">暂无</span></div>
+							<div><span class="dialog-body-left">置信度</span> <span class="dialog-body-right">暂无</span></div>
+							<div><span class="dialog-body-left">相关链接</span> <span class="dialog-body-right" style="cursor: pointer; color:rgb(0, 119, 255)">下载</span></div>							
+						</div>
+						<br>
+						<div class="dialog-body-title">
+							<span class="start-png"></span>
+							处置建议
+							<p class="dashed-bottom"></p>
+							<p class="end-png"></p>
+						</div>
+						<div style="font-size: 10px; margin: 5px;">
+							1、确认告警出现的频率、数量及时间等指标，大致判断是否为手动误访问导致
+							 <br>
+							2、排查是否存在其他受影响终端
+						</div>
+					</div>
         <template #footer>
             <span class="dialog-footer">
                 <el-button type="primary" @click="saveEdit()">确 定</el-button>
@@ -255,7 +274,7 @@ let form = reactive<FormAndTable>({
 let idx: number = -1;
 let editOrAdd:any
 const handleEdit = (index: number, row: any) => {
-	ElMessage('正在开发中...')
+	// ElMessage('正在开发中...')
 	// idx = index
 	// form.id = tableData2.value[idx].id
 	// form.time = tableData2.value[idx].time
@@ -270,47 +289,130 @@ const handleEdit = (index: number, row: any) => {
 	// form.level = tableData2.value[idx].level
 	// form.state = tableData2.value[idx].state
 	// editOrAdd = 'edit'
-	// editVisible.value = true;
+	editVisible.value = true;
 };
 function saveEdit() {
 	// console.log(tableData.value[currentRow]);	
 	editVisible.value = false;
-	if(editOrAdd=='edit'){
-		tableData2.value[idx].id = form.id
-		tableData2.value[idx].time = form.time
-		tableData2.value[idx].harmIP = form.harmIP
-		tableData2.value[idx].harmPort = form.harmPort
-		tableData2.value[idx].databaseType = form.databaseType
-		tableData2.value[idx].warnType = form.warnType
-		tableData2.value[idx].warnContent = form.warnContent
-		tableData2.value[idx].attackNum = form.attackNum
-		tableData2.value[idx].attackIP = form.attackIP
-		tableData2.value[idx].attackPort = form.attackPort
-		tableData2.value[idx].level = form.level
-		tableData2.value[idx].state = form.state
-		ElMessage.success(`修改成功`);		
-	}else{
-		tableData2.value.push({
-			id:form.id,
-			time:form.time,
-			harmIP: form.harmIP,
-			harmPort:form.harmPort,
-			databaseType:form.databaseType,
-			warnType:form.warnType,
-			warnContent:form.warnContent,
-			attackNum: form.attackNum,
-			attackIP: form.attackIP,
-			attackPort:form.attackPort,
-			state:form.state,
-			level:form.level
-		});
-		ElMessage.success(`添加成功`);	
-	}
+	// if(editOrAdd=='edit'){
+	// 	tableData2.value[idx].id = form.id
+	// 	tableData2.value[idx].time = form.time
+	// 	tableData2.value[idx].harmIP = form.harmIP
+	// 	tableData2.value[idx].harmPort = form.harmPort
+	// 	tableData2.value[idx].databaseType = form.databaseType
+	// 	tableData2.value[idx].warnType = form.warnType
+	// 	tableData2.value[idx].warnContent = form.warnContent
+	// 	tableData2.value[idx].attackNum = form.attackNum
+	// 	tableData2.value[idx].attackIP = form.attackIP
+	// 	tableData2.value[idx].attackPort = form.attackPort
+	// 	tableData2.value[idx].level = form.level
+	// 	tableData2.value[idx].state = form.state
+	// 	ElMessage.success(`修改成功`);		
+	// }else{
+	// 	tableData2.value.push({
+	// 		id:form.id,
+	// 		time:form.time,
+	// 		harmIP: form.harmIP,
+	// 		harmPort:form.harmPort,
+	// 		databaseType:form.databaseType,
+	// 		warnType:form.warnType,
+	// 		warnContent:form.warnContent,
+	// 		attackNum: form.attackNum,
+	// 		attackIP: form.attackIP,
+	// 		attackPort:form.attackPort,
+	// 		state:form.state,
+	// 		level:form.level
+	// 	});
+	// 	ElMessage.success(`添加成功`);	
+	// }
 	
 };
 </script>
 
 <style scoped lang="less">
+// dialog样式
+:deep(.el-dialog__header){
+	height: 46px;
+	line-height: 46px;
+	padding:0 16px;
+	border-bottom: 1px solid #e6e6e6;
+	margin-right:0px
+}
+:deep(.el-dialog__title) {
+    line-height: 16px;
+    font-size: 16px;
+    color: #303133;
+}
+:deep(.el-dialog__headerbtn) {
+	top:0;
+	height: 50px;
+	width: 50px;
+}
+:deep(.el-dialog__body){
+	padding:15px 20px!important
+}
+.dialog-body{
+	// width: 100%;
+    font-size: 14px;
+    border: 1px solid #d6d6d6;
+    padding: 20px;
+    overflow: auto;
+}
+.dialog-body-title{
+	padding: 5px 0;
+    font-size: 17px;
+    color: #333;
+    font-weight: 700;
+    display: flex;
+    // -webkit-box-align: center;
+    // -ms-flex-align: center;
+    align-items: center;
+}
+.dialog-body .start-png{
+	width: 20px;
+    height: 20px;
+    margin-right: 0;
+	background: url(../assets/img/data_image_base1.png) no-repeat 50%;
+	// background-size: contain;
+}
+// p{
+// 	line-height: 32px;
+// }
+.dashed-bottom{
+	flex: 1;  // flex剩余空间都分给dashed-bottom  flex-grow：1 伸
+	// flex:auto;
+	// position: relative;
+	margin: 0;
+	margin-left:11px;
+	border-bottom:1px dashed rgb(144, 202, 229)
+}
+.end-png{
+	width: 60px;
+    height: 5px;
+    margin: 0 auto;
+	background: url(../assets/img/data_image_base2.png) no-repeat 50%;
+}
+.dialog-body-content{
+	
+	columns: 3;
+	margin-top: 8px;
+	// display: flex;
+	// flex-wrap: wrap;
+	// justify-content: space-between;
+}
+.dialog-body-content div{
+	margin-bottom:6px
+}
+.dialog-body-left{
+	margin-left:6px;
+	margin-bottom: 10px;
+	font-size: 14px;
+	color: #aaaaaa;
+}
+.dialog-body-right{
+	font-size: 14px;
+    font-weight: 500;
+}
 :deep(.el-table__header th){
 	background-color: rgba(51, 121, 255,0.2)!important;
   	color: #333333;
