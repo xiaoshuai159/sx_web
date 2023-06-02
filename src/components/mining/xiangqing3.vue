@@ -48,7 +48,7 @@
               </div>
                
                 
-              <div align="left" style="height: 58px;">
+              <div align="left" style="height:45px; margin-top: 15px;">
                 <el-button @click="handleSearch">查询</el-button
                 ><el-button 
                   >导出</el-button
@@ -109,12 +109,52 @@
           </el-col>
         </el-row>
       </el-main>
+      <el-dialog v-model="dialogTableVisible" title="挖矿信息详情" :append-to-body='true' >
+        <div class="dialog-body">
+						<div class="dialog-body-title">
+							<span class="start-png"></span>
+							基础信息
+							<p class="dashed-bottom"></p>
+							<p class="end-png"></p>
+						</div>
+              <div class="my-el-row">
+                  <div><span class="dialog-body-left">APP名称：</span><span class="dialog-body-right">TikTok</span></div>
+                  <div><span class="dialog-body-left">应用商店：</span><span class="dialog-body-right">小米应用商店</span></div> 
+                  <div><span class="dialog-body-left">版本号：</span><span class="dialog-body-right">12.3.1</span></div>
+              </div>
+              <div class="my-el-row">
+                  <div><span class="dialog-body-left">下载量：</span><span class="dialog-body-right">12333</span></div>
+                  <div><span class="dialog-body-left">包名：</span><span class="dialog-body-right">com.ss.android.trill</span></div>
+                  <div><span class="dialog-body-left">apk文件大小：</span><span class="dialog-body-right">15351</span></div>
+              </div>
+              <div class="my-el-row">
+                  <div><span class="dialog-body-left">版本名称：</span><span class="dialog-body-right">01.05.0071</span></div>
+                  <div><span class="dialog-body-left">主办单位：</span><span class="dialog-body-right">-</span></div>
+              </div>
+              <div style="margin-top: 6px;">
+                  <div style="margin-bottom: 6px;"><span class="dialog-body-left">下载地址：</span><span class="dialog-body-right">http://d7.xiaotongqq.com/ttdl.apk</span></div>
+							    <div style="margin-bottom: 6px;"><span class="dialog-body-left">APP描述：</span><span class="dialog-body-right">TikTok 是一款全球流行的短视频社交应用，用户可以通过拍摄、剪辑和分享短视频来展示自己的才华和创意。</span></div>
+              </div>
+					</div>
+			<template #footer>
+				<span class="dialog-footer">
+					<el-button type="primary" @click="saveEdit">确定</el-button>
+					<el-button @click="dialogTableVisible = false">
+						取消
+					</el-button>
+				</span>
+			</template>
+      </el-dialog>
     </el-card>
   </div>
 </template>
 
 <script setup lang="ts" name="xiangqing3">
 import {reactive, ref} from 'vue';
+const dialogTableVisible = ref(false)
+const saveEdit = () => {
+  dialogTableVisible.value = false;
+}
 const searchValue = {
     value: "",
     value2: "",
@@ -172,6 +212,102 @@ function handleCurrentChange(val:number) {
 </script>
 
 <style scoped lang="less">
+// dialog样式
+:deep(.el-dialog__header){
+	height: 46px;
+	line-height: 46px;
+	padding:0 16px;
+	border-bottom: 1px solid #e6e6e6;
+	margin-right:0px
+}
+:deep(.el-dialog__title) {
+    line-height: 16px;
+    font-size: 16px;
+    color: #303133;
+}
+:deep(.el-dialog__headerbtn) {
+	top:0;
+	height: 50px;
+	width: 50px;
+}
+:deep(.el-dialog__body){
+	padding:15px 20px!important
+}
+.dialog-body{
+	// width: 100%;
+    font-size: 14px;
+    border: 1px solid #d6d6d6;
+    padding: 20px;
+    overflow: auto;
+}
+.dialog-body-title{
+	padding: 5px 0;
+    font-size: 17px;
+    color: #333;
+    font-weight: 700;
+    display: flex;
+    // -webkit-box-align: center;
+    // -ms-flex-align: center;
+    align-items: center;
+}
+.dialog-body .start-png{
+	width: 20px;
+    height: 20px;
+    margin-right: 0;
+	background: url(../../assets/img/data_image_base1.png) no-repeat 50%;
+	// background-size: contain;
+}
+// p{
+// 	line-height: 32px;
+// }
+.dashed-bottom{
+	flex: 1;  // flex剩余空间都分给dashed-bottom  flex-grow：1 伸
+	// flex:auto;
+	// position: relative;
+	margin: 0;
+	margin-left:11px;
+	border-bottom:1px dashed rgb(144, 202, 229)
+}
+.end-png{
+	width: 60px;
+    height: 5px;
+    margin: 0 auto;
+	background: url(../../assets/img/data_image_base2.png) no-repeat 50%;
+}
+.dialog-body-content{
+	
+	columns: 3;
+	margin-top: 8px;
+	// display: flex;
+	// flex-wrap: wrap;
+	// justify-content: space-between;
+}
+.dialog-body-content div{
+	margin-bottom:6px
+}
+.dialog-body-left{
+	margin-left:6px;
+	margin-bottom: 10px;
+	font-size: 14px;
+	color: #aaaaaa;
+}
+.dialog-body-right{
+	font-size: 14px;
+    font-weight: 500;
+}
+.my-el-row{
+    margin-top: 8px;
+}
+.my-el-row div{
+    float: left;
+    width: 33%;
+}
+.my-el-row::after{
+    content:'';
+    display:block;
+    clear: both;
+}
+
 :deep(.el-select) {
   width: 15%;
 }
@@ -184,13 +320,13 @@ function handleCurrentChange(val:number) {
 :deep(.el-input__icon) {
   line-height: inherit;
 }
-:deep(.el-button) {
-  line-height: 0.1;
-  border-radius: 5px;
-  letter-spacing: 10px;
-  margin: 15px 30px -8px 0;
-  padding: 12px 21px 12px 28px;
-}
+// :deep(.el-button) {
+//   line-height: 0.1;
+//   border-radius: 5px;
+//   letter-spacing: 10px;
+//   margin: 15px 30px -8px 0;
+//   padding: 12px 21px 12px 28px;
+// }
 :deep(.el-icon-loading) {
   width: 14px;
   height: 14px;

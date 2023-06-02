@@ -46,7 +46,7 @@
                 style="width: 15%"
               ></el-input>
             </div>
-            <div align="left" style="height: 58px;">
+            <div align="left" style="height:45px; margin-top: 15px;">
               <el-button @click="handleSearch">查询</el-button
               ><el-button 
                 >导出</el-button
@@ -203,13 +203,13 @@ top: -1px;
 :deep(.el-input__icon) {
 line-height: inherit;
 }
-:deep(.el-button) {
-line-height: 0.1;
-border-radius: 5px;
-letter-spacing: 10px;
-margin: 15px 30px -8px 0;
-padding: 12px 21px 12px 28px;
-}
+// :deep(.el-button) {
+// line-height: 0.1;
+// border-radius: 5px;
+// letter-spacing: 10px;
+// margin: 15px 30px -8px 0;
+// padding: 12px 21px 12px 28px;
+// }
 :deep(.el-icon-loading) {
 width: 14px;
 height: 14px;

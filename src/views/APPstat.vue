@@ -100,8 +100,8 @@
 				</template>
 			</el-table-column>
 		</el-table>
-		<el-dialog v-model="dialogTableVisible" title="APP信息填写" :append-to-body='true' width="30%" top="1%">
-			<el-form :model="form">
+		<el-dialog v-model="dialogTableVisible" title="APP信息详情" :append-to-body='true' >
+			<!-- <el-form :model="form">
 				<el-form-item label="序号" :label-width="formLabelWidth">
 					<el-input v-model="form.num" autocomplete="off" />
 				</el-form-item>
@@ -135,7 +135,71 @@
 				<el-form-item label="权限信息" :label-width="formLabelWidth">
 					<el-input v-model="form.premissInfo" autocomplete="off" :rows="2" type="textarea" />
 				</el-form-item>
-			</el-form>
+			</el-form> -->
+            <div class="dialog-body">
+						<div class="dialog-body-title">
+							<span class="start-png"></span>
+							基础信息
+							<p class="dashed-bottom"></p>
+							<p class="end-png"></p>
+						</div>
+                        <div class="my-el-row">
+                            <div><span class="dialog-body-left">APP名称：</span><span class="dialog-body-right">TikTok</span></div>
+                            <div><span class="dialog-body-left">应用商店：</span><span class="dialog-body-right">小米应用商店</span></div> 
+                            <div><span class="dialog-body-left">版本号：</span><span class="dialog-body-right">12.3.1</span></div>
+                        </div>
+                        <div class="my-el-row">
+                            <div><span class="dialog-body-left">下载量：</span><span class="dialog-body-right">12333</span></div>
+                            <div><span class="dialog-body-left">包名：</span><span class="dialog-body-right">com.ss.android.trill</span></div>
+                            <div><span class="dialog-body-left">apk文件大小：</span><span class="dialog-body-right">15351</span></div>
+                        </div>
+                        <div class="my-el-row">
+                            <div><span class="dialog-body-left">版本名称：</span><span class="dialog-body-right">01.05.0071</span></div>
+                            <div><span class="dialog-body-left">主办单位：</span><span class="dialog-body-right">-</span></div>
+                        </div>
+                        <div style="margin-top: 6px;">
+                            <div style="margin-bottom: 6px;"><span class="dialog-body-left">下载地址：</span><span class="dialog-body-right">http://d7.xiaotongqq.com/ttdl.apk</span></div>
+							<div style="margin-bottom: 6px;"><span class="dialog-body-left">APP描述：</span><span class="dialog-body-right">TikTok 是一款全球流行的短视频社交应用，用户可以通过拍摄、剪辑和分享短视频来展示自己的才华和创意。</span></div>
+                        </div>
+						<!-- <br>
+						<div class="dialog-body-title">
+							<span class="start-png"></span>
+							告警信息
+							<p class="dashed-bottom"></p>
+							<p class="end-png"></p>
+						</div>
+						<div class="dialog-body-content">
+							<div><span class="dialog-body-left">告警类型：</span><span class="dialog-body-right">数据库密码爆破</span></div>
+							<div><span class="dialog-body-left">告警等级：</span><span class="dialog-body-right">高级</span></div>
+							<div><span class="dialog-body-left">告警载荷：</span><span class="dialog-body-right">/x0qrvdngfe</span></div>	
+						</div>
+						<br>
+						<div class="dialog-body-title">
+							<span class="start-png"></span>
+							威胁情报
+							<p class="dashed-bottom"></p>
+							<p class="end-png"></p>
+						</div>
+						<div style="margin-top: 6px;margin-left: 5px; font-size: 18px;font-weight: 600;">pool.use-138.com</div>
+						<div class="dialog-body-content">							
+							<div><span class="dialog-body-left">情报标签</span> <span class="dialog-body-right">暂无</span></div>
+							<div><span class="dialog-body-left">运营商</span> <span class="dialog-body-right">暂无</span></div>
+							<div><span class="dialog-body-left">置信度</span> <span class="dialog-body-right">暂无</span></div>
+							<div><span class="dialog-body-left">相关链接</span> <span class="dialog-body-right" style="cursor: pointer; color:rgb(0, 119, 255)">下载</span></div>							
+						</div>
+						<br>
+						<div class="dialog-body-title">
+							<span class="start-png"></span>
+							处置建议
+							<p class="dashed-bottom"></p>
+							<p class="end-png"></p>
+						</div>
+						<div style="font-size: 10px; margin: 5px;">
+							1、确认告警出现的频率、数量及时间等指标，大致判断是否为手动误访问导致
+							 <br>
+							2、排查是否存在其他受影响终端
+						</div> -->
+					</div>
 			<template #footer>
 				<span class="dialog-footer">
 					<el-button type="primary" @click="saveEdit">确定</el-button>
@@ -610,7 +674,7 @@ const handleSearch = () => {
 }
 let editOrAdd:string
 const handleEdit = (a:number,b:any) => {
-    ElMessage('正在开发中...')
+    // ElMessage('正在开发中...')
 	// idx = a
 	// editOrAdd = 'edit'
 	// form.num = tableData.value[idx].num
@@ -624,45 +688,45 @@ const handleEdit = (a:number,b:any) => {
 	// form.isRecord = tableData.value[idx].isRecord
 	// form.recordTel = tableData.value[idx].recordTel
 	// form.premissInfo = tableData.value[idx].premissInfo
-	// dialogTableVisible.value = true
+	dialogTableVisible.value = true
 }
 
 const saveEdit = () => {
-	if(editOrAdd == 'edit'){
-		dialogTableVisible.value = false;
-		tableData.value[idx].num = form.num
-		tableData.value[idx].name = form.name
-		tableData.value[idx].pcapName = form.pcapName
-		tableData.value[idx].operator = form.operator
-		tableData.value[idx].developer = form.developer
-		tableData.value[idx].version = form.version
-		tableData.value[idx].info = form.info
-		tableData.value[idx].condition = form.condition
-		tableData.value[idx].isRecord = form.isRecord
-		tableData.value[idx].recordTel = form.recordTel
-		tableData.value[idx].premissInfo = form.premissInfo
-		ElMessage.success(`修改成功`);
-	}else{
-		dialogTableVisible.value = false;
-		tableData.value.push({
-			num: form.num,
-			name: form.name,
-			pcapName: form.pcapName,
-			operator: form.operator,
-			developer: form.developer,
-			version: form.version,
-            sha1:form.sha1,
-            shopName:form.shopName,
-            downloadNum:form.downloadNum,
-			info: form.info,
-			condition: form.condition,
-			isRecord: form.isRecord,
-			recordTel: form.recordTel,
-			premissInfo: form.premissInfo,	
-		})
-		ElMessage.success(`添加成功`);
-	}
-	
+	// if(editOrAdd == 'edit'){
+	// 	dialogTableVisible.value = false;
+	// 	tableData.value[idx].num = form.num
+	// 	tableData.value[idx].name = form.name
+	// 	tableData.value[idx].pcapName = form.pcapName
+	// 	tableData.value[idx].operator = form.operator
+	// 	tableData.value[idx].developer = form.developer
+	// 	tableData.value[idx].version = form.version
+	// 	tableData.value[idx].info = form.info
+	// 	tableData.value[idx].condition = form.condition
+	// 	tableData.value[idx].isRecord = form.isRecord
+	// 	tableData.value[idx].recordTel = form.recordTel
+	// 	tableData.value[idx].premissInfo = form.premissInfo
+	// 	ElMessage.success(`修改成功`);
+	// }else{
+	// 	dialogTableVisible.value = false;
+	// 	tableData.value.push({
+	// 		num: form.num,
+	// 		name: form.name,
+	// 		pcapName: form.pcapName,
+	// 		operator: form.operator,
+	// 		developer: form.developer,
+	// 		version: form.version,
+    //         sha1:form.sha1,
+    //         shopName:form.shopName,
+    //         downloadNum:form.downloadNum,
+	// 		info: form.info,
+	// 		condition: form.condition,
+	// 		isRecord: form.isRecord,
+	// 		recordTel: form.recordTel,
+	// 		premissInfo: form.premissInfo,	
+	// 	})
+	// 	ElMessage.success(`添加成功`);
+	// }
+	dialogTableVisible.value = false;
 }
 const handleAdd = () => {
 	editOrAdd = 'add'
@@ -728,6 +792,101 @@ onUnmounted(() => {
 </script>
 
 <style scoped lang="less">
+// dialog样式
+:deep(.el-dialog__header){
+	height: 46px;
+	line-height: 46px;
+	padding:0 16px;
+	border-bottom: 1px solid #e6e6e6;
+	margin-right:0px
+}
+:deep(.el-dialog__title) {
+    line-height: 16px;
+    font-size: 16px;
+    color: #303133;
+}
+:deep(.el-dialog__headerbtn) {
+	top:0;
+	height: 50px;
+	width: 50px;
+}
+:deep(.el-dialog__body){
+	padding:15px 20px!important
+}
+.dialog-body{
+	// width: 100%;
+    font-size: 14px;
+    border: 1px solid #d6d6d6;
+    padding: 20px;
+    overflow: auto;
+}
+.dialog-body-title{
+	padding: 5px 0;
+    font-size: 17px;
+    color: #333;
+    font-weight: 700;
+    display: flex;
+    // -webkit-box-align: center;
+    // -ms-flex-align: center;
+    align-items: center;
+}
+.dialog-body .start-png{
+	width: 20px;
+    height: 20px;
+    margin-right: 0;
+	background: url(../assets/img/data_image_base1.png) no-repeat 50%;
+	// background-size: contain;
+}
+// p{
+// 	line-height: 32px;
+// }
+.dashed-bottom{
+	flex: 1;  // flex剩余空间都分给dashed-bottom  flex-grow：1 伸
+	// flex:auto;
+	// position: relative;
+	margin: 0;
+	margin-left:11px;
+	border-bottom:1px dashed rgb(144, 202, 229)
+}
+.end-png{
+	width: 60px;
+    height: 5px;
+    margin: 0 auto;
+	background: url(../assets/img/data_image_base2.png) no-repeat 50%;
+}
+.dialog-body-content{
+	
+	columns: 3;
+	margin-top: 8px;
+	// display: flex;
+	// flex-wrap: wrap;
+	// justify-content: space-between;
+}
+.dialog-body-content div{
+	margin-bottom:6px
+}
+.dialog-body-left{
+	margin-left:6px;
+	margin-bottom: 10px;
+	font-size: 14px;
+	color: #aaaaaa;
+}
+.dialog-body-right{
+	font-size: 14px;
+    font-weight: 500;
+}
+.my-el-row{
+    margin-top: 8px;
+}
+.my-el-row div{
+    float: left;
+    width: 33%;
+}
+.my-el-row::after{
+    content:'';
+    display:block;
+    clear: both;
+}
 :deep(.el-table__header th){
 	background-color: rgba(51, 121, 255,0.2)!important;
   	color: #333333;
