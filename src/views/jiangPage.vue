@@ -97,10 +97,10 @@
 						<div class="dialog-body-content">
 							<div><span class="dialog-body-left">事件id：</span><span class="dialog-body-right">01</span></div>
 							<div><span class="dialog-body-left">时间：</span><span class="dialog-body-right">2023-05-29</span></div>
-							<div><span class="dialog-body-left">事件名称：</span><span class="dialog-body-right">密码爆破</span></div>	
+							<div><span class="dialog-body-left">事件名称：</span><span class="dialog-body-right">柠檬鸭组织木马</span></div>	
 							<div><span class="dialog-body-left">源IP：</span><span class="dialog-body-right">63.56.123.55</span></div>
 							<div><span class="dialog-body-left">源端口：</span><span class="dialog-body-right">124</span></div>
-							<div><span class="dialog-body-left">地域：</span><span class="dialog-body-right">日本东京</span></div> 
+							<div><span class="dialog-body-left">地域：</span><span class="dialog-body-right">广东</span></div> 
 							<div><span class="dialog-body-left">目的IP：</span><span class="dialog-body-right">13.5.12.55</span></div>
 							<div><span class="dialog-body-left">目的端口：</span><span class="dialog-body-right">24</span></div>
 							<div><span class="dialog-body-left">地域：</span><span class="dialog-body-right">北京昌平</span></div>
@@ -113,7 +113,7 @@
 							<p class="end-png"></p>
 						</div>
 						<div class="dialog-body-content">
-							<div><span class="dialog-body-left">告警类型：</span><span class="dialog-body-right">数据库密码爆破</span></div>
+							<div><span class="dialog-body-left">告警类型：</span><span class="dialog-body-right">柠檬鸭组织木马</span></div>
 							<div><span class="dialog-body-left">告警等级：</span><span class="dialog-body-right">高级</span></div>
 							<div><span class="dialog-body-left">告警载荷：</span><span class="dialog-body-right">/x0qrvdngfe</span></div>	
 						</div>
