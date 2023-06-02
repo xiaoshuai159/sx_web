@@ -1,18 +1,9 @@
 <template>
     <div class="sidebar">
         <!-- background-color="#324157" -->
-        <el-menu 
-            class="sidebar-el-menu" 
-            :default-active="onRoutes" 
-            :collapse="sidebar.collapse" 
-            
-            background-color="#0e538f" 
-            text-color="#bfcbd9" 
-            active-text-color="#20a0ff" 
-            unique-opened 
-            router
-        >
-        <!-- background-color="#0e538f" -->
+        <el-menu class="sidebar-el-menu" :default-active="onRoutes" :collapse="sidebar.collapse" background-color="#0e538f"
+            text-color="#bfcbd9" active-text-color="#20a0ff" unique-opened router>
+            <!-- background-color="#0e538f" -->
             <template v-for="item in items">
                 <template v-if="item.subs">
                     <el-sub-menu :index="item.index" :key="item.index" v-permiss="item.permiss">
@@ -67,7 +58,7 @@ const items = [
         index: '/dashboard',
         title: '数据安全',
         permiss: '1',
-        subs:[
+        subs: [
             {
                 index: '/dashboard',
                 title: '数据库安全事件',
@@ -109,7 +100,7 @@ const items = [
         title: '分析研判',
         permiss: '9',
         subs: [
-             {
+            {
                 index: '/domainMonitoring',
                 title: '域名异常监测',
                 permiss: '10',
@@ -140,7 +131,7 @@ const items = [
         title: '系统管理',
         permiss: '13',
         subs: [
-             {
+            {
                 index: '/permission',
                 title: '用户管理',
                 permiss: '13',
@@ -201,10 +192,12 @@ const sidebar = useSidebarStore();
     overflow-y: scroll;
     transition: all 0.3s;
 }
+
 .sidebar .sidebar-el-menu {
     background: url(../assets/img/menuLeftpush.png) no-repeat;
-    background-size:cover;
+    background-size: cover;
 }
+
 .sidebar::-webkit-scrollbar {
     width: 0;
 }
@@ -212,10 +205,52 @@ const sidebar = useSidebarStore();
 .sidebar-el-menu:not(.el-menu--collapse) {
     width: 220px;
 }
-.sidebar > ul {
+
+.sidebar>ul {
     height: 100%;
 }
-:deep(.el-sub-menu__title){
-    height: 50px;
+
+.el-submenu .el-menu-item {
+    font-size: 16px;
+    padding-left: 68px !important;
+}
+
+.el-submenu .el-submenu__title {
+    height: 38px;
+    line-height: 38px;
+    border-bottom: 1px solid;
+    border-image: -webkit-linear-gradient(left, transparent, rgba(114, 171, 207, .2), transparent) 1 15 1;
+}
+
+.el-menu-item.is-active {
+    color: #fff;
+    background: rgba(111, 228, 242, .1) !important;
+    outline: none;
+    position: relative;
+}
+
+.el-menu--collapse .el-submenu.is-active:before,
+.el-menu-item.is-active:before,
+.el-menu-item:focus:before,
+.el-submenu:focus:before {
+    content: "";
+    width: 0;
+    height: 23%;
+    border-top: 20px solid transparent;
+    border-left: 3px solid #6fe4f2;
+    border-bottom: 20px solid transparent;
+    position: absolute;
+    left: 2px;
+}
+
+.el-menu-item.is-active:after,
+.el-menu-item:focus:after {
+    content: "";
+    width: 2px;
+    height: 100%;
+    background: #6fe4f2;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 </style>
