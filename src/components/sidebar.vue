@@ -91,6 +91,11 @@ const items = [
                 index: '/jiangPage',
                 title: '僵木蠕事件监测',
                 permiss: '15',
+            },
+            {
+                index: '/domainMonitoring',
+                title: '域名异常监测',
+                permiss: '10',
             }
         ],
     },
@@ -100,11 +105,7 @@ const items = [
         title: '分析研判',
         permiss: '9',
         subs: [
-            {
-                index: '/domainMonitoring',
-                title: '域名异常监测',
-                permiss: '10',
-            },
+            
             {
                 index: '/threatIntelligence',
                 title: '威胁情报库',

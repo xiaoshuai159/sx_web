@@ -74,7 +74,7 @@
                 </el-table-column>
                 <el-table-column label="操作" width="100" align="center" >
                   <template #default="scope">
-                    <el-button text v-permiss="15"  type="primary" size="small"  style="margin: 0; letter-spacing: 0px;">
+                    <el-button text v-permiss="15"  type="primary" size="small" @click="handleEdit(scope.$index, scope.row)" style="margin: 0; letter-spacing: 0px;">
                       详情
                     </el-button>
                   </template>
@@ -102,23 +102,26 @@
 							<p class="dashed-bottom"></p>
 							<p class="end-png"></p>
 						</div>
-              <div class="my-el-row">
-                  <div><span class="dialog-body-left">APP名称：</span><span class="dialog-body-right">TikTok</span></div>
-                  <div><span class="dialog-body-left">应用商店：</span><span class="dialog-body-right">小米应用商店</span></div> 
-                  <div><span class="dialog-body-left">版本号：</span><span class="dialog-body-right">12.3.1</span></div>
+            <div class="my-el-row">
+                  <div><span class="dialog-body-left">时间：</span><span class="dialog-body-right">2023/06/07</span></div>
+                  <div><span class="dialog-body-left">事件id：</span><span class="dialog-body-right">15</span></div> 
+                  <div><span class="dialog-body-left">币种：</span><span class="dialog-body-right">-</span></div>
+                  
               </div>
-              <div class="my-el-row">
-                  <div><span class="dialog-body-left">下载量：</span><span class="dialog-body-right">12333</span></div>
-                  <div><span class="dialog-body-left">包名：</span><span class="dialog-body-right">com.ss.android.trill</span></div>
-                  <div><span class="dialog-body-left">apk文件大小：</span><span class="dialog-body-right">15351</span></div>
+              <div class="my-el-row">                  
+                  <div><span class="dialog-body-left">源IP：</span><span class="dialog-body-right">5.23.87.155</span></div>
+                  <div><span class="dialog-body-left">源端口：</span><span class="dialog-body-right">251</span></div>
+                  <div><span class="dialog-body-left">地域：</span><span class="dialog-body-right">-</span></div>
               </div>
-              <div class="my-el-row">
-                  <div><span class="dialog-body-left">版本名称：</span><span class="dialog-body-right">01.05.0071</span></div>
-                  <div><span class="dialog-body-left">主办单位：</span><span class="dialog-body-right">-</span></div>
+              <div class="my-el-row">                  
+                  <div><span class="dialog-body-left">目的IP：</span><span class="dialog-body-right">45.55.123.55</span></div>
+                  <div><span class="dialog-body-left">目的端口：</span><span class="dialog-body-right">15351</span></div>
+                  <div><span class="dialog-body-left">地域：</span><span class="dialog-body-right">-</span></div>
               </div>
-              <div style="margin-top: 6px;">
-                  <div style="margin-bottom: 6px;"><span class="dialog-body-left">下载地址：</span><span class="dialog-body-right">http://d7.xiaotongqq.com/ttdl.apk</span></div>
-							    <div style="margin-bottom: 6px;"><span class="dialog-body-left">APP描述：</span><span class="dialog-body-right">TikTok 是一款全球流行的短视频社交应用，用户可以通过拍摄、剪辑和分享短视频来展示自己的才华和创意。</span></div>
+              <div style="margin-top: 8px;">
+                  <div style="margin-bottom: 8px;"><span class="dialog-body-left">矿池地址：</span><span class="dialog-body-right">-</span></div>
+                  <div style="margin-bottom: 8px;"><span class="dialog-body-left">矿机操作：</span><span class="dialog-body-right">-</span></div>
+							    <div style="margin-bottom: 8px;"><span class="dialog-body-left">通信载荷：</span><span class="dialog-body-right">-</span></div>
               </div>
 					</div>
 			<template #footer>
@@ -189,6 +192,10 @@ const getData = () => {
 }
 let pagesize:number = 10
 let currentPage:number = 1
+const handleEdit = (index:any,row:any) =>{
+  dialogTableVisible.value = true
+  
+}
 function handleSizeChange(val:number) {
     pagesize = val;
 }

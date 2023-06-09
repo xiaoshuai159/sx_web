@@ -80,6 +80,10 @@ const handleCommand = (command: string) => {
 };
 </script>
 <style scoped>
+@font-face {
+	font-family: 'YouShe';
+	src: url('../common/YouSheBiaoTiHei-2.ttf');
+}
 .header {
 	position: relative;
 	box-sizing: border-box;
@@ -109,12 +113,12 @@ const handleCommand = (command: string) => {
 	line-height: 48px; */
 	font-family: 'YouShe';
 	width: 520px;
-	font-weight: 600;
+	/* font-weight: 600; */
 	letter-spacing: 1.5px;
-	font-size: 28px;
+	font-size: 34px;
 	line-height: 56px;
 	/* 文字倾斜 */
-	transform: skew(-7deg); 
+	/* transform: skew(-7deg);  */
 }
 .header-right {
 	float: right;

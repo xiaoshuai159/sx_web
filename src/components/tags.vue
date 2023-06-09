@@ -61,7 +61,8 @@ const closeTags = (index: number) => {
 	const delItem = tags.list[index];
 	tags.delTagsItem(index);
 	const item = tags.list[index] ? tags.list[index] : tags.list[index - 1];
-	if(route.name==='provincePage'||route.name==='cityPage'||route.name==='areaPage'){return}
+	// if(route.name==='provincePage'||route.name==='cityPage'||route.name==='areaPage'){return}
+	if(route.name==='cityPage'||route.name==='areaPage'){return}  // 没有全国地图的时候，仅有省级地图使用这个，最大使用provincePage做tag标签
 	else{
 		if (item) {
 		delItem.path === route.fullPath && router.push(item.path);
@@ -80,7 +81,8 @@ const setTags = (route: any) => {
 	if (!isExist) {
 		if (tags.list.length >= 8) tags.delTagsItem(0);
 		console.log(route.name);
-		if(route.name==='provincePage'||route.name==='cityPage'||route.name==='areaPage'){return}
+		// if(route.name==='provincePage'||route.name==='cityPage'||route.name==='areaPage'){return}
+		if(route.name==='cityPage'||route.name==='areaPage'){return}  // 没有全国地图的时候，仅有省级地图使用这个，最大使用provincePage做tag标签
 		else{
 			tags.setTagsItem({
 				name: route.name,

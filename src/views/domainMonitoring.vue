@@ -37,7 +37,7 @@
 						</el-table-column>
 						<el-table-column prop="change" label="详情" min-width="85" show-overflow-tooltip>
 							<template #default="scope">
-								<el-button text @click="getDetail()" v-permiss="15" style="color:dodgerblue;">
+								<el-button text @click="getDetail(scope.$index, scope.row)" v-permiss="15" style="color:dodgerblue;">
 									详情
 								</el-button>
 							</template>
@@ -69,13 +69,62 @@
 			</el-col>
 		</el-row>
 		<!-- 编辑弹出框 -->
-		<el-dialog title="详情" :data="eventData" v-model="editVisible" width="30%">
-			<el-form-item label="IP" prop="taskType">
-				192.168.1.1
-			</el-form-item>
-			<el-form-item label="详情" prop="cyclical">
-				XXXXXXXXXXXXXXXXXX
-			</el-form-item>
+		<el-dialog title="详情" :data="eventData" v-model="editVisible">
+			<div class="dialog-body">
+						<div class="dialog-body-title">
+							<span class="start-png"></span>
+							域名信息
+							<p class="dashed-bottom"></p>
+							<p class="end-png"></p>
+						</div>
+						<div class="my-el-row">
+							<div><span class="dialog-body-left">域名名称：</span><span class="dialog-body-right">-</span></div>
+							<div><span class="dialog-body-left">对应ip：</span><span class="dialog-body-right">15.242.44.10</span></div>
+						</div>
+						<div class="my-el-row">
+							<div><span class="dialog-body-left">注册时间：</span><span class="dialog-body-right">-</span></div>
+							<div><span class="dialog-body-left">到期时间：</span><span class="dialog-body-right">-</span></div>
+						</div>
+						<div class="my-el-row">
+							<div><span class="dialog-body-left">Umbrella排名：</span><span class="dialog-body-right">-</span></div>
+							<div><span class="dialog-body-left">Alexa排名：</span><span class="dialog-body-right">-</span></div>
+						</div>
+						<div class="my-el-row">
+							<div><span class="dialog-body-left">域名备案信息：</span><span class="dialog-body-right">-</span></div>
+							<div><span class="dialog-body-left">域名服务商：</span><span class="dialog-body-right">-</span></div>
+						</div>
+						<br>
+						<div class="dialog-body-title">
+							<span class="start-png"></span>
+							告警信息
+							<p class="dashed-bottom"></p>
+							<p class="end-png"></p>
+						</div>
+						<div class="dialog-body-content">
+							<div><span class="dialog-body-left">告警时间：</span><span class="dialog-body-right">-</span></div>
+							<div><span class="dialog-body-left">告警类型：</span><span class="dialog-body-right">-</span></div>
+							<div><span class="dialog-body-left">危险等级：</span><span class="dialog-body-right">-</span></div>	
+						</div>
+						<br>
+						<div class="dialog-body-title">
+							<span class="start-png"></span>
+							子域名信息表
+							<p class="dashed-bottom"></p>
+							<p class="end-png"></p>
+						</div>
+						<div style="margin-top: 6px;margin-left: 5px;">-</div>
+						
+						<br>
+						<div class="dialog-body-title">
+							<span class="start-png"></span>
+							DNS解析信息
+							<p class="dashed-bottom"></p>
+							<p class="end-png"></p>
+						</div>
+						<div style="font-size: 10px; margin: 5px;">
+							-
+						</div>
+					</div>
 			<template #footer>
 				<span class="dialog-footer">
 					<el-button @click="editVisible = false">取 消</el-button>
@@ -853,18 +902,113 @@ let form = reactive({
 	taskType: '',
 	cyclicalNum: ''
 });
-const getDetail = () => {
-	ElMessage('正在开发中...')
+const getDetail = (index:any,row:any) => {
+	// ElMessage('正在开发中...')
 	// form.name = row.name;
 	// form.address = row.address;
 	// debugger
-	// editVisible.value = true;
+	editVisible.value = true;
 	// state.addTitle = '新增';
 };
 
 </script>
 
 <style scoped lang="less">
+// dialog样式
+:deep(.el-dialog__header){
+	height: 46px;
+	line-height: 46px;
+	padding:0 16px;
+	border-bottom: 1px solid #e6e6e6;
+	margin-right:0px
+}
+:deep(.el-dialog__title) {
+    line-height: 16px;
+    font-size: 16px;
+    color: #303133;
+}
+:deep(.el-dialog__headerbtn) {
+	top:0;
+	height: 50px;
+	width: 50px;
+}
+:deep(.el-dialog__body){
+	padding:15px 20px!important
+}
+.my-el-row{
+    margin-top: 8px;
+}
+.my-el-row div{
+    float: left;
+    width: 50%;
+}
+.my-el-row::after{
+    content:'';
+    display:block;
+    clear: both;
+}
+.dialog-body{
+	// width: 100%;
+    font-size: 14px;
+    border: 1px solid #d6d6d6;
+    padding: 20px;
+    overflow: auto;
+}
+.dialog-body-title{
+	padding: 5px 0;
+    font-size: 17px;
+    color: #333;
+    font-weight: 700;
+    display: flex;
+    // -webkit-box-align: center;
+    // -ms-flex-align: center;
+    align-items: center;
+}
+.dialog-body .start-png{
+	width: 20px;
+    height: 20px;
+    margin-right: 0;
+	background: url(../assets/img/data_image_base1.png) no-repeat 50%;
+	// background-size: contain;
+}
+// p{
+// 	line-height: 32px;
+// }
+.dashed-bottom{
+	flex: 1;  // flex剩余空间都分给dashed-bottom  flex-grow：1 伸
+	// flex:auto;
+	// position: relative;
+	margin: 0;
+	margin-left:11px;
+	border-bottom:1px dashed rgb(144, 202, 229)
+}
+.end-png{
+	width: 60px;
+    height: 5px;
+    margin: 0 auto;
+	background: url(../assets/img/data_image_base2.png) no-repeat 50%;
+}
+.dialog-body-content{
+	
+	columns: 3;
+	margin-top: 8px;
+	// display: flex;
+	// flex-wrap: wrap;
+	// justify-content: space-between;
+}
+.dialog-body-content div{
+	margin-bottom:6px
+}
+.dialog-body-left{
+	margin-left:6px;
+	margin-bottom: 10px;
+	font-size: 14px;
+	color: #aaaaaa;
+}
+.dialog-body-right{
+	font-size: 14px;
+    font-weight: 500;
+}
 
 :deep(.el-table__header th){
 	background-color: rgba(51, 121, 255,0.2)!important;
