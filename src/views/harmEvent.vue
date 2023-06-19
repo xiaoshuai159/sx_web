@@ -124,6 +124,7 @@
 <script setup lang="ts" name="harmEvent" >
 import { reactive,ref } from 'vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
+import { dayjs } from 'element-plus';
 interface FormAndTable {
 	id: number|undefined
 	time: string
@@ -149,7 +150,7 @@ const handlePageChange = (val: number) => {
 const getData = () =>{
 	tableData2.value = [{
 	id: 1,
-	time:'2023-05-29 10:10:00',
+	time:dayjs().format("YYYY-MM-DD  HH:mm:ss"),
 	IP: '172.53.45.62',
     domain:'dailysync.zapto.org',
 	warnType:'涉黄事件',
@@ -176,12 +177,12 @@ const getData = () =>{
 }]
 }
 const value1 = ref<[Date,Date]>([
-	new Date(2023, 4, 29, 10, 10),
-  new Date(2023, 4, 30, 10, 10),
+    dayjs().subtract(1, 'day').toDate(),
+    dayjs().toDate()
 ])
 const tableData2 = ref<FormAndTable[]>([{
 	id: 1,
-	time:'2023-05-29 10:10:00',
+	time:dayjs().format("YYYY-MM-DD  HH:mm:ss"),
 	IP: '172.53.45.62',
     domain:'dailysync.zapto.org',
 	warnType:'涉黄事件',

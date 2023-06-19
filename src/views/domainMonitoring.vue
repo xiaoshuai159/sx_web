@@ -138,8 +138,7 @@
 <script setup lang="ts" name="dashboard">
 import { ElMessage } from 'element-plus';
 import { onMounted, reactive, ref, Ref,onUnmounted,nextTick } from 'vue';
-import imgurl from '../assets/img/img.jpg';
-import { sample } from 'lodash';
+import dayjs from 'dayjs'
 import * as echarts from 'echarts'
 
 // const tableRef: Ref<HTMLElement | any> = ref(null)
@@ -175,8 +174,8 @@ onMounted(() => {
 const name = localStorage.getItem('ms_username');
 const role: string = name === 'admin' ? '超级管理员' : '普通用户';
 const value1 = ref<[Date, Date]>([
-	new Date(2023, 4, 29, 10, 10),
-  	new Date(2023, 4, 30, 10, 10),
+	dayjs().subtract(1, 'day').toDate(),
+    dayjs().toDate()
 ])
 
 const query = reactive({

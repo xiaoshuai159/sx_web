@@ -167,14 +167,9 @@
 						<el-table-column prop="time" label="时间" min-width="158" show-overflow-tooltip></el-table-column>
 						<el-table-column prop="harmIP" label="受害者IP" min-width="115" show-overflow-tooltip></el-table-column>
 						<el-table-column prop="attackIP" label="攻击者IP" min-width="115" show-overflow-tooltip></el-table-column>
-						
-						<!-- <el-table-column prop="databaseType" label="数据库类型" show-overflow-tooltip min-width="95"></el-table-column> -->
 						<el-table-column prop="warnType" label="告警类型" min-width="140"  show-overflow-tooltip ></el-table-column>
 						<el-table-column prop="warnContent" label="事件名称" min-width="100" show-overflow-tooltip></el-table-column>
 						<el-table-column prop="harmPort" label="目的端口" min-width="100" show-overflow-tooltip></el-table-column>
-						<!-- <el-table-column prop="attackNum" label="攻击次数" min-width="83" show-overflow-tooltip></el-table-column> -->
-						
-						<!-- <el-table-column prop="attackPort" label="攻击者端口" min-width="75"></el-table-column> -->
 						<el-table-column prop="level" label="告警等级" min-width="100" align="center">
 							<template #default="scope">
 								<el-tag
@@ -184,26 +179,13 @@
 								</el-tag>
 							</template>
 						</el-table-column>
-						<!-- <el-table-column label="验证状态" align="center" min-width="90">
-							<template #default="scope">
-								<el-tag
-									:type="scope.row.state === '已验证' ? 'success' : scope.row.state === '未验证' ? 'danger' : ''"
-								>
-									{{ scope.row.state }}
-								</el-tag>
-							</template>
-						</el-table-column> -->
 						<el-table-column label="操作" width="90" align="center" >
 							<template #default="scope">
 								<el-button text class="blue" @click="handleEdit(scope.$index, scope.row)" v-permiss="15">
 									详情
 								</el-button>
-								<!-- <el-button text class="red" @click="handleDelete(scope.$index)" v-permiss="16">
-									删除
-								</el-button> -->
 							</template>
-						</el-table-column>
-						
+						</el-table-column>						
 					</el-table>
 					<div class="pagination">
 						<el-pagination
@@ -337,12 +319,13 @@ import { onMounted, reactive,ref,onUnmounted, nextTick } from 'vue';
 // import imgurl from '../assets/img/img.jpg';
 // import { sample } from 'lodash';
 import * as echarts from 'echarts'
-import { ElMessage, ElMessageBox, rowContextKey } from 'element-plus';
+import { dayjs } from 'element-plus';
+import { ElMessage, ElMessageBox } from 'element-plus';
 const name = localStorage.getItem('ms_username');
 const role: string = name === 'admin' ? '超级管理员' : '普通用户';
 const value1 = ref<[Date,Date]>([
-  new Date(2023, 4, 29, 10, 10),
-  new Date(2023, 4, 30, 10, 10),
+	dayjs().subtract(1, 'day').toDate(),
+    dayjs().toDate()
 ])
 const input1 = ref('')
 let isHave = ref(false)
@@ -659,7 +642,7 @@ const query = reactive({
 // ])
 const tableData2 = ref<FormAndTable[]>([{
 	id: 1,
-	time:'2023-05-29 10:10:00',
+	time:dayjs().format("YYYY-MM-DD  HH:mm:ss"),
 	harmIP: '172.53.45.62',
 	harmPort: 45,
 	databaseType:'mysql',
@@ -683,7 +666,7 @@ const pageTotal = ref(0);
 const getData = () =>{
 	tableData2.value = [{
 	id: 1,
-	time:'2023-05-29 10:10:00',
+	time:dayjs().format("YYYY-MM-DD  HH:mm:ss"),
 	harmIP: '172.5.45.62',
 	harmPort: 45,
 	databaseType:'mysql',
@@ -697,7 +680,7 @@ const getData = () =>{
 },
 {
 	id: 2,
-	time:'2023-05-29 10:10:00',
+	time:dayjs().format("YYYY-MM-DD  HH:mm:ss"),
 	harmIP: '172.53.45.6',
 	harmPort: 75,
 	databaseType:'mysql',
@@ -711,7 +694,7 @@ const getData = () =>{
 },
 {
 	id: 3,
-	time:'2023-05-29 10:10:00',
+	time:dayjs().format("YYYY-MM-DD  HH:mm:ss"),
 	harmIP: '172.53.5.62',
 	harmPort: 40,
 	databaseType:'mysql',

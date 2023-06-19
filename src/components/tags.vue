@@ -1,6 +1,10 @@
 <template>
 	<div class="tags" v-if="tags.show">
-		<ul>
+		
+		<ul><div class="collapse-btn" @click="collapseChage">
+			<el-icon v-if="sidebar.collapse"><Expand /></el-icon>
+			<el-icon v-else><Fold /></el-icon>
+		</div>
 			<li
 				class="tags-li"
 				v-for="(item, index) in tags.list"
@@ -11,6 +15,11 @@
 				<el-icon @click="closeTags(index)"><Close /></el-icon>
 			</li>
 		</ul>
+		<div>
+			<span>当前位置：</span>
+			<span>{{ preTagName }}</span> >
+			<span>{{ route.meta.title }}</span>
+		</div>
 		<!-- <div class="tags-close-box">
 			<el-select v-model="value" class="m-2" placeholder="Select" size="small" style="height: 28px;">
 				<el-option
@@ -25,10 +34,15 @@
 </template>
 
 <script setup lang="ts">
+import { useSidebarStore } from '../store/sidebar';
 import { useTagsStore } from '../store/tags';
 import { onBeforeRouteUpdate, useRoute, useRouter } from 'vue-router';
 import { ref } from 'vue'
 const value = ref('day')
+const sidebar = useSidebarStore();
+const collapseChage = () => {
+	sidebar.handleCollapse();
+};
 
 const options = [
   {
@@ -54,7 +68,6 @@ const router = useRouter();
 const isActive = (path: string) => {
 	return path === route.fullPath;
 };
-
 const tags = useTagsStore();
 // 关闭单个标签
 const closeTags = (index: number) => {
@@ -72,15 +85,28 @@ const closeTags = (index: number) => {
 	}
 	
 };
-
+let preTagName = ref<string>() // 设置当前位置的位置1
+const getPreTagName = (tagName:string) =>{
+	if(tagName=="数据库安全事件"||tagName=="APP检测分析"){
+		preTagName.value = "数据安全"
+	}else if(tagName=="挖矿行为监测"||tagName=="漏洞监测"||tagName=="僵木蠕事件监测"||tagName=="域名异常监测"){
+		preTagName.value = "网络安全"
+	}else if(tagName=="威胁情报库"||tagName=="追踪溯源分析"||tagName=="公共危害事件"||tagName=="攻击搜索"){
+		preTagName.value = "分析研判"
+	}else if(tagName=="用户管理"){
+		preTagName.value = "系统管理"
+	}
+}
 // 设置标签
 const setTags = (route: any) => {
 	const isExist = tags.list.some(item => {
 		return item.path === route.fullPath;
 	});
+	getPreTagName(route.meta.title)
 	if (!isExist) {
 		if (tags.list.length >= 8) tags.delTagsItem(0);
-		console.log(route.name);
+		
+		// console.log(route.meta.title);
 		// if(route.name==='provincePage'||route.name==='cityPage'||route.name==='areaPage'){return}
 		if(route.name==='cityPage'||route.name==='areaPage'){return}  // 没有全国地图的时候，仅有省级地图使用这个，最大使用provincePage做tag标签
 		else{
@@ -94,7 +120,7 @@ const setTags = (route: any) => {
 	}
 };
 setTags(route);
-onBeforeRouteUpdate(to => {
+onBeforeRouteUpdate(to => {	
 	setTags(to);
 });
 
@@ -122,27 +148,47 @@ const handleTags = (command: string) => {
 </script>
 
 <style scoped lang="less">
-
+.collapse-btn {
+	display: flex;
+	/* justify-content: center; */
+	align-items: center;
+	height: 100%;
+	float: left;
+	padding-right: 7px;
+	transition: transform 0.2s;
+	transform: scale(1.2);
+	cursor: pointer;
+}
+.collapse-btn:hover{
+	transform: scale(1.4);
+}
 :deep(.el-input__wrapper){
 	height: 26px!important
 }
 </style>
-<style>
+<style lang="less">
 .tags {
 	position: relative;
-	height: 30px;
+	/* height: 30px; */
+	height: 60px;
 	overflow: hidden;
-	background: #fff;
+	// background: #fff;
 	padding-right: 120px;
-	box-shadow: 0 5px 10px #ddd;
+	// box-shadow: 0 5px 10px #ddd;
+	div {
+		margin-left: 12px;
+		line-height: 40px;
+		font-size: 13px;
+		color: #5e5f5f;
+	}
 }
 
 .tags ul {
 	box-sizing: border-box;
 	width: 100%;
-	height: 100%;
+	/* height: 100%; */
+	height: 50%;
 }
-
 .tags-li {
 	display: flex;
 	align-items: center;

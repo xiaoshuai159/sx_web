@@ -119,7 +119,7 @@ import { ref, reactive } from 'vue';
 import { dialogEmits, ElMessage, ElMessageBox } from 'element-plus';
 import { Delete, Edit, Search, Plus } from '@element-plus/icons-vue';
 import { fetchData } from '../api/index';
-import type { FormInstance, FormRules } from 'element-plus';
+import { dayjs } from 'element-plus';
 import { UploadProps } from 'element-plus';
 import * as XLSX from 'xlsx';
 import { fromPairs } from 'lodash';
@@ -206,7 +206,7 @@ const state = reactive({
 // 	}
 // };
 
-const rules: FormRules = {
+const rules: any = {
 	name: [{ required: true, message: '请输入表单名称', trigger: 'blur' }],
 };
 
@@ -269,8 +269,8 @@ const query = reactive({
 	pageSize: 10
 });
 const value1 = ref<[Date, Date]>([
-	new Date(2023, 1, 14, 10, 10),
-	new Date(2023, 1, 15, 10, 10),
+	dayjs().subtract(1, 'day').toDate(),
+    dayjs().toDate()
 ])
 let tableData = ref<TableItem[]>([{
 	id: 1,

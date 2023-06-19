@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container" style="padding:12px">
         <div class="map-header-text"> 全国 </div>
         <el-divider></el-divider>
         <div>
@@ -184,13 +184,6 @@ onBeforeUnmount(() => {
 }
 </style>
 <style>
-.content {
-    width: auto;
-    height: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-    background-color: white;
-}
 .map-header-text {
     display: inline-block;
     margin-left: 15px;

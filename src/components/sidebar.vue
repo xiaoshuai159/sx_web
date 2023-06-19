@@ -105,7 +105,12 @@ const items = [
         title: '分析研判',
         permiss: '9',
         subs: [
-            
+            {
+                index: '/attackSearch',
+                title: '攻击搜索',
+                // title: '威胁研判',
+                permiss: '11',
+            },
             {
                 index: '/threatIntelligence',
                 title: '威胁情报库',

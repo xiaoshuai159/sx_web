@@ -16,7 +16,7 @@ const routes: RouteRecordRaw[] = [
                 path: '/dashboard',
                 name: 'dashboard',
                 meta: {
-                    title: '数据库安全',
+                    title: '数据库安全事件',
                     permiss: '2',
                 },
                 component: () => import('../views/dashboard.vue'),
@@ -43,7 +43,7 @@ const routes: RouteRecordRaw[] = [
                 path: '/APPstat',
                 name: 'APPstat',
                 meta: {
-                    title: 'APP监测',
+                    title: 'APP检测分析',
                     permiss: '5',
                 },
                 component: () => import('../views/APPstat.vue'),
@@ -190,6 +190,16 @@ const routes: RouteRecordRaw[] = [
 
             },
             {
+                path:'/attackSearch',
+                name:'attackSearch',
+                meta:{
+                    title:'攻击搜索',
+                    permiss:'16',
+                },
+                component: () => import('../views/attackSearch.vue')
+
+            },
+            {
                 path:'/harmEvent',
                 name:'harmEvent',
                 meta:{
@@ -203,7 +213,7 @@ const routes: RouteRecordRaw[] = [
                 path: '/permission',
                 name: 'permission',
                 meta: {
-                    title: '权限管理',
+                    title: '用户管理',
                     permiss: '13',
                 },
                 component: () => import(/* webpackChunkName: "permission" */ '../views/permission.vue'),

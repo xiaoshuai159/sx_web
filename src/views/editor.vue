@@ -117,6 +117,7 @@
 
 <script setup lang="ts" name="editor">
 import { ref,reactive } from 'vue';
+import { dayjs } from 'element-plus';
 import { ElMessage, ElMessageBox } from 'element-plus'
 const form = reactive({
 	type:'',
@@ -126,8 +127,8 @@ const form = reactive({
 })
 const formLabelWidth = '80px'
 const value1 = ref<[Date, Date]>([
-  new Date(2023, 2, 14, 10, 10),
-  new Date(2023, 2, 15, 10, 10),
+	dayjs().subtract(1, 'day').toDate(),
+    dayjs().toDate()
 ])
 const todoList = reactive([
 	{

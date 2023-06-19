@@ -32,14 +32,8 @@
             <el-table-column prop="time" label="时间" min-width="158" show-overflow-tooltip></el-table-column>
             <el-table-column prop="harmIP" label="受害者IP" min-width="115" show-overflow-tooltip></el-table-column>
             <el-table-column prop="attackIP" label="攻击者IP" min-width="115" show-overflow-tooltip></el-table-column>
-            
-            <!-- <el-table-column prop="databaseType" label="数据库类型" show-overflow-tooltip min-width="95"></el-table-column> -->
-             <el-table-column prop="warnType" label="类型" min-width="140"  show-overflow-tooltip ></el-table-column>
-            <!-- <el-table-column prop="warnContent" label="事件名称" min-width="100" show-overflow-tooltip></el-table-column>  -->
+            <el-table-column prop="warnType" label="类型" min-width="140"  show-overflow-tooltip ></el-table-column>
             <el-table-column prop="harmPort" label="目的端口" min-width="100" show-overflow-tooltip></el-table-column>
-            <!-- <el-table-column prop="attackNum" label="攻击次数" min-width="83" show-overflow-tooltip></el-table-column> -->
-            
-            <!-- <el-table-column prop="attackPort" label="攻击者端口" min-width="75"></el-table-column> -->
             <el-table-column prop="level" label="告警等级" min-width="100" align="center">
                 <template #default="scope">
                     <el-tag
@@ -49,29 +43,13 @@
                     </el-tag>
                 </template>
             </el-table-column>
-            <!-- <el-table-column label="验证状态" align="center" min-width="90">
-                <template #default="scope">
-                    <el-tag
-                        :type="scope.row.state === '已验证' ? 'success' : scope.row.state === '未验证' ? 'danger' : ''"
-                    >
-                        {{ scope.row.state }}
-                    </el-tag>
-                </template>
-            </el-table-column> -->
             <el-table-column label="操作" width="90" align="center" >
                 <template #default="scope">
                     <el-button text class="blue" @click="handleEdit(scope.$index, scope.row)" v-permiss="15">
                         详情
                     </el-button>
-                        <!-- <el-button text @click="handleEdit(scope.$index, scope.row)" v-permiss="15">
-                        编辑
-                    </el-button>
-                    <el-button text class="red" @click="handleDelete(scope.$index)" v-permiss="16">
-                        删除
-                    </el-button>  -->
                 </template>
-            </el-table-column>
-            
+            </el-table-column>            
         </el-table>
         <div class="pagination">
             <el-pagination
@@ -83,6 +61,7 @@
                 @current-change="handlePageChange"
             ></el-pagination>
         </div>
+
     </div>
 
             <!-- 编辑弹出框 -->
@@ -157,8 +136,8 @@
 </template>
 
 <script setup lang="ts" name="jiangPage" >
-import { reactive,ref } from 'vue';
-import { ElMessage, ElMessageBox } from 'element-plus';
+import { reactive,ref } from 'vue'
+import { dayjs } from 'element-plus'
 interface FormAndTable {
 	id: number|undefined
 	time: string
@@ -187,7 +166,7 @@ const handlePageChange = (val: number) => {
 const getData = () =>{
 	tableData2.value = [{
 	id: 1,
-	time:'2023-05-29 10:10:00',
+	time:dayjs().format("YYYY-MM-DD  HH:mm:ss"),
 	harmIP: '172.5.45.62',
 	harmPort: 45,
 	databaseType:'mysql',
@@ -201,7 +180,7 @@ const getData = () =>{
 },
 {
 	id: 2,
-	time:'2023-05-29 10:10:00',
+	time:dayjs().format("YYYY-MM-DD  HH:mm:ss"),
 	harmIP: '172.53.45.6',
 	harmPort: 75,
 	databaseType:'mysql',
@@ -215,7 +194,7 @@ const getData = () =>{
 },
 {
 	id: 3,
-	time:'2023-05-29 10:10:00',
+	time:dayjs().format("YYYY-MM-DD  HH:mm:ss"),
 	harmIP: '172.53.5.62',
 	harmPort: 40,
 	databaseType:'mysql',
@@ -229,12 +208,12 @@ const getData = () =>{
 }]
 }
 const value1 = ref<[Date,Date]>([
-	new Date(2023, 4, 29, 10, 10),
-  new Date(2023, 4, 30, 10, 10),
+	dayjs().subtract(1, 'day').toDate(),
+    dayjs().toDate()
 ])
 const tableData2 = ref<FormAndTable[]>([{
 	id: 1,
-	time:'2023-05-29 10:10:00',
+	time:dayjs().format("YYYY-MM-DD  HH:mm:ss"),
 	harmIP: '172.53.45.62',
 	harmPort: 45,
 	databaseType:'mysql',
@@ -269,64 +248,18 @@ let form = reactive<FormAndTable>({
 let idx: number = -1;
 let editOrAdd:any
 const handleEdit = (index: number, row: any) => {
-	// ElMessage('正在开发中...')
-	// idx = index
-	// // const proxyForm = JSON.parse(JSON.stringify(tableData.value[currentRow]))
-	// // form = proxyForm
-	// form.id = tableData2.value[idx].id
-	// form.time = tableData2.value[idx].time
-	// form.harmIP = tableData2.value[idx].harmIP
-	// form.harmPort = tableData2.value[idx].harmPort
-	// form.databaseType = tableData2.value[idx].databaseType
-	// form.warnType = tableData2.value[idx].warnType
-	// form.warnContent = tableData2.value[idx].warnContent
-	// form.attackNum = tableData2.value[idx].attackNum
-	// form.attackIP = tableData2.value[idx].attackIP
-	// form.attackPort = tableData2.value[idx].attackPort
-	// form.level = tableData2.value[idx].level
-	// form.state = tableData2.value[idx].state
-	// editOrAdd = 'edit'
 	editVisible.value = true;
 };
 function saveEdit() {
-	// console.log(tableData.value[currentRow]);	
 	editVisible.value = false;
-	// if(editOrAdd=='edit'){
-	// 	tableData2.value[idx].id = form.id
-	// 	tableData2.value[idx].time = form.time
-	// 	tableData2.value[idx].harmIP = form.harmIP
-	// 	tableData2.value[idx].harmPort = form.harmPort
-	// 	tableData2.value[idx].databaseType = form.databaseType
-	// 	tableData2.value[idx].warnType = form.warnType
-	// 	tableData2.value[idx].warnContent = form.warnContent
-	// 	tableData2.value[idx].attackNum = form.attackNum
-	// 	tableData2.value[idx].attackIP = form.attackIP
-	// 	tableData2.value[idx].attackPort = form.attackPort
-	// 	tableData2.value[idx].level = form.level
-	// 	tableData2.value[idx].state = form.state
-	// 	ElMessage.success(`修改成功`);		
-	// }else{
-	// 	tableData2.value.push({
-	// 		id:form.id,
-	// 		time:form.time,
-	// 		harmIP: form.harmIP,
-	// 		harmPort:form.harmPort,
-	// 		databaseType:form.databaseType,
-	// 		warnType:form.warnType,
-	// 		warnContent:form.warnContent,
-	// 		attackNum: form.attackNum,
-	// 		attackIP: form.attackIP,
-	// 		attackPort:form.attackPort,
-	// 		state:form.state,
-	// 		level:form.level
-	// 	});
-	// 	ElMessage.success(`添加成功`);	
-	// }
-	
 };
 </script>
 
 <style scoped lang="less">
+:deep(.vxe-cell){
+	position: relative;
+	
+}
 // dialog样式
 :deep(.el-dialog__header){
 	height: 46px;

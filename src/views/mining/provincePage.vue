@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container"  style="padding:12px">
         <div class="map-header-text">
             <!-- 国级 -->
             <!-- <span style="cursor:pointer;" @click="toCountryPage">全国</span><span v-html="'\u00a0'"></span>
@@ -82,7 +82,7 @@ async function initChart() {
     mapChart = echarts.init(document.getElementById('map_ref')!);
     const ret = await axios.get(`../../map/省级/辽宁省.json`);
     echarts.registerMap(`辽宁省`, ret.data)
-    console.log('执行了initChart',store.province);
+    // console.log('执行了initChart',store.province);
     
     const initOption = {
         geo: [
@@ -201,13 +201,13 @@ onBeforeUnmount(() => {
 }
 </style>
 <style>
-.content {
+/* .content {
     width: auto;
     height: 100%;
     padding: 10px;
     box-sizing: border-box;
     background-color: white;
-}
+} */
 .map-header-text {
     display: inline-block;
     margin-left: 15px;

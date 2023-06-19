@@ -163,6 +163,7 @@
 
 <script setup lang="ts" name="bugPage" >
 import { reactive,ref } from 'vue';
+import { dayjs } from 'element-plus';
 import { ElMessage, ElMessageBox } from 'element-plus';
 interface FormAndTable {
 	id: number|undefined
@@ -192,7 +193,7 @@ const handlePageChange = (val: number) => {
 const getData = () =>{
 	tableData2.value = [{
 	id: 1,
-	time:'2023-05-29 10:10:00',
+	time:dayjs().format("YYYY-MM-DD  HH:mm:ss"),
 	harmIP: '172.5.45.62',
 	harmPort: 45,
 	databaseType:'mysql',
@@ -206,7 +207,7 @@ const getData = () =>{
 },
 {
 	id: 2,
-	time:'2023-05-29 10:10:00',
+	time:dayjs().format("YYYY-MM-DD  HH:mm:ss"),
 	harmIP: '172.53.45.6',
 	harmPort: 75,
 	databaseType:'mysql',
@@ -220,7 +221,7 @@ const getData = () =>{
 },
 {
 	id: 3,
-	time:'2023-05-29 10:10:00',
+	time:dayjs().format("YYYY-MM-DD  HH:mm:ss"),
 	harmIP: '172.53.5.62',
 	harmPort: 40,
 	databaseType:'mysql',
@@ -234,12 +235,12 @@ const getData = () =>{
 }]
 }
 const value1 = ref<[Date,Date]>([
-	new Date(2023, 4, 29, 10, 10),
-  new Date(2023, 4, 30, 10, 10),
+	dayjs().subtract(1, 'day').toDate(),
+    dayjs().toDate()
 ])
 const tableData2 = ref<FormAndTable[]>([{
 	id: 1,
-	time:'2023-05-29 10:10:00',
+	time:dayjs().format("YYYY-MM-DD  HH:mm:ss"),
 	harmIP: '172.53.45.62',
 	harmPort: 45,
 	databaseType:'mysql',

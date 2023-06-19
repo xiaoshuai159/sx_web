@@ -109,6 +109,10 @@ const data: Tree[] = [
 					{
 						id: '16',
 						label: '追踪溯源分析'
+					},
+					{
+						id: '16',
+						label: '攻击搜索'
 					}
 				]
 			}
@@ -125,7 +129,7 @@ const data: Tree[] = [
 
 	{
 		id: '18',
-		label: '权限管理'
+		label: '用户管理'
 	},
 	// {
 	// 	id: '14',

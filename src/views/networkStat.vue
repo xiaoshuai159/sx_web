@@ -515,6 +515,7 @@
 import { onMounted, reactive, ref, onBeforeUnmount } from 'vue';
 import * as echarts from 'echarts'
 import { nextTick } from 'vue'
+import { dayjs } from 'element-plus';
 import { Search } from '@element-plus/icons-vue';
 
 let currentPage4 = ref<number>(1)
@@ -560,8 +561,8 @@ onBeforeUnmount(()=>{
 const name = localStorage.getItem('ms_username');
 const role: string = name === 'admin' ? '超级管理员' : '普通用户';
 const value1 = ref<[Date, Date]>([
-	new Date(2023, 1, 14, 10, 10),
-	new Date(2023, 1, 15, 10, 10),
+	dayjs().subtract(1, 'day').toDate(),
+    dayjs().toDate()
 ])
 
 const query = reactive({
