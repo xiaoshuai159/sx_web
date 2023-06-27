@@ -21,7 +21,13 @@
                 </el-card>
             </el-col>
             <el-col :span="8">
-                <el-card style="height:395px;">
+                <el-card style="height:395px;" :body-style="{ padding: '0px' }">
+                    <div class="card-body-title">
+                        <span class="start-png"></span>
+                        <span class="card-title-text">应用商店分布</span> 
+                        <p class="dashed-bottom"></p>
+                        <p class="end-png"></p>
+                    </div>
                     <div id="pieChart" :style="{ width: '92%', height: '345px' }"></div>
                 </el-card>
             </el-col>
@@ -29,7 +35,12 @@
         <el-row :gutter="10" style="margin-top: 10px;">
             <el-col :span="8">
                 <el-card>
-                    <span style="display: block; margin:0 0 20px 0;font-size: 18px;">下架信息</span>
+                    <div class="card-body-title" style="margin: -20px -20px 0 -20px;">
+                        <span class="start-png"></span>
+                        <span class="card-title-text">下架信息</span> 
+                        <p class="dashed-bottom"></p>
+                        <p class="end-png"></p>
+                    </div>
                     <el-table :data="tableData2" style="width: 100%" max-height="290" stripe>
                         <el-table-column prop="time" label="Time" min-width="160" />
                         <el-table-column prop="name" label="Name" min-width="90" />
@@ -41,12 +52,24 @@
             </el-col>
             <el-col :span="8">
                 <el-card>
-                    <div id="pieChart2" :style="{  width: '92%', height: '323px' }"></div>
+                    <div class="card-body-title" style="margin: -20px -20px 0 -20px;">
+                        <span class="start-png"></span>
+                        <span class="card-title-text">应用类型分布</span> 
+                        <p class="dashed-bottom"></p>
+                        <p class="end-png"></p>
+                    </div>
+                    <div id="pieChart2" :style="{  width: '92%', height: '273px' }"></div>
                 </el-card>
             </el-col>
             <el-col :span="8">
                 <el-card>
-                    <div id="barChart" :style="{ width: '92%', height: '323px' }"></div>
+                    <div class="card-body-title" style="margin: -20px -20px 0 -20px;">
+                        <span class="start-png"></span>
+                        <span class="card-title-text">下载量分布</span> 
+                        <p class="dashed-bottom"></p>
+                        <p class="end-png"></p>
+                    </div>
+                    <div id="barChart" :style="{ width: '92%', height: '273px' }"></div>
                 </el-card>
             </el-col>
             
@@ -327,14 +350,12 @@ let myPieChart:any = null
 function initOption2() {
     myPieChart = echarts.init(document.getElementById('pieChart')!);
     let option = {
-        title: {
-            text: '应用商店分布'
-        },
+        
         tooltip: {
             trigger: 'item'
         },
         legend: {
-            bottom: '1%',
+            bottom: '5%',
             left: 'center',
             itemStyle: {
                 borderWidth: 0
@@ -345,7 +366,7 @@ function initOption2() {
                 color: ['#5da8ff', '#8e9dff', '#fedc69', '#26deca', '#b955a4'],
                 name: '数量',
                 type: 'pie',
-                center: ['50%', '45%'],
+                center: ['50%', '38%'],
                 radius: ['35%', '60%'],
                 avoidLabelOverlap: false,
                 itemStyle: {
@@ -385,14 +406,6 @@ function initOption3() {
     // type EChartsOption = echarts.EChartsOption;
     myBarChart = echarts.init(document.getElementById('barChart')!);
     let option = {
-        title: {
-            text: '下载量分布',
-            x: '2%',
-            y: '2%',
-            textStyle: {
-                color: '#666666'
-            }
-        },
         tooltip: {
             trigger: 'axis',
             axisPointer: {
@@ -401,7 +414,7 @@ function initOption3() {
         },
         legend: {},
         grid: {
-            top: '15%',
+            top: '1%',
             left: '3%',
             right: '4%',
             bottom: '1%',
@@ -430,9 +443,7 @@ let myBarChart2:any = null
 function initOption4() {
     myBarChart2 = echarts.init(document.getElementById('pieChart2')!);
     let option = {
-        title: {
-            text: '应用类型分布',
-        },
+        
         tooltip: {
             trigger: 'item'
         },
@@ -448,7 +459,7 @@ function initOption4() {
             {
                 name: '数量',
                 type: 'pie',
-                center:['50%', '45%'],
+                center:['50%', '35%'],
                 radius: '55%',
                 avoidLabelOverlap: false,
      
@@ -813,6 +824,18 @@ onUnmounted(() => {
 :deep(.el-dialog__body){
 	padding:15px 20px!important
 }
+.card-body-title {
+	padding: 15px;
+	font-size: 17px;
+	font-weight: 700;
+	display: flex;
+	align-items: center;
+}
+.card-title-text {
+	// font-family: '思源黑体';
+	font-size: 18px;
+	color:#666666
+}
 .dialog-body{
 	// width: 100%;
     font-size: 14px;
@@ -830,7 +853,7 @@ onUnmounted(() => {
     // -ms-flex-align: center;
     align-items: center;
 }
-.dialog-body .start-png{
+.start-png{
 	width: 20px;
     height: 20px;
     margin-right: 0;

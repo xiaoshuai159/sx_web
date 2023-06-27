@@ -21,6 +21,13 @@ export default defineConfig({
 		include: ['schart.js']
 	},
 	server:{
-		host:'0.0.0.0'
+		host:'0.0.0.0',
+		proxy: {
+			'/api': {
+			  target: 'http://172.17.18.1:9998', // 将请求代理到目标主机
+			  changeOrigin: true,           // 修改请求头中的 Origin
+			  rewrite: (path) => path.replace(/^\/api/, '') // 将请求路径中的 '/api' 替换为空字符串
+			}
+		  }
 	}
 });

@@ -50,12 +50,23 @@
 		<el-row :gutter="10">
 			<el-col :span="12">
 				<el-card shadow="hover" :body-style="{ padding: '0px', height: '285px' }">
-					<!-- <span class="normalText">被攻击数据库ip排行</span> -->
+					<div class="card-body-title">
+                        <span class="start-png"></span>
+                        <span class="card-title-text">域名异常排行</span> 
+                        <p class="dashed-bottom"></p>
+                        <p class="end-png"></p>
+                    </div>
 					<div id="myChart" :style="{ width: '92%', height: '277px' }"></div>
 				</el-card>
 			</el-col>
 			<el-col :span="12">
 				<el-card shadow="hover" :body-style="{ padding: '0px', height: '285px' }">
+					<div class="card-body-title">
+                        <span class="start-png"></span>
+                        <span class="card-title-text">域名异常分类</span> 
+                        <p class="dashed-bottom"></p>
+                        <p class="end-png"></p>
+                    </div>
 					<div id="myChart3" :style="{ width: '92%', height: '277px' }"></div>
 				</el-card>
 			</el-col>
@@ -64,7 +75,13 @@
 		<el-row :gutter="10">
 			<el-col :span="24">
 				<el-card shadow="hover" :body-style="{ padding: '0px', height: '285px' }">
-					<div id="myChart2" :style="{ width: '98%', height: '277px' }"></div>
+					<div class="card-body-title">
+                        <span class="start-png"></span>
+                        <span class="card-title-text">事件趋势分析</span> 
+                        <p class="dashed-bottom"></p>
+                        <p class="end-png"></p>
+                    </div>
+					<div id="myChart2" :style="{ width: '98%', height: '300px' }"></div>
 				</el-card>
 			</el-col>
 		</el-row>
@@ -672,14 +689,6 @@ let myChart1:any = null
 function initOption1() {
 	myChart1 = echarts.init(document.getElementById('myChart')!); 
 	let option= {
-		title: {
-			text: '域名异常排行',
-			x: '2%',
-			y: '2%',
-			textStyle: {
-				color: '#666666'
-			}
-		},
 		tooltip: {
 			// trigger: 'axis',
 			// axisPointer: {
@@ -688,10 +697,10 @@ function initOption1() {
 		},
 		legend: {},
 		grid: {
-			top: '15%',
+			top: '1%',
 			left: '3%',
 			right: '4%',
-			bottom: '1%',
+			bottom: '20%',
 			containLabel: true
 		},
 		xAxis: {
@@ -738,14 +747,6 @@ function initOption2() {
 	// type EChartsOption = echarts.EChartsOption;
 	myChart2 = echarts.init(document.getElementById('myChart2')!);
 	let option= {
-		title: {
-			text: '事件趋势分析',
-			x: '2%',
-			y: '2%',
-			textStyle: {
-				color: '#666666'
-			}
-		},
 		tooltip: {
 			trigger: 'axis',
 			axisPointer: {
@@ -757,13 +758,13 @@ function initOption2() {
 		},
 		legend: {
 			data: ['恶意未注册', '域名仿冒', '“8220”组织木马', '白名单', '黑名单'],
-			top: '13%'
+			top: '1%'
 		},
 		grid: {
-			top: '30%',
+			top: '15%',
 			left: '3%',
 			right: '4%',
-			bottom: '3%',
+			bottom: '25%',
 			containLabel: true
 		},
 		xAxis: [
@@ -823,14 +824,6 @@ function initOption3() {
 	// type EChartsOption = echarts.EChartsOption;
 	myChart3 = echarts.init(document.getElementById('myChart3')!);
 	let option = {
-		title:{
-			text: '域名异常分类',
-			x: '2%',
-			y: '2%',
-			textStyle: {
-				color: '#666666'
-			}
-		},
 		legend: {
 			top: 'bottom'
 		},
@@ -848,7 +841,7 @@ function initOption3() {
 			name: 'Nightingale Chart',
 			type: 'pie',
 			radius: [20, 100],
-			center: ['50%', '50%'],
+			center: ['50%', '40%'],
 			roseType: 'area',
 			itemStyle: {
 				borderRadius: 8
@@ -913,6 +906,39 @@ const getDetail = (index:any,row:any) => {
 </script>
 
 <style scoped lang="less">
+.start-png{
+	width: 20px;
+    height: 20px;
+    margin-right: 0;
+	background: url(../assets/img/data_image_base1.png) no-repeat 50%;
+	// background-size: contain;
+}
+.dashed-bottom{
+	flex: 1;  // flex剩余空间都分给dashed-bottom  flex-grow：1 伸
+	// flex:auto;
+	// position: relative;
+	margin: 0;
+	margin-left:11px;
+	border-bottom:1px dashed rgb(144, 202, 229)
+}
+.end-png{
+	width: 60px;
+    height: 5px;
+    margin: 0 auto;
+	background: url(../assets/img/data_image_base2.png) no-repeat 50%;
+}
+.card-body-title {
+	padding: 15px;
+	font-size: 17px;
+	font-weight: 700;
+	display: flex;
+	align-items: center;
+}
+.card-title-text {
+	// font-family: '思源黑体';
+	font-size: 18px;
+	color:#666666
+}
 // dialog样式
 :deep(.el-dialog__header){
 	height: 46px;

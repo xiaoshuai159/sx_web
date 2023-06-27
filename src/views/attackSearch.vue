@@ -87,7 +87,92 @@
             @cell-mouseenter="handleCellMouseEnter"
             @cell-mouseleave="cellMouseleaveEvent"
 		>
-			<vxe-column title="来源IP" field="sourceIP" fixed="left" min-width="160"></vxe-column>
+		<vxe-column type="expand" width="80" :fixed="expandFixed">
+			<template #content="{ row, rowIndex }">
+				<div class="expand-wrapper">
+					<div class="my-first-row">
+						<div class="left-icon">
+							<svg t="1687229267237" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="21638" width="100" height="100"><path d="M523.2 329.472a38.4 38.4 0 0 1 44.864-30.613c24.405 4.608 57.941 18.901 84.544 47.509 27.797 29.888 46.165 73.472 40.683 131.328a38.4 38.4 0 1 1-76.459-7.253c3.435-36.224-7.723-58.091-20.459-71.766-13.909-14.933-31.893-22.336-42.56-24.341a38.4 38.4 0 0 1-30.613-44.864zM364.16 832a149.376 149.376 0 0 0 295.68 0h-87.467a64.021 64.021 0 0 1-120.746 0H364.16z m190.507-725.333a42.667 42.667 0 1 0-85.334 0v45.482a322.987 322.987 0 0 1 85.334 0v-45.482z" p-id="21639" fill="#d81e06"></path><path d="M800.597 746.667H223.403l5.589-11.158c5.547-11.093 9.45-18.922 13.035-26.965a405.333 405.333 0 0 0 34.922-147.904c0.384-8.79 0.384-17.536 0.384-29.93v-61.377c0-129.6 105.067-234.666 234.667-234.666s234.667 105.066 234.667 234.666v61.376c0 12.416 0 21.163 0.384 29.931a405.333 405.333 0 0 0 34.901 147.904c3.605 8.043 7.51 15.85 13.056 26.965l5.59 11.158zM512 149.333c-176.725 0-320 143.275-320 320v59.691c0 14.016 0 21.013-0.299 27.947a320 320 0 0 1-27.562 116.757c-2.838 6.315-5.974 12.587-12.224 25.11l-4.907 9.813c-13.504 26.986-20.245 40.469-21.61 51.285a64 64 0 0 0 42.303 68.459C177.984 832 193.067 832 223.232 832h577.515c30.186 0 45.269 0 55.552-3.627a64 64 0 0 0 42.304-68.416c-1.366-10.837-8.107-24.32-21.611-51.306l-4.907-9.814c-6.272-12.522-9.386-18.794-12.224-25.109A319.936 319.936 0 0 1 832.3 556.971C832 550.037 832 543.04 832 529.024v-59.69c0-176.726-143.275-320-320-320z" p-id="21640" fill="#d81e06"></path></svg>
+						</div>
+						<div class="top-text">
+							<p>{{ row.eventName }}</p>
+							<p>检测到攻击者：[{{ row.sourceIP }}]对[{{ row.destIP }}]发起针对web业务系统的{{ row.alarmSubType }}攻击。攻击URL:/arcgis/rest/services，服务器响应:200。</p>
+							<p v-if="row.alarmSubType=='越权访问'">{{ row.alarmSubType }}是指攻击者使用地权限或无需访问权限的情况下，利用漏洞或配置错误绕过权限检查，访问或操作到原本无权访问的功能。</p>
+							<p>2023-01-18 11:41:07</p>
+						</div>
+						<div class="right-button">
+							<el-button type="primary" plain size="small">上下文</el-button>
+							<el-button type="primary" plain size="small">标记</el-button>
+							<el-button type="primary" plain size="small">生成事件</el-button>
+							<el-button type="primary" plain size="small">生成风险</el-button>
+						</div>
+					</div>
+					<div class="my-second-row">
+						<div class="my-col">
+							<div class="my-box-header">来源</div>
+							<div class="my-box-body">
+								<div class="box-text">
+									<p style="margin-left: 25px;">资产名称：<span>重庆市规划和自然资源局</span></p> <br>
+									<p style="margin-left: 40.5px;">来源IP：<span>{{ row.sourceIP }}</span></p><br>
+									<p style="margin-left: 52.6px;">端口：<span>55867</span></p><br>
+									<p style="margin-left: 39px;">安全域：<span>未分配</span></p><br>
+									<p style="margin-left: 25px;">地理位置：<span>中国 - 重庆 - 重庆</span></p>
+								</div>
+							</div>
+						</div>
+						<div class="my-col">
+							<div class="my-box-header">手段</div>
+							<div class="my-box-body">
+								<div class="box-text">
+									<p style="margin-left: 52.6px;">协议：<span>TCP / http</span></p> <br>
+									<p style="margin-left: 39px;">状态码：<span>200</span></p><br>
+									<p style="margin-left: 25px;">告警分类：<span>web攻击</span></p><br>
+									<p style="margin-left: 25px;">告警类型：<span>越权访问</span></p>
+								</div>
+							</div>
+						</div>
+						<div class="my-col">
+							<div class="my-box-header">目的</div>		
+							<div class="my-box-body">
+								<div class="box-text">									
+									<p style="margin-left: 40.5px;">目的IP：<span>{{ row.destIP }}</span></p><br>
+									<p style="margin-left: 52.6px;">端口：<span>6080</span></p><br>
+									<p style="margin-left: 39px;">安全域：<span>未分配</span></p><br>
+									<p style="margin-left: 25px;">地理位置：<span>中国 - 北京 - 北京</span></p><br>
+									<p style="margin-left: 25px;">站点名称：<span>{{ row.destIP }}:6080</span></p>
+									
+								</div>
+							</div>					
+						</div>
+						<div class="my-col">
+							<div class="my-box-header">模型</div>
+							<div class="my-box-body">
+								<div class="box-text">
+									<p style="margin-left: 25px;">模型名称：<span style="color: #759ef1;">web攻击 AHAPT</span></p> <br>
+									<p style="margin-left: 25px;">模型类型：<span>规则模型</span></p><br>
+									<p style="margin-left: 25px;">告警等级：<span>高</span></p><br>
+									<p style="margin-left: 40.5px;">事件ID：<span>6101514928399105450</span></p><br>
+									<p style="margin-left: 25px;">告警结果：<span style="color: red;">攻击成功</span></p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="my-third-row">
+						<div class="my-box-header">举证</div>
+						<div class="my-box-body">
+							<p style="font-weight: 600;font-size: 16px;color: black;">基本信息</p>
+							<p style="font-weight: 600;color: black;margin: 15px 0;">攻击者：<span style="margin-right: 100px;font-weight: 400;">{{ row.sourceIP }}</span> 
+								 受害者：<span style="margin-right: 100px;font-weight: 400;">{{ row.destIP }}</span> 
+								  原始流ID：<span style="margin-right: 100px;font-weight: 400;color: #759ef1;">2301181147590969251</span> 
+								  原始ID列表：<span style="margin-right: 100px;font-weight: 400;color: #759ef1;">230118114802000004702</span></p>
+							<p style="display: flex; font-weight: 600;font-size: 16px;color: black;margin-top: 25px; align-items: center;"><span>请求页面</span><span style="margin-left: 10px; flex: 1;border-bottom: 1px solid #d3d8e5;"></span> </p>
+							<p style="color: #759ef1;margin-top: 15px;">{{ row.destIP }}:6080/arcgis/rest/services</p>
+						</div>
+					</div>
+				</div>
+			</template>
+		</vxe-column>
+			<vxe-column title="来源IP" field="sourceIP" min-width="160"></vxe-column>
 			<vxe-column title="目的IP" field="destIP" min-width="160"></vxe-column>
 			<vxe-column title="告警子类型" field="alarmSubType" min-width="140"></vxe-column>
 			<vxe-column title="事件名称" field="eventName" min-width="240" show-overflow></vxe-column>
@@ -109,6 +194,7 @@
 <script setup lang="ts" name="jiangPage" >
 import { dayjs } from 'element-plus';
 import { reactive,ref, onMounted,onUnmounted, nextTick } from 'vue';
+import { VxeColumnPropTypes } from 'vxe-table'
 import * as echarts from 'echarts'
 let multSearch:any = ref([])
 const options = ref([
@@ -373,6 +459,7 @@ const timerange = ref<[Date, Date]>([
   dayjs().subtract(1, 'day').toDate(),
   dayjs().toDate()
 ])
+const expandFixed = ref<VxeColumnPropTypes.Fixed>()
 const web = ref([])
 const webs = ['弱口令', '信息明文传输风险']
 const attack = ref([])
@@ -441,11 +528,13 @@ const tableData =ref([
 		{ sourceIP:'221.176.46.3',destIP:'212.24.139.164',alarmSubType:'越权访问',eventName:'WEB攻击->越权访问',distPort:873,threatLevel:'高',alarmResult:'攻击成功',startTime:'2023-01-26 23:18:03',state:'未处理',alarmName:'WEB攻击->越权访问',reqHeader:'未知',unitName:'未知' },
 		{ sourceIP:'113.207.121.288',destIP:'114.114.114.114',alarmSubType:'恶意域名',eventName:'挖矿->回连域名',distPort:53,threatLevel:'中',alarmResult:'攻击成功',startTime:'2023-01-29 09:52:16',state:'未处理',alarmName:'挖矿->回连域名',reqHeader:'未知',unitName:'未知' },
       ])
-const handleCellMouseEnter:any = ({row, column, cell}:any, event:any)=> {	
+const handleCellMouseEnter:any = ({row, column, cell, columnIndex}:any, event:any)=> {	
+	if(columnIndex === 0) return	
 	const iElement = document.createElement('i');  // 减号图标
 	iElement.setAttribute('class', 'el-icon');
 	iElement.style.fontSize = '15px';
-	iElement.style.marginLeft = '5px'
+	iElement.style.marginLeft = '5px';
+	iElement.setAttribute('title', '排除');  // 添加鼠标悬浮文字
 	const svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 	svgElement.setAttribute('viewBox', '0 0 1024 1024');
 	const pathElement = document.createElementNS('http://www.w3.org/2000/svg', 'path');
@@ -457,6 +546,7 @@ const handleCellMouseEnter:any = ({row, column, cell}:any, event:any)=> {
 	const iElement2 = document.createElement('i');  // 加号图标
 	iElement2.setAttribute('class', 'el-icon');
 	iElement2.style.fontSize = '15px';
+	iElement2.setAttribute('title', '筛选');  // 添加鼠标悬浮文字
 	const svgElement2 = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 	svgElement2.setAttribute('viewBox', '0 0 1024 1024');
 	const pathElement2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
@@ -613,6 +703,82 @@ let editOrAdd:any
 </script>
 
 <style scoped lang="less">
+// 展开行样式
+.expand-wrapper{
+	.my-first-row{
+		display: flex;
+		.left-icon{
+			margin: 15px 20px;
+		}
+		.top-text{
+			p:first-child{
+				margin-top: 15px;
+				font-size: 18px;
+				font-weight: 600;
+				color:black
+			}
+			p{
+				// font-size: 12px;
+				margin: 6px 0;
+			}
+		}
+		.right-button{
+			margin-top: 15px;
+			margin-left: 50px;
+		}
+	}
+	.my-second-row{
+		display: flex;
+		.my-col{
+			border:#ebeced 1px solid;
+			height: 190px;
+			width: 300px;
+			margin:5px;
+			.my-box-header{
+				background-color: #f4f5f8;
+				border-bottom:#ebeced 1px solid;
+				color: #444444;
+				font-weight: 600;
+				height: 30px;
+				line-height: 30px;
+				padding-left: 8px;
+			}
+			.my-box-body{
+				padding:8px;
+				.box-text{
+					display: inline-block;
+					font-weight: 600;
+					color:black;
+					p{
+						display: inline-block;
+						margin: 5px 0;
+						span{
+							font-weight: 400;
+						}
+					}
+				}
+			}
+		}
+	}
+	.my-third-row{
+		border:#ebeced 1px solid;
+		width: 1236.5px;
+		margin:5px;
+		.my-box-header{
+				background-color: #f4f5f8;
+				border-bottom:#ebeced 1px solid;
+				color: #444444;
+				font-weight: 600;
+				height: 30px;
+				line-height: 30px;
+				padding-left: 8px;
+			}
+		.my-box-body{
+			padding:16px;
+		}
+	}
+
+}
 .mytable-style ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
