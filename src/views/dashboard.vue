@@ -686,10 +686,12 @@ onMounted(() => {
 		response_type: 'code',
 		state: 'STATE'
 	}
-	axios.get('/api/authentication/auth/authorize', { params: data }).then((data) => {
-		console.log(data);
+	// axios.get('/api/authentication/auth/authorize', { params: data }).then((data) => {
+	// 	console.log(data);
 
-	})
+	// })
+	const testUrl = 'http://172.17.18.1:9998/authentication/auth/authorize'+ data
+	// console.log(testUrl);
 	nextTick(() => {
 		initOption1()
 		initOption2()

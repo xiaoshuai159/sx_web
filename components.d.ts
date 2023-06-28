@@ -49,4 +49,7 @@ declare module '@vue/runtime-core' {
     Xiangqing3: typeof import('./src/components/mining/xiangqing3.vue')['default']
     Xiangqing4: typeof import('./src/components/mining/xiangqing4.vue')['default']
   }
+  export interface ComponentCustomProperties {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
+  }
 }

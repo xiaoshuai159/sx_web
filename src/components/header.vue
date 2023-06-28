@@ -87,6 +87,10 @@ const handleCommand = (command: string) => {
 	font-family: 'YouShe';
 	src: url('../common/YouSheBiaoTiHei-2.ttf');
 }
+@media screen and (min-width:1920px) {
+
+}
+
 .header {
 	position: relative;
 	box-sizing: border-box;

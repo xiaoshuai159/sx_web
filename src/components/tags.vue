@@ -91,7 +91,7 @@ const getPreTagName = (tagName:string) =>{
 		preTagName.value = "数据安全"
 	}else if(tagName=="挖矿行为监测"||tagName=="漏洞监测"||tagName=="僵木蠕事件监测"||tagName=="域名异常监测"){
 		preTagName.value = "网络安全"
-	}else if(tagName=="威胁情报库"||tagName=="追踪溯源分析"||tagName=="公共危害事件"||tagName=="攻击搜索"){
+	}else if(tagName=="威胁情报库"||tagName=="追踪溯源分析"||tagName=="公共危害事件"||tagName=="威胁研判"){
 		preTagName.value = "分析研判"
 	}else if(tagName=="用户管理"){
 		preTagName.value = "系统管理"

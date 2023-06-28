@@ -48,141 +48,222 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+// import app from '../main';
+import { usePermissStore } from '../store/permiss';
+import { computed,ref } from 'vue';
 import { useSidebarStore } from '../store/sidebar';
 import { useRoute } from 'vue-router';
-
-const items = [
-    {
-        icon: 'Odometer',
-        index: '/dashboard',
-        title: '数据安全',
-        permiss: '1',
-        subs: [
-            {
-                index: '/dashboard',
-                title: '数据库安全事件',
-                permiss: '2',
-            },
-            {
-                index: '/APPstat',
-                title: 'APP检测分析',
-                permiss: '3',
-            },
-        ]
-    },
-    {
-        icon: 'Warning',
-        index: '/securityAnalysis',
-        title: '网络安全',
-        permiss: '5',
-        subs: [
-            {
-                index: '/provincePage',
-                title: '挖矿行为监测',
-                permiss: '13',
-            },
-            {
-                index: '/bugPage',
-                title: '漏洞监测',
-                permiss: '14',
-            },
-            {
-                index: '/jiangPage',
-                title: '僵木蠕事件监测',
-                permiss: '15',
-            },
-            {
-                index: '/domainMonitoring',
-                title: '域名异常监测',
-                permiss: '10',
-            }
-        ],
-    },
-    {
-        icon: 'WarnTriangleFilled',
-        index: '/threatIntelligence',
-        title: '分析研判',
-        permiss: '9',
-        subs: [
-            {
-                index: '/attackSearch',
-                title: '攻击搜索',
-                // title: '威胁研判',
-                permiss: '11',
-            },
-            {
-                index: '/threatIntelligence',
-                title: '威胁情报库',
-                // title: '威胁研判',
-                permiss: '11',
-            },
-            {
-                index: '/attackAndDefence',
-                // title: '组织与资产检索',
-                title: '追踪溯源分析',
-                permiss: '12',
-            },
-            {
-                index: '/harmEvent',
-                // title: '组织与资产检索',
-                title: '公共危害事件',
-                permiss: '12',
-            }
-        ],
-    },
-    {
-        icon: 'MessageBox',
-        index: '/permission',
-        title: '系统管理',
-        permiss: '13',
-        subs: [
-            {
-                index: '/permission',
-                title: '用户管理',
-                permiss: '13',
-            },
-        ],
-    },
+import router from '../router';
+let items:any = ref([
     // {
-    //     icon: 'MessageBox',
-    //     index: '/domainMonitoring',
-    //     title: '域名安全监测',
-    //     permiss: '15',
+    //     icon: 'Odometer',
+    //     index: '/dashboard',
+    //     title: '数据安全',
+    //     permiss: '1',
     //     subs: [
+    //         {
+    //             index: '/dashboard',
+    //             title: '数据库安全事件',
+    //             permiss: '2',
+    //         },
+    //         {
+    //             index: '/APPstat',
+    //             title: 'APP检测分析',
+    //             permiss: '3',
+    //         },
+    //     ]
+    // },
+    // {
+    //     icon: 'Warning',
+    //     index: '/securityAnalysis',
+    //     title: '网络安全',
+    //     permiss: '4',
+    //     subs: [
+    //         {
+    //             index: '/provincePage',
+    //             title: '挖矿行为监测',
+    //             permiss: '5',
+    //         },
+    //         {
+    //             index: '/bugPage',
+    //             title: '漏洞监测',
+    //             permiss: '6',
+    //         },
+    //         {
+    //             index: '/jiangPage',
+    //             title: '僵木蠕事件监测',
+    //             permiss: '7',
+    //         },
     //         {
     //             index: '/domainMonitoring',
     //             title: '域名异常监测',
-    //             permiss: '15',
-    //         },
-    //         {
-    //             index: '4',
-    //             title: '配置管理',
-    //             permiss: '15',
-    //             subs:[
-    //                 {
-    //                     index: '/domainSetting',
-    //                     title: '三级菜单1',
-    //                     permiss: '16',
-    //                 },
-    //                 {
-    //                     index: '/threatIntelligence',
-    //                     title: '三级菜单2',
-    //                     permiss: '17',
-    //                 },
-    //             ]
-    //         },
+    //             permiss: '8',
+    //         }
     //     ],
     // },
-];
-
+    // {
+    //     icon: 'WarnTriangleFilled',
+    //     index: '/threatIntelligence',
+    //     title: '分析研判',
+    //     permiss: '9',
+    //     subs: [
+    //         {
+    //             index: '/attackSearch',
+    //             title: '威胁研判',
+    //             // title: '威胁研判',
+    //             permiss: '10',
+    //         },
+    //         {
+    //             index: '/threatIntelligence',
+    //             title: '威胁情报库',
+    //             // title: '威胁研判',
+    //             permiss: '11',
+    //         },
+    //         {
+    //             index: '/attackAndDefence',
+    //             // title: '组织与资产检索',
+    //             title: '追踪溯源分析',
+    //             permiss: '12',
+    //         },
+    //         {
+    //             index: '/harmEvent',
+    //             // title: '组织与资产检索',
+    //             title: '公共危害事件',
+    //             permiss: '13',
+    //         }
+    //     ],
+    // },
+    // {
+    //     icon: 'MessageBox',
+    //     index: '/permission',
+    //     title: '系统管理',
+    //     permiss: '14',
+    //     subs: [
+    //         {
+    //             index: '/permission',
+    //             title: '用户管理',
+    //             permiss: '15',
+    //         },
+    //     ],
+    // }
+]);
+const items1 = [{
+    icon: 'Odometer',
+    index: '/dashboard',
+    title: '数据安全',
+    permiss: '1',
+    subs: [
+        {
+            index: '/dashboard',
+            title: '数据库安全事件',
+            permiss: '2',
+        },
+        {
+            index: '/APPstat',
+            title: 'APP检测分析',
+            permiss: '3',
+        },
+    ]
+}];
+const items2 = [{
+    icon: 'Warning',
+    index: '/securityAnalysis',
+    title: '网络安全',
+    permiss: '4',
+    subs: [
+        {
+            index: '/provincePage',
+            title: '挖矿行为监测',
+            permiss: '5',
+        },
+        {
+            index: '/bugPage',
+            title: '漏洞监测',
+            permiss: '6',
+        },
+        {
+            index: '/jiangPage',
+            title: '僵木蠕事件监测',
+            permiss: '7',
+        },
+        {
+            index: '/domainMonitoring',
+            title: '域名异常监测',
+            permiss: '8',
+        }
+    ],
+}];
+const items3 = [{
+    icon: 'WarnTriangleFilled',
+    index: '/threatIntelligence',
+    title: '分析研判',
+    permiss: '9',
+    subs: [
+        {
+            index: '/attackSearch',
+            title: '威胁研判',
+            // title: '威胁研判',
+            permiss: '10',
+        },
+        {
+            index: '/threatIntelligence',
+            title: '威胁情报库',
+            // title: '威胁研判',
+            permiss: '11',
+        },
+        {
+            index: '/attackAndDefence',
+            // title: '组织与资产检索',
+            title: '追踪溯源分析',
+            permiss: '12',
+        },
+        {
+            index: '/harmEvent',
+            // title: '组织与资产检索',
+            title: '公共危害事件',
+            permiss: '13',
+        }
+    ],
+}];
 const route = useRoute();
 const onRoutes = computed(() => {
     // “不走登录” 设置 ms_keys 权限，侧边栏内容显示
-    localStorage.setItem('ms_keys', '["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18"]');
+    // localStorage.setItem('ms_keys', '["1","2","3","4","5","6","7","8","9","10","11","12","13"]');
+    console.log('执行onRoutes');
+    // router.beforeEach((to,from,next)=>{
+    //     if(to.path=='/dashboard'||to.path=='/APPstat'){
+    //         // localStorage.setItem('ms_keys', '["1","2","3"]')
+    //         items.value = items1
+    //     }else if(to.path=='/provincePage'||to.path=='/bugPage'||to.path=='/jiangPage'||to.path=='/domainMonitoring'){
+    //         // localStorage.setItem('ms_keys', '["4","5","6","7","8"]')
+    //         items.value = items2
+    //     }else{
+    //         // localStorage.setItem('ms_keys', '["9","10","11","12","13"]')
+    //         items.value = items3
+    //     }
+    //     next()
+    // })
+    // console.log(route.path);
+    
+    const sidebarItems:any = {
+    '/dashboard': items1,
+    '/APPstat': items1,
+    '/provincePage': items2,
+    '/cityPage': items2,
+    '/areaPage': items2,
+    '/bugPage': items2,
+    '/jiangPage': items2,
+    '/domainMonitoring': items2,
+    '/threatIntelligence': items3,
+    '/attackSearch': items3,
+    '/attackAndDefence': items3,
+    '/harmEvent': items3,
+  };
+  const sidebar = sidebarItems[route.path] || [];
+//   console.log(sidebar);
+  items.value = sidebar
     return route.path;
 });
-
 const sidebar = useSidebarStore();
 
 </script>

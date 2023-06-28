@@ -101,9 +101,9 @@
 							<p>2023-01-18 11:41:07</p>
 						</div>
 						<div class="right-button">
-							<el-button type="primary" plain size="small">上下文</el-button>
-							<el-button type="primary" plain size="small">标记</el-button>
-							<el-button type="primary" plain size="small">生成事件</el-button>
+							<!-- <el-button type="primary" plain size="small">上下文</el-button>
+							<el-button type="primary" plain size="small">标记</el-button> -->
+							<el-button type="primary" plain size="small" @click="createEvent">生成事件</el-button>
 							<el-button type="primary" plain size="small">生成风险</el-button>
 						</div>
 					</div>
@@ -700,6 +700,12 @@ let form = reactive<FormAndTable>({
 });
 let idx: number = -1;
 let editOrAdd:any
+// 点击生成事件按钮
+let dialogVisible = false
+const createEvent = () =>{
+	console.log("点击了生成事件按钮");
+	
+}
 </script>
 
 <style scoped lang="less">

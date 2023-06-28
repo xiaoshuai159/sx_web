@@ -1,11 +1,12 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHashHistory, RouteRecordRaw, createWebHistory } from 'vue-router';
 import { usePermissStore } from '../store/permiss';
 import Home from '../views/home.vue';
 
 const routes: RouteRecordRaw[] = [
     {
         path: '/',
-        redirect: '/dashboard',
+        // redirect: '/dashboard',
+        redirect: '/provincePage',
     },
     {
         path: '/',
@@ -22,77 +23,14 @@ const routes: RouteRecordRaw[] = [
                 component: () => import('../views/dashboard.vue'),
             },
             {
-                path: '/editor',
-                name: 'editor',
-                meta: {
-                    title: '事件预警',
-                    permiss: '3',
-                },
-                component: () => import('../views/editor.vue'),
-            },
-            {
-                path: '/table',
-                name: 'basetable',
-                meta: {
-                    title: '事件汇总',
-                    permiss: '4',
-                },
-                component: () => import('../views/table.vue'),
-            },
-            {
                 path: '/APPstat',
                 name: 'APPstat',
                 meta: {
                     title: 'APP检测分析',
-                    permiss: '5',
+                    permiss: '3',
                 },
-                component: () => import('../views/APPstat.vue'),
-            },
-            {
-                path: '/APPsearch',
-                name: 'APPsearch',
-                meta: {
-                    title: 'APP事件查询',
-                    permiss: '6',
-                },
-                component: () => import('../views/APPsearch.vue'),
-            },
-            // {
-            //     path: '/securityAnalysis',
-            //     name: 'securityAnalysis',
-            //     meta: {
-            //         title: '安全分析',
-            //         permiss: '7',
-            //     },
-            //     component: () => import('../views/securityAnalysis.vue'),
-            // },
-            {
-                path: '/taskManagement',
-                name: 'taskManagement',
-                meta: {
-                    title: '任务管理',
-                    permiss: '8',
-                },
-                component: () => import('../views/taskManagement.vue'),
-            },
-            {
-                path: '/networkStat',
-                name: 'networkStat',
-                meta: {
-                    title: '数据展示',
-                    permiss: '9',
-                },
-                component: () => import('../views/networkStat.vue'),
-            },
-            {
-                path: '/noRecordApp',
-                name: 'noRecordApp',
-                meta: {
-                    title: '未备案APP处置',
-                    permiss: '10',
-                },
-                component: () => import('../views/noRecordApp.vue'),
-
+                component: () => import('../views/APPstat.vue')
+                
             },
             {
                 path: '/threatIntelligence',
@@ -112,32 +50,32 @@ const routes: RouteRecordRaw[] = [
                 },
                 component: () => import(/* webpackChunkName: "charts" */ '../views/attackAndDefence.vue'),
             },
-            {
-                path: '/countryPage',
-                name: 'countryPage',
-                meta: {
-                    title: '挖矿行为监测',
-                    permiss: '13',
-                },
-                component: () => import(/* webpackChunkName: "charts" */ '../views/mining/countryPage.vue'),
+            // {
+            //     path: '/countryPage',
+            //     name: 'countryPage',
+            //     meta: {
+            //         title: '挖矿行为监测',
+            //         permiss: '13',
+            //     },
+            //     component: () => import(/* webpackChunkName: "charts" */ '../views/mining/countryPage.vue'),
 
-            },
+            // },
             {
                 path: '/provincePage',
                 name: 'provincePage',
                 meta: {
                     title: '挖矿行为监测',
-                    permiss: '13',
+                    permiss: '5',
                 },
-                component: () => import(/* webpackChunkName: "charts" */ '../views/mining/provincePage.vue'),
-
+                component: () => import(/* webpackChunkName: "charts" */ '../views/mining/provincePage.vue')
+                
             },
             {
                 path: '/cityPage',
                 name: 'cityPage',
                 meta: {
                     title: '挖矿行为监测',
-                    permiss: '14',
+                    permiss: '5',
                 },
                 component: () => import(/* webpackChunkName: "charts" */ '../views/mining/cityPage.vue'),
             },
@@ -146,7 +84,7 @@ const routes: RouteRecordRaw[] = [
                 name: 'areaPage',
                 meta: {
                     title: '挖矿行为监测',
-                    permiss: '14',
+                    permiss: '5',
                 },
                 component: () => import(/* webpackChunkName: "charts" */ '../views/mining/areaPage.vue'),
             },
@@ -155,26 +93,26 @@ const routes: RouteRecordRaw[] = [
                 name: 'domainMonitoring',
                 meta: {
                     title: '域名异常监测',
-                    permiss: '15',
+                    permiss: '8',
                 },
                 component: () => import(/* webpackChunkName: "charts" */ '../views/domainMonitoring.vue'),
             },
             
-            {
-                path: '/domainSetting',
-                name: 'domainSetting',
-                meta: {
-                    title: '配置管理',
-                    permiss: '15',
-                },
-                component: () => import(/* webpackChunkName: "charts" */ '../views/domainSetting.vue'),
-            },
+            // {
+            //     path: '/domainSetting',
+            //     name: 'domainSetting',
+            //     meta: {
+            //         title: '配置管理',
+            //         permiss: '15',
+            //     },
+            //     component: () => import(/* webpackChunkName: "charts" */ '../views/domainSetting.vue'),
+            // },
             {
                 path:'/bugPage',
                 name:'bugPage',
                 meta:{
                     title:'漏洞监测',
-                    permiss:'16',
+                    permiss:'6',
                 },
                 component: () => import('../views/bugPage.vue')
 
@@ -184,7 +122,7 @@ const routes: RouteRecordRaw[] = [
                 name:'jiangPage',
                 meta:{
                     title:'僵木蠕事件监测',
-                    permiss:'16',
+                    permiss:'7',
                 },
                 component: () => import('../views/jiangPage.vue')
 
@@ -193,8 +131,8 @@ const routes: RouteRecordRaw[] = [
                 path:'/attackSearch',
                 name:'attackSearch',
                 meta:{
-                    title:'攻击搜索',
-                    permiss:'16',
+                    title:'威胁研判',
+                    permiss:'10',
                 },
                 component: () => import('../views/attackSearch.vue')
 
@@ -204,7 +142,7 @@ const routes: RouteRecordRaw[] = [
                 name:'harmEvent',
                 meta:{
                     title:'公共危害事件',
-                    permiss:'16',
+                    permiss:'13',
                 },
                 component: () => import('../views/harmEvent.vue')
 
@@ -214,72 +152,10 @@ const routes: RouteRecordRaw[] = [
                 name: 'permission',
                 meta: {
                     title: '用户管理',
-                    permiss: '13',
+                    permiss: '15',
                 },
                 component: () => import(/* webpackChunkName: "permission" */ '../views/permission.vue'),
             },
-            // {
-            //     path: '/upload',
-            //     name: 'upload',
-            //     meta: {
-            //         title: '上传插件',
-            //         permiss: '6',
-            //     },
-            //     component: () => import(/* webpackChunkName: "upload" */ '../views/upload.vue'),
-            // },
-            // {
-            //     path: '/icon',
-            //     name: 'icon',
-            //     meta: {
-            //         title: '自定义图标',
-            //         permiss: '10',
-            //     },
-            //     component: () => import(/* webpackChunkName: "icon" */ '../views/icon.vue'),
-            // },
-            // {
-            //     path: '/user',
-            //     name: 'user',
-            //     meta: {
-            //         title: '个人中心',
-            //     },
-            //     component: () => import(/* webpackChunkName: "user" */ '../views/user.vue'),
-            // },
-            // {
-            //     path: '/editor',
-            //     name: 'editor',
-            //     meta: {
-            //         title: '富文本编辑器',
-            //         permiss: '8',
-            //     },
-            //     component: () => import(/* webpackChunkName: "editor" */ '../views/editor.vue'),
-            // },
-            // {
-            //     path: '/markdown',
-            //     name: 'markdown',
-            //     meta: {
-            //         title: 'markdown编辑器',
-            //         permiss: '9',
-            //     },
-            //     component: () => import(/* webpackChunkName: "markdown" */ '../views/markdown.vue'),
-            // },
-            // {
-            //     path: '/export',
-            //     name: 'export',
-            //     meta: {
-            //         title: '导出Excel',
-            //         permiss: '2',
-            //     },
-            //     component: () => import(/* webpackChunkName: "export" */ '../views/export.vue'),
-            // },
-            // {
-            //     path: '/import',
-            //     name: 'import',
-            //     meta: {
-            //         title: '导入Excel',
-            //         permiss: '2',
-            //     },
-            //     component: () => import(/* webpackChunkName: "import" */ '../views/import.vue'),
-            // },
         ],
     },
     {
@@ -301,7 +177,7 @@ const routes: RouteRecordRaw[] = [
 ];
 
 const router = createRouter({
-    history: createWebHashHistory(),
+    history: createWebHistory(),
     routes,
 });
 // 路由守卫
