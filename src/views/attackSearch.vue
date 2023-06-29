@@ -185,6 +185,140 @@
 			<vxe-column title="请求头" field="reqHeader" min-width="140"></vxe-column>
 			<vxe-column title="单位名称" field="unitName" min-width="140"></vxe-column>
 		</vxe-table>
+		<el-dialog title="生成事件" v-model="editVisible">
+			<div class="dialog-body">
+						<div class="dialog-body-title">
+							<span class="start-png"></span>
+							基本信息
+							<p class="dashed-bottom"></p>
+							<p class="end-png"></p>
+						</div>
+						<!-- <div class="my-el-row">
+							<div><span class="dialog-body-left">对应ip：</span><span class="dialog-body-right">15.242.44.10</span></div>
+						</div> -->
+						<el-row style="margin-top:10px">
+							<el-col :span="12" style="padding-left:28px"> <span>事件名称：</span> <el-input v-model="eventNameInput" placeholder="请输入安全事件名称" size="small" style="width: 12vw;"></el-input> </el-col>
+							<el-col :span="12" style="padding-left:43px"> <span>事件等级：</span> <el-select v-model="eventLevelSel" placeholder="请选择" size="small" style="width: 12vw;">
+								<el-option
+								v-for="item in eventLevelOpt"
+								:key="item.value"
+								:label="item.label"
+								:value="item.value"
+								/>
+							</el-select> </el-col>
+						</el-row>
+						<el-row>
+							<el-col :span="12" style="padding-left:28px"> <span>发现时间：</span> <el-date-picker
+								v-model="value1"
+								type="date"
+								placeholder="请选择发现时间"
+								size="small"
+								:clearable="false"
+								style="width: 12vw;"
+							/> </el-col>
+							<el-col :span="12" style="padding-left:43px"> <span>事件描述：</span> <el-input v-model="eventdescInput" size="small" placeholder="请输入事件描述" style="width: 12vw;"></el-input> </el-col>
+						</el-row>
+						<el-row>
+							<el-col :span="12" style="padding-left:28px"> <span>验证状态：</span> <el-select v-model="stateSel" placeholder="请选择" size="small" style="width: 12vw;">
+								<el-option
+								v-for="item in stateOpt"
+								:key="item.value"
+								:label="item.label"
+								:value="item.value"
+								/>
+							</el-select> </el-col>
+							<el-col :span="12" style="padding-left:15px"> <span>目标对象URL：</span> <el-input v-model="tarUrlInput" size="small" placeholder="请输入目标对象URL" style="width: 12vw;"></el-input> </el-col>
+						</el-row>
+						<el-row>
+							<el-col :span="12"> <span>目标对象域名：</span> <el-input v-model="tarDomainInput" size="small" placeholder="请输入目标对象域名" style="width: 12vw;"></el-input> </el-col>
+							<el-col :span="12" style="padding-left:29px"> <span>目标对象IP：</span> <el-input v-model="tarIpInput" size="small" placeholder="请输入目标对象IP" style="width: 12vw;"></el-input> </el-col>
+						</el-row>
+						<el-row>
+							<el-col :span="12"> <span>目标对象端口：</span> <el-input v-model="tarPortInput" size="small" placeholder="请输入目标对象端口" style="width: 12vw;"></el-input> </el-col>
+							<el-col :span="12"> <span>目标对象所在地：</span> <el-select v-model="tarAreaSel" placeholder="请选择" size="small" style="width: 12vw;">
+								<el-option
+								v-for="item in tarAreaOpt"
+								:key="item.value"
+								:label="item.label"
+								:value="item.value"
+								/>
+							</el-select> </el-col>
+						</el-row>
+						<el-row>
+							<el-col :span="12" style="padding-left:28px"> <span>攻击者IP：</span> <el-input v-model="attackIpInput" placeholder="请输入攻击者IP" size="small" style="width: 12vw;"></el-input> </el-col>
+							<el-col :span="12" style="padding-left:28px"> <span>攻击者端口：</span> <el-input v-model="attackPortInput" placeholder="请输入攻击者端口" size="small" style="width: 12vw;"></el-input> </el-col>
+						</el-row>
+						<el-row>
+							<el-col :span="12"> <span>攻击者所在地：</span> <el-select v-model="attackAreaSel" placeholder="请选择" size="small" style="width: 12vw;">
+								<el-option
+								v-for="item in attackAreaOpt"
+								:key="item.value"
+								:label="item.label"
+								:value="item.value"
+								/>
+							</el-select> </el-col>
+							<el-col :span="12" style="padding-left:42px"> <span>发现厂商：</span> <el-select v-model="discoverFirmSel" placeholder="请选择" size="small" style="width: 12vw;">
+								<el-option
+								v-for="item in discoverFirmOpt"
+								:key="item.value"
+								:label="item.label"
+								:value="item.value"
+								/>
+							</el-select> </el-col>
+						</el-row>
+						<el-row>
+							<el-col :span="12"  style="padding-left:28px"> <span>事件类别：</span> <el-select v-model="eventTypeSel" placeholder="请选择" size="small" style="width: 12vw;">
+								<el-option
+								v-for="item in eventTypeOpt"
+								:key="item.value"
+								:label="item.label"
+								:value="item.value"
+								/>
+							</el-select> </el-col>
+							<el-col :span="12" style="padding-left:55px"> <span>子类别：</span> <el-select v-model="subTypeSel" placeholder="请选择" size="small" style="width: 12vw;">
+								<el-option
+								v-for="item in subTypeOpt"
+								:key="item.value"
+								:label="item.label"
+								:value="item.value"
+								/>
+							</el-select> </el-col>
+						</el-row>
+						<el-row>
+							<el-col :span="12" style="padding-left:28px"> <span>事件来源：</span> <el-select v-model="eventSourceSel" placeholder="请选择" size="small" style="width: 12vw;">
+								<el-option
+								v-for="item in eventSourceOpt"
+								:key="item.value"
+								:label="item.label"
+								:value="item.value"
+								/>
+							</el-select> </el-col>
+							<el-col :span="12" style="padding-left:55px"> <span>受害者：</span> <el-input v-model="harmInput" size="small" placeholder="请输入受害者" style="width: 12vw;"></el-input> </el-col>
+						</el-row>
+						<el-row>
+							<el-col :span="12" style="padding-left:28px"> <span>填报单位：</span> <el-input v-model="areaInput" size="small" placeholder="请输入填报单位" style="width: 12vw;"></el-input> </el-col>
+							<el-col :span="12" style="padding-left:69px"> <span>备注：</span> <el-input v-model="remark" size="small" style="width: 12vw;"></el-input> </el-col>
+						</el-row>
+						<!-- <div class="dialog-body-title">
+							<span class="start-png"></span>
+							告警信息
+							<p class="dashed-bottom"></p>
+							<p class="end-png"></p>
+						</div>
+						<div class="dialog-body-content">
+							<div><span class="dialog-body-left">告警时间：</span><span class="dialog-body-right">-</span></div>
+							<div><span class="dialog-body-left">告警类型：</span><span class="dialog-body-right">-</span></div>
+							<div><span class="dialog-body-left">危险等级：</span><span class="dialog-body-right">-</span></div>	
+						</div>
+						<br> -->
+					</div>
+			<template #footer>
+				<span class="dialog-footer">
+					<el-button type="primary" @click="uploadFile">上传</el-button>
+					<el-button @click="editVisible = false">取 消</el-button>
+				</span>
+			</template>
+		</el-dialog>
 		</div>
 		
     </div>
@@ -192,7 +326,7 @@
 </template>
 
 <script setup lang="ts" name="jiangPage" >
-import { dayjs } from 'element-plus';
+import { dayjs,ElMessage } from 'element-plus';
 import { reactive,ref, onMounted,onUnmounted, nextTick } from 'vue';
 import { VxeColumnPropTypes } from 'vxe-table'
 import * as echarts from 'echarts'
@@ -459,6 +593,74 @@ const timerange = ref<[Date, Date]>([
   dayjs().subtract(1, 'day').toDate(),
   dayjs().toDate()
 ])
+let eventNameInput = ref('')
+let eventLevelInput = ref('')
+let eventdescInput = ref('')
+let tarUrlInput = ref('')
+let tarDomainInput = ref('')
+let tarIpInput = ref('')
+let tarPortInput = ref('')
+let attackIpInput = ref('')
+let attackPortInput = ref('')
+let harmInput = ref('')
+let areaInput = ref('')
+let remark = ref('')
+let eventLevelSel = ref('')
+let eventLevelOpt = [
+  {
+    value: '高',
+    label: '高',
+  },
+  {
+    value: '中',
+    label: '中',
+  },
+  {
+    value: '低',
+    label: '低',
+  }
+]
+let stateSel = ref('')
+let stateOpt = [
+  {
+    value: '已验证',
+    label: '已验证',
+  },
+  {
+    value: '未验证',
+    label: '未验证',
+  }
+]
+let tarAreaSel = ref('')
+let tarAreaOpt = [
+	{
+    value: '北京',
+    label: '北京',
+  },
+  {
+    value: '上海',
+    label: '上海',
+  }
+]
+let attackAreaSel = ref('')
+let attackAreaOpt = [
+	{
+    value: '北京',
+    label: '北京',
+  },
+  {
+    value: '上海',
+    label: '上海',
+  }
+]
+let discoverFirmSel = ref('')
+let discoverFirmOpt:any = []
+let eventTypeSel = ref('')
+let eventTypeOpt:any = []
+let subTypeSel = ref('')
+let subTypeOpt:any = []
+let eventSourceSel = ref('')
+let eventSourceOpt:any = []
 const expandFixed = ref<VxeColumnPropTypes.Fixed>()
 const web = ref([])
 const webs = ['弱口令', '信息明文传输风险']
@@ -606,7 +808,7 @@ interface FormAndTable {
 	state: string
 }
 const formLabelWidth = '90px'
-const editVisible = ref(false);
+
 const pageTotal = ref(0);
 const handleSearch = () => {
 	query.pageIndex = 1;
@@ -660,10 +862,7 @@ const getData = () =>{
 	level:'高'
 }]
 }
-const value1 = ref<[Date,Date]>([
-	new Date(2023, 4, 29, 10, 10),
-    new Date(2023, 4, 30, 10, 10),
-])
+const value1 = ref('')
 const tableData2 = ref<FormAndTable[]>([{
 	id: 1,
 	time:dayjs().format("YYYY-MM-DD  HH:mm:ss"),
@@ -701,10 +900,36 @@ let form = reactive<FormAndTable>({
 let idx: number = -1;
 let editOrAdd:any
 // 点击生成事件按钮
-let dialogVisible = false
+let editVisible = ref(false);
 const createEvent = () =>{
-	console.log("点击了生成事件按钮");
-	
+	editVisible.value = true
+}
+const uploadFile = () => {
+	ElMessage({
+		message: '上传成功！',
+		type: 'success',
+	})
+	eventNameInput.value = ''
+	eventLevelInput.value = ''
+	eventdescInput.value = ''
+	tarUrlInput.value = ''
+	tarDomainInput.value = ''
+	tarIpInput.value = ''
+	tarPortInput.value = ''
+	attackIpInput.value = ''
+	attackPortInput.value = ''
+	harmInput.value = ''
+	areaInput.value = ''
+	remark.value = ''
+	eventLevelSel.value = ''
+	stateSel.value = ''
+	tarAreaSel.value = ''
+	attackAreaSel.value = ''
+	discoverFirmSel.value = ''
+	eventTypeSel.value = ''
+	subTypeSel.value = ''
+	eventSourceSel.value = ''
+	editVisible.value = false
 }
 </script>
 
@@ -900,6 +1125,18 @@ const createEvent = () =>{
 .dialog-body-right{
 	font-size: 14px;
     font-weight: 500;
+}
+.my-el-row{
+    margin-top: 8px;
+}
+.my-el-row div{
+    float: left;
+    width: 60%;
+}
+.my-el-row::after{
+    content:'';
+    display:block;
+    clear: both;
 }
 :deep(.el-table__header th){
 	background-color: rgba(51, 121, 255,0.2)!important;

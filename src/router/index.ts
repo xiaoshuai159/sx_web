@@ -6,7 +6,8 @@ const routes: RouteRecordRaw[] = [
     {
         path: '/',
         // redirect: '/dashboard',
-        redirect: '/provincePage',
+        // redirect: '/provincePage',
+        redirect:'/attackSearch'
     },
     {
         path: '/',
