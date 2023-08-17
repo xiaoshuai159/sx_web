@@ -62,7 +62,7 @@
           <el-col :span="24">
             <div class="block">
               <el-table
-                :data="tableData"
+                :data="curtableData2"
                 class="tableClass"
                 stripe
                 ref="multipleTable"
@@ -102,7 +102,7 @@
                 >
                 </el-table-column> -->
               </el-table>
-              <el-pagination
+              <!-- <el-pagination
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
                 :current-page="currentPage"
@@ -110,11 +110,16 @@
                 layout="total, sizes"
                 :total="tableData.length"
               >
-              <!-- , prev, pager, next, jumper -->
-              </el-pagination>
+              </el-pagination> -->
+              
             </div>
           </el-col>
         </el-row>
+        <div class="pagination">
+						<el-pagination background layout="total, prev, pager, next" v-model:current-page="query.pageIndex"
+							:page-size="query.pageSize" :total="query.total"
+							@current-change="handlePageChange"></el-pagination>
+					</div>
       </el-main>
       <el-dialog v-model="dialogTableVisible" title="挖矿信息详情" :append-to-body='true' >
         <div class="dialog-body">
@@ -160,8 +165,29 @@
 </template>
 
 <script setup lang="ts" name="xiangqing2">
-import {reactive, ref} from 'vue';
+import {reactive, ref, onMounted} from 'vue';
+onMounted(()=>{
+  handlePageChange(1)
+})
 const dialogTableVisible = ref(false)
+const curtableData2:any = ref([])
+  const handlePageChange = (value: number) => {
+	query.pageIndex = value;
+   if (value > 1) {
+
+		curtableData2.value = tableData.value&&tableData.value.slice(10,16)
+	} else { 
+		curtableData2.value = tableData.value&&tableData.value.slice(0,10);  
+   }
+
+};
+const query = reactive({
+	address: '',
+	name: '',
+	pageIndex: 1,
+	pageSize: 10,
+	total:16
+});
 const saveEdit = () => {
   dialogTableVisible.value = false;
 }
@@ -184,6 +210,111 @@ const options:any = []
 const options2:any = []
 const options3:any = []
 const tableData = ref<appTableData[]>([
+    {
+        _id: '182.16.14.234',
+        _ip: '216.118.242.12',
+        _port: '37',
+        _time:'2023-05-29',
+        district: '普兰店'
+    },
+    {
+        _id: '182.16.14.234',
+        _ip: '216.118.242.12',
+        _port: '37',
+        _time:'2023-05-29',
+        district: '普兰店'
+    },
+    {
+        _id: '182.16.14.234',
+        _ip: '216.118.242.12',
+        _port: '37',
+        _time:'2023-05-29',
+        district: '普兰店'
+    },
+    {
+        _id: '182.16.14.234',
+        _ip: '216.118.242.12',
+        _port: '37',
+        _time:'2023-05-29',
+        district: '普兰店'
+    },
+    {
+        _id: '182.16.14.234',
+        _ip: '216.118.242.12',
+        _port: '37',
+        _time:'2023-05-29',
+        district: '普兰店'
+    },
+    {
+        _id: '182.16.14.234',
+        _ip: '216.118.242.12',
+        _port: '37',
+        _time:'2023-05-29',
+        district: '普兰店'
+    },
+    {
+        _id: '182.16.14.234',
+        _ip: '216.118.242.12',
+        _port: '37',
+        _time:'2023-05-29',
+        district: '普兰店'
+    },
+    {
+        _id: '182.16.14.234',
+        _ip: '216.118.242.12',
+        _port: '37',
+        _time:'2023-05-29',
+        district: '普兰店'
+    },
+    {
+        _id: '182.16.14.234',
+        _ip: '216.118.242.12',
+        _port: '37',
+        _time:'2023-05-29',
+        district: '普兰店'
+    },
+    {
+        _id: '182.16.14.234',
+        _ip: '216.118.242.12',
+        _port: '37',
+        _time:'2023-05-29',
+        district: '普兰店'
+    },
+    {
+        _id: '182.16.14.234',
+        _ip: '216.118.242.12',
+        _port: '37',
+        _time:'2023-05-29',
+        district: '普兰店'
+    },
+    {
+        _id: '182.16.14.234',
+        _ip: '216.118.242.12',
+        _port: '37',
+        _time:'2023-05-29',
+        district: '普兰店'
+    },
+    {
+        _id: '182.16.14.234',
+        _ip: '216.118.242.12',
+        _port: '37',
+        _time:'2023-05-29',
+        district: '普兰店'
+    },
+    {
+        _id: '182.16.14.234',
+        _ip: '216.118.242.12',
+        _port: '37',
+        _time:'2023-05-29',
+        district: '普兰店'
+    },
+    {
+        _id: '182.16.14.234',
+        _ip: '216.118.242.12',
+        _port: '37',
+        _time:'2023-05-29',
+        district: '普兰店'
+    },
     {
         _id: '182.16.14.234',
         _ip: '216.118.242.12',

@@ -185,6 +185,7 @@
 			<vxe-column title="请求头" field="reqHeader" min-width="140"></vxe-column>
 			<vxe-column title="单位名称" field="unitName" min-width="140"></vxe-column>
 		</vxe-table>
+		
 		<el-dialog title="生成事件" v-model="editVisible">
 			<div class="dialog-body">
 						<div class="dialog-body-title">
@@ -593,6 +594,24 @@ const timerange = ref<[Date, Date]>([
   dayjs().subtract(1, 'day').toDate(),
   dayjs().toDate()
 ])
+
+const gridOptions = reactive({
+  border: true,
+  height: 530,
+  loading: false,
+  columnConfig: {
+    resizable: true
+  },
+  data: [],
+  columns: [
+    { type: 'seq', width: 60 },
+    { type: 'checkbox', width: 50 },
+    { field: 'name', title: 'Name' },
+    { field: 'nickname', title: 'Nickname' },
+    { field: 'role', title: 'Role' },
+    { field: 'address', title: 'Address', showOverflow: true }
+  ]
+})
 let eventNameInput = ref('')
 let eventLevelInput = ref('')
 let eventdescInput = ref('')
@@ -719,6 +738,7 @@ function myChart1Resize(){
 onMounted(()=>{
 	nextTick(()=>{
 		initOption1()
+		
 	})	
 })
 onUnmounted(() => {
@@ -729,6 +749,13 @@ onUnmounted(() => {
 const tableData =ref([
 		{ sourceIP:'221.176.46.3',destIP:'212.24.139.164',alarmSubType:'越权访问',eventName:'WEB攻击->越权访问',distPort:873,threatLevel:'高',alarmResult:'攻击成功',startTime:'2023-01-26 23:18:03',state:'未处理',alarmName:'WEB攻击->越权访问',reqHeader:'未知',unitName:'未知' },
 		{ sourceIP:'113.207.121.288',destIP:'114.114.114.114',alarmSubType:'恶意域名',eventName:'挖矿->回连域名',distPort:53,threatLevel:'中',alarmResult:'攻击成功',startTime:'2023-01-29 09:52:16',state:'未处理',alarmName:'挖矿->回连域名',reqHeader:'未知',unitName:'未知' },
+		{ sourceIP:'77.245.76.66',destIP:'5.104.110.170',alarmSubType:'越权访问',eventName:'WEB攻击->越权访问',distPort:23,threatLevel:'高',alarmResult:'攻击成功',startTime:'2023-01-26 23:18:03',state:'未处理',alarmName:'WEB攻击->越权访问',reqHeader:'未知',unitName:'未知' },
+		{ sourceIP:'139.162.111.226',destIP:'185.29.10.24',alarmSubType:'恶意域名',eventName:'挖矿->回连域名',distPort:16,threatLevel:'中',alarmResult:'攻击成功',startTime:'2023-01-29 09:52:16',state:'未处理',alarmName:'挖矿->回连域名',reqHeader:'未知',unitName:'未知' },
+		{ sourceIP:'46.183.222.84',destIP:'185.64.104.229',alarmSubType:'越权访问',eventName:'WEB攻击->越权访问',distPort:81,threatLevel:'高',alarmResult:'攻击成功',startTime:'2023-01-26 23:18:03',state:'未处理',alarmName:'WEB攻击->越权访问',reqHeader:'未知',unitName:'未知' },
+		{ sourceIP:'113.207.121.288',destIP:'198.20.167.132',alarmSubType:'恶意域名',eventName:'挖矿->回连域名',distPort:103,threatLevel:'中',alarmResult:'攻击成功',startTime:'2023-01-29 09:52:16',state:'未处理',alarmName:'挖矿->回连域名',reqHeader:'未知',unitName:'未知' },
+		{ sourceIP:'193.169.245.31',destIP:'46.183.222.84',alarmSubType:'越权访问',eventName:'WEB攻击->越权访问',distPort:631,threatLevel:'高',alarmResult:'攻击成功',startTime:'2023-01-26 23:18:03',state:'未处理',alarmName:'WEB攻击->越权访问',reqHeader:'未知',unitName:'未知' },
+		{ sourceIP:'173.209.43.20',destIP:'154.16.138.89',alarmSubType:'恶意域名',eventName:'挖矿->回连域名',distPort:12,threatLevel:'中',alarmResult:'攻击成功',startTime:'2023-01-29 09:52:16',state:'未处理',alarmName:'挖矿->回连域名',reqHeader:'未知',unitName:'未知' },
+		{ sourceIP:'23.227.201.220',destIP:'74.121.190.150',alarmSubType:'越权访问',eventName:'WEB攻击->越权访问',distPort:82,threatLevel:'高',alarmResult:'攻击成功',startTime:'2023-01-26 23:18:03',state:'未处理',alarmName:'WEB攻击->越权访问',reqHeader:'未知',unitName:'未知' },
       ])
 const handleCellMouseEnter:any = ({row, column, cell, columnIndex}:any, event:any)=> {	
 	if(columnIndex === 0) return	

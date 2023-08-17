@@ -220,6 +220,7 @@ const successFn = () => {
     isHave.value = 3
 }
 const getIOCinfo = () =>{
+    
     if(input1.value == 'hot.tenchier.com'||input1.value == '121.37.189.177'||input1.value == 'https://www.hot.tenchier.com'){
         isHave.value = 2
     }else{

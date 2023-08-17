@@ -259,11 +259,11 @@
 
 						<span>攻击者IP：</span>
 						<el-input v-model="query.name" placeholder="攻击者IP" class="handle-input mr10"></el-input>
-						<el-button type="primary" @click="handleSearch">搜索</el-button>
+						<el-button type="primary" >搜索</el-button>
 						<el-button>导出</el-button>
 						<!-- <el-button type="primary" @click="handleAdd">新增</el-button> -->
 					</div>
-					<el-table :data="tableData2" class="tableStyle" ref="multipleTable"
+					<el-table :data="curtableData2" class="tableStyle" ref="multipleTable"
 						header-cell-class-name="table-header" stripe>
 						<el-table-column prop="id" label="事件id" min-width="70" align="center"></el-table-column>
 						<el-table-column prop="time" label="时间" min-width="158" show-overflow-tooltip></el-table-column>
@@ -293,8 +293,8 @@
 						</el-table-column>
 					</el-table>
 					<div class="pagination">
-						<el-pagination background layout="total, prev, pager, next" :current-page="query.pageIndex"
-							:page-size="query.pageSize" :total="pageTotal"
+						<el-pagination background layout="total, prev, pager, next" v-model:current-page="query.pageIndex"
+							:page-size="query.pageSize" :total="query.total"
 							@current-change="handlePageChange"></el-pagination>
 					</div>
 				</div>
@@ -697,6 +697,8 @@ onMounted(() => {
 		initOption2()
 		initOption3()
 	})
+	handlePageChange(1)
+	
 })
 
 
@@ -728,12 +730,7 @@ interface FormAndTable {
 	level: string
 	state: string
 }
-const query = reactive({
-	address: '',
-	name: '',
-	pageIndex: 1,
-	pageSize: 10
-});
+
 // const value1 = ref<[Date,Date]>([
 //   new Date(2023, 1, 21, 10, 10),
 //   new Date(2023, 1, 22, 10, 10),
@@ -751,32 +748,7 @@ const tableData2 = ref<FormAndTable[]>([{
 	attackPort: 68,
 	state: '已验证',
 	level: '高'
-}]);
-const pageTotal = ref(0);
-// 获取表格数据
-// const getData = () => {
-// 	fetchData().then(res => {
-// 		tableData.value = res.data.list;
-// 		pageTotal.value = res.data.pageTotal || 50;
-// 	});
-// };
-// getData();
-const getData = () => {
-	tableData2.value = [{
-		id: 1,
-		time: dayjs().format("YYYY-MM-DD  HH:mm:ss"),
-		harmIP: '172.5.45.62',
-		harmPort: 45,
-		databaseType: 'mysql',
-		warnType: '数据库密码爆破',
-		warnContent: '无',
-		attackNum: 9,
-		attackIP: '192.168.55.4',
-		attackPort: 68,
-		state: '已验证',
-		level: '高'
-	},
-	{
+},{
 		id: 2,
 		time: dayjs().format("YYYY-MM-DD  HH:mm:ss"),
 		harmIP: '172.53.45.6',
@@ -803,17 +775,245 @@ const getData = () => {
 		attackPort: 68,
 		state: '已验证',
 		level: '高'
-	}]
+	},
+	{
+		id: 4,
+		time: dayjs().format("YYYY-MM-DD  HH:mm:ss"),
+		harmIP: '172.53.5.62',
+		harmPort: 40,
+		databaseType: 'mysql',
+		warnType: '数据库密码爆破',
+		warnContent: '无',
+		attackNum: 9,
+		attackIP: '192.168.55.4',
+		attackPort: 68,
+		state: '已验证',
+		level: '高'
+	},
+	{
+		id: 5,
+		time: dayjs().format("YYYY-MM-DD  HH:mm:ss"),
+		harmIP: '172.53.5.62',
+		harmPort: 40,
+		databaseType: 'mysql',
+		warnType: '数据库密码爆破',
+		warnContent: '无',
+		attackNum: 9,
+		attackIP: '192.168.55.4',
+		attackPort: 68,
+		state: '已验证',
+		level: '高'
+	},
+	{
+		id: 6,
+		time: dayjs().format("YYYY-MM-DD  HH:mm:ss"),
+		harmIP: '172.53.5.62',
+		harmPort: 40,
+		databaseType: 'mysql',
+		warnType: '数据库密码爆破',
+		warnContent: '无',
+		attackNum: 9,
+		attackIP: '192.168.55.4',
+		attackPort: 68,
+		state: '已验证',
+		level: '高'
+	},
+	{
+		id: 7,
+		time: dayjs().format("YYYY-MM-DD  HH:mm:ss"),
+		harmIP: '172.53.5.62',
+		harmPort: 40,
+		databaseType: 'mysql',
+		warnType: '数据库密码爆破',
+		warnContent: '无',
+		attackNum: 9,
+		attackIP: '192.168.55.4',
+		attackPort: 68,
+		state: '已验证',
+		level: '高'
+	},
+	{
+		id: 8,
+		time: dayjs().format("YYYY-MM-DD  HH:mm:ss"),
+		harmIP: '172.53.5.62',
+		harmPort: 40,
+		databaseType: 'mysql',
+		warnType: '数据库密码爆破',
+		warnContent: '无',
+		attackNum: 9,
+		attackIP: '192.168.55.4',
+		attackPort: 68,
+		state: '已验证',
+		level: '高'
+	},
+	{
+		id: 9,
+		time: dayjs().format("YYYY-MM-DD  HH:mm:ss"),
+		harmIP: '172.53.5.62',
+		harmPort: 40,
+		databaseType: 'mysql',
+		warnType: '数据库密码爆破',
+		warnContent: '无',
+		attackNum: 9,
+		attackIP: '192.168.55.4',
+		attackPort: 68,
+		state: '已验证',
+		level: '高'
+	},
+	{
+		id: 10,
+		time: dayjs().format("YYYY-MM-DD  HH:mm:ss"),
+		harmIP: '172.53.5.62',
+		harmPort: 40,
+		databaseType: 'mysql',
+		warnType: '数据库密码爆破',
+		warnContent: '无',
+		attackNum: 9,
+		attackIP: '192.168.55.4',
+		attackPort: 68,
+		state: '已验证',
+		level: '高'
+	},
+	{
+		id: 11,
+		time: dayjs().format("YYYY-MM-DD  HH:mm:ss"),
+		harmIP: '172.53.5.62',
+		harmPort: 40,
+		databaseType: 'mysql',
+		warnType: '数据库密码爆破',
+		warnContent: '无',
+		attackNum: 9,
+		attackIP: '192.168.55.4',
+		attackPort: 68,
+		state: '已验证',
+		level: '高'
+	},
+	{
+		id: 12,
+		time: dayjs().format("YYYY-MM-DD  HH:mm:ss"),
+		harmIP: '172.53.5.62',
+		harmPort: 40,
+		databaseType: 'mysql',
+		warnType: '数据库密码爆破',
+		warnContent: '无',
+		attackNum: 9,
+		attackIP: '192.168.55.4',
+		attackPort: 68,
+		state: '已验证',
+		level: '高'
+	},
+	{
+		id: 13,
+		time: dayjs().format("YYYY-MM-DD  HH:mm:ss"),
+		harmIP: '172.53.5.62',
+		harmPort: 40,
+		databaseType: 'mysql',
+		warnType: '数据库密码爆破',
+		warnContent: '无',
+		attackNum: 9,
+		attackIP: '192.168.55.4',
+		attackPort: 68,
+		state: '已验证',
+		level: '高'
+	},
+	{
+		id:14,
+		time: dayjs().format("YYYY-MM-DD  HH:mm:ss"),
+		harmIP: '172.53.5.62',
+		harmPort: 40,
+		databaseType: 'mysql',
+		warnType: '数据库密码爆破',
+		warnContent: '无',
+		attackNum: 9,
+		attackIP: '192.168.55.4',
+		attackPort: 68,
+		state: '已验证',
+		level: '高'
+	},
+	{
+		id: 15,
+		time: dayjs().format("YYYY-MM-DD  HH:mm:ss"),
+		harmIP: '172.53.5.62',
+		harmPort: 40,
+		databaseType: 'mysql',
+		warnType: '数据库密码爆破',
+		warnContent: '无',
+		attackNum: 9,
+		attackIP: '192.168.55.4',
+		attackPort: 68,
+		state: '已验证',
+		level: '高'
+	},
+	{
+		id: 16,
+		time: dayjs().format("YYYY-MM-DD  HH:mm:ss"),
+		harmIP: '172.53.5.62',
+		harmPort: 40,
+		databaseType: 'mysql',
+		warnType: '数据库密码爆破',
+		warnContent: '无',
+		attackNum: 9,
+		attackIP: '192.168.55.4',
+		attackPort: 68,
+		state: '已验证',
+		level: '高'
+	}]);
+const curtableData2 = ref<FormAndTable[] | undefined>([])
+const query = reactive({
+	address: '',
+	name: '',
+	pageIndex: 1,
+	pageSize: 10,
+	total:16
+	// total: curtableData2.value?curtableData2.value.length + 1 / 10 : 0
+});
+const pageTotal = ref(16);
+// 获取表格数据
+// const getData = () => {
+// 	fetchData().then(res => {
+// 		tableData.value = res.data.list;
+// 		pageTotal.value = res.data.pageTotal || 50;
+// 	});
+// };
+// getData();
+const getData = (curPageNum:number) => {
+	console.log('执行getData'+curPageNum);
+	
+	// tableData2.value = []
 }
 // 查询操作
-const handleSearch = () => {
-	query.pageIndex = 1;
-	getData();
-};
+// const handleSearch = () => {
+// 	query.pageIndex = 1;
+// 	getData();
+// };
 // 分页导航
-const handlePageChange = (val: number) => {
-	query.pageIndex = val;
-	getData();
+const handlePageChange = (value: number) => {
+	query.pageIndex = value;
+	console.log("当前页码"+value);
+ //判断当前页是否为首页 页码从1开始，是则直接调用后端数据，否则要进行计算
+   if (value > 1) {
+	
+	//  var i = (value - 1) * 10;  //计算当前页第一条数据的下标，
+  
+	//  var arry = [];  //建立一个临时数组
+  
+	//  //比如每页10条数据，第二页的第一条数据就是从 （2-1）*10 = 10 开始的 结束下标就是2*10=20 
+	//  while (i < value * 10) {
+	//   //解决最后一页出现null值
+	//   if (curtableData2.value !== undefined&&curtableData2.value[i] != null) {
+	// 	 arry.push(curtableData2.value[i]);
+	//    }else{
+	// 	break
+	//    }
+	//    i++
+	//  }
+	
+	//  curtableData2.value=arry
+		curtableData2.value = tableData2.value&&tableData2.value.slice(10,16)
+	} else { 
+		curtableData2.value = tableData2.value&&tableData2.value.slice(0,10);  
+   }
+	// getData(value);
 };
 
 // 删除操作

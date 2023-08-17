@@ -28,11 +28,11 @@
             
             <span>攻击者IP：</span>
             <el-input v-model="query.name" placeholder="攻击者IP" class="handle-input mr10"></el-input>
-            <el-button type="primary" @click="handleSearch">搜索</el-button>
+            <el-button type="primary">搜索</el-button>
             <el-button>导出</el-button>
             <!-- <el-button type="primary" @click="handleAdd">新增</el-button> -->
         </div>
-        <el-table :data="tableData2" class="tableStyle" ref="multipleTable" header-cell-class-name="table-header" stripe>
+        <el-table :data="curtableData2" class="tableStyle" ref="multipleTable" header-cell-class-name="table-header" stripe>
             <el-table-column prop="id" label="事件id" min-width="70" align="center"></el-table-column>
             <el-table-column prop="time" label="时间" min-width="158" show-overflow-tooltip></el-table-column>
             <el-table-column prop="harmIP" label="受害者IP" min-width="115" show-overflow-tooltip></el-table-column>
@@ -79,14 +79,9 @@
             
         </el-table>
         <div class="pagination">
-            <el-pagination
-                background
-                layout="total, prev, pager, next"
-                :current-page="query.pageIndex"
-                :page-size="query.pageSize"
-                :total="pageTotal"
-                @current-change="handlePageChange"
-            ></el-pagination>
+            <el-pagination background layout="total, prev, pager, next" v-model:current-page="query.pageIndex"
+							:page-size="query.pageSize" :total="query.total"
+							@current-change="handlePageChange"></el-pagination>
         </div>
     </div>
 
@@ -162,7 +157,7 @@
 </template>
 
 <script setup lang="ts" name="bugPage" >
-import { reactive,ref } from 'vue';
+import { reactive,ref,onMounted } from 'vue';
 import { dayjs } from 'element-plus';
 import { ElMessage, ElMessageBox } from 'element-plus';
 interface FormAndTable {
@@ -186,9 +181,32 @@ const handleSearch = () => {
 	query.pageIndex = 1;
 	getData();
 };
-const handlePageChange = (val: number) => {
-	query.pageIndex = val;
-	getData();
+onMounted(()=>{
+	handlePageChange(1)
+})
+// const handlePageChange = (val: number) => {
+// 	query.pageIndex = val;
+// 	getData();
+// };
+const curtableData2 = ref<FormAndTable[] | undefined>([])
+const query = reactive({
+	address: '',
+	name: '',
+	pageIndex: 1,
+	pageSize: 10,
+	total:16
+});
+
+ const handlePageChange = (value: number) => {
+	query.pageIndex = value;
+	console.log("当前页码"+value);
+   if (value > 1) {
+
+		curtableData2.value = tableData2.value&&tableData2.value.slice(10,16)
+	} else { 
+		curtableData2.value = tableData2.value&&tableData2.value.slice(0,10);  
+   }
+
 };
 const getData = () =>{
 	tableData2.value = [{
@@ -251,13 +269,208 @@ const tableData2 = ref<FormAndTable[]>([{
 	attackPort: 68,
 	state:'已验证',
 	level:'高'
+},{
+	id: 1,
+	time:dayjs().format("YYYY-MM-DD  HH:mm:ss"),
+	harmIP: '172.53.45.62',
+	harmPort: 45,
+	databaseType:'mysql',
+	warnType:'SQL注入漏洞',
+	warnContent:'...',
+	attackNum: 9,
+	attackIP: '192.168.55.4',
+	attackPort: 68,
+	state:'已验证',
+	level:'高'
+},{
+	id: 1,
+	time:dayjs().format("YYYY-MM-DD  HH:mm:ss"),
+	harmIP: '172.53.45.62',
+	harmPort: 45,
+	databaseType:'mysql',
+	warnType:'SQL注入漏洞',
+	warnContent:'...',
+	attackNum: 9,
+	attackIP: '192.168.55.4',
+	attackPort: 68,
+	state:'已验证',
+	level:'高'
+},{
+	id: 1,
+	time:dayjs().format("YYYY-MM-DD  HH:mm:ss"),
+	harmIP: '172.53.45.62',
+	harmPort: 45,
+	databaseType:'mysql',
+	warnType:'SQL注入漏洞',
+	warnContent:'...',
+	attackNum: 9,
+	attackIP: '192.168.55.4',
+	attackPort: 68,
+	state:'已验证',
+	level:'高'
+},{
+	id: 1,
+	time:dayjs().format("YYYY-MM-DD  HH:mm:ss"),
+	harmIP: '172.53.45.62',
+	harmPort: 45,
+	databaseType:'mysql',
+	warnType:'SQL注入漏洞',
+	warnContent:'...',
+	attackNum: 9,
+	attackIP: '192.168.55.4',
+	attackPort: 68,
+	state:'已验证',
+	level:'高'
+},{
+	id: 1,
+	time:dayjs().format("YYYY-MM-DD  HH:mm:ss"),
+	harmIP: '172.53.45.62',
+	harmPort: 45,
+	databaseType:'mysql',
+	warnType:'SQL注入漏洞',
+	warnContent:'...',
+	attackNum: 9,
+	attackIP: '192.168.55.4',
+	attackPort: 68,
+	state:'已验证',
+	level:'高'
+},{
+	id: 1,
+	time:dayjs().format("YYYY-MM-DD  HH:mm:ss"),
+	harmIP: '172.53.45.62',
+	harmPort: 45,
+	databaseType:'mysql',
+	warnType:'SQL注入漏洞',
+	warnContent:'...',
+	attackNum: 9,
+	attackIP: '192.168.55.4',
+	attackPort: 68,
+	state:'已验证',
+	level:'高'
+},{
+	id: 1,
+	time:dayjs().format("YYYY-MM-DD  HH:mm:ss"),
+	harmIP: '172.53.45.62',
+	harmPort: 45,
+	databaseType:'mysql',
+	warnType:'SQL注入漏洞',
+	warnContent:'...',
+	attackNum: 9,
+	attackIP: '192.168.55.4',
+	attackPort: 68,
+	state:'已验证',
+	level:'高'
+},{
+	id: 1,
+	time:dayjs().format("YYYY-MM-DD  HH:mm:ss"),
+	harmIP: '172.53.45.62',
+	harmPort: 45,
+	databaseType:'mysql',
+	warnType:'SQL注入漏洞',
+	warnContent:'...',
+	attackNum: 9,
+	attackIP: '192.168.55.4',
+	attackPort: 68,
+	state:'已验证',
+	level:'高'
+},{
+	id: 1,
+	time:dayjs().format("YYYY-MM-DD  HH:mm:ss"),
+	harmIP: '172.53.45.62',
+	harmPort: 45,
+	databaseType:'mysql',
+	warnType:'SQL注入漏洞',
+	warnContent:'...',
+	attackNum: 9,
+	attackIP: '192.168.55.4',
+	attackPort: 68,
+	state:'已验证',
+	level:'高'
+},{
+	id: 1,
+	time:dayjs().format("YYYY-MM-DD  HH:mm:ss"),
+	harmIP: '172.53.45.62',
+	harmPort: 45,
+	databaseType:'mysql',
+	warnType:'SQL注入漏洞',
+	warnContent:'...',
+	attackNum: 9,
+	attackIP: '192.168.55.4',
+	attackPort: 68,
+	state:'已验证',
+	level:'高'
+},{
+	id: 1,
+	time:dayjs().format("YYYY-MM-DD  HH:mm:ss"),
+	harmIP: '172.53.45.62',
+	harmPort: 45,
+	databaseType:'mysql',
+	warnType:'SQL注入漏洞',
+	warnContent:'...',
+	attackNum: 9,
+	attackIP: '192.168.55.4',
+	attackPort: 68,
+	state:'已验证',
+	level:'高'
+},{
+	id: 1,
+	time:dayjs().format("YYYY-MM-DD  HH:mm:ss"),
+	harmIP: '172.53.45.62',
+	harmPort: 45,
+	databaseType:'mysql',
+	warnType:'SQL注入漏洞',
+	warnContent:'...',
+	attackNum: 9,
+	attackIP: '192.168.55.4',
+	attackPort: 68,
+	state:'已验证',
+	level:'高'
+},{
+	id: 1,
+	time:dayjs().format("YYYY-MM-DD  HH:mm:ss"),
+	harmIP: '172.53.45.62',
+	harmPort: 45,
+	databaseType:'mysql',
+	warnType:'SQL注入漏洞',
+	warnContent:'...',
+	attackNum: 9,
+	attackIP: '192.168.55.4',
+	attackPort: 68,
+	state:'已验证',
+	level:'高'
+},{
+	id: 1,
+	time:dayjs().format("YYYY-MM-DD  HH:mm:ss"),
+	harmIP: '172.53.45.62',
+	harmPort: 45,
+	databaseType:'mysql',
+	warnType:'SQL注入漏洞',
+	warnContent:'...',
+	attackNum: 9,
+	attackIP: '192.168.55.4',
+	attackPort: 68,
+	state:'已验证',
+	level:'高'
+},{
+	id: 1,
+	time:dayjs().format("YYYY-MM-DD  HH:mm:ss"),
+	harmIP: '172.53.45.62',
+	harmPort: 45,
+	databaseType:'mysql',
+	warnType:'SQL注入漏洞',
+	warnContent:'...',
+	attackNum: 9,
+	attackIP: '192.168.55.4',
+	attackPort: 68,
+	state:'已验证',
+	level:'高'
 }]);
-const query = reactive({
-	address: '',
-	name: '',
-	pageIndex: 1,
-	pageSize: 10
-});
+// const query = reactive({
+// 	address: '',
+// 	name: '',
+// 	pageIndex: 1,
+// 	pageSize: 10
+// });
 let form = reactive<FormAndTable>({
 	id: undefined,
 	time: '',

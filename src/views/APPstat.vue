@@ -93,13 +93,13 @@
                             style="width:8%;margin-right: 20px;"></el-input>
                         <span class="spanText">包名：</span><el-input placeholder="请输入内容" 
                             style="width:13%;margin-right: 20px;"></el-input>
-                        <el-button @click="handleSearch">查询</el-button>
+                        <el-button>查询</el-button>
                         <el-button>导出</el-button>
                             <!-- <el-button type="success" @click="handleAdd">新增</el-button>
                             <el-button type="danger" @click="handleDel">删除</el-button> -->
                     </div>
 		
-		<el-table ref="multipleTableRef" :data="tableData" class="tableStyle" style="width: 100%" @selection-change="handleSelectionChange" stripe>
+		<el-table ref="multipleTableRef" :data="curtableData2" class="tableStyle" style="width: 100%" @selection-change="handleSelectionChange" stripe>
 			<el-table-column type="selection" min-width="55" />
 			<el-table-column prop="num" label="序号" min-width="80" />
 			<el-table-column prop="name" label="APP名称" min-width="120" show-overflow-tooltip/>
@@ -123,6 +123,11 @@
 				</template>
 			</el-table-column>
 		</el-table>
+        <div class="pagination">
+						<el-pagination background layout="total, prev, pager, next" v-model:current-page="query.pageIndex"
+							:page-size="query.pageSize" :total="query.total"
+							@current-change="handlePageChange"></el-pagination>
+					</div>
 		<el-dialog v-model="dialogTableVisible" title="APP信息详情" :append-to-body='true' >
 			<!-- <el-form :model="form">
 				<el-form-item label="序号" :label-width="formLabelWidth">
@@ -246,6 +251,25 @@ import { ElTable } from 'element-plus'
 import { ElMessage, ElMessageBox } from 'element-plus';
 let isHave = ref(false)
 let myLineChart:any = null
+const query = reactive({
+	address: '',
+	name: '',
+	pageIndex: 1,
+	pageSize: 10,
+	total:16
+});
+const curtableData2:any = ref([])
+const handlePageChange = (value: number) => {
+	query.pageIndex = value;
+	console.log("当前页码"+value);
+   if (value > 1) {
+
+		curtableData2.value = tableData.value&&tableData.value.slice(10,16)
+	} else { 
+		curtableData2.value = tableData.value&&tableData.value.slice(0,10);  
+   }
+
+};
 function initOption1() {
     myLineChart = echarts.init(document.getElementById('lineChart')!);
     let option = {
@@ -613,6 +637,261 @@ const tableData = ref<appTableData[]>([
 		premissInfo: '读取设备状态和身份：用于获取设备信息和身份验证。',
 
 	},
+    {
+		num: 12,
+		name: 'TikTok',
+        pcapName: 'com.ss.android.ugc.trill',
+        operator: 'ByteDance',
+        developer: 'ByteDance',
+		version: '12.3.1',
+        sha1:'ce03a420dce72d092f7a048774608e478c6d5d97',
+        shopName:'小米应用商店',
+        downloadNum:12333,
+		info: 'TikTok 是一款全球流行的短视频社交应用，用户可以通过拍摄、剪辑和分享短视频来展示自己的才华和创意。',
+		condition: '未下架',
+		isRecord: '未备案',
+		recordTel: '9759632',
+		premissInfo: '读取设备状态和身份：用于获取设备信息和身份验证。',
+
+	},
+    {
+		num: 12,
+		name: 'TikTok',
+        pcapName: 'com.ss.android.ugc.trill',
+        operator: 'ByteDance',
+        developer: 'ByteDance',
+		version: '12.3.1',
+        sha1:'ce03a420dce72d092f7a048774608e478c6d5d97',
+        shopName:'小米应用商店',
+        downloadNum:12333,
+		info: 'TikTok 是一款全球流行的短视频社交应用，用户可以通过拍摄、剪辑和分享短视频来展示自己的才华和创意。',
+		condition: '未下架',
+		isRecord: '未备案',
+		recordTel: '9759632',
+		premissInfo: '读取设备状态和身份：用于获取设备信息和身份验证。',
+
+	},
+    {
+		num: 12,
+		name: 'TikTok',
+        pcapName: 'com.ss.android.ugc.trill',
+        operator: 'ByteDance',
+        developer: 'ByteDance',
+		version: '12.3.1',
+        sha1:'ce03a420dce72d092f7a048774608e478c6d5d97',
+        shopName:'小米应用商店',
+        downloadNum:12333,
+		info: 'TikTok 是一款全球流行的短视频社交应用，用户可以通过拍摄、剪辑和分享短视频来展示自己的才华和创意。',
+		condition: '未下架',
+		isRecord: '未备案',
+		recordTel: '9759632',
+		premissInfo: '读取设备状态和身份：用于获取设备信息和身份验证。',
+
+	},
+    {
+		num: 12,
+		name: 'TikTok',
+        pcapName: 'com.ss.android.ugc.trill',
+        operator: 'ByteDance',
+        developer: 'ByteDance',
+		version: '12.3.1',
+        sha1:'ce03a420dce72d092f7a048774608e478c6d5d97',
+        shopName:'小米应用商店',
+        downloadNum:12333,
+		info: 'TikTok 是一款全球流行的短视频社交应用，用户可以通过拍摄、剪辑和分享短视频来展示自己的才华和创意。',
+		condition: '未下架',
+		isRecord: '未备案',
+		recordTel: '9759632',
+		premissInfo: '读取设备状态和身份：用于获取设备信息和身份验证。',
+
+	},
+    {
+		num: 12,
+		name: 'TikTok',
+        pcapName: 'com.ss.android.ugc.trill',
+        operator: 'ByteDance',
+        developer: 'ByteDance',
+		version: '12.3.1',
+        sha1:'ce03a420dce72d092f7a048774608e478c6d5d97',
+        shopName:'小米应用商店',
+        downloadNum:12333,
+		info: 'TikTok 是一款全球流行的短视频社交应用，用户可以通过拍摄、剪辑和分享短视频来展示自己的才华和创意。',
+		condition: '未下架',
+		isRecord: '未备案',
+		recordTel: '9759632',
+		premissInfo: '读取设备状态和身份：用于获取设备信息和身份验证。',
+
+	},
+    {
+		num: 12,
+		name: 'TikTok',
+        pcapName: 'com.ss.android.ugc.trill',
+        operator: 'ByteDance',
+        developer: 'ByteDance',
+		version: '12.3.1',
+        sha1:'ce03a420dce72d092f7a048774608e478c6d5d97',
+        shopName:'小米应用商店',
+        downloadNum:12333,
+		info: 'TikTok 是一款全球流行的短视频社交应用，用户可以通过拍摄、剪辑和分享短视频来展示自己的才华和创意。',
+		condition: '未下架',
+		isRecord: '未备案',
+		recordTel: '9759632',
+		premissInfo: '读取设备状态和身份：用于获取设备信息和身份验证。',
+
+	},
+    {
+		num: 12,
+		name: 'TikTok',
+        pcapName: 'com.ss.android.ugc.trill',
+        operator: 'ByteDance',
+        developer: 'ByteDance',
+		version: '12.3.1',
+        sha1:'ce03a420dce72d092f7a048774608e478c6d5d97',
+        shopName:'小米应用商店',
+        downloadNum:12333,
+		info: 'TikTok 是一款全球流行的短视频社交应用，用户可以通过拍摄、剪辑和分享短视频来展示自己的才华和创意。',
+		condition: '未下架',
+		isRecord: '未备案',
+		recordTel: '9759632',
+		premissInfo: '读取设备状态和身份：用于获取设备信息和身份验证。',
+
+	},
+    {
+		num: 12,
+		name: 'TikTok',
+        pcapName: 'com.ss.android.ugc.trill',
+        operator: 'ByteDance',
+        developer: 'ByteDance',
+		version: '12.3.1',
+        sha1:'ce03a420dce72d092f7a048774608e478c6d5d97',
+        shopName:'小米应用商店',
+        downloadNum:12333,
+		info: 'TikTok 是一款全球流行的短视频社交应用，用户可以通过拍摄、剪辑和分享短视频来展示自己的才华和创意。',
+		condition: '未下架',
+		isRecord: '未备案',
+		recordTel: '9759632',
+		premissInfo: '读取设备状态和身份：用于获取设备信息和身份验证。',
+
+	},
+    {
+		num: 12,
+		name: 'TikTok',
+        pcapName: 'com.ss.android.ugc.trill',
+        operator: 'ByteDance',
+        developer: 'ByteDance',
+		version: '12.3.1',
+        sha1:'ce03a420dce72d092f7a048774608e478c6d5d97',
+        shopName:'小米应用商店',
+        downloadNum:12333,
+		info: 'TikTok 是一款全球流行的短视频社交应用，用户可以通过拍摄、剪辑和分享短视频来展示自己的才华和创意。',
+		condition: '未下架',
+		isRecord: '未备案',
+		recordTel: '9759632',
+		premissInfo: '读取设备状态和身份：用于获取设备信息和身份验证。',
+
+	},
+    {
+		num: 12,
+		name: 'TikTok',
+        pcapName: 'com.ss.android.ugc.trill',
+        operator: 'ByteDance',
+        developer: 'ByteDance',
+		version: '12.3.1',
+        sha1:'ce03a420dce72d092f7a048774608e478c6d5d97',
+        shopName:'小米应用商店',
+        downloadNum:12333,
+		info: 'TikTok 是一款全球流行的短视频社交应用，用户可以通过拍摄、剪辑和分享短视频来展示自己的才华和创意。',
+		condition: '未下架',
+		isRecord: '未备案',
+		recordTel: '9759632',
+		premissInfo: '读取设备状态和身份：用于获取设备信息和身份验证。',
+
+	},
+    {
+		num: 12,
+		name: 'TikTok',
+        pcapName: 'com.ss.android.ugc.trill',
+        operator: 'ByteDance',
+        developer: 'ByteDance',
+		version: '12.3.1',
+        sha1:'ce03a420dce72d092f7a048774608e478c6d5d97',
+        shopName:'小米应用商店',
+        downloadNum:12333,
+		info: 'TikTok 是一款全球流行的短视频社交应用，用户可以通过拍摄、剪辑和分享短视频来展示自己的才华和创意。',
+		condition: '未下架',
+		isRecord: '未备案',
+		recordTel: '9759632',
+		premissInfo: '读取设备状态和身份：用于获取设备信息和身份验证。',
+
+	},
+    {
+		num: 12,
+		name: 'TikTok',
+        pcapName: 'com.ss.android.ugc.trill',
+        operator: 'ByteDance',
+        developer: 'ByteDance',
+		version: '12.3.1',
+        sha1:'ce03a420dce72d092f7a048774608e478c6d5d97',
+        shopName:'小米应用商店',
+        downloadNum:12333,
+		info: 'TikTok 是一款全球流行的短视频社交应用，用户可以通过拍摄、剪辑和分享短视频来展示自己的才华和创意。',
+		condition: '未下架',
+		isRecord: '未备案',
+		recordTel: '9759632',
+		premissInfo: '读取设备状态和身份：用于获取设备信息和身份验证。',
+
+	},
+    {
+		num: 12,
+		name: 'TikTok',
+        pcapName: 'com.ss.android.ugc.trill',
+        operator: 'ByteDance',
+        developer: 'ByteDance',
+		version: '12.3.1',
+        sha1:'ce03a420dce72d092f7a048774608e478c6d5d97',
+        shopName:'小米应用商店',
+        downloadNum:12333,
+		info: 'TikTok 是一款全球流行的短视频社交应用，用户可以通过拍摄、剪辑和分享短视频来展示自己的才华和创意。',
+		condition: '未下架',
+		isRecord: '未备案',
+		recordTel: '9759632',
+		premissInfo: '读取设备状态和身份：用于获取设备信息和身份验证。',
+
+	},
+    {
+		num: 12,
+		name: 'TikTok',
+        pcapName: 'com.ss.android.ugc.trill',
+        operator: 'ByteDance',
+        developer: 'ByteDance',
+		version: '12.3.1',
+        sha1:'ce03a420dce72d092f7a048774608e478c6d5d97',
+        shopName:'小米应用商店',
+        downloadNum:12333,
+		info: 'TikTok 是一款全球流行的短视频社交应用，用户可以通过拍摄、剪辑和分享短视频来展示自己的才华和创意。',
+		condition: '未下架',
+		isRecord: '未备案',
+		recordTel: '9759632',
+		premissInfo: '读取设备状态和身份：用于获取设备信息和身份验证。',
+
+	},
+    {
+		num: 12,
+		name: 'TikTok',
+        pcapName: 'com.ss.android.ugc.trill',
+        operator: 'ByteDance',
+        developer: 'ByteDance',
+		version: '12.3.1',
+        sha1:'ce03a420dce72d092f7a048774608e478c6d5d97',
+        shopName:'小米应用商店',
+        downloadNum:12333,
+		info: 'TikTok 是一款全球流行的短视频社交应用，用户可以通过拍摄、剪辑和分享短视频来展示自己的才华和创意。',
+		condition: '未下架',
+		isRecord: '未备案',
+		recordTel: '9759632',
+		premissInfo: '读取设备状态和身份：用于获取设备信息和身份验证。',
+
+	}
 ])
 const options = [
 	{
@@ -787,6 +1066,7 @@ onMounted(()=>{
 		initOption3()
         initOption4()
 	})	
+    handlePageChange(1)
 })
 
 
