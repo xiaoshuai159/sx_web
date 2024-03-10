@@ -15,6 +15,15 @@ const routes: RouteRecordRaw[] = [
         component: Home,
         children: [
             {
+                path: '/redirectPage',
+                name: 'redirectPage',
+                meta: {
+                    title: '重定向页面',
+                    permiss: '2',
+                },
+                component: () => import('../views/redirectPage.vue'),
+            },
+            {
                 path: '/dashboard',
                 name: 'dashboard',
                 meta: {
@@ -146,6 +155,17 @@ const routes: RouteRecordRaw[] = [
                     permiss:'13',
                 },
                 component: () => import('../views/harmEvent.vue')
+
+            },
+            
+            {
+                path:'/h1',
+                name:'h1',
+                meta:{
+                    title:'行为记录',
+                    permiss:'13',
+                },
+                component: () => import('../views/h1.vue')
 
             },
             {

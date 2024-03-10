@@ -69,7 +69,7 @@ onMounted(() => {
 	}
 });
 const toMenuIndex = ()=>{
-	window.location.href = "http://172.17.18.1:9998/#/menuIndex"
+	window.location.href = "http://172.17.18.1:8888/#/menuIndex"
 }
 // 用户名下拉菜单选择事件
 const router = useRouter();

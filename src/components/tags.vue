@@ -1,10 +1,12 @@
 <template>
 	<div class="tags" v-if="tags.show">
 		
-		<ul><div class="collapse-btn" @click="collapseChage">
-			<el-icon v-if="sidebar.collapse"><Expand /></el-icon>
-			<el-icon v-else><Fold /></el-icon>
-		</div>
+		<ul>
+			<div class="collapse-btn" @click="collapseChage">
+				<el-icon v-if="sidebar.collapse"><Expand /></el-icon>
+				<el-icon v-else><Fold /></el-icon>
+			</div>
+			
 			<li
 				class="tags-li"
 				v-for="(item, index) in tags.list"
@@ -12,7 +14,7 @@
 				:key="index"
 			>
 				<router-link :to="item.path" class="tags-li-title">{{ item.title }}</router-link>
-				<el-icon @click="closeTags(index)"><Close /></el-icon>
+				<el-icon @click="closeTags(index)" style="margin-top: 2px;"><Close /></el-icon>
 			</li>
 		</ul>
 		<div>
@@ -190,9 +192,10 @@ const handleTags = (command: string) => {
 	height: 50%;
 }
 .tags-li {
-	display: flex;
-	align-items: center;
-	float: left;
+	// display: flex;
+	// align-items: center;
+	// float: left;
+	display: inline-block;
 	margin: 3px 5px 2px 3px;
 	border-radius: 3px;
 	font-size: 12px;
@@ -201,13 +204,12 @@ const handleTags = (command: string) => {
 	height: 23px;
 	border: 1px solid #e9eaec;
 	background: #fff;
-	padding: 0 5px 0 12px;
+	padding: 4px 5px 0px 12px;
 	color: #666;
 	-webkit-transition: all 0.3s ease-in;
 	-moz-transition: all 0.3s ease-in;
 	transition: all 0.3s ease-in;
 }
-
 .tags-li:not(.active):hover {
 	background: #f8f8f8;
 }

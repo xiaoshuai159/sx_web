@@ -680,17 +680,27 @@ function myChart3Resize() {
 	}
 }
 onMounted(() => {
-	let data = {
-		client_id: 'S0021',
-		redirect_uri: 'http://172.19.19.48:5175/#/dashboard',
-		response_type: 'code',
-		state: 'STATE'
-	}
-	// axios.get('/api/authentication/auth/authorize', { params: data }).then((data) => {
-	// 	console.log(data);
-
+	// let data = {
+	// 	client_id: 'S0021',
+	// 	redirect_uri: 'http://172.19.19.48:5175/dashboard',
+	// 	response_type: 'code',
+	// 	state: 'STATE'
+	// }
+	// let data2 = {
+	// 	client_id: 'S0021',
+	// 	redirect_uri: 'http://172.17.18.1:5175/dashboard',
+	// 	response_type: 'code',
+	// 	state: 'STATE'
+	// }
+	// axios.get('/api/authentication/auth/authorize', { params: data }).then((res:any) => {
+	// 	console.log(res);
+		
+	// 	if(res.code == 200){
+	// 		window.location.href = res.data
+	// 	}
 	// })
-	const testUrl = 'http://172.17.18.1:9998/authentication/auth/authorize'+ data
+	// window.location.href = 'http://172.17.18.1:9998/authentication/auth/authorize?client_id=S0021&redirect_uri=http://172.19.19.48:5175/dashboard&response_type=code&state=STATE'
+	// const testUrl = 'http://172.17.18.1:9998/authentication/auth/authorize'+ data
 	// console.log(testUrl);
 	nextTick(() => {
 		initOption1()

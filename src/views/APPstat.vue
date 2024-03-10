@@ -604,7 +604,7 @@ const handleSelectionChange = (val: appTableData[]) => {
 const dialogTableVisible = ref(false)
 const formLabelWidth = '80px'
 let form = reactive<appTableData>({
-	num: 12,
+	num: 1,
 	name: 'TikTok',
 	pcapName: 'com.ss.android.ugc.trill',
 	operator: 'ByteDance',
@@ -620,8 +620,25 @@ let form = reactive<appTableData>({
     premissInfo: '读取设备状态和身份：用于获取设备信息和身份验证。',
 })
 const tableData = ref<appTableData[]>([
+    {
+		num: 1,
+		name: 'TikTok',
+        pcapName: 'com.ss.android.ugc.trill',
+        operator: 'ByteDance',
+        developer: 'ByteDance',
+		version: '12.3.1',
+        sha1:'ce03a420dce72d092f7a048774608e478c6d5d97',
+        shopName:'小米应用商店',
+        downloadNum:12333,
+		info: 'TikTok 是一款全球流行的短视频社交应用，用户可以通过拍摄、剪辑和分享短视频来展示自己的才华和创意。',
+		condition: '未下架',
+		isRecord: '未备案',
+		recordTel: '9759632',
+		premissInfo: '读取设备状态和身份：用于获取设备信息和身份验证。',
+
+	},
 	{
-		num: 12,
+		num: 2,
 		name: 'TikTok',
         pcapName: 'com.ss.android.ugc.trill',
         operator: 'ByteDance',
@@ -638,7 +655,7 @@ const tableData = ref<appTableData[]>([
 
 	},
     {
-		num: 12,
+		num: 3,
 		name: 'TikTok',
         pcapName: 'com.ss.android.ugc.trill',
         operator: 'ByteDance',
@@ -655,7 +672,7 @@ const tableData = ref<appTableData[]>([
 
 	},
     {
-		num: 12,
+		num: 4,
 		name: 'TikTok',
         pcapName: 'com.ss.android.ugc.trill',
         operator: 'ByteDance',
@@ -672,7 +689,7 @@ const tableData = ref<appTableData[]>([
 
 	},
     {
-		num: 12,
+		num: 5,
 		name: 'TikTok',
         pcapName: 'com.ss.android.ugc.trill',
         operator: 'ByteDance',
@@ -689,7 +706,7 @@ const tableData = ref<appTableData[]>([
 
 	},
     {
-		num: 12,
+		num: 6,
 		name: 'TikTok',
         pcapName: 'com.ss.android.ugc.trill',
         operator: 'ByteDance',
@@ -706,7 +723,7 @@ const tableData = ref<appTableData[]>([
 
 	},
     {
-		num: 12,
+		num: 7,
 		name: 'TikTok',
         pcapName: 'com.ss.android.ugc.trill',
         operator: 'ByteDance',
@@ -723,7 +740,7 @@ const tableData = ref<appTableData[]>([
 
 	},
     {
-		num: 12,
+		num: 8,
 		name: 'TikTok',
         pcapName: 'com.ss.android.ugc.trill',
         operator: 'ByteDance',
@@ -740,7 +757,7 @@ const tableData = ref<appTableData[]>([
 
 	},
     {
-		num: 12,
+		num: 9,
 		name: 'TikTok',
         pcapName: 'com.ss.android.ugc.trill',
         operator: 'ByteDance',
@@ -757,7 +774,7 @@ const tableData = ref<appTableData[]>([
 
 	},
     {
-		num: 12,
+		num: 10,
 		name: 'TikTok',
         pcapName: 'com.ss.android.ugc.trill',
         operator: 'ByteDance',
@@ -773,23 +790,7 @@ const tableData = ref<appTableData[]>([
 		premissInfo: '读取设备状态和身份：用于获取设备信息和身份验证。',
 
 	},
-    {
-		num: 12,
-		name: 'TikTok',
-        pcapName: 'com.ss.android.ugc.trill',
-        operator: 'ByteDance',
-        developer: 'ByteDance',
-		version: '12.3.1',
-        sha1:'ce03a420dce72d092f7a048774608e478c6d5d97',
-        shopName:'小米应用商店',
-        downloadNum:12333,
-		info: 'TikTok 是一款全球流行的短视频社交应用，用户可以通过拍摄、剪辑和分享短视频来展示自己的才华和创意。',
-		condition: '未下架',
-		isRecord: '未备案',
-		recordTel: '9759632',
-		premissInfo: '读取设备状态和身份：用于获取设备信息和身份验证。',
-
-	},
+    
     {
 		num: 12,
 		name: 'TikTok',

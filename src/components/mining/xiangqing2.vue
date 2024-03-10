@@ -132,23 +132,23 @@
               <div class="my-el-row">
                   <div><span class="dialog-body-left">时间：</span><span class="dialog-body-right">2023/06/07</span></div>
                   <div><span class="dialog-body-left">事件id：</span><span class="dialog-body-right">15</span></div> 
-                  <div><span class="dialog-body-left">币种：</span><span class="dialog-body-right">-</span></div>
+                  <div><span class="dialog-body-left">币种：</span><span class="dialog-body-right">比特币</span></div>
                   
               </div>
               <div class="my-el-row">                  
                   <div><span class="dialog-body-left">源IP：</span><span class="dialog-body-right">5.23.87.155</span></div>
                   <div><span class="dialog-body-left">源端口：</span><span class="dialog-body-right">251</span></div>
-                  <div><span class="dialog-body-left">地域：</span><span class="dialog-body-right">-</span></div>
+                  <div><span class="dialog-body-left">地域：</span><span class="dialog-body-right">锦州</span></div>
               </div>
               <div class="my-el-row">                  
                   <div><span class="dialog-body-left">目的IP：</span><span class="dialog-body-right">45.55.123.55</span></div>
                   <div><span class="dialog-body-left">目的端口：</span><span class="dialog-body-right">15351</span></div>
-                  <div><span class="dialog-body-left">地域：</span><span class="dialog-body-right">-</span></div>
+                  <div><span class="dialog-body-left">地域：</span><span class="dialog-body-right">深圳</span></div>
               </div>
               <div style="margin-top: 8px;">
-                  <div style="margin-bottom: 8px;"><span class="dialog-body-left">矿池地址：</span><span class="dialog-body-right">-</span></div>
-                  <div style="margin-bottom: 8px;"><span class="dialog-body-left">矿机操作：</span><span class="dialog-body-right">-</span></div>
-							    <div style="margin-bottom: 8px;"><span class="dialog-body-left">通信载荷：</span><span class="dialog-body-right">-</span></div>
+                  <div style="margin-bottom: 8px;"><span class="dialog-body-left">矿池地址：</span><span class="dialog-body-right">pool.www.mining.com</span></div>
+                  <div style="margin-bottom: 8px;"><span class="dialog-body-left">矿机操作：</span><span class="dialog-body-right">任务变更</span></div>
+							    <div style="margin-bottom: 8px;"><span class="dialog-body-left">通信载荷：</span><span class="dialog-body-right">"jsonrcp:"v1.0","method":"subscribe",params:{}</span></div>
               </div>
 					</div>
 			<template #footer>

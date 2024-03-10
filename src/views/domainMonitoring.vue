@@ -95,20 +95,20 @@
 							<p class="end-png"></p>
 						</div>
 						<div class="my-el-row">
-							<div><span class="dialog-body-left">域名名称：</span><span class="dialog-body-right">-</span></div>
+							<div><span class="dialog-body-left">域名名称：</span><span class="dialog-body-right">www.abcminingpool.com</span></div>
 							<div><span class="dialog-body-left">对应ip：</span><span class="dialog-body-right">15.242.44.10</span></div>
 						</div>
 						<div class="my-el-row">
-							<div><span class="dialog-body-left">注册时间：</span><span class="dialog-body-right">-</span></div>
-							<div><span class="dialog-body-left">到期时间：</span><span class="dialog-body-right">-</span></div>
+							<div><span class="dialog-body-left">注册时间：</span><span class="dialog-body-right">2023-05-12</span></div>
+							<div><span class="dialog-body-left">到期时间：</span><span class="dialog-body-right">2025-05-12</span></div>
 						</div>
 						<div class="my-el-row">
-							<div><span class="dialog-body-left">Umbrella排名：</span><span class="dialog-body-right">-</span></div>
-							<div><span class="dialog-body-left">Alexa排名：</span><span class="dialog-body-right">-</span></div>
+							<div><span class="dialog-body-left">Umbrella排名：</span><span class="dialog-body-right">23685</span></div>
+							<div><span class="dialog-body-left">Alexa排名：</span><span class="dialog-body-right">31742</span></div>
 						</div>
 						<div class="my-el-row">
-							<div><span class="dialog-body-left">域名备案信息：</span><span class="dialog-body-right">-</span></div>
-							<div><span class="dialog-body-left">域名服务商：</span><span class="dialog-body-right">-</span></div>
+							<div><span class="dialog-body-left">域名备案信息：</span><span class="dialog-body-right">无</span></div>
+							<div><span class="dialog-body-left">域名服务商：</span><span class="dialog-body-right">NetEase Cloud</span></div>
 						</div>
 						<br>
 						<div class="dialog-body-title">
@@ -118,9 +118,9 @@
 							<p class="end-png"></p>
 						</div>
 						<div class="dialog-body-content">
-							<div><span class="dialog-body-left">告警时间：</span><span class="dialog-body-right">-</span></div>
-							<div><span class="dialog-body-left">告警类型：</span><span class="dialog-body-right">-</span></div>
-							<div><span class="dialog-body-left">危险等级：</span><span class="dialog-body-right">-</span></div>	
+							<div><span class="dialog-body-left">告警时间：</span><span class="dialog-body-right">2023-07-12</span></div>
+							<div><span class="dialog-body-left">告警类型：</span><span class="dialog-body-right">域名劫持</span></div>
+							<div><span class="dialog-body-left">危险等级：</span><span class="dialog-body-right">高</span></div>	
 						</div>
 						<br>
 						<div class="dialog-body-title">
@@ -129,7 +129,7 @@
 							<p class="dashed-bottom"></p>
 							<p class="end-png"></p>
 						</div>
-						<div style="margin-top: 6px;margin-left: 5px;">-</div>
+						<div style="margin-top: 6px;margin-left: 5px;">a.b.www.abcminingpool.com</div>
 						
 						<br>
 						<div class="dialog-body-title">
@@ -139,7 +139,7 @@
 							<p class="end-png"></p>
 						</div>
 						<div style="font-size: 10px; margin: 5px;">
-							-
+							暂无
 						</div>
 					</div>
 			<template #footer>

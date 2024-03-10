@@ -222,7 +222,13 @@ const items3 = [{
             // title: '组织与资产检索',
             title: '公共危害事件',
             permiss: '13',
-        }
+        },
+        {
+            index: '/h1',
+            // title: '组织与资产检索',
+            title: '行为记录',
+            permiss: '13',
+        },
     ],
 }];
 const route = useRoute();
@@ -258,6 +264,7 @@ const onRoutes = computed(() => {
     '/attackSearch': items3,
     '/attackAndDefence': items3,
     '/harmEvent': items3,
+    '/h1': items3,
   };
   const sidebar = sidebarItems[route.path] || [];
 //   console.log(sidebar);
